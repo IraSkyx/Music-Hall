@@ -1,0 +1,30 @@
+﻿<Window x:Class="MyApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyApp"
+        mc:Ignorable="d"
+        Background="#222222"
+        Title="My App" Height="720" Width="1080" ResizeMode="NoResize" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="BorderThickness" BorderThickness="5,10,15,20" Background="White" Padding="5" CornerRadius="15"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+        <Button x:Name="button_Copy" Content="Connexion" Foreground="White" Background="transparent" HorizontalAlignment="Left" Margin="876,3,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0">
+            <!--<Button.Style>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Button.Style>-->
+        </Button>
+        <Button x:Name="button" Content="Inscription" Foreground="White" Background="transparent" HorizontalAlignment="Left" Margin="956,3,0,0" VerticalAlignment="Top" Width="75" Height="18" BorderThickness="0"/>
+        <Button x:Name="button1" Content="X" Click="Exit" Foreground="White" Background="transparent" HorizontalAlignment="Left" Margin="1050,3,0,0" VerticalAlignment="Top" Width="20" Height="18" BorderThickness="0"/>
+    </Grid>
+</Window>
