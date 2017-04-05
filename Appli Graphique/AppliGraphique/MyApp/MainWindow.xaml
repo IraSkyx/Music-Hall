@@ -9,22 +9,55 @@
         Title="My App" Height="720" Width="1080" ResizeMode="NoResize" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
         <Grid.Resources>
-            <Style TargetType="{x:Type Button}">
+            <Style x:Key="BorderStyle" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="BorderThickness" BorderThickness="5,10,15,20" Background="White" Padding="5" CornerRadius="15"/>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="Red" Opacity="0.8"/>
+                            </Setter.Value>
+                        </Setter>
                     </Trigger>
                 </Style.Triggers>
             </Style>
         </Grid.Resources>
-        <Button x:Name="button_Copy" Content="Connexion" Foreground="White" Background="transparent" HorizontalAlignment="Left" Margin="876,3,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0">
-            <!--<Button.Style>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Red"/>
-                </Trigger>
-            </Button.Style>-->
+        <Button x:Name="connexion" Style="{StaticResource BorderStyle}" Click="Connexion" Content="Connexion" Foreground="White" Background="transparent" HorizontalAlignment="Left" Margin="855,0,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Height="30">
         </Button>
-        <Button x:Name="button" Content="Inscription" Foreground="White" Background="transparent" HorizontalAlignment="Left" Margin="956,3,0,0" VerticalAlignment="Top" Width="75" Height="18" BorderThickness="0"/>
-        <Button x:Name="button1" Content="X" Click="Exit" Foreground="White" Background="transparent" HorizontalAlignment="Left" Margin="1050,3,0,0" VerticalAlignment="Top" Width="20" Height="18" BorderThickness="0"/>
+        <Button x:Name="inscription" Style="{StaticResource BorderStyle}" Content="Inscription" Foreground="White" Background="transparent" HorizontalAlignment="Left" Margin="930,0,0,0" VerticalAlignment="Top" Width="75" Height="30" BorderThickness="0"/>
+        <Button x:Name="quit" Content="X" Click="Exit" Foreground="White" HorizontalAlignment="Left" Margin="1005,0,0,0" VerticalAlignment="Top" Width="75" Height="30" BorderThickness="0" FontSize="20" FontFamily="Arual">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#FFAE322E" Opacity="0.5"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>

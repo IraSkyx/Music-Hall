@@ -10,35 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MyApp
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour Window1.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Window1 : Window
     {
-        public MainWindow()
+        public Window1()
         {
             InitializeComponent();
         }
-
         private void Exit(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void Grid_ContextMenuClosing(object sender, ContextMenuEventArgs e)
-        {
-
-        }
-
-        private void Connexion(object sender, RoutedEventArgs e)
-        {
-            Window1 subWindow = new Window1();
-            subWindow.Show();
         }
     }
 }
