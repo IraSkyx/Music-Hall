@@ -27,5 +27,12 @@ namespace MyApp
         {
             this.Close();
         }
+        private void Increase(object sender, RoutedEventArgs e)
+        {
+            Width = System.Windows.SystemParameters.PrimaryScreenWidth;
+            Height = System.Windows.SystemParameters.PrimaryScreenHeight;
+            Canvas.SetTop(this, 0);
+            Canvas.SetLeft(this, 0);
+        }
     }
 }
