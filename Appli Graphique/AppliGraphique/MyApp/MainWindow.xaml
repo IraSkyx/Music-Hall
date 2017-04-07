@@ -7,89 +7,32 @@
         mc:Ignorable="d"
         Background="#222222"
         Title="Music'Hall" Height="720" Width="1080" ResizeMode="NoResize" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" WindowStyle="None">
+   
     <Grid>
-        <Grid.Resources>
-            <Style x:Key="BorderStyle" TargetType="{x:Type Button}">
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background">
-                            <Setter.Value>
-                                <SolidColorBrush Color="Red" Opacity="0.8"/>
-                            </Setter.Value>
-                        </Setter>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-        </Grid.Resources>
-        <Button x:Name="connexion" Style="{StaticResource BorderStyle}" Click="Connexion" Content="Connexion" Foreground="White" Background="transparent" HorizontalAlignment="Left" Margin="795,0,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Height="30">
-        </Button>
-        <Button x:Name="inscription" Style="{StaticResource BorderStyle}" Click="Inscription" Content="Inscription" Foreground="White" Background="transparent" HorizontalAlignment="Left" Margin="870,0,0,0" VerticalAlignment="Top" Width="75" Height="30" BorderThickness="0"/>
-        <Button x:Name="quit" Content="X" Click="Exit" Foreground="White" HorizontalAlignment="Left" Margin="1005,0,0,0" VerticalAlignment="Top" Width="75" Height="30" BorderThickness="0" FontSize="20" FontFamily="Arual">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="#FFAE322E" Opacity="0.5"/>
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+        
+        <Button x:Name="connexion" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Connexion" Content="Connexion" HorizontalAlignment="Left" Margin="810,0,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Height="30"/>
+        <Button x:Name="inscription" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Inscription" Content="Inscription" HorizontalAlignment="Left" Margin="885,0,0,0" VerticalAlignment="Top" Width="75" Height="30" BorderThickness="0"/>
+        <Button x:Name="quit" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Content="X" Click="Exit" HorizontalAlignment="Left" Margin="1020,0,0,0" VerticalAlignment="Top" Width="60" Height="30" BorderThickness="0" FontSize="20" FontFamily="Arual"/>
+        <Button x:Name="increase" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Content="+" Click="Increase" BorderThickness="0" FontSize="20" FontFamily="Bebas Neue" RenderTransformOrigin="0.553,0.083" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="60" Margin="0,0,60,0"/>
         <Rectangle Fill="White" HorizontalAlignment="Left" Height="100" Margin="0,620,0,0" Stroke="Black" VerticalAlignment="Top" Width="1080"/>
         <Button x:Name="button" Content="Lecture" HorizontalAlignment="Left" Margin="410,675,0,0" VerticalAlignment="Top" Width="75" Click="Play"/>
         <Button x:Name="button_Copy" Content="Pause" HorizontalAlignment="Left" Margin="500,675,0,0" VerticalAlignment="Top" Width="75" Click="Pause"/>
         <Button x:Name="button_Copy1" Content="Replay" HorizontalAlignment="Left" Margin="600,675,0,0" VerticalAlignment="Top" Width="75" Click="Replay"/>
-        <Slider x:Name="slider" IsSnapToTickEnabled="True" TickFrequency="5" ValueChanged="Change" HorizontalAlignment="Left" Margin="735,675,0,0" VerticalAlignment="Top" Width="135" Maximum="100"/>
-        <Button x:Name="increase" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Content="+" Click="Increase" Foreground="White" BorderThickness="0" FontSize="20" FontFamily="Bebas Neue" RenderTransformOrigin="0.553,0.083" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="58" Margin="0,1,75,0">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="Black" Opacity="0.5"/>
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+        <Slider x:Name="slider" IsSnapToTickEnabled="True" TickFrequency="5" ValueChanged="Change" HorizontalAlignment="Left" Margin="735,675,0,0" VerticalAlignment="Top" Width="135" Value="50" Maximum="100"/>
         <ProgressBar Name="Prog" HorizontalAlignment="Left" Height="10" Margin="410,655,0,0" VerticalAlignment="Top" Width="265" SmallChange="1"/>
         <Label x:Name="duration" Content="00:00:00" HorizontalAlignment="Left" Margin="515,629,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="375" Margin="922,211,0,0" VerticalAlignment="Top" Width="148"/>
+
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="505" VerticalAlignment="Top" Width="885" SelectionChanged="tabControl_SelectionChanged" Margin="20,97,0,0">
+            <TabItem Header="Artise1"></TabItem>
+
+            <TabItem Header="Artiste2"></TabItem>
+
+            <TabItem Header="Artiste3"></TabItem>
+
+            <DataGrid x:Name="dataGrid" Height="100" Width="100"/>
+        </TabControl>
+
     </Grid>
+    
 </Window>

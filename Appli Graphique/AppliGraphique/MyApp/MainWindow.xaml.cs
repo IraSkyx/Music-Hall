@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WMPLib;
+//using WMPLib;
 
 namespace MyApp
 {
@@ -24,7 +24,7 @@ namespace MyApp
     public partial class MainWindow : Window
     {
         Musique zik;
-        WindowsMediaPlayer player = null;
+        //WindowsMediaPlayer player = null;
         Timer myTimer;
         int CurrentSecond;
         int CurrentMinute;
@@ -33,6 +33,8 @@ namespace MyApp
         public MainWindow()
         {
             InitializeComponent();
+            //Style s = this.Resources["Rouge"] as Style;
+            //connexion.Style = s;
             zik = new Musique("Back For More", "Feder feat Daecom","blablabla", @"C:\Users\adria\Desktop\eFeder.jpg", "06/04/2017", @"C:\Users\adria\Desktop\Feder feat. Daecolm - Back For More.mp3", 210);
             myTimer = new Timer(1000);
             myTimer.Enabled = true;
@@ -41,7 +43,7 @@ namespace MyApp
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void Grid_ContextMenuClosing(object sender, ContextMenuEventArgs e)
@@ -51,6 +53,20 @@ namespace MyApp
 
         private void Increase(object sender, RoutedEventArgs e)
         {
+            if (WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+                increase.Content = "+";
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+                increase.Content = "-";
+            }
+
+
+
+            /*
             if ((string)increase.Content == "+")
             {
                 Width = SystemParameters.PrimaryScreenWidth;
@@ -66,7 +82,7 @@ namespace MyApp
                 Canvas.SetLeft(this,SystemParameters.PrimaryScreenWidth / 2 - 540);
                 Canvas.SetTop(this, SystemParameters.PrimaryScreenHeight / 2 - 360);
                 increase.Content = "+";
-            }
+            }*/
         }
 
         private void Connexion(object sender, RoutedEventArgs e)
@@ -102,28 +118,28 @@ namespace MyApp
 
         private void Play(object sender, RoutedEventArgs e)
         {
-                CurrentSecond = 0;
+                /*CurrentSecond = 0;
                 CurrentMinute = 0;
                 CurrentHour = 0;
                 player = new WindowsMediaPlayer();
                 player.URL = zik.audio;
                 player.settings.volume = 50;
                 player.controls.play();
-                myTimer.Start();
+                myTimer.Start();*/
         }
 
         private void Replay(object sender, RoutedEventArgs e)
         {
-            if (player == null)
+           /* if (player == null)
             {
                 return;
             }
-            player.settings.setMode("Loop", true);
+            player.settings.setMode("Loop", true);*/
         }
 
         private void Pause(object sender, RoutedEventArgs e)
         {
-            if (player == null)
+            /*if (player == null)
             {
                 return;
             }
@@ -131,12 +147,17 @@ namespace MyApp
             {
                 myTimer.Enabled = false;               
                 player.controls.pause();
-            }
+            }*/
         }
 
         private void Change(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            player.settings.volume = Convert.ToInt32(slider.Value*100);
+            //player.settings.volume = Convert.ToInt32(slider.Value*100);
+        }
+
+        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
