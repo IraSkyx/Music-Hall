@@ -9,38 +9,48 @@
         Title="Music'Hall" Height="720" Width="1080" ResizeMode="NoResize" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" WindowStyle="None">
 
     <StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,0,100">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,0,30">
             <Button x:Name="inscription" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Inscription" Content="Inscription" Width="75" Height="30" BorderThickness="0"/>
             <Button x:Name="connexion" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Connexion" Content="Connexion" Width="75" BorderThickness="0" Height="30"/>
             <Button x:Name="increase" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Increase" Content="+" BorderThickness="0" FontSize="20" FontFamily="Bebas Neue" Height="30" Width="60"/>
             <Button x:Name="quit" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Exit" Content="X" Width="60" Height="30" BorderThickness="0" FontSize="20" FontFamily="Arual"/>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TabControl x:Name="tabControl" Height="300" Width="700" SelectionChanged="tabControl_SelectionChanged">
-                <TabItem Header="Artise1"></TabItem>
+        <StackPanel Orientation="Vertical">
 
-                <TabItem Header="Artiste2"></TabItem>
+            <WebBrowser Margin="0,0,0,20" Height="100"/>
 
-                <TabItem Header="Artiste3"></TabItem>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TabControl x:Name="TabControl" VerticalAlignment="Center" Margin="0,0,10,0" Height="400" Width="788" SelectionChanged="TabControl_SelectionChanged">
+                    <TabItem Header="Accueil">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Top" Height="375">
+                            <Image x:Name="image" HorizontalAlignment="Left" Source="..\resources\eFeder.jpg" Height="90"/>
+                            <Image x:Name="image2" HorizontalAlignment="Left" Source="..\resources\eFeder.jpg" Height="90"/>
+                            <Image x:Name="image3" HorizontalAlignment="Left" Source="..\resources\eFeder.jpg" Height="90"/>
+                            <Image x:Name="image4" HorizontalAlignment="Left" Source="..\resources\eFeder.jpg" Height="90"/>
+                        </StackPanel>
+                    </TabItem>
 
-                <DataGrid x:Name="dataGrid" Height="100" Width="100"/>
-            </TabControl>
+                    <TabItem Header="Sélection"></TabItem>
 
-            <ListBox x:Name="listBox" Height="375" Width="148"/>
-        </StackPanel>
+                    <TabItem Header="Recherche"></TabItem>
 
-        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Label x:Name="duration" HorizontalContentAlignment="Center" Content="00:00:00"/>
-            <ProgressBar x:Name="Prog" Height="10" Width="265" Margin="10,0,0,10"/>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,0,10">
-                <Button x:Name="play" Click="Play" Content="Play" Width="75"/>
-                <Button x:Name="pause" Click="Pause" Content="Pause" Width="75"/>
-                <Button x:Name="replay" Click="Replay" Content="Replay" Width="75"/>
+                </TabControl>
+
+                <ListBox x:Name="listBox" Height="400" Margin="10,0,0,0" Width="148"/>
             </StackPanel>
-            <Slider x:Name="slider" ValueChanged="Change" TickFrequency="5"  Width="135" Value="50" Maximum="100"/>
-        </StackPanel>
 
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label x:Name="duration" Foreground="White" HorizontalContentAlignment="Center" Content="00:00"/>
+                <ProgressBar x:Name="Prog" Height="5" Width="265" Background="Transparent" Foreground="White" Margin="10,0,0,10"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,0,10">
+                    <Button x:Name="play" Click="Play" Content="Play" Width="75"/>
+                    <Button x:Name="pause" Click="Pause" Content="Pause" Width="75"/>
+                    <Button x:Name="replay" Click="Replay" Content="Replay" Width="75"/>
+                </StackPanel>
+                <Slider x:Name="slider" ValueChanged="Change" TickFrequency="5"  Width="135" Value="50" Maximum="100"/>
+            </StackPanel>
+        </StackPanel>
     </StackPanel>
 
 </Window>
