@@ -23,27 +23,23 @@ namespace MyApp
         {
             InitializeComponent();
         }
+
         private void Exit(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
         private void Increase(object sender, RoutedEventArgs e)
         {
-            if ((string)increase.Content == "+")
+            if (WindowState == WindowState.Maximized)
             {
-                Width = SystemParameters.PrimaryScreenWidth;
-                Height = SystemParameters.PrimaryScreenHeight;
-                Canvas.SetTop(this, 0);
-                Canvas.SetLeft(this, 0);
-                increase.Content = "-";
+                this.WindowState = WindowState.Normal;
+                increase.Content = "+";
             }
             else
             {
-                Width = 1080;
-                Height = 720;
-                Canvas.SetLeft(this, SystemParameters.PrimaryScreenWidth / 2 - 540);
-                Canvas.SetTop(this, SystemParameters.PrimaryScreenHeight / 2 - 360);
-                increase.Content = "+";
+                this.WindowState = WindowState.Maximized;
+                increase.Content = "-";
             }
         }
     }

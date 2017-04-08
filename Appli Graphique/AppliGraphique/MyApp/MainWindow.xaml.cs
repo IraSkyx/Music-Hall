@@ -33,9 +33,29 @@ namespace MyApp
         public MainWindow()
         {
             InitializeComponent();
-            //Style s = this.Resources["Rouge"] as Style;
-            //connexion.Style = s;
+
+            //Doit permettre d'override la template redéfinie
+
+            /*Setter setter = new Setter();
+            setter.Property=BackgroundProperty;
+
+            SolidColorBrush color = new SolidColorBrush();
+            color.Color = Color.FromRgb(217, 30, 24);
+            color.Opacity = 0.8;
+
+            setter.Value = color;
+
+            Trigger trigger = new Trigger();
+            trigger.Property = IsMouseOverProperty;
+            trigger.Value = true;
+
+            trigger.Setters.Add(setter);
+
+            quit.Triggers.Add(trigger);*/
+            
+
             zik = new Musique("Back For More", "Feder feat Daecom","blablabla", @"C:\Users\adria\Desktop\eFeder.jpg", "06/04/2017", @"C:\Users\adria\Desktop\Feder feat. Daecolm - Back For More.mp3", 210);
+
             myTimer = new Timer(1000);
             myTimer.Enabled = true;
             myTimer.Elapsed += new ElapsedEventHandler(myEvent);        
@@ -55,34 +75,14 @@ namespace MyApp
         {
             if (WindowState == WindowState.Maximized)
             {
-                this.WindowState = WindowState.Normal;
+                WindowState = WindowState.Normal;
                 increase.Content = "+";
             }
             else
             {
-                this.WindowState = WindowState.Maximized;
+                WindowState = WindowState.Maximized;
                 increase.Content = "-";
             }
-
-
-
-            /*
-            if ((string)increase.Content == "+")
-            {
-                Width = SystemParameters.PrimaryScreenWidth;
-                Height = SystemParameters.PrimaryScreenHeight;
-                Canvas.SetTop(this, 0);
-                Canvas.SetLeft(this, 0);
-                increase.Content = "-";
-            }
-            else
-            {               
-                Width = 1080;
-                Height = 720;
-                Canvas.SetLeft(this,SystemParameters.PrimaryScreenWidth / 2 - 540);
-                Canvas.SetTop(this, SystemParameters.PrimaryScreenHeight / 2 - 360);
-                increase.Content = "+";
-            }*/
         }
 
         private void Connexion(object sender, RoutedEventArgs e)
