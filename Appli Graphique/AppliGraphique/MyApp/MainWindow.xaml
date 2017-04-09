@@ -12,8 +12,9 @@
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,0,30">
             <Button x:Name="inscription" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Inscription" Content="Inscription" Width="75" Height="30" BorderThickness="0"/>
             <Button x:Name="connexion" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Connexion" Content="Connexion" Width="75" BorderThickness="0" Height="30"/>
-            <Button x:Name="increase" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Increase" Content="+" BorderThickness="0" FontSize="20" FontFamily="Bebas Neue" Height="30" Width="60"/>
-            <Button x:Name="quit" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Exit" Content="X" Width="60" Height="30" BorderThickness="0" FontSize="20" FontFamily="Arual"/>
+            <Button x:Name="reduce" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Reduce" Content="―" BorderThickness="0" FontSize="20" FontFamily="Arual" Height="30" Width="60"/>
+            <Button x:Name="increase" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Increase" Content="⇱" VerticalContentAlignment="Center" BorderThickness="0" FontSize="20" FontFamily="Arual" Height="30" Width="60"/>
+            <Button x:Name="quit" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Exit" Content="✗" Width="60" Height="30" BorderThickness="0" FontSize="20" FontFamily="Arual"/>
         </StackPanel>
 
         <StackPanel Orientation="Vertical">
@@ -44,11 +45,11 @@
                 <Label x:Name="duration" Foreground="White" HorizontalContentAlignment="Center" Content="00:00"/>
                 <ProgressBar x:Name="Prog" Height="5" Width="265" Background="Transparent" Foreground="White" Margin="10,0,0,10"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,0,10">
-                    <Button x:Name="play" Click="Play" Content="Play" Width="75"/>
-                    <Button x:Name="pause" Click="Pause" Content="Pause" Width="75"/>
-                    <Button x:Name="replay" Click="Replay" Content="Replay" Width="75"/>
+                    <Button x:Name="pause" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Pause" Content="❚❚" Margin="0,0,10,0" Height="40" Width="40" FontSize="20"/>
+                    <Button x:Name="replay" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Replay" Content="⟲" Margin="10,0,0,0" Height="40" Width="40" FontSize="20"/>
                 </StackPanel>
                 <Slider x:Name="slider" ValueChanged="Change" TickFrequency="5"  Width="135" Value="50" Maximum="100"/>
+                <Button x:Name="play" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Play" Content="Play" Width="75"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>

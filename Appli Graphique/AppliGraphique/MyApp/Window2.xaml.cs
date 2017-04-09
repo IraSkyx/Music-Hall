@@ -29,17 +29,22 @@ namespace MyApp
             Close();
         }
 
+        private void Reduce(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
         private void Increase(object sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Maximized)
             {
-                this.WindowState = WindowState.Normal;
-                increase.Content = "+";
+                WindowState = WindowState.Normal;
+                increase.Content = "⇱";
             }
             else
             {
-                this.WindowState = WindowState.Maximized;
-                increase.Content = "-";
+                WindowState = WindowState.Maximized;
+                increase.Content = "⇲";
             }
         }
 

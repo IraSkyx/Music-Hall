@@ -36,17 +36,13 @@ namespace MyApp
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
 
             // zik = new Musique("Back For More", "Feder feat Daecom","blablabla", @"..\resources\eFeder.jpg", "06/04/2017", @"C:\Users\Adrien\Desktop\C#\Appli Graphique\AppliGraphique\resources\Feder.mp3", 210);
 
-            //MyMusics db = new MyMusics(@"C:\Users\Adrien\Desktop\C#\Appli Graphique\AppliGraphique\MyMusics.mdf");
-            //db.CreateDatabase();
-
             myTimer = new DispatcherTimer();
             myTimer.Tick += new EventHandler(MyEvent);
-            myTimer.Interval = new TimeSpan(0, 0, 0, 0, 250);
-
-            Thread Thread = new Thread(new ThreadStart(ThreadLoop));      
+            myTimer.Interval = new TimeSpan(0, 0, 0, 0, 250);  
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -59,12 +55,12 @@ namespace MyApp
             if (WindowState == WindowState.Maximized)
             {
                 WindowState = WindowState.Normal;
-                increase.Content = "+";
+                increase.Content = "⇱";
             }
             else
             {
                 WindowState = WindowState.Maximized;
-                increase.Content = "-";
+                increase.Content = "⇲";
             }
         }
 
@@ -72,6 +68,11 @@ namespace MyApp
         {
             Window1 subWindow = new Window1();
             subWindow.Show();
+        }
+
+        private void Reduce(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
 
         private void Inscription(object sender, RoutedEventArgs e)
@@ -111,23 +112,35 @@ namespace MyApp
 
         private void Replay(object sender, RoutedEventArgs e)
         {
-            if (player == null)
+            if (player.settings.getMode("Loop"))
             {
-                return;
+                player.settings.setMode("Loop", false);
+                replay.Foreground = new SolidColorBrush(Color.FromRgb(255,255,255));
             }
-            player.settings.setMode("Loop", true);
+            else
+            {
+                player.settings.setMode("Loop", true);
+                replay.Foreground = new SolidColorBrush(Color.FromRgb(39, 174, 96));
+            }
         }
 
         private void Pause(object sender, RoutedEventArgs e)
         {
-            if (player == null)
+            if ((int)player.playState==10)
             {
                 return;
             }
             if (myTimer.IsEnabled)
             {           
                 player.controls.pause();
+                pause.Content = "►";
                 myTimer.Stop();
+            }
+            else
+            {
+                player.controls.pause();
+                pause.Content = "||";
+                myTimer.Start();
             }
         }
 
