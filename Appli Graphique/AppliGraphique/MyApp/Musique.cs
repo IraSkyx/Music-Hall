@@ -1,10 +1,16 @@
-﻿namespace MyApp
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace MyApp
 {
-    internal class Musique
+    internal class Musique : INotifyPropertyChanged
     {
-        public string titre { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public string artiste { get; set; }
+
+        public string titre { get; set; }
 
         public string infos { get; set; }
 
@@ -23,5 +29,13 @@
             this.date = date;
             this.audio = audio;
         }
+
+        //Demander ce que veut dire cette simplification
+        protected void OnPropertyChanged([CallerMemberName] string propName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+        }
+        /*var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propName));*/
     }
 }

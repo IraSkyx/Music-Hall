@@ -8,7 +8,7 @@
         Background="#222222"
         Icon="C:\Users\adria\Desktop\C#\Appli Graphique\AppliGraphique\resources\logo.ico"
         BorderThickness=".5"
-        BorderBrush="#ECF0F1"
+        BorderBrush="#ECF0F1"     
         Title="Music'Hall" Height="720" Width="1080" ResizeMode="NoResize" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" WindowStyle="None">
 
     <DockPanel LastChildFill="False" Background="#ECF0F1">
@@ -26,7 +26,7 @@
 
             <StackPanel Orientation="Horizontal" Height="300" HorizontalAlignment="Center">
                 <TabControl x:Name="TabControl" VerticalAlignment="Center" Width="788" SelectionChanged="TabControl_SelectionChanged">
-                    
+
                     <TabItem Header="Accueil"></TabItem>
 
                     <TabItem Header="Sélection"></TabItem>
@@ -47,19 +47,22 @@
                 </ListBox>
             </StackPanel>
         </StackPanel>
-        <StackPanel DockPanel.Dock="Bottom" Background="#222222" Orientation="Vertical">
-            <Label x:Name="duration" Foreground="White" HorizontalContentAlignment="Center" Content="00:00"/>
-            <ProgressBar x:Name="Prog" Height="5" Width="350" Background="Transparent" Foreground="White"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
-                <Button x:Name="previous" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Précédent" Content="◀◀" Width="50" Height="50" FontSize="22"/>
-                <Button x:Name="random" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture aléatoire" Content="∞" Width="50" Height="50" FontSize="22"/>
-                <Button x:Name="PausePlay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture" Click="PlayPause" Content="▶" Width="50" Height="50" FontSize="22"/>
-                <Button x:Name="replay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture en boucle" Click="Replay" Content="⟲" Width="50" Height="50" FontSize="22"/>
-                <Button x:Name="next" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Suivant" Content="▶▶" Width="50" Height="50" FontSize="22"/>
+        <StackPanel DockPanel.Dock="Bottom" Background="#222222">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label x:Name="duration" Foreground="White" HorizontalContentAlignment="Center" Content="00:00:00"/>
+                    <ProgressBar x:Name="Prog" Height="5" Width="350" Background="Transparent" Foreground="White"/>
+                    <Label x:Name="duration2" Foreground="White" HorizontalContentAlignment="Center" Content="00:00:00"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <Button x:Name="previous" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Précédent" Content="◀◀" Width="50" Height="50" FontSize="22"/>
+                    <Button x:Name="random" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture aléatoire" Content="∞" Width="50" Height="50" FontSize="22"/>
+                    <Button x:Name="PausePlay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture" Click="PlayPause" Content="▶" Width="50" Height="50" FontSize="22"/>
+                    <Button x:Name="replay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture en boucle" Click="Replay" Content="⟲" Width="50" Height="50" FontSize="22"/>
+                    <Button x:Name="next" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Suivant" Content="▶▶" Width="50" Height="50" FontSize="22"/>
+                </StackPanel>
+                <Slider x:Name="slider" ValueChanged="Change" TickFrequency="5"  Width="135" Value="50" Maximum="100" ToolTip = "Modifier le volume" Margin="0,0,0,10"/>
             </StackPanel>
-            <Slider x:Name="slider" ValueChanged="Change" TickFrequency="5"  Width="135" Value="50" Maximum="100" ToolTip = "Modifier le volume" Margin="0,0,0,10"/>
         </StackPanel>
-       
     </DockPanel>
-
 </Window>

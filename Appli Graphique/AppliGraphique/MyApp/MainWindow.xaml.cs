@@ -22,6 +22,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using WMPLib;
+using System.Collections;
+using System.ComponentModel;
 
 namespace MyApp
 {
@@ -32,18 +34,18 @@ namespace MyApp
     {
         public WindowsMediaPlayer player = new WindowsMediaPlayer();
         public DispatcherTimer myTimer;
-        public string url = @"C:\Users\adria\Desktop\C#\Appli Graphique\AppliGraphique\resources\Feder.mp3";
+        Musique CurrentlyPlaying;
         public double time=0.00;
-        Util View = new Util();
 
         public MainWindow()
         {
+            DataContext = CurrentlyPlaying;
             InitializeComponent();
-            base.DataContext = View;
             myTimer = new DispatcherTimer();
             myTimer.Tick += new EventHandler(MyEvent);
             myTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
-            player.settings.volume = 50;           
+            player.settings.volume = 50;
+            CurrentlyPlaying = new Musique("Back For More", "Feder, Daecolm", "bloblo", @"C:\Users\adria\Desktop\C#\Appli Graphique\AppliGraphique\resources\eFeder.jpg", "10/10/2010", @"C:\Users\adria\Desktop\C#\Appli Graphique\AppliGraphique\resources\Feder.mp3");
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -84,8 +86,9 @@ namespace MyApp
 
         private void MyEvent(object sender, EventArgs e)
         {
-            duration.Content = (Math.Floor(player.controls.currentPosition / 60)).ToString("00") + ":" + (player.controls.currentPosition % 60).ToString("00");
-            if(player.currentMedia.duration != 0)
+            duration.Content = (Math.Floor(player.controls.currentPosition / 1440)).ToString("00") + ":" + (Math.Floor(player.controls.currentPosition / 60)).ToString("00") + ":" + (player.controls.currentPosition % 60).ToString("00");
+            duration2.Content = (Math.Floor(player.currentMedia.duration / 1440)).ToString("00") + ":" + (Math.Floor(player.currentMedia.duration / 60)).ToString("00") + ":" + (player.currentMedia.duration % 60).ToString("00");
+            if (player.currentMedia.duration != 0)
             {
                 Prog.Value = (player.controls.currentPosition * 100) / player.currentMedia.duration;
             }
@@ -109,7 +112,7 @@ namespace MyApp
         {
             if ((string)PausePlay.Content == "▶")
             {
-                player.URL = url;
+                player.URL = CurrentlyPlaying.audio;
                 player.controls.currentPosition = time;
                 PausePlay.Content = "∥";
                 PausePlay.ToolTip = "Pause";
@@ -137,9 +140,14 @@ namespace MyApp
         }
     }
 
-    internal class Util
+    internal class MusiqueView
     {
         public ObservableCollection<Musique> li = new ObservableCollection<Musique>();
+
+        public IEnumerator<Musique> GetEnumerator()
+        {
+            return ((IEnumerable<Musique>)li).GetEnumerator();
+        }
 
         internal ObservableCollection<Musique> ChargerMusic()
         {
