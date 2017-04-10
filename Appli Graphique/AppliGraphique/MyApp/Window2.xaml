@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyApp"
         mc:Ignorable="d"
-        Background="#1a1a1a"
-        Title="Inscription" Height="500" BorderThickness="0" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+        BorderThickness=".5"
+        BorderBrush="#ECF0F1"
+        Background="#222222"
+        Title="Inscription" Height="500" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="reduce" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Reduce" Content="―" BorderThickness="0" FontSize="20" FontFamily="Arual" Height="30" Width="40"/>
-            <Button x:Name="increase" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Increase" Content="⇱" VerticalContentAlignment="Center" BorderThickness="0" FontSize="20" FontFamily="Arual" Height="30" Width="40"/>
-            <Button x:Name="quit" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Exit" Content="✗" Width="40" Height="30" BorderThickness="0" FontSize="20" FontFamily="Arual"/>
+            <Button x:Name="reduce" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" Click="Reduce" Content="―" BorderThickness="0" FontSize="20" FontFamily="Arual" Height="30" Width="45"/>
+            <Button x:Name="increase" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" Click="Increase" Content="⇱" VerticalContentAlignment="Center" BorderThickness="0" FontSize="20" FontFamily="Arual" Height="30" Width="45"/>
+            <Button x:Name="quit" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" Click="Exit" Content="✗" Width="45" Height="30" BorderThickness="0" FontSize="20" FontFamily="Arual"/>
         </StackPanel>
 
         <Grid VerticalAlignment="Top" HorizontalAlignment="Center">

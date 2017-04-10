@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Reflection;
@@ -29,20 +32,18 @@ namespace MyApp
     {
         public WindowsMediaPlayer player = new WindowsMediaPlayer();
         public DispatcherTimer myTimer;
-        int CurrentSecond=0;
-        int CurrentTimer=0;
-        int duree = 210;
+        public string url = @"C:\Users\adria\Desktop\C#\Appli Graphique\AppliGraphique\resources\Feder.mp3";
+        public double time=0.00;
+        Util View = new Util();
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = this;
-
-            // zik = new Musique("Back For More", "Feder feat Daecom","blablabla", @"..\resources\eFeder.jpg", "06/04/2017", @"C:\Users\Adrien\Desktop\C#\Appli Graphique\AppliGraphique\resources\Feder.mp3", 210);
-
+            base.DataContext = View;
             myTimer = new DispatcherTimer();
             myTimer.Tick += new EventHandler(MyEvent);
-            myTimer.Interval = new TimeSpan(0, 0, 0, 0, 250);  
+            myTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            player.settings.volume = 50;           
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -81,33 +82,13 @@ namespace MyApp
             subWindow2.Show();
         }
 
-        public static void ThreadLoop()
-        {
-            while (Thread.CurrentThread.IsAlive)
-            {
-                Thread.Sleep(500);
-            }
-        }
-
         private void MyEvent(object sender, EventArgs e)
         {
-            if (CurrentTimer == 4)
+            duration.Content = (Math.Floor(player.controls.currentPosition / 60)).ToString("00") + ":" + (player.controls.currentPosition % 60).ToString("00");
+            if(player.currentMedia.duration != 0)
             {
-                
-                ++CurrentSecond;                
-                duration.Content = (CurrentSecond/60).ToString("00") + ":" + (CurrentSecond % 60).ToString("00");
-                CurrentTimer = 0;
+                Prog.Value = (player.controls.currentPosition * 100) / player.currentMedia.duration;
             }
-            ++CurrentTimer;
-            Prog.Value = ((CurrentSecond+(CurrentTimer*0.25)) * 100) / duree;
-        }
-
-        private void Play(object sender, RoutedEventArgs e)
-        {
-                player.URL = @"C:\Users\Adrien\Desktop\C#\Appli Graphique\AppliGraphique\resources\Feder.mp3";
-                player.settings.volume = 50;
-                player.controls.play();
-                myTimer.Start();
         }
 
         private void Replay(object sender, RoutedEventArgs e)
@@ -124,23 +105,24 @@ namespace MyApp
             }
         }
 
-        private void Pause(object sender, RoutedEventArgs e)
+        private void PlayPause(object sender, RoutedEventArgs e)
         {
-            if ((int)player.playState==10)
+            if ((string)PausePlay.Content == "▶")
             {
-                return;
-            }
-            if (myTimer.IsEnabled)
-            {           
-                player.controls.pause();
-                pause.Content = "►";
-                myTimer.Stop();
-            }
+                player.URL = url;
+                player.controls.currentPosition = time;
+                PausePlay.Content = "∥";
+                PausePlay.ToolTip = "Pause";
+                player.controls.play();
+                myTimer.Start();
+            } 
             else
             {
+                time = player.controls.currentPosition;
                 player.controls.pause();
-                pause.Content = "||";
-                myTimer.Start();
+                PausePlay.Content = "▶";
+                PausePlay.ToolTip = "Lecture";
+                myTimer.Stop();
             }
         }
 
@@ -152,6 +134,35 @@ namespace MyApp
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+    }
+
+    internal class Util
+    {
+        public ObservableCollection<Musique> li = new ObservableCollection<Musique>();
+
+        internal ObservableCollection<Musique> ChargerMusic()
+        {
+            string [] line = new string[6];          
+            try
+            {
+                using (StreamReader str = new StreamReader(@"C:\Users\adria\Desktop\C#\Appli Graphique\AppliGraphique\resources\File.txt"))
+                {
+                    while (str.EndOfStream==false)
+                    {
+                        for(int i = 0; i <=5 ; ++i)
+                        {
+                            line[i] = str.ReadLine();
+                        }
+                        li.Add(new Musique(line[0], line[1], line[2], line[3], line[4], line[5]));
+                    }
+                }               
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return li;
         }
     }
 }

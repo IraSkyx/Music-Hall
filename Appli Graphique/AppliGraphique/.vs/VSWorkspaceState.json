@@ -1,10 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\MyApp",
-    "\\MyApp\\obj\\Debug",
-    "\\MyApp\\obj\\Release\\TempPE"
+    "\\MyApp"
   ],
-  "SelectedNode": "\\AppliGraphique.sln",
+  "SelectedNode": "\\MyApp\\MainWindow.xaml.cs",
   "PreviewInSolutionExplorer": true
 }

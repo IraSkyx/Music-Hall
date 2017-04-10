@@ -2,66 +2,26 @@
 {
     internal class Musique
     {
-        /*public string titre
-        {
-            get { return titre; }
-            private set { titre = value; }
-        }
-        public string artiste
-        {
-            get { return artiste; }
-            private set { artiste = value; }
-        }
-        public string infos
-        {
-            get { return infos; }
-            private set { infos = value; }
-        }
-        public string image
-        {
-            get { return image; }
-            private set { image = value; }
-        }
-        public string date
-        {
-            get { return date; }
-            private set { date = value; }
-        }
-        public string audio
-        {
-            get { return audio; }
-            private set { audio = value; }
-        }
-        public int duree
-        {
-            get { return duree; }
-            private set { duree = value; }
-        }*/
+        public string titre { get; set; }
 
-        public string titre;
+        public string artiste { get; set; }
 
-        public string artiste;
+        public string infos { get; set; }
 
-        public string infos;
+        public string image { get; set; }
 
-        public string image;
+        public string date { get; set; }
 
-        public string date;
+        public string audio { get; set; }
 
-        public string audio;
-
-        public int duree;
-        
-
-        public Musique(string titre, string artiste, string infos, string image, string date, string audio, int duree)
+        public Musique(string titre, string artiste, string infos, string image, string date, string audio)
         {
             this.titre = titre;
             this.artiste = artiste;
-            this.infos = infos;          
+            this.infos = infos;
             this.image = image;
             this.date = date;
             this.audio = audio;
-            this.duree = duree;
         }
     }
 }
