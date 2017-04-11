@@ -11,7 +11,7 @@
         </Style>
 
         <ControlTemplate x:Key="OverButton" TargetType="Button">
-            <Border Background="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" BorderThickness="2" BorderBrush="Transparent">
+            <Border Background="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Width}" BorderThickness="2" BorderBrush="Transparent">
                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Border>
         </ControlTemplate>
