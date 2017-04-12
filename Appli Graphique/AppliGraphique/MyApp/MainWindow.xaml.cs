@@ -1,30 +1,13 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Media;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using WMPLib;
-using System.Collections;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace MyApp
 {
@@ -33,27 +16,30 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        public WindowsMediaPlayer player = new WindowsMediaPlayer();
+        /*public WindowsMediaPlayer player = new WindowsMediaPlayer();
         public DispatcherTimer myTimer;
         public double time = 0.00;
-        public LinkedList<string> CurrentlyPlaying;
+        List<Musique> AllMusic;
+        Musique CurrentlyPlaying;*/
 
         public MainWindow()
         {
             InitializeComponent();
 
-            myTimer = new DispatcherTimer();
+            /*myTimer = new DispatcherTimer();
             myTimer.Tick += new EventHandler(MyEvent);
             myTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
 
-            CurrentlyPlaying = MusiqueView.ChargerMusic();
+            AllMusic = MusiqueView.ChargerMusic();
+            Console.WriteLine(AllMusic);
+            CurrentlyPlaying = AllMusic.ElementAt(0);
 
             player.settings.volume = 50;          
             player.settings.autoStart = false; 
-            player.URL = CurrentlyPlaying.First(); 
+            player.URL = CurrentlyPlaying.audio; */
         }
 
-            private void Exit(object sender, RoutedEventArgs e)
+        private void Exit(object sender, RoutedEventArgs e)
         {
             Close();
         }
@@ -89,7 +75,7 @@ namespace MyApp
             subWindow2.Show();
         }
 
-        private void MyEvent(object sender, EventArgs e)
+        /*private void MyEvent(object sender, EventArgs e)
         {
             duration.Content = (Math.Floor(player.controls.currentPosition / 1440)).ToString("00") + ":" + (Math.Floor(player.controls.currentPosition / 60)).ToString("00") + ":" + (player.controls.currentPosition % 60).ToString("00");
             duration2.Content = (Math.Floor(player.currentMedia.duration / 1440)).ToString("00") + ":" + (Math.Floor(player.currentMedia.duration / 60)).ToString("00") + ":" + (player.currentMedia.duration % 60).ToString("00");
@@ -117,17 +103,12 @@ namespace MyApp
 
         private void Previous(object sender, RoutedEventArgs e)
         {
-            player.URL = (IndexOf(player.URL, 0) == 0) ? CurrentlyPlaying.ElementAt(CurrentlyPlaying.Count-1) : CurrentlyPlaying.ElementAt(IndexOf(player.URL, 0)-1);
-        }
-
-        private int IndexOf(string url, int n)
-        {
-            return (CurrentlyPlaying.ElementAt(n) == url) ? n : IndexOf(url, n + 1);          
+            player.URL = (AllMusic.IndexOf(CurrentlyPlaying) == 0) ? AllMusic.ElementAt(AllMusic.Count - 1).audio : AllMusic.ElementAt(AllMusic.IndexOf(CurrentlyPlaying) - 1).audio;
         }
 
         private void Next(object sender, RoutedEventArgs e)
         {
-            player.URL = (IndexOf(player.URL, 0) == CurrentlyPlaying.Count-1) ? CurrentlyPlaying.ElementAt(0) : CurrentlyPlaying.ElementAt(IndexOf(player.URL, 0) + 1);
+            player.URL = (AllMusic.IndexOf(CurrentlyPlaying) == AllMusic.Count-1) ? AllMusic.ElementAt(0).audio : AllMusic.ElementAt(AllMusic.IndexOf(CurrentlyPlaying) + 1).audio;
         }
 
         private void Random(object sender, RoutedEventArgs e)
@@ -169,17 +150,17 @@ namespace MyApp
 
     internal class MusiqueView //Refaire la classe avec class Musique voire List 
     {
-        public static LinkedList<string> li = new LinkedList<string>();
+        public static List<Musique> li = new List<Musique>();
 
-        internal static LinkedList<string> ChargerMusic()
+        internal static List<Musique> ChargerMusic()
         {        
             try
             {
-                using (StreamReader str = new StreamReader(@"C:\Users\adria\Desktop\C#\Appli Graphique\AppliGraphique\resources\File.txt"))
+                using (StreamReader str = new StreamReader(MyApp.Properties.Resources.File))
                 {
                     while (str.EndOfStream==false)
                     {
-                        li.AddFirst(@"C:\Users\adria\Desktop\C#\Appli Graphique\AppliGraphique\resources\"+ str.ReadLine());
+                        li.Add(new Musique(str.ReadLine(), str.ReadLine()));
                     }
                 }               
             }
@@ -188,6 +169,7 @@ namespace MyApp
                 Console.WriteLine(e.Message);
             }
             return li;
-        }
+        }*/
     }
+    
 }

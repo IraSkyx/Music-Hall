@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,4 +33,24 @@ namespace MyApp
         [Column]
         public int duree;
     }*/
+}
+
+
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace MyApp
+{
+    internal class Musique
+    {
+        
+        public string Audio;
+        public string Image;
+
+        public Musique(string Audio, string Image)
+        {
+            this.Audio = Audio; 
+            this.Image = Image;           
+        }
+    }
 }
