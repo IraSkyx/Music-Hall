@@ -38,6 +38,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -186,9 +187,53 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\The Chainsmokers - Paris.mp3" />
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AintMe.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eAintMe.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eFeder.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eHolding.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eJustLike.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eMadeon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eParis.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Feder.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\File.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Holding.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JustLike.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Madeon.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paris.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

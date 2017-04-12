@@ -56,7 +56,7 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image x:Name="image" Margin="0,10,0,0" Width="60" Height="60"/>
+                    <Image x:Name="image" Width="60" Height="60"/>
                     <Label x:Name="title" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center"/>
                     <Label x:Name="artist" Foreground="White" HorizontalContentAlignment="Center"/>
                 </StackPanel>
