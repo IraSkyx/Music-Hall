@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-// using WMPLib;
+using WMPLib;
 
 namespace MyApp
 {
@@ -16,8 +16,8 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        /*public WindowsMediaPlayer player = new WindowsMediaPlayer();
-        public DispatcherTimer myTimer;
+        public WindowsMediaPlayer player = new WindowsMediaPlayer();
+        /*public DispatcherTimer myTimer;
         public double time = 0.00;
         List<Musique> AllMusic;
         Musique CurrentlyPlaying;*/
@@ -85,7 +85,7 @@ namespace MyApp
             artist.Content = player.currentMedia.getItemInfo("Artist");
 
             Prog.Value = (player.currentMedia.duration != 0) ? (player.controls.currentPosition * 100) / player.currentMedia.duration : (player.controls.currentPosition * 100) / 0.01;
-        }
+        }*/
 
         private void Replay(object sender, RoutedEventArgs e)
         {
@@ -103,12 +103,12 @@ namespace MyApp
 
         private void Previous(object sender, RoutedEventArgs e)
         {
-            player.URL = (AllMusic.IndexOf(CurrentlyPlaying) == 0) ? AllMusic.ElementAt(AllMusic.Count - 1).audio : AllMusic.ElementAt(AllMusic.IndexOf(CurrentlyPlaying) - 1).audio;
+            //player.URL = (AllMusic.IndexOf(CurrentlyPlaying) == 0) ? AllMusic.ElementAt(AllMusic.Count - 1).audio : AllMusic.ElementAt(AllMusic.IndexOf(CurrentlyPlaying) - 1).audio;
         }
 
         private void Next(object sender, RoutedEventArgs e)
         {
-            player.URL = (AllMusic.IndexOf(CurrentlyPlaying) == AllMusic.Count-1) ? AllMusic.ElementAt(0).audio : AllMusic.ElementAt(AllMusic.IndexOf(CurrentlyPlaying) + 1).audio;
+            //player.URL = (AllMusic.IndexOf(CurrentlyPlaying) == AllMusic.Count-1) ? AllMusic.ElementAt(0).audio : AllMusic.ElementAt(AllMusic.IndexOf(CurrentlyPlaying) + 1).audio;
         }
 
         private void Random(object sender, RoutedEventArgs e)
@@ -121,19 +121,19 @@ namespace MyApp
             if ((string)PausePlay.Content == "▶")
             {
                 player.settings.autoStart = true;
-                player.controls.currentPosition = time;              
+                //player.controls.currentPosition = time;              
                 PausePlay.Content = "∥";
                 PausePlay.ToolTip = "Pause";
                 player.controls.play();
-                myTimer.Start();
-            } 
+                //myTimer.Start();
+            }
             else
             {
-                time = player.controls.currentPosition;
+                //time = player.controls.currentPosition;
                 player.controls.pause();
                 PausePlay.Content = "▶";
                 PausePlay.ToolTip = "Lecture";
-                myTimer.Stop();
+                //myTimer.Stop();
             }
         }
 
@@ -148,7 +148,7 @@ namespace MyApp
         }
     }
 
-    internal class MusiqueView //Refaire la classe avec class Musique voire List 
+    /*internal class MusiqueView //Refaire la classe avec class Musique voire List 
     {
         public static List<Musique> li = new List<Musique>();
 
@@ -169,7 +169,6 @@ namespace MyApp
                 Console.WriteLine(e.Message);
             }
             return li;
-        }*/
-    }
-    
+        }
+    }*/ 
 }

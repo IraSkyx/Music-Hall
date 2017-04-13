@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyApp"
         mc:Ignorable="d"
-        Background="#222222"
-        Icon="C:\Users\adria\Desktop\C#\Appli Graphique\AppliGraphique\resources\logo.ico"
+        Background="#222222"      
         BorderThickness=".5"
         BorderBrush="#ECF0F1"     
         Title="Music'Hall" Height="720" Width="1080" ResizeMode="NoResize" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" WindowStyle="None">
