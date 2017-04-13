@@ -20,18 +20,21 @@ namespace Biblio
 
         public void CopyDirectory()
         {
-            Directory.CreateDirectory(@"\resources");
-            foreach (var file in Directory.GetFiles( @"\..\..\..\resources"))
+            Directory.CreateDirectory(@".\resources");
+            foreach (var file in Directory.GetFiles(@".\..\..\..\resources"))
             {
-                File.Copy(file, Path.Combine(@"\resources", Path.GetFileName(file)));
+                File.Copy(file, Path.Combine(@".\resources", Path.GetFileName(file)), true);            
             }
         }
 
         public void Load()
         {
-            using(StreamReader str = new StreamReader("\resources.File.txt"))
+            using(StreamReader str = new StreamReader(@".\resources\File.txt"))
             {
-                
+                while (!str.EndOfStream)
+                {
+                    AllMusic.Add(new Musique(str.ReadLine(), str.ReadLine(), str.ReadLine(), str.ReadLine(), str.ReadLine(), str.ReadLine(), str.ReadLine()));
+                }           
             }       
         }
     }

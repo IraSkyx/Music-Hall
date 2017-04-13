@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Biblio
 {
@@ -21,5 +22,19 @@ namespace Biblio
             playlist.Remove(music);
         }
 
+        public override string ToString()
+        {
+            string a="";
+            foreach(Musique music in playlist)
+            {
+                a += music.ToString();
+            }
+            return a;
+        }
+
+        internal Musique ElementAt(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,6 +1,42 @@
-Feder.mp3
-AintMe.mp3
-Holding.mp3
-JustLike.mp3
-Madeon.mp3
-Paris.mp3
+Feder feat Daecolm
+Back For More
+2017
+Electro
+Blabla
+.\resources\Feder.mp3
+.\resources\eFeder.jpg
+Kygo feat Selena Gomez
+It Ain't Me
+2017
+House, Pop
+Blabla
+.\resources\AintMe.mp3
+.\resources\eAintMe.jpg
+Twenty One Pilots
+Holding On To You
+2011
+Musique alternative/independante, Pop
+Blabla
+.\resources\Holding.mp3
+.\resources\eHolding.jpg
+The Chainsmokers
+Something Just Like This
+2017
+Dance
+Blabla
+.\resources\JustLike.mp3
+.\resources\eJustLike.jpg
+Porter Robinson feat Madeon
+Shelter
+2016
+Electro
+Blabla
+.\resources\Shelter.mp3
+.\resources\eShelter.jpg
+The Chainsmokers
+Paris
+2017
+Dance
+Blabla
+.\resources\Paris.mp3
+.\resources\eParis.jpg

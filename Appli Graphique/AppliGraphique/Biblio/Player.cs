@@ -10,12 +10,13 @@ namespace Biblio
         public Player()
         {
             player = new WindowsMediaPlayer();
+            player.settings.autoStart = true;
         }
 
         public void SetPlay(Musique music)
         {
             player.URL = music.Audio;
             CurrentlyPlaying = music;
-        }
+        }     
     }
 }
