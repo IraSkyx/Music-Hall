@@ -10,7 +10,7 @@
         public string Audio;
         public string Image;
 
-        public Musique(string Title, string Artist, string Date, string Info, string Genre, string Audio, string Image)
+        public Musique(string Title, string Artist, string Date, string Genre, string Info, string Audio, string Image)
         {
             this.Title = Title;
             this.Artist = Artist;
@@ -22,9 +22,8 @@
         }
 
         public override string ToString()
-        {
-            //return "Titre: " +Title+ "\n" + "Artiste: " + Artist + "\n"+ "Date:" + Date + "\n"+"Genre: " + Genre + "\n"+"Infos: " + Info + "\n";
-            return $"{nom} {prenom}"; //exemple bonne ecriture
+        {          
+            return $"{Title}\n{Artist}\n{Date}\n{Genre}\n{Info}";
         }
     }
 }

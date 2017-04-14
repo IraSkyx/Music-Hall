@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Threading;
-using WMPLib;
 
 namespace MyApp
 {
@@ -89,7 +83,7 @@ namespace MyApp
 
         private void Replay(object sender, RoutedEventArgs e)
         {
-            if (player.settings.getMode("Loop"))
+            /*if (player.settings.getMode("Loop"))
             {
                 player.settings.setMode("Loop", false);
                 replay.Foreground = new SolidColorBrush(Color.FromRgb(255,255,255));
@@ -98,7 +92,7 @@ namespace MyApp
             {
                 player.settings.setMode("Loop", true);
                 replay.Foreground = new SolidColorBrush(Color.FromRgb(39, 174, 96));
-            }
+            }*/
         }
 
         private void Previous(object sender, RoutedEventArgs e)
@@ -118,7 +112,7 @@ namespace MyApp
 
         private void PlayPause(object sender, RoutedEventArgs e)
         {
-            if ((string)PausePlay.Content == "▶")
+           /* if ((string)PausePlay.Content == "▶")
             {
                 player.settings.autoStart = true;
                 //player.controls.currentPosition = time;              
@@ -134,12 +128,12 @@ namespace MyApp
                 PausePlay.Content = "▶";
                 PausePlay.ToolTip = "Lecture";
                 //myTimer.Stop();
-            }
+            }*/
         }
 
         private void Change(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            player.settings.volume = Convert.ToInt32(slider.Value);
+            //player.settings.volume = Convert.ToInt32(slider.Value);
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)

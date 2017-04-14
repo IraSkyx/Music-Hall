@@ -2,10 +2,9 @@
 {
     public class User
     {
-        public string Pseudo { get; set; }
-        public string Email{ get; set; }
-        public string Psswd{ get; set; }
-
+        public string Pseudo;
+        public string Email;
+        public string Psswd;
         public Playlist Favorite;
 
         public User(string Pseudo, string Email, string Psswd, Playlist Favorite)
