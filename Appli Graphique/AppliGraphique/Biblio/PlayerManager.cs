@@ -26,6 +26,7 @@ namespace Biblio
         {
             if (NewState == 8) {
                 SetNext();
+                PausePlay();
             }
         }
 

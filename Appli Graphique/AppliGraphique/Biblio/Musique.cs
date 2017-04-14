@@ -23,7 +23,8 @@
 
         public override string ToString()
         {
-            return Title+"\n"+ Artist + "\n" + Date + "\n" + Genre + "\n" + Info + "\n";
+            //return "Titre: " +Title+ "\n" + "Artiste: " + Artist + "\n"+ "Date:" + Date + "\n"+"Genre: " + Genre + "\n"+"Infos: " + Info + "\n";
+            return $"{nom} {prenom}"; //exemple bonne ecriture
         }
     }
 }

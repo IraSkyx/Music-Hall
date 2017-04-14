@@ -31,10 +31,5 @@ namespace Biblio
             }
             return a;
         }
-
-        internal Musique ElementAt(int v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

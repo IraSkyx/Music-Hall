@@ -16,7 +16,7 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        public WindowsMediaPlayer player = new WindowsMediaPlayer();
+     //   public WindowsMediaPlayer player = new WindowsMediaPlayer();
         /*public DispatcherTimer myTimer;
         public double time = 0.00;
         List<Musique> AllMusic;

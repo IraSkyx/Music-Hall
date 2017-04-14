@@ -4,12 +4,12 @@ namespace Biblio
 {
     public class Player
     {
-        public WindowsMediaPlayer player;
+        //public WindowsMediaPlayer player;
         public Musique CurrentlyPlaying;
 
         public Player()
         {
-            player = new WindowsMediaPlayer();
+          //  player = new WindowsMediaPlayer();
             player.settings.autoStart = true;
         }
 
