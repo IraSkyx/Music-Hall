@@ -1,4 +1,6 @@
-﻿namespace Biblio
+﻿using System.Windows.Media.Imaging;
+
+namespace Biblio
 {
     public class Musique
     {
@@ -23,7 +25,7 @@
 
         public override string ToString()
         {          
-            return $"{Title}\n{Artist}\n{Date}\n{Genre}\n{Infos}";
+            return $"{Title}\n{Artist}\n{Date}\n{Genre}\n{Infos}\n";
         }
     }
 }

@@ -22,17 +22,5 @@ namespace MyApp.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Paramètre {
-            get {
-                return ((bool)(this["Paramètre"]));
-            }
-            set {
-                this["Paramètre"] = value;
-            }
-        }
     }
 }

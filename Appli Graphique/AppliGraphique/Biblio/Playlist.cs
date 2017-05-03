@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 
 namespace Biblio
 {
     public class Playlist
     {
-        private List<Musique> playlist;
+        private ObservableCollection<Musique> playlist;
 
         public Playlist()
         {
-            playlist = new List<Musique>();
+            playlist = new ObservableCollection<Musique>();
         }
 
         public void AddMusic(Musique music)

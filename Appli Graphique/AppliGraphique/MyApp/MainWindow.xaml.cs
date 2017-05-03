@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Biblio;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace MyApp
@@ -11,11 +12,17 @@ namespace MyApp
         public MainWindow()
         {
             InitializeComponent();
+
+            //Initialisation de tous les utilisateurs et de toutes les musiques
+            AllUsers users = new AllUsers();
+            users.All = LoadUsers.Load();
+            AllMusic musics = new AllMusic();
+            musics.All = LoadMusic.Load();
+            scroller.DataContext = musics;
         }
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.Paramètre = true;
             Close();
         }
 

@@ -141,20 +141,6 @@ namespace MyApp.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Feder.mp3
-        ///AintMe.mp3
-        ///Holding.mp3
-        ///JustLike.mp3
-        ///Madeon.mp3
-        ///Paris.mp3.
-        /// </summary>
-        internal static string File {
-            get {
-                return ResourceManager.GetString("File", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une ressource localisée de type System.Byte[].
         /// </summary>
         internal static byte[] Holding {

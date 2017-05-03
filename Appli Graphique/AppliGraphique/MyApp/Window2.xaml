@@ -8,12 +8,13 @@
         BorderThickness=".5"
         BorderBrush="#ECF0F1"
         Background="#222222"
+        FontFamily="Microsoft YaHei Light"
         Title="Inscription" Height="500" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="reduce" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" Click="Reduce" Content="―" BorderThickness="0" FontSize="20" FontFamily="Arual" Height="30" Width="45"/>
-            <Button x:Name="increase" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" Click="Increase" Content="⇱" VerticalContentAlignment="Center" BorderThickness="0" FontSize="20" FontFamily="Arual" Height="30" Width="45"/>
-            <Button x:Name="quit" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" Click="Exit" Content="✗" Width="45" Height="30" BorderThickness="0" FontSize="20" FontFamily="Arual"/>
+            <Button x:Name="reduce" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" Click="Reduce" Content="―" BorderThickness="0" FontSize="20" Height="30" Width="45"/>
+            <Button x:Name="increase" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" Click="Increase" Content="⇱" VerticalContentAlignment="Center" BorderThickness="0" FontSize="20" Height="30" Width="45"/>
+            <Button x:Name="quit" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" Click="Exit" Content="✗" Width="45" Height="30" BorderThickness="0" FontSize="20" />
         </StackPanel>
 
         <Grid VerticalAlignment="Top" HorizontalAlignment="Center">
@@ -26,7 +27,7 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <Label x:Name="inscrire" HorizontalContentAlignment="Center" Grid.Row="0" Content="S'inscrire" Foreground="White" FontWeight="Bold" FontSize="35" FontStyle="Italic" Margin="30"/>
+            <Label x:Name="inscrire" HorizontalContentAlignment="Center" Grid.Row="0" Content="S'inscrire" Foreground="White" FontSize="35" Margin="30"/>
 
             <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 

@@ -5,7 +5,7 @@
         public string Pseudo { get; set; }
         public string Email { get; set; }
         public string Psswd { get; set; }
-        private Playlist Favorite;
+        public Playlist Favorite { get; set; }
 
         public User(string Pseudo, string Email, string Psswd, Playlist Favorite)
         {

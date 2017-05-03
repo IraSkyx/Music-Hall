@@ -8,50 +8,67 @@
         Background="#222222"      
         BorderThickness=".5"
         BorderBrush="#ECF0F1"     
-        Title="Music'Hall" Height="720" Width="1080" ResizeMode="NoResize" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="Music'Hall" Height="720" Width="1080" ResizeMode="NoResize" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" WindowStyle="None" FontFamily="Microsoft YaHei Light">
 
-    <DockPanel LastChildFill="False" Background="#ECF0F1">
+    <DockPanel LastChildFill="False" Background="#222222">
         <StackPanel x:Name="Panel" DockPanel.Dock="Top" FlowDirection="RightToLeft" Orientation="Horizontal" Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="#222222">
-            <Button x:Name="quit" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" Height="30" BorderThickness="0" FontSize="20" FontFamily="Arual"/>
-            <Button x:Name="increase" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" ToolTip="Rétablir précédent" Click="Increase" Content="⇱" VerticalContentAlignment="Center" BorderThickness="0" FontSize="20" FontFamily="Arual" Height="30" Width="60"/>
-            <Button x:Name="reduce" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" ToolTip="Réduire" Click="Reduce" Content="―" BorderThickness="0" FontSize="20" FontFamily="Arual" Height="30" Width="60"/>
+            <Button x:Name="quit" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" Height="30" BorderThickness="0" FontSize="20"/>
+            <Button x:Name="increase" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" ToolTip="Rétablir précédent" Click="Increase" Content="⇱" VerticalContentAlignment="Center" BorderThickness="0" FontSize="20" Height="30" Width="60"/>
+            <Button x:Name="reduce" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" ToolTip="Réduire" Click="Reduce" Content="―" BorderThickness="0" FontSize="20" Height="30" Width="60"/>
             <Button x:Name="connexion" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" ToolTip="Se connecter" Click="Connexion" Content="Connexion" Width="75" BorderThickness="0" Height="30"/>
             <Button x:Name="inscription" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" ToolTip="S'inscrire" Click="Inscription" Content="Inscription" Width="75" Height="30" BorderThickness="0"/>
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Height="Auto" HorizontalAlignment="Stretch">
 
-            <WebBrowser Margin="0,0,0,20" Height="100"/>
+            <ListBox x:Name="scroller" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding All}" Height="100" Margin="10,30" Background="Transparent">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Height="70" Width="70" Source="{Binding Image}"/>
+                            <Label Content="{Binding Title}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
-            <StackPanel Orientation="Horizontal" Height="300" HorizontalAlignment="Center">
-                <TabControl x:Name="TabControl" VerticalAlignment="Center" Width="788" SelectionChanged="TabControl_SelectionChanged">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TabControl x:Name="TabControl" VerticalAlignment="Center" Width="788" Height="300" BorderThickness="0" SelectionChanged="TabControl_SelectionChanged" Margin="0,0,30,0" Background="#303030">
 
-                    <TabItem Header="Accueil"></TabItem>
+                    <TabItem Header="Accueil" Width="100" Foreground="White">
+                        
+                    </TabItem>
 
-                    <TabItem Header="Sélection"></TabItem>
+                    <TabItem Header="Sélection" Width="100" Foreground="White">
+                        
+                    </TabItem>
 
-                    <TabItem Header="Recherche"></TabItem>
+                    <TabItem Header="Recherche" Width="100" Foreground="White">
+                        <StackPanel Margin="10">
+                            <TextBox Width="300" Height="25"/>
+                        </StackPanel>
+                    </TabItem>
 
                 </TabControl>
 
-                <ListBox x:Name="listBox" ItemsSource="{Binding View}" Width="150">
+                <ListBox x:Name="listBox" Width="150" Background="Transparent">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <Label Foreground="Black" Content="{Binding titre}"/>
-                                <Label Foreground="Black" Content="{Binding artiste}"/>
+                                <Label/>
+                                <Label/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </StackPanel>
         </StackPanel>
-        <StackPanel DockPanel.Dock="Bottom" Background="#222222">
+        <StackPanel DockPanel.Dock="Bottom" Background="#303030">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -66,7 +83,7 @@
                         <ProgressBar x:Name="Prog" Height="5" Width="350" Background="Transparent" Foreground="White"/>
                         <Label x:Name="duration2" Foreground="White" HorizontalContentAlignment="Center" Content="00:00:00"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="previous" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Précédent" Content="◀◀" Width="50" Height="50" FontSize="22"/>
                         <Button x:Name="random" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture aléatoire" Content="∞" Width="50" Height="50" FontSize="22"/>
                         <Button x:Name="PausePlay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture" Content="▶" Width="50" Height="50" FontSize="22"/>
