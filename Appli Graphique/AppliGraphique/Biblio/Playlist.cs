@@ -4,7 +4,7 @@ namespace Biblio
 {
     public class Playlist
     {
-        public List<Musique> playlist;
+        private List<Musique> playlist;
 
         public Playlist()
         {

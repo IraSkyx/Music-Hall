@@ -2,10 +2,10 @@
 {
     public class User
     {
-        public string Pseudo;
-        public string Email;
-        public string Psswd;
-        public Playlist Favorite;
+        public string Pseudo { get; set; }
+        public string Email { get; set; }
+        public string Psswd { get; set; }
+        private Playlist Favorite;
 
         public User(string Pseudo, string Email, string Psswd, Playlist Favorite)
         {
@@ -15,5 +15,9 @@
             this.Favorite = Favorite;
         }
 
+        public override string ToString()
+        {
+            return $"{Pseudo}\n{Email}\n{Psswd}\n{Favorite}\n";
+        }
     }
 }
