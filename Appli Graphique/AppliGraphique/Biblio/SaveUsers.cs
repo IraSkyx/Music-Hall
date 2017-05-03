@@ -6,7 +6,8 @@ namespace Biblio
     {
         public static void Save(ObservableCollection<User> AllUsers)
         {
-
+            ObservableCollection<User> listeUser = new ObservableCollection<User>();
+            
         }
     }
 }
