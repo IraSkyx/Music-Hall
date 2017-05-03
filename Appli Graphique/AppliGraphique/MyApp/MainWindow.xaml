@@ -21,31 +21,69 @@
 
         <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Height="Auto" HorizontalAlignment="Stretch">
 
-            <ListBox x:Name="scroller" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding All}" Height="100" Margin="10,30" Background="Transparent">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Height="70" Width="70" Source="{Binding Image}"/>
-                            <Label Content="{Binding Title}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-
+            <ScrollViewer x:Name="scrollviewer" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Width="Auto">
+                <ListBox x:Name="scroller" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="scroller_SelectionChanged" HorizontalAlignment="Center" Height="100" ItemsSource="{Binding All}" Margin="10,30" Background="Transparent">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Image Height="50" Width="50" Source="{Binding Image}"/>
+                                <Label Content="{Binding Title}" Foreground="White"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TabControl x:Name="TabControl" VerticalAlignment="Center" Width="788" Height="300" BorderThickness="0" SelectionChanged="TabControl_SelectionChanged" Margin="0,0,30,0" Background="#303030">
+                <TabControl x:Name="TabControl" VerticalAlignment="Center" Width="788" Height="300" BorderThickness="0" Margin="0,0,30,0" Background="#303030">
 
                     <TabItem Header="Accueil" Width="100" Foreground="White">
-                        
+
                     </TabItem>
 
                     <TabItem Header="Sélection" Width="100" Foreground="White">
-                        
+                        <Grid x:Name="Selection">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="129*"/>
+                                <ColumnDefinition Width="67*"/>
+                                <ColumnDefinition Width="196*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.ColumnSpan="2" Margin="30">
+                                <Image VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" Height="120" Source="{Binding ElementName=scroller, Path=SelectedItem.Image}">
+                                    <Image.BitmapEffect>
+                                        <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="10" Softness="1" Opacity="0.5"/>
+                                    </Image.BitmapEffect>
+                                </Image>
+                                <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Title}" FontSize="20" Margin="0,20,0,10" Foreground="White"/>
+                                <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Artist}" Foreground="White"/>
+                            </StackPanel>
+                            <StackPanel VerticalAlignment="Center" Grid.Column="2" Margin="0,36">
+                                <TabControl Width="300" Height="200" Background="#343434">
+                                    <TabItem Header="Infos" Width="60" Foreground="White">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20" Foreground="White"/>
+                                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Date}" Margin="30" FontSize="20" Foreground="White"/>
+                                        </StackPanel>
+                                    </TabItem>
+                                    <TabItem Header="Etc" Width="60" Foreground="White"/>
+                                    <TabItem Header="Etc" Width="60" Foreground="White"/>
+                                </TabControl>
+                            </StackPanel>
+                        </Grid>
                     </TabItem>
 
                     <TabItem Header="Recherche" Width="100" Foreground="White">
                         <StackPanel Margin="10">
-                            <TextBox Width="300" Height="25"/>
+                            <TextBox x:Name="Input" Width="300" Height="25" TextChanged="TextBox_TextChanged"/>
+                            <ListBox x:Name="Search" Background="Transparent" Height="150" Margin="30" SelectionChanged="ListBox_SelectionChanged">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Height="50" Width="50" Source="{Binding Image}"/>
+                                            <Label Content="{Binding Title}" Foreground="White"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                         </StackPanel>
                     </TabItem>
 

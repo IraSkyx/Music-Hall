@@ -15,7 +15,6 @@ namespace MainTest
             playl.AddMusic(m2);
             playl.AddMusic(m3);
             User jean = new User("Toto", "toto@gmail.com", "toto", playl);
-            
         }
 
         static void Main(string[] args)

@@ -100,8 +100,8 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -133,55 +133,35 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\The Chainsmokers - Paris.mp3" />
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\AintMe.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\eAintMe.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\eFeder.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\eHolding.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\eJustLike.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\eMadeon.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\eParis.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Feder.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Holding.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\JustLike.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Madeon.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Paris.mp3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Biblio\Biblio.csproj">
       <Project>{087caf5b-e6cd-4ed8-9c1b-2bbf4a29a649}</Project>
       <Name>Biblio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\eParis.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\eAintMe.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="images\eFeder.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="images\eHolding.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="images\eJustLike.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="images\eShelter.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

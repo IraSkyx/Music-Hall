@@ -1,6 +1,10 @@
 ﻿using Biblio;
+using System;
+using System.Linq;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MyApp
 {
@@ -9,6 +13,9 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        ObservableCollection<Musique> Result;
+        AllMusic musics;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -16,9 +23,10 @@ namespace MyApp
             //Initialisation de tous les utilisateurs et de toutes les musiques
             AllUsers users = new AllUsers();
             users.All = LoadUsers.Load();
-            AllMusic musics = new AllMusic();
+            musics = new AllMusic();
             musics.All = LoadMusic.Load();
             scroller.DataContext = musics;
+            Search.ItemsSource = Result;
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -62,9 +70,29 @@ namespace MyApp
             //player.settings.volume = Convert.ToInt32(slider.Value);
         }
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void scroller_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            TabControl.SelectedIndex = 1;
+        }
 
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            scroller.SelectedIndex = musics.All.IndexOf((Musique)Search.SelectedItem);
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Result = new ObservableCollection<Musique>(musics.All.Where(x => x.Title.Equals(Input.Text)));
+            if(Result.Count>0)
+                scroller.SelectedIndex = musics.All.IndexOf(Result.ElementAt(0));
+        }
+
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta < 0)
+                scrollviewer.LineLeft();
+            else
+                scrollviewer.LineRight();
         }
     }
 }

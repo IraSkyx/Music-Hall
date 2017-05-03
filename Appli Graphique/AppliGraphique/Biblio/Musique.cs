@@ -1,6 +1,4 @@
-﻿using System.Windows.Media.Imaging;
-
-namespace Biblio
+﻿namespace Biblio
 {
     public class Musique
     {
