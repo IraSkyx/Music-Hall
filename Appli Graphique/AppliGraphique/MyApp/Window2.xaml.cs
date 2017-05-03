@@ -8,7 +8,7 @@ namespace MyApp
     public partial class Window2 : Window
     {
         public Window2()
-        {
+        {            
             InitializeComponent();
         }
         private void Exit(object sender, RoutedEventArgs e)

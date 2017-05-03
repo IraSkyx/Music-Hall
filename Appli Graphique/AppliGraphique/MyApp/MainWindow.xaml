@@ -67,11 +67,11 @@
                         <Label x:Name="duration2" Foreground="White" HorizontalContentAlignment="Center" Content="00:00:00"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                        <Button x:Name="previous" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Précédent" Click="Previous" Content="◀◀" Width="50" Height="50" FontSize="22"/>
-                        <Button x:Name="random" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture aléatoire" Click="Random" Content="∞" Width="50" Height="50" FontSize="22"/>
-                        <Button x:Name="PausePlay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture" Click="PlayPause" Content="▶" Width="50" Height="50" FontSize="22"/>
-                        <Button x:Name="replay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture en boucle" Click="Replay" Content="⟲" Width="50" Height="50" FontSize="22"/>
-                        <Button x:Name="next" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Suivant" Click="Next" Content="▶▶" Width="50" Height="50" FontSize="22"/>
+                        <Button x:Name="previous" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Précédent" Content="◀◀" Width="50" Height="50" FontSize="22"/>
+                        <Button x:Name="random" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture aléatoire" Content="∞" Width="50" Height="50" FontSize="22"/>
+                        <Button x:Name="PausePlay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture" Content="▶" Width="50" Height="50" FontSize="22"/>
+                        <Button x:Name="replay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture en boucle" Content="⟲" Width="50" Height="50" FontSize="22"/>
+                        <Button x:Name="next" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Suivant" Content="▶▶" Width="50" Height="50" FontSize="22"/>
                     </StackPanel>
                     <Slider x:Name="slider" ValueChanged="Change" TickFrequency="5"  Width="135" Value="50" Maximum="100" ToolTip = "Modifier le volume" Margin="0,0,0,10"/>
                 </StackPanel>

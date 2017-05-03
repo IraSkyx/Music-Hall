@@ -1,7 +1,4 @@
 ﻿using Biblio;
-using System;
-using System.Linq;
-
 
 namespace MainTest
 {
