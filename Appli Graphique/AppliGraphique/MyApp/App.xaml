@@ -105,7 +105,7 @@
             </Setter>
         </Style>
 
-        <Style TargetType="ListBox">
+        <Style TargetType="ListBox" x:Key="HorizontalListbox">
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>

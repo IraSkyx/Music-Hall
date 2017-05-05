@@ -5,7 +5,7 @@ namespace Biblio
 {
     public class Playlist
     {
-        public ObservableCollection<Musique> playlist;
+        public ObservableCollection<Musique> playlist { get; set; }
 
         public Playlist()
         {

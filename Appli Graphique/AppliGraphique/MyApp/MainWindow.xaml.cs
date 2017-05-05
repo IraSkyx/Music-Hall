@@ -26,6 +26,7 @@ namespace MyApp
         public MainWindow()
         {
             InitializeComponent();
+            listBox.SelectedIndex = 0;
 
             //Initialisation Player
             FullPlayer.Children.Add(Player.ElementPlayer);
@@ -39,10 +40,12 @@ namespace MyApp
             musics.All = LoadMusic.Load();
 
             //Initialisation des DataContext  
-            scroller.DataContext = musics;
+            scroller.DataContext = musics;           
             Search.ItemsSource = Result;
             FullPlayer.DataContext = Player.ElementPlayer;
             Currently.DataContext = Player.CurrentlyPlaying;
+
+            listBox.DataContext = currentUser;
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -94,6 +97,8 @@ namespace MyApp
             connexion.ToolTip = "Fermer la session";
             inscription.Content = currentUser.Infos.DisplayName;
             inscription.ToolTip = "Voir profil";
+
+            listBox.UpdateLayout();
         }
 
         private void Inscription(object sender, RoutedEventArgs e)
@@ -143,10 +148,11 @@ namespace MyApp
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (e.Delta < 0)
-                scrollviewer.LineLeft();
+            if (e.Delta > 0)
+                scroller.SelectedIndex = (scroller.SelectedIndex == 0) ? 0 : scroller.SelectedIndex - 1;                     
             else
-                scrollviewer.LineRight();
+                scroller.SelectedIndex = (scroller.SelectedIndex == musics.All.Count-1) ? musics.All.Count - 1 : scroller.SelectedIndex + 1;
+            scroller.ScrollIntoView(musics.All.ElementAt(scroller.SelectedIndex));
         }
 
         private void StackPanel_MouseUp(object sender, MouseButtonEventArgs e)
