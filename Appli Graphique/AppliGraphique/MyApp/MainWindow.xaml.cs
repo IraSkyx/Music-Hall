@@ -188,18 +188,23 @@ namespace MyApp
 
         private void Replay(object sender, RoutedEventArgs e)
         {
-            replay.Foreground = (Player.SetRandomPlay()) ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            replay.Foreground = (Player.SetLoop()) ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            random.Foreground = (Player.RandomPlay) ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
         }
 
         private void SetRandom(object sender, RoutedEventArgs e)
-        {
+        {           
             random.Foreground = (Player.SetRandomPlay()) ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            replay.Foreground = (Player.Loop) ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
         }
 
         private void Next(object sender, RoutedEventArgs e)
         {
             if (currentUser == null || currentUser.Favorite == null)
+            {
+                PausePlay.Content = "▶";
                 return;
+            }
             PausePlay.Content = (Player.GoToNextOrPrevious(currentUser, 1)) ? "||" : "▶";
         }
 
@@ -219,12 +224,15 @@ namespace MyApp
             }
             else if (Player.RandomPlay) //Mode Random activé
             {
-                if (currentUser.Favorite == null)
-                    PausePlay.Content = (Player.Play(musics.All.ElementAt(new Random().Next()))) ? "||" : "▶";
-                else
+                if (currentUser != null)
                 {
-                    PausePlay.Content = (Player.Play(currentUser.Favorite.playlist.ElementAt(new Random().Next()))) ? "||" : "▶";
+                    if (currentUser.Favorite != null)
+                        PausePlay.Content = Player.Play(musics.All.ElementAt(new Random().Next())) ? "||" : "▶";
+                    else
+                        PausePlay.Content = Player.Play(currentUser.Favorite.playlist.ElementAt(new Random().Next())) ? "||" : "▶";
                 }
+                else
+                    PausePlay.Content = Player.Play(musics.All.ElementAt(new Random().Next())) ? "||" : "▶";
             }
             else //Mode Replay & Random désactivé
             {
@@ -234,6 +242,7 @@ namespace MyApp
         private void MediaOpened(object sender, RoutedEventArgs e)
         {
             SetDuration();
+            Prog.Maximum = Player.ElementPlayer.NaturalDuration.TimeSpan.TotalSeconds;
             image.Source = new BitmapImage(new Uri(Player.CurrentlyPlaying.Image));
             title.Text = Player.CurrentlyPlaying.Title;
             artist.Text = Player.CurrentlyPlaying.Artist;
@@ -261,6 +270,17 @@ namespace MyApp
                 Player.ElementPlayer.NaturalDuration.TimeSpan.Minutes,
                 Player.ElementPlayer.NaturalDuration.TimeSpan.Seconds
                 );
+        }
+
+        private void ProgMouseClick(object sender, MouseButtonEventArgs e)
+        {
+            if (Player.ElementPlayer.Source != null && Player.ElementPlayer.NaturalDuration.HasTimeSpan)
+            {
+                Prog.Value = (e.GetPosition(Prog).X / Prog.ActualWidth) * Prog.Maximum;
+                Player.ElementPlayer.Position = new TimeSpan(0,0,(int)Prog.Value);
+                Player.ElementPlayer.Play();
+                PausePlay.Content = "||";
+            }
         }
     }       
 }

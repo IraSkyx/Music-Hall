@@ -31,12 +31,16 @@ namespace Biblio
         public bool SetRandomPlay()
         {
             RandomPlay = !RandomPlay;
+            if (RandomPlay)
+                Loop = false;
             return RandomPlay;
         }
 
         public bool SetLoop()
         {
             Loop = !Loop;
+            if (Loop)
+                RandomPlay = false;
             return Loop;
         }
 
