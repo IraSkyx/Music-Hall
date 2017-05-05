@@ -25,6 +25,7 @@
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
             <Label x:Name="label" HorizontalContentAlignment="Center" Grid.Row="0" Content="Se connecter" Foreground="White" FontSize="35" Margin="30"/>
@@ -40,14 +41,15 @@
                 </Grid.RowDefinitions>
                 
                 <Label x:Name="label1" Content="Adresse e-mail" Grid.Column="0" Foreground="White" Height="30" Width="120"/>
-                <TextBox x:Name="textBox" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Height="23" Width="120"/>
-                
-                <Label x:Name="mdp" Content="Mot de passe" Foreground="White" Grid.Row="1" Height="30" Width="120"/>
-                <PasswordBox x:Name="passwordBox" Grid.Row="1" Grid.Column="1" Grid.RowSpan="1" Height="23" Width="120"/>
-            
+                <TextBox x:Name="email" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Height="23" Width="120"/>
+
+                <Label x:Name="passwordlab" Content="Mot de passe" Foreground="White" Grid.Row="1" Height="30" Width="120"/>
+                <PasswordBox x:Name="passwd" Grid.Row="1" Grid.Column="1" Grid.RowSpan="1" Height="23" Width="120"/>
+
             </Grid>
 
-            <Button x:Name="valider" Content="Valider" Width="100" Height="35" Grid.Row="2" Margin="50" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}"/>
+            <Label x:Name="wrong" Content="Email ou mot de passe invalide" Visibility="Hidden" Foreground="#D91E18" Grid.Row="2" HorizontalContentAlignment="Center"/>
+            <Button x:Name="valider" Click="Commit" Content="Valider" Width="100" Height="35" Grid.Row="3" Margin="10" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}"/>
         </Grid>
     </DockPanel>
 </Window>

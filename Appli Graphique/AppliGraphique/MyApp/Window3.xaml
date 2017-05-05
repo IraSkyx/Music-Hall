@@ -1,0 +1,47 @@
+﻿<Window x:Class="MyApp.Window3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyApp"
+        mc:Ignorable="d"
+        BorderThickness=".5"
+        FontFamily="Microsoft YaHei Light"
+        BorderBrush="#ECF0F1"
+        Background="#222222"
+        Foreground="White"
+        Title="Profil" Height="500" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="reduce" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" Click="Reduce" Content="―" BorderThickness="0" FontSize="20" Height="30" Width="45"/>
+            <Button x:Name="increase" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" Click="Increase" Content="⇱" VerticalContentAlignment="Center" BorderThickness="0" FontSize="20" Height="30" Width="45"/>
+            <Button x:Name="quit" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" Click="Exit" Content="✗" Width="45" Height="30" BorderThickness="0" FontSize="20"/>
+        </StackPanel>
+        <StackPanel>
+            <Label x:Name="label" HorizontalContentAlignment="Center" Content="Profil" Foreground="White" FontSize="35" Margin="30"/>
+            <Grid x:Name="gridresources">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+              
+                <TextBlock x:Name="pseudo" Grid.Row="0" VerticalAlignment="Center" TextAlignment="Center" Text="Pseudo" FontSize="15"/>
+                <TextBlock x:Name="email" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Text="Adresse email" FontSize="15"/>
+                <TextBlock x:Name="mdp" Grid.Row="2" VerticalAlignment="Center" TextAlignment="Center" Text="Mot de passe" FontSize="15"/>
+             
+                <TextBox x:Name="pseudobox" Grid.Column="1" Height="30" Margin="10" Text="{Binding Infos.DisplayName, Mode=OneWay}"/>
+                <TextBox x:Name="emailbox" Grid.Column="1" Grid.Row="1"  Height="30" Margin="10" Text="{Binding Infos.Address, Mode=OneWay}"/>
+                <TextBox x:Name="mdpbox" Grid.Column="1" Grid.Row="2" Height="30" Margin="10" Text="{Binding Psswd, Mode=OneWay}"/>
+
+            </Grid>
+            <Button x:Name="valider" Click="Commit" Content="Sauvegarder mon profil" Width="200" Height="35" Margin="30" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}"/>
+        </StackPanel>
+        
+           
+    </DockPanel>
+</Window>

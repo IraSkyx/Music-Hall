@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using Biblio;
+using System;
+using System.Linq;
+using System.Windows;
 
 namespace MyApp
 {
@@ -7,14 +10,18 @@ namespace MyApp
     /// </summary>
     public partial class Window1 : Window
     {
-        public Window1()
+        public event Action <User> Check;
+        AllUsers DataBase;
+
+        public Window1(AllUsers DataBase)
         {
             InitializeComponent();
+            this.DataBase = DataBase;
         }
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void Reduce(object sender, RoutedEventArgs e)
@@ -33,6 +40,20 @@ namespace MyApp
             {
                 WindowState = WindowState.Maximized;
                 increase.Content = "⇲";
+            }
+        }
+
+        private void Commit(object sender, RoutedEventArgs e)
+        {           
+            var currentuser = DataBase.All.Where(x => x.Infos.Address.Equals(email.Text) && x.Psswd.Equals(passwd.Password));
+            if (currentuser.Count()>0)
+            {
+                Check?.Invoke(currentuser.ElementAt(0));
+                Close();
+            }
+            else
+            {
+                wrong.Visibility = Visibility.Visible;
             }
         }
     }

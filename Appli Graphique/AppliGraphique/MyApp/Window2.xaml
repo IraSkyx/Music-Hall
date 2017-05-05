@@ -53,7 +53,7 @@
 
             </Grid>
 
-            <Button x:Name="valider" Content="Valider" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Width="100" Height="35" Grid.Row="2" Margin="50"/>
+            <Button x:Name="valider" Content="Valider" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Commit" Width="100" Height="35" Grid.Row="2" Margin="50"/>
             
         </Grid>
     </DockPanel>

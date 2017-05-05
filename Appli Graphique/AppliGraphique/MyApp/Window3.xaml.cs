@@ -1,23 +1,26 @@
 ﻿using Biblio;
 using System;
 using System.Net.Mail;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 
 namespace MyApp
 {
     /// <summary>
-    /// Logique d'interaction pour Window2.xaml
+    /// Logique d'interaction pour Window3.xaml
     /// </summary>
-    public partial class Window2 : Window
+    public partial class Window3 : Window
     {
         public event Action<User> Check;
+        private User currentuser; 
 
-        public Window2()
-        {            
+        public Window3(User currentuser)
+        {           
+            this.currentuser = currentuser;          
             InitializeComponent();
+            gridresources.DataContext = currentuser;
         }
+
         private void Exit(object sender, RoutedEventArgs e)
         {
             Close();
@@ -43,10 +46,11 @@ namespace MyApp
         }
 
         private void Commit(object sender, RoutedEventArgs e)
-        {                   
-            if (IsValid(email.Text) && (pseudo.Text).Length>3 && (mdp.Password).Length > 3)
+        {
+            if (IsValid(emailbox.Text) && (pseudobox.Text).Length > 3 && (mdpbox.Text).Length > 3)
             {
-                Check?.Invoke(new User(new MailAddress(email.Text, pseudo.Text), mdp.Password, null));
+                if (!(currentuser.Infos.Address.Equals(emailbox.Text)) || !(currentuser.Infos.DisplayName.Equals(pseudobox.Text)) || !(currentuser.Psswd.Equals(mdpbox.Text)))
+                    Check?.Invoke(new User(new MailAddress(IsValid(emailbox.Text) ? emailbox.Text : currentuser.Infos.Address, (pseudobox.Text).Length > 3 ? pseudobox.Text : currentuser.Infos.DisplayName), (mdpbox.Text).Length > 3 ? mdpbox.Text : currentuser.Psswd, currentuser.Favorite));
                 Close();
             }
             else
@@ -54,32 +58,34 @@ namespace MyApp
                 SolidColorBrush red = new SolidColorBrush(Color.FromRgb(217, 30, 24));
                 if (!IsValid(email.Text))
                 {
-                    labelemail.Content = "Email invalide";
-                    labelemail.Foreground = red;
+                    email.Text = "Email invalide";
+                    email.Foreground = red;
                 }
-                    
+
                 if ((pseudo.Text).Length < 3)
                 {
-                    labelpseudo.Content = "4 caractères mini";
-                    labelpseudo.Foreground = red;
+                    pseudo.Text = "4 caractères mini";
+                    pseudo.Foreground = red;
                 }
-                    
-                if ((mdp.Password).Length < 3)
+
+                if ((mdpbox.Text).Length < 3)
                 {
-                    labelmdp.Content = "4 caractères mini";
-                    labelmdp.Foreground = red;
+                    mdp.Text = "4 caractères mini";
+                    mdp.Foreground = red;
                 }
             }
         }
 
         public bool IsValid(string emailaddress)
         {
+            if (emailaddress == null || emailaddress == "")
+                return false;
             try
             {
                 MailAddress m = new MailAddress(emailaddress);
                 return true;
             }
-            catch (FormatException)
+            catch (Exception)
             {
                 return false;
             }

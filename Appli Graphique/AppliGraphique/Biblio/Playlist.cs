@@ -1,10 +1,11 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Biblio
 {
     public class Playlist
     {
-        private ObservableCollection<Musique> playlist;
+        public ObservableCollection<Musique> playlist;
 
         public Playlist()
         {
@@ -23,12 +24,7 @@ namespace Biblio
 
         public override string ToString()
         {
-            string a="";
-            foreach(Musique music in playlist)
-            {
-                a += music.ToString();
-            }
-            return a;
+            return string.Join<Musique>("",playlist.ToArray());
         }
     }
 }

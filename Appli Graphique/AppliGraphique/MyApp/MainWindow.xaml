@@ -15,8 +15,8 @@
             <Button x:Name="quit" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" Height="30" BorderThickness="0" FontSize="20"/>
             <Button x:Name="increase" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" ToolTip="Rétablir précédent" Click="Increase" Content="⇱" VerticalContentAlignment="Center" BorderThickness="0" FontSize="20" Height="30" Width="60"/>
             <Button x:Name="reduce" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" ToolTip="Réduire" Click="Reduce" Content="―" BorderThickness="0" FontSize="20" Height="30" Width="60"/>
-            <Button x:Name="connexion" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" ToolTip="Se connecter" Click="Connexion" Content="Connexion" Width="75" BorderThickness="0" Height="30"/>
-            <Button x:Name="inscription" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" ToolTip="S'inscrire" Click="Inscription" Content="Inscription" Width="75" Height="30" BorderThickness="0"/>
+            <Button x:Name="connexion" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" ToolTip="Se connecter" Click="Connexion" Content="Connexion" Width="100" BorderThickness="0" Height="30"/>
+            <Button x:Name="inscription" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverMenu}" ToolTip="S'inscrire" Click="Inscription" Content="Inscription" Width="100" Height="30" BorderThickness="0"/>
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Height="Auto" HorizontalAlignment="Stretch">
@@ -37,15 +37,33 @@
                 <TabControl x:Name="TabControl" VerticalAlignment="Center" Width="788" Height="300" BorderThickness="0" Margin="0,0,30,0" Background="#303030">
 
                     <TabItem Header="Accueil" Width="100" Foreground="White">
-
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel x:Name="hall" Margin="20"  VerticalAlignment="Bottom" MouseUp="StackPanel_MouseUp">
+                                <TextBlock Text="Top 1 Music'Hall" FontSize="20" Margin="10" HorizontalAlignment="Center"/>
+                                <Image Source="{StaticResource aintme}" Width="150" ToolTip="Cliquer pour + d'infos"/>
+                            </StackPanel>
+                            <StackPanel x:Name="world" Margin="20" Grid.Column="1" VerticalAlignment="Top" MouseUp="StackPanel_MouseUp">
+                                <Image Source="{StaticResource feder}" Width="150" ToolTip="Cliquer pour + d'infos"/>
+                                <TextBlock Text="Top 1 World" FontSize="20" Margin="10" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel x:Name="france" Margin="20" Grid.Column="2" VerticalAlignment="Center" MouseUp="StackPanel_MouseUp">
+                                <TextBlock Text="Top 1 France" FontSize="20" Margin="10" HorizontalAlignment="Center"/>
+                                <Image Source="{StaticResource paris}" Width="150" ToolTip="Cliquer pour + d'infos"/>
+                            </StackPanel>
+                        </Grid>
                     </TabItem>
 
                     <TabItem Header="Sélection" Width="100" Foreground="White">
                         <Grid x:Name="Selection">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="129*"/>
-                                <ColumnDefinition Width="67*"/>
-                                <ColumnDefinition Width="196*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.ColumnSpan="2" Margin="30">
                                 <Image VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" Height="120" Source="{Binding ElementName=scroller, Path=SelectedItem.Image}">
@@ -57,7 +75,7 @@
                                 <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Artist}" Foreground="White"/>
                             </StackPanel>
                             <StackPanel VerticalAlignment="Center" Grid.Column="2" Margin="0,36">
-                                <TabControl Width="300" Height="200" Background="#343434">
+                                <TabControl Width="300" Height="150" Background="#343434">
                                     <TabItem Header="Infos" Width="60" Foreground="White">
                                         <StackPanel>
                                             <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20" Foreground="White"/>
@@ -67,6 +85,7 @@
                                     <TabItem Header="Etc" Width="60" Foreground="White"/>
                                     <TabItem Header="Etc" Width="60" Foreground="White"/>
                                 </TabControl>
+                                <Button Content="lecture" Click="Play"/>
                             </StackPanel>
                         </Grid>
                     </TabItem>
@@ -115,21 +134,21 @@
                     <Label x:Name="artist" Foreground="White" HorizontalContentAlignment="Center"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Label x:Name="duration" Foreground="White" HorizontalContentAlignment="Center" Content="00:00:00"/>
-                        <ProgressBar x:Name="Prog" Height="5" Width="350" Background="Transparent" Foreground="White"/>
-                        <Label x:Name="duration2" Foreground="White" HorizontalContentAlignment="Center" Content="00:00:00"/>
+                <StackPanel x:Name="FullPlayer" Grid.Column="1">
+                    <StackPanel x:Name="Progress" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="duration" Foreground="White" TextAlignment="Center" Text="{Binding Position, Mode=OneWay}"/>
+                        <ProgressBar x:Name="Prog" Height="5" Width="350" Background="Transparent" Foreground="White" Value="{Binding Position}"/>
+                        <TextBlock x:Name="duration2" Foreground="White" TextAlignment="Center" Text="{Binding NaturalDuration.TimeSpan.TotalSeconds, Mode=OneWay}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="previous" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Précédent" Content="◀◀" Width="50" Height="50" FontSize="22"/>
-                        <Button x:Name="random" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture aléatoire" Content="∞" Width="50" Height="50" FontSize="22"/>
-                        <Button x:Name="PausePlay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture" Content="▶" Width="50" Height="50" FontSize="22"/>
-                        <Button x:Name="replay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Lecture en boucle" Content="⟲" Width="50" Height="50" FontSize="22"/>
-                        <Button x:Name="next" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" ToolTip="Suivant" Content="▶▶" Width="50" Height="50" FontSize="22"/>
+                        <Button x:Name="previous" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="Previous" ToolTip="Précédent" Content="◀◀" Width="50" Height="50" FontSize="22"/>
+                        <Button x:Name="random" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="SetRandom" ToolTip="Lecture aléatoire" Content="∞" Width="50" Height="50" FontSize="22"/>
+                        <Button x:Name="PausePlay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="PausePlay_Click" ToolTip="Lecture" Content="▶" Width="50" Height="50" FontSize="22"/>
+                        <Button x:Name="replay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="Replay" ToolTip="Lecture en boucle" Content="⟲" Width="50" Height="50" FontSize="22"/>
+                        <Button x:Name="next" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="Next" ToolTip="Suivant" Content="▶▶" Width="50" Height="50" FontSize="22"/>
                     </StackPanel>
-                    <MediaElement Name="Player" LoadedBehavior="Manual" UnloadedBehavior="Stop" />
-                    <Slider x:Name="slider" ValueChanged="Change" TickFrequency="5"  Width="135" Value="50" Maximum="100" ToolTip = "Modifier le volume" Margin="0,10,0,10"/>
+                    <MediaElement Name="Player" Source="{Binding Audio, Mode=TwoWay}" LoadedBehavior="Manual" MediaEnded="Player_MediaEnded" UnloadedBehavior="Stop"/>
+                    <Slider x:Name="slider" Width="135" Value="{Binding Volume, ElementName=Player, Mode=TwoWay}" Minimum="0" Maximum="1" ToolTip = "Modifier le volume" Margin="0,10,0,10" IsMoveToPointEnabled="True"/>
                 </StackPanel>
             </Grid>
         </StackPanel>

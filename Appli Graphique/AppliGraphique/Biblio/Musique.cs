@@ -1,4 +1,6 @@
-﻿namespace Biblio
+﻿using System;
+
+namespace Biblio
 {
     public class Musique
     {
@@ -6,11 +8,11 @@
         public string Artist { get; set; }
         public string Date { get; set; }
         public string Genre { get; set; }
-        public string Infos { get; set; }
-        public string Audio { get; set; }
+        public string Infos { get; set; }     
+        public Uri Audio { get; set; }
         public string Image { get; set; }
 
-        public Musique(string Title, string Artist, string Date, string Genre, string Infos, string Audio, string Image)
+        public Musique(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Image)
         {
             this.Title = Title;
             this.Artist = Artist;

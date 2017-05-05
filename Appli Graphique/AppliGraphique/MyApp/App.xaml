@@ -53,6 +53,12 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
+        <BitmapImage x:Key="feder" UriSource="images/iFeder.jpg" />
+
+        <BitmapImage x:Key="paris" UriSource="images/iParis.jpg" />
+
+        <BitmapImage x:Key="aintme" UriSource="images/iAintMe.jpg" />
+
         <SolidColorBrush x:Key="BlackBrush" Color="#303030"/>
 
         <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
