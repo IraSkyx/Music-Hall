@@ -171,6 +171,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\logo.ico" />
     <None Include="audio\AintMe.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

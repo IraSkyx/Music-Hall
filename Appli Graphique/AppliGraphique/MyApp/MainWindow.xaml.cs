@@ -6,6 +6,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Data;
+using System.Windows.Threading;
+using System.Windows.Media.Imaging;
 
 namespace MyApp
 {
@@ -15,16 +18,19 @@ namespace MyApp
     public partial class MainWindow : Window
     {
         private ObservableCollection<Musique> Result;
+        private Player Player = new Player();
         private AllMusic musics;
         private AllUsers users;
         private User currentUser;
-        private Musique currentlyPlaying;
-        private bool Loop=false;
-        private bool RandomPlay=false;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            //Initialisation Player
+            FullPlayer.Children.Add(Player.ElementPlayer);
+            Player.ElementPlayer.MediaOpened += MediaOpened;
+            Player.ElementPlayer.MediaEnded += MediaEnded;
 
             //Initialisation de tous les utilisateurs et de toutes les musiques
             users = new AllUsers();
@@ -35,14 +41,18 @@ namespace MyApp
             //Initialisation des DataContext  
             scroller.DataContext = musics;
             Search.ItemsSource = Result;
-            Progress.DataContext = Player;
-            Player.DataContext = currentlyPlaying;
-
+            FullPlayer.DataContext = Player.ElementPlayer;
+            Currently.DataContext = Player.CurrentlyPlaying;
         }
 
         private void Exit(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Reduce(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
 
         private void Increase(object sender, RoutedEventArgs e)
@@ -61,13 +71,10 @@ namespace MyApp
 
         private void Connexion(object sender, RoutedEventArgs e)
         {
-            if ((string)connexion.Content == "Connexion" && (string)inscription.Content== "Inscription")
-            { 
+            if ((string)connexion.Content == "Connexion" && (string)inscription.Content == "Inscription")
+            {
                 Window1 subWindow = new Window1(users);
-                subWindow.Check += value =>
-                {
-                    LogIn(value);
-                };
+                subWindow.Check += value => LogIn(value);
                 subWindow.Show();
             }
             else
@@ -89,15 +96,9 @@ namespace MyApp
             inscription.ToolTip = "Voir profil";
         }
 
-        private void Reduce(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-            Console.WriteLine(currentUser.Favorite.ToString());
-        }
-
         private void Inscription(object sender, RoutedEventArgs e)
         {
-            if((string)connexion.Content == "Déconnexion" && (string)inscription.Content == currentUser.Infos.DisplayName)
+            if ((string)connexion.Content == "Déconnexion" && (string)inscription.Content == currentUser.Infos.DisplayName)
             {
                 Window3 subWindow3 = new Window3(currentUser);
                 subWindow3.Check += value =>
@@ -117,7 +118,7 @@ namespace MyApp
                     LogIn(value);
                 };
                 subWindow2.Show();
-            }          
+            }
         }
 
         private void scroller_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -136,8 +137,8 @@ namespace MyApp
             if (Result.Count > 0)
             {
                 scroller.SelectedIndex = musics.All.IndexOf(Result.ElementAt(0));
-                Input.Text="";
-            }              
+                Input.Text = "";
+            }
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -161,107 +162,99 @@ namespace MyApp
 
         private void Play(object sender, RoutedEventArgs e)
         {
-            currentlyPlaying= (Musique)scroller.SelectedItem;
-            Player.Source = ((Musique)scroller.SelectedItem).Audio;
-            PausePlay.Content = "||";
-            Player.Play();
+            PausePlay.Content = (Player.Play((Musique)scroller.SelectedItem)) ? "||" : "▶";
         }
 
         private void PausePlay_Click(object sender, RoutedEventArgs e)
         {
-            if (Player.Source==null) return; //Si rien n'est en train d'être lu
-            if((string)PausePlay.Content == "||")
+            if (Player.CurrentlyPlaying == null) return; //Si rien n'est en train d'être lu
+            if ((string)PausePlay.Content == "||")
             {
                 PausePlay.Content = "▶";
-                Player.Pause();
+                Player.ElementPlayer.Pause();
             }
             else
             {
                 PausePlay.Content = "||";
-                Player.Play();
+                Player.ElementPlayer.Play();
             }
         }
 
         private void Replay(object sender, RoutedEventArgs e)
         {
-            if (Loop==false)
-            {            
-                replay.Foreground = new SolidColorBrush(Color.FromRgb(3, 166, 120));
-                Loop = true;
-            }               
-            else
-            {
-                replay.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-                Loop = false;
-            }
+            replay.Foreground = (Player.SetRandomPlay()) ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
         }
 
         private void SetRandom(object sender, RoutedEventArgs e)
-        {           
-            if (RandomPlay==false)
-            {
-                random.Foreground = new SolidColorBrush(Color.FromRgb(3, 166, 120));
-                RandomPlay = true;
-            }
-            else
-            {
-                random.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-                RandomPlay = false;
-            }
+        {
+            random.Foreground = (Player.SetRandomPlay()) ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
         }
 
         private void Next(object sender, RoutedEventArgs e)
         {
-            if (currentUser==null || currentUser.Favorite == null)
+            if (currentUser == null || currentUser.Favorite == null)
                 return;
-            var music = currentUser.Favorite.playlist.Where(x => x.Audio.Equals(Player.Source.ToString()));
-            if (music.Count() == 0) //Est en train de lire une musique qui n'appartient pas à sa playlist 
-                return;
-            int Index = currentUser.Favorite.playlist.IndexOf(music.ElementAt(0));
-            Player.Source = (Index + 1 == currentUser.Favorite.playlist.Count) ? currentUser.Favorite.playlist.ElementAt(0).Audio : currentUser.Favorite.playlist.ElementAt(Index+1).Audio;
-            PausePlay.Content = "||";
-            Player.Play();
+            PausePlay.Content = (Player.GoToNextOrPrevious(currentUser, 1)) ? "||" : "▶";
         }
 
         private void Previous(object sender, RoutedEventArgs e)
         {
-            if (currentUser==null || currentUser.Favorite == null)
+            if (currentUser == null || currentUser.Favorite == null)
                 return;
-            var music = currentUser.Favorite.playlist.Where(x => x.Audio.Equals(Player.Source.ToString()));
-            if (music.Count() == 0) //Est en train de lire une musique qui n'appartient pas à sa playlist 
-                return;
-            int Index = currentUser.Favorite.playlist.IndexOf(music.ElementAt(0));
-            Player.Source = (Index - 1 == -1) ? currentUser.Favorite.playlist.ElementAt(currentUser.Favorite.playlist.Count()-1).Audio : currentUser.Favorite.playlist.ElementAt(Index - 1).Audio;
-            PausePlay.Content = "||";
-            Player.Play();
+            PausePlay.Content = (Player.GoToNextOrPrevious(currentUser, -1)) ? "||" : "▶";
         }
 
-        private void Player_MediaEnded(object sender, RoutedEventArgs e)
+        private void MediaEnded(object sender, RoutedEventArgs e)
         {
-            if (Loop) //Mode Replay activé
+            if (Player.Loop) //Mode Replay activé
             {
-                Player.Position = TimeSpan.Zero;
-                Player.Play();
+                Player.ElementPlayer.Position = TimeSpan.Zero;
+                Player.ElementPlayer.Play();
             }
-            else if (RandomPlay) //Mode Random activé
+            else if (Player.RandomPlay) //Mode Random activé
             {
                 if (currentUser.Favorite == null)
-                {
-                    Player.Source = musics.All.ElementAt(new Random().Next()).Audio;
-                    PausePlay.Content = "||";
-                    Player.Play();
-                }
+                    PausePlay.Content = (Player.Play(musics.All.ElementAt(new Random().Next()))) ? "||" : "▶";
                 else
                 {
-                    Player.Source = currentUser.Favorite.playlist.ElementAt(new Random().Next()).Audio;
-                    PausePlay.Content = "||";
-                    Player.Play();
-                }               
+                    PausePlay.Content = (Player.Play(currentUser.Favorite.playlist.ElementAt(new Random().Next()))) ? "||" : "▶";
+                }
             }
             else //Mode Replay & Random désactivé
             {
                 Next(this, new RoutedEventArgs());
             }
         }
-    }
+        private void MediaOpened(object sender, RoutedEventArgs e)
+        {
+            SetDuration();
+            image.Source = new BitmapImage(new Uri(Player.CurrentlyPlaying.Image));
+            title.Text = Player.CurrentlyPlaying.Title;
+            artist.Text = Player.CurrentlyPlaying.Artist;
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Tick += new EventHandler(myEvent);
+            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Start();
+        }
+
+        private void myEvent(object sender, EventArgs e)
+        {
+            SetDuration();
+        }
+
+        private void SetDuration()
+        {
+            duration.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                Player.ElementPlayer.Position.Hours,
+                Player.ElementPlayer.Position.Minutes,
+                Player.ElementPlayer.Position.Seconds
+                );
+            Prog.Value = Player.ElementPlayer.Position.TotalSeconds;
+            duration2.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                Player.ElementPlayer.NaturalDuration.TimeSpan.Hours,
+                Player.ElementPlayer.NaturalDuration.TimeSpan.Minutes,
+                Player.ElementPlayer.NaturalDuration.TimeSpan.Seconds
+                );
+        }
+    }       
 }

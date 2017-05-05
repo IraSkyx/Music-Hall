@@ -8,7 +8,7 @@ namespace Biblio
         public string Artist { get; set; }
         public string Date { get; set; }
         public string Genre { get; set; }
-        public string Infos { get; set; }     
+        public string Infos { get; set; }    
         public Uri Audio { get; set; }
         public string Image { get; set; }
 
