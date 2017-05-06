@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Biblio
 {
-    public class Playlist
+    public class Playlist 
     {
         public ObservableCollection<Musique> playlist { get; set; }
 

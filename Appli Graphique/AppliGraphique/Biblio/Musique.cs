@@ -2,7 +2,7 @@
 
 namespace Biblio
 {
-    public class Musique
+    public class Musique 
     {
         public string Title { get; set; }
         public string Artist { get; set; }

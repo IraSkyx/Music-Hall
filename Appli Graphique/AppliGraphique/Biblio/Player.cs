@@ -52,16 +52,20 @@ namespace Biblio
 
         private bool SetPlay()
         {
-            if (CurrentlyPlaying.Audio != null)
+            if (CurrentlyPlaying != null)
             {
-                ElementPlayer.Source = CurrentlyPlaying.Audio;
-                ElementPlayer.Play();
-                return true;
+                if (CurrentlyPlaying.Audio != null)
+                {
+                    ElementPlayer.Source = CurrentlyPlaying.Audio;
+                    ElementPlayer.Play();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;   
         }
     }
 }

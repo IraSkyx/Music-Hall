@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using System.Windows.Media.Imaging;
+using System.Text.RegularExpressions;
 
 namespace MyApp
 {
@@ -15,11 +16,11 @@ namespace MyApp
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
-        private ObservableCollection<Musique> Result;
+    {       
         private Player Player = new Player();
-        private AllMusic musics;
-        private AllUsers users;
+        private AllMusic musics = new AllMusic();
+        private AllMusic result = new AllMusic();
+        private AllUsers users = new AllUsers();
         private User currentUser;
 
         public MainWindow()
@@ -33,18 +34,13 @@ namespace MyApp
             Player.ElementPlayer.MediaEnded += MediaEnded;
 
             //Initialisation de tous les utilisateurs et de toutes les musiques
-            users = new AllUsers();
             users.All = LoadUsers.Load();
-            musics = new AllMusic();
             musics.All = LoadMusic.Load();
 
             //Initialisation des DataContext  
-            scroller.DataContext = musics;           
-            Search.ItemsSource = Result;
+            scroller.DataContext = musics;                     
             FullPlayer.DataContext = Player.ElementPlayer;
-            Currently.DataContext = Player.CurrentlyPlaying;
-
-            listBox.DataContext = currentUser;
+            Search.DataContext = result;
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -82,6 +78,7 @@ namespace MyApp
             else
             {
                 currentUser = null;
+                listBox.DataContext = null;
                 connexion.Content = "Connexion";
                 connexion.ToolTip = "Se connecter";
                 inscription.Content = "Inscription";
@@ -96,8 +93,7 @@ namespace MyApp
             connexion.ToolTip = "Fermer la session";
             inscription.Content = currentUser.Infos.DisplayName;
             inscription.ToolTip = "Voir profil";
-
-            listBox.UpdateLayout();
+            listBox.DataContext = currentUser.Favorite;
         }
 
         private void Inscription(object sender, RoutedEventArgs e)
@@ -137,12 +133,22 @@ namespace MyApp
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Result = new ObservableCollection<Musique>(musics.All.Where(x => x.Title.Equals(Input.Text)));
-            if (Result.Count > 0)
-            {
-                scroller.SelectedIndex = musics.All.IndexOf(Result.ElementAt(0));
-                Input.Text = "";
-            }
+            if (criterion.SelectedItem == bytitle)
+                result.All = new ObservableCollection<Musique>(musics.All.Where(x => Regex.IsMatch(x.Title, Input.Text)));
+            else if (criterion.SelectedItem == byartist)
+                result.All = new ObservableCollection<Musique>(musics.All.Where(x => Regex.IsMatch(x.Artist, Input.Text)));
+            else if (criterion.SelectedItem == bygenre)
+                result.All = new ObservableCollection<Musique>(musics.All.Where(x => Regex.IsMatch(x.Genre, Input.Text)));
+            else if (criterion.SelectedItem == bydate)
+                result.All = new ObservableCollection<Musique>(musics.All.Where(x => Regex.IsMatch(x.Date, Input.Text)));
+
+            Search.DataContext = result;
+        }
+
+        private void criterion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Input.Text != "")
+                TextBox_TextChanged(this, new TextChangedEventArgs(e.RoutedEvent, UndoAction.None));
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -241,6 +247,7 @@ namespace MyApp
         private void MediaOpened(object sender, RoutedEventArgs e)
         {
             SetDuration();
+            Add.Visibility = Visibility.Visible;
             Prog.Maximum = Player.ElementPlayer.NaturalDuration.TimeSpan.TotalSeconds;
             image.Source = new BitmapImage(new Uri(Player.CurrentlyPlaying.Image));
             title.Text = Player.CurrentlyPlaying.Title;
@@ -258,17 +265,20 @@ namespace MyApp
 
         private void SetDuration()
         {
-            duration.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
+            if (Player.ElementPlayer.Source != null && Player.ElementPlayer.NaturalDuration.HasTimeSpan)
+            {
+                duration.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
                 Player.ElementPlayer.Position.Hours,
                 Player.ElementPlayer.Position.Minutes,
                 Player.ElementPlayer.Position.Seconds
                 );
-            Prog.Value = Player.ElementPlayer.Position.TotalSeconds;
-            duration2.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
-                Player.ElementPlayer.NaturalDuration.TimeSpan.Hours,
-                Player.ElementPlayer.NaturalDuration.TimeSpan.Minutes,
-                Player.ElementPlayer.NaturalDuration.TimeSpan.Seconds
-                );
+                Prog.Value = Player.ElementPlayer.Position.TotalSeconds;
+                duration2.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                    Player.ElementPlayer.NaturalDuration.TimeSpan.Hours,
+                    Player.ElementPlayer.NaturalDuration.TimeSpan.Minutes,
+                    Player.ElementPlayer.NaturalDuration.TimeSpan.Seconds
+                    );
+            }
         }
 
         private void ProgMouseClick(object sender, MouseButtonEventArgs e)
@@ -281,5 +291,43 @@ namespace MyApp
                 PausePlay.Content = "||";
             }
         }
-    }       
+
+        private void AddToPlaylist(object sender, RoutedEventArgs e)
+        {
+            if (currentUser != null)
+                if(currentUser.Favorite!=null)
+                {
+                    if (currentUser.Favorite.playlist.Where(x => x.Title.Equals(((Musique)scroller.SelectedItem).Title)).Count() == 0)
+                        currentUser.Favorite.AddMusic((Musique)scroller.SelectedItem);
+                }
+                else
+                {
+                    currentUser.Favorite = new Playlist();
+                    listBox.DataContext = currentUser.Favorite;
+                    currentUser.Favorite.AddMusic((Musique)scroller.SelectedItem);
+                }
+        }
+
+        private void AddToPlaylist2(object sender, RoutedEventArgs e)
+        {
+            if (Player.CurrentlyPlaying != null && currentUser!=null)
+                    currentUser.Favorite.AddMusic(Player.CurrentlyPlaying);
+        }
+
+        private void ReadFromPlaylist(object sender, MouseButtonEventArgs e)
+        {
+            Player.Play((Musique)listBox.SelectedItem);
+        }
+
+        private void DeleteFromPlaylist(object sender, MouseButtonEventArgs e)
+        {
+            if (currentUser != null)
+                    currentUser.Favorite.DeleteMusic((Musique)listBox.SelectedItem);
+        }
+
+        private void SeeMusic(object sender, MouseButtonEventArgs e)
+        {
+            scroller.SelectedIndex = musics.All.IndexOf(musics.All.Where(x => x.Title.Equals(((Musique)listBox.SelectedItem).Title)).ElementAt(0));
+        }
+    }   
 }

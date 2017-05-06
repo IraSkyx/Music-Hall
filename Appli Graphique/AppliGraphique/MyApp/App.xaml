@@ -28,7 +28,7 @@
         </ControlTemplate>
 
         <ControlTemplate x:Key="OverMenu" TargetType="Button">
-            <Border Background="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" BorderThickness="2" BorderBrush="Transparent">
+            <Border Background="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" BorderThickness="0" BorderBrush="Transparent">
                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Border>
             <ControlTemplate.Triggers>
@@ -39,7 +39,7 @@
         </ControlTemplate>
 
         <ControlTemplate x:Key="OverQuit" TargetType="Button">
-            <Border Background="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" BorderThickness="2" BorderBrush="Transparent">
+            <Border Background="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" BorderThickness="0" BorderBrush="Transparent">
                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Border>
             <ControlTemplate.Triggers>
@@ -59,7 +59,7 @@
 
         <BitmapImage x:Key="aintme" UriSource="images/iAintMe.jpg" />
 
-        <SolidColorBrush x:Key="BlackBrush" Color="#303030"/>
+        <SolidColorBrush x:Key="BlackBrush" Color="#222222"/>
 
         <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
 
@@ -77,8 +77,8 @@
                             <Border 
                                 Name="Border"
                                 Background="{StaticResource BlackBrush}"
-                                BorderBrush="{StaticResource SolidBorderBrush}" 
-                                BorderThickness="1,1,1,1" 
+                                BorderBrush="#dee3e7" 
+                                BorderThickness="1,1,1,0" 
                                 CornerRadius="2,12,0,0" >
                                 <ContentPresenter x:Name="ContentSite"
                                     VerticalAlignment="Center"
@@ -113,9 +113,77 @@
                     </ItemsPanelTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Foreground" Value="{StaticResource BlackBrush}" />
         </Style>
-        
+
+
+        <Style x:Key="SliderRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Rectangle Fill="Transparent"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CustomSlider" TargetType="{x:Type Slider}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Slider}">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TickBar x:Name="TopTick" Visibility="Collapsed" Fill="White" Placement="Top" SnapsToDevicePixels="True" Height="4" Margin="0,0,0,2" />
+                            <Border x:Name="TrackBackground" Grid.Row="1" Margin="10,0" BorderThickness="2" BorderBrush="White" VerticalAlignment="Center" Height="4" />
+                            <Track x:Name="PART_Track" Grid.Row="1">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static Slider.DecreaseLarge}"  Style="{StaticResource SliderRepeatButtonStyle}" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static Slider.IncreaseLarge}" Style="{StaticResource SliderRepeatButtonStyle}"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Style>
+                                            <Style TargetType="{x:Type Thumb}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Thumb}">
+                                                            <Ellipse Width="10" Height="10" Fill="White"/>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Thumb.Style>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                            <TickBar x:Name="BottomTick" Grid.Row="2" Visibility="Collapsed" Fill="LightGray" Placement="Bottom" SnapsToDevicePixels="True" Height="4" Margin="0,2,0,0"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="TickPlacement" Value="TopLeft">
+                                <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                            <Trigger Property="TickPlacement" Value="BottomRight">
+                                <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                            <Trigger Property="TickPlacement" Value="Both">
+                                <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Application.Resources>
     
 </Application>
