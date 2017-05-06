@@ -1,7 +1,6 @@
 ﻿using Biblio;
 using System;
 using System.Net.Mail;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 
@@ -28,18 +27,9 @@ namespace MyApp
             WindowState = WindowState.Minimized;
         }
 
-        private void Increase(object sender, RoutedEventArgs e)
+        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
-            {
-                WindowState = WindowState.Normal;
-                increase.Content = "⇱";
-            }
-            else
-            {
-                WindowState = WindowState.Maximized;
-                increase.Content = "⇲";
-            }
+            DragMove();
         }
 
         private void Commit(object sender, RoutedEventArgs e)
@@ -54,19 +44,19 @@ namespace MyApp
                 SolidColorBrush red = new SolidColorBrush(Color.FromRgb(217, 30, 24));
                 if (!IsValid(email.Text))
                 {
-                    labelemail.Content = "Email invalide";
+                    labelemail.Text = "Email invalide";
                     labelemail.Foreground = red;
                 }
                     
                 if ((pseudo.Text).Length < 3)
                 {
-                    labelpseudo.Content = "4 caractères mini";
+                    labelpseudo.Text = "4 caractères mini";
                     labelpseudo.Foreground = red;
                 }
                     
                 if ((mdp.Password).Length < 3)
                 {
-                    labelmdp.Content = "4 caractères mini";
+                    labelmdp.Text = "4 caractères mini";
                     labelmdp.Foreground = red;
                 }
             }

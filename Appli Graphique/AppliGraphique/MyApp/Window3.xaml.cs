@@ -31,18 +31,9 @@ namespace MyApp
             WindowState = WindowState.Minimized;
         }
 
-        private void Increase(object sender, RoutedEventArgs e)
+        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
-            {
-                WindowState = WindowState.Normal;
-                increase.Content = "⇱";
-            }
-            else
-            {
-                WindowState = WindowState.Maximized;
-                increase.Content = "⇲";
-            }
+            DragMove();
         }
 
         private void Commit(object sender, RoutedEventArgs e)

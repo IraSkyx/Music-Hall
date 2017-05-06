@@ -73,6 +73,7 @@ namespace MyApp
             {
                 Window1 subWindow = new Window1(users);
                 subWindow.Check += value => LogIn(value);
+                subWindow.Owner = Application.Current.MainWindow;
                 subWindow.Show();
             }
             else
@@ -107,6 +108,7 @@ namespace MyApp
                     users.All.Remove(currentUser);
                     LogIn(value);
                 };
+                subWindow3.Owner = Application.Current.MainWindow;
                 subWindow3.Show();
             }
             else
@@ -117,6 +119,7 @@ namespace MyApp
                     users.All.Add(value);
                     LogIn(value);
                 };
+                subWindow2.Owner = Application.Current.MainWindow;
                 subWindow2.Show();
             }
         }
@@ -329,5 +332,10 @@ namespace MyApp
         {
             scroller.SelectedIndex = musics.All.IndexOf(musics.All.Where(x => x.Title.Equals(((Musique)listBox.SelectedItem).Title)).ElementAt(0));
         }
+        private void SeeMusic2(object sender, MouseButtonEventArgs e)
+        {
+            scroller.SelectedIndex = musics.All.IndexOf(musics.All.Where(x => x.Title.Equals((Player.CurrentlyPlaying).Title)).ElementAt(0));
+        }
+
     }   
 }

@@ -33,7 +33,7 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock x:Name="Add" Text="✚" Visibility="Hidden" FontSize="20" Margin="20" VerticalAlignment="Center" TextAlignment="Center" MouseUp="AddToPlaylist2"/>
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MouseUp="SeeMusic2">
                         <Image x:Name="image" Width="60" Height="60"/>
                         <TextBlock x:Name="title" FontSize="15"/>
                         <TextBlock x:Name="artist" FontSize="10"/>
