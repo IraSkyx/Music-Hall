@@ -3,27 +3,24 @@ using System.Windows.Controls;
 
 namespace Biblio
 {
-    public class Player
+    public class Player : MediaElement
     {
-        public MediaElement ElementPlayer;
-        public Musique CurrentlyPlaying;
-        public bool Loop;
-        public bool RandomPlay;
+        public Musique CurrentlyPlaying { get; set; }
+        public bool Loop { get; set; }
+        public bool RandomPlay { get; set; }
 
-        public Player()
+        public Player():base()
         {
-            ElementPlayer = new MediaElement();
-            ElementPlayer.LoadedBehavior = MediaState.Manual;            
-            ElementPlayer.UnloadedBehavior = MediaState.Stop;
-            ElementPlayer.Volume = 0.5;
+            LoadedBehavior = MediaState.Manual;            
+            UnloadedBehavior = MediaState.Stop;
         }
 
         public bool GoToNextOrPrevious(User currentUser, int Sens)
         {
             if (CurrentlyPlaying == null)
                 return false;
-            int index = currentUser.Favorite.playlist.IndexOf(CurrentlyPlaying);
-            CurrentlyPlaying = (Sens==1) ? (index + 1 == currentUser.Favorite.playlist.Count) ? currentUser.Favorite.playlist.ElementAt(0) : currentUser.Favorite.playlist.ElementAt(index + 1) : (index - 1 == -1) ? currentUser.Favorite.playlist.ElementAt(currentUser.Favorite.playlist.Count() - 1) : currentUser.Favorite.playlist.ElementAt(index - 1);
+            int index = currentUser.Favorite.IndexOf(CurrentlyPlaying);
+            CurrentlyPlaying = (Sens==1) ? (index + 1 == currentUser.Favorite.Count) ? currentUser.Favorite.ElementAt(0) : currentUser.Favorite.ElementAt(index + 1) : (index - 1 == -1) ? currentUser.Favorite.ElementAt(currentUser.Favorite.Count() - 1) : currentUser.Favorite.ElementAt(index - 1);
             return SetPlay();
 
         }
@@ -56,8 +53,8 @@ namespace Biblio
             {
                 if (CurrentlyPlaying.Audio != null)
                 {
-                    ElementPlayer.Source = CurrentlyPlaying.Audio;
-                    ElementPlayer.Play();
+                    Source = CurrentlyPlaying.Audio;
+                    Play();
                     return true;
                 }
                 else

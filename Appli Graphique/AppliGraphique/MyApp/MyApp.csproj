@@ -149,26 +149,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="images\eParis.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Resource Include="images\eParis.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="images\eAintMe.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="images\eFeder.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="images\eHolding.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="images\eJustLike.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="images\eShelter.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Resource Include="images\eAintMe.jpg" />
+    <Resource Include="images\eFeder.jpg" />
+    <Resource Include="images\eHolding.jpg" />
+    <Resource Include="images\eJustLike.jpg" />
+    <Resource Include="images\eShelter.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\logo.ico" />
@@ -190,15 +178,6 @@
     <None Include="audio\Shelter.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="images\iAintMe.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\iFeder.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\iParis.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -44,8 +44,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllMusic.cs" />
-    <Compile Include="AllUsers.cs" />
     <Compile Include="LoadMusic.cs" />
     <Compile Include="LoadUsers.cs" />
     <Compile Include="Musique.cs" />

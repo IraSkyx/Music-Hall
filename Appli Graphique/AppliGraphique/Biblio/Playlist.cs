@@ -1,30 +1,39 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Biblio
 {
-    public class Playlist 
+    public class Playlist : ObservableCollection<Musique>
     {
-        public ObservableCollection<Musique> playlist { get; set; }
+        public Playlist PlaylistProperty
+        {
+            get { return this; }
+        }
 
         public Playlist()
+            : base()
         {
-            playlist = new ObservableCollection<Musique>();
+        }
+
+        public Playlist(IEnumerable<Musique> mus)
+            :base(mus)
+        {
         }
 
         public void AddMusic(Musique music)
         {
-            playlist.Add(music);
+            Add(music);
         }
 
         public void DeleteMusic(Musique music)
         {
-            playlist.Remove(music);
+            Remove(music);
         }
 
         public override string ToString()
         {
-            return string.Join<Musique>("",playlist.ToArray());
+            return string.Join<Musique>("", this.ToArray());
         }
     }
 }

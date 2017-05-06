@@ -62,11 +62,11 @@ namespace MyApp
             }
         }
 
-        public bool IsValid(string emailaddress)
+        public bool IsValid(string email)
         {
             try
             {
-                MailAddress m = new MailAddress(emailaddress);
+                MailAddress m = new MailAddress(email);
                 return true;
             }
             catch (FormatException)

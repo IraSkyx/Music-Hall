@@ -5,12 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyApp"
         mc:Ignorable="d"
-        Background="#95A5A6"      
-        BorderThickness="0"
+        Background="#ECF0F1"      
         BorderBrush="#ECF0F1"     
         Title="Music'Hall" Height="720" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Foreground="White" FontFamily="Microsoft YaHei Light">
-
-    <DockPanel Background="#ECF0F1" Margin="0">
+    <DockPanel>
         
         <!--En-tête-->
         <StackPanel x:Name="Panel" DockPanel.Dock="Top" FlowDirection="RightToLeft" Orientation="Horizontal" Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="#222222">
@@ -33,8 +31,8 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock x:Name="Add" Text="✚" Visibility="Hidden" FontSize="20" Margin="20" VerticalAlignment="Center" TextAlignment="Center" MouseUp="AddToPlaylist2"/>
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MouseUp="SeeMusic2">
-                        <Image x:Name="image" Width="60" Height="60"/>
+                    <StackPanel x:Name="ActualPlay" HorizontalAlignment="Center" VerticalAlignment="Center" MouseUp="SeeMusic2">
+                        <Image x:Name="image" Width="60" Height="60" Margin="3"/>
                         <TextBlock x:Name="title" FontSize="15"/>
                         <TextBlock x:Name="artist" FontSize="10"/>
                     </StackPanel>
@@ -62,7 +60,7 @@
         <!-- Corps -->
         <DockPanel>
 
-            <ListView x:Name="scroller" DockPanel.Dock="Top" Style="{StaticResource HorizontalListbox}" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" ItemsSource="{Binding All}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="scroller_SelectionChanged" Height="100" Margin="10,30" Background="Transparent">
+            <ListView x:Name="scroller" DockPanel.Dock="Top" Style="{StaticResource HorizontalListbox}" MouseDoubleClick="Play" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" ItemsSource="{Binding PlaylistProperty}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="scroller_SelectionChanged" Height="100" Margin="10,30" Background="Transparent">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -86,15 +84,15 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel x:Name="hall" Margin="20"  VerticalAlignment="Bottom" MouseUp="StackPanel_MouseUp">
                                 <TextBlock Text="Top 1 Music'Hall" FontSize="20" Margin="10" TextAlignment="Center"/>
-                                <Image Source="{StaticResource aintme}" Width="150" ToolTip="Cliquer pour + d'infos"/>
+                                <Image Source="images/eAintMe.jpg" Width="150" ToolTip="Cliquer pour + d'infos"/>
                             </StackPanel>
                             <StackPanel x:Name="world" Margin="20" Grid.Column="1" VerticalAlignment="Top" MouseUp="StackPanel_MouseUp">
-                                <Image Source="{StaticResource feder}" Width="150" ToolTip="Cliquer pour + d'infos"/>
+                                <Image Source="images/eFeder.jpg" Width="150" ToolTip="Cliquer pour + d'infos"/>
                                 <TextBlock Text="Top 1 World" FontSize="20" Margin="10" TextAlignment="Center"/>
                             </StackPanel>
                             <StackPanel x:Name="france" Margin="20" Grid.Column="2" VerticalAlignment="Center" MouseUp="StackPanel_MouseUp">
                                 <TextBlock Text="Top 1 France" FontSize="20" Margin="10" TextAlignment="Center"/>
-                                <Image Source="{StaticResource paris}" Width="150" ToolTip="Cliquer pour + d'infos"/>
+                                <Image Source="images/eParis.jpg" Width="150" ToolTip="Cliquer pour + d'infos"/>
                             </StackPanel>
                         </Grid>
                     </TabItem>
@@ -117,14 +115,24 @@
                             </StackPanel>
                             <StackPanel VerticalAlignment="Center" Grid.Column="2">
                                 <TabControl Background="#222222" Margin="20">
-                                    <TabItem Header="Infos"  Foreground="White">
+                                    <TabItem Header="Infos" Foreground="White">
                                         <StackPanel>
                                             <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20"/>
                                             <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Date}" Margin="30" FontSize="20"/>
                                         </StackPanel>
                                     </TabItem>
-                                    <TabItem Header="Etc" Foreground="White"/>
-                                    <TabItem Header="Etc" Foreground="White"/>
+                                    <TabItem Header="Etc" Foreground="White">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20"/>
+                                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Date}" Margin="30" FontSize="20"/>
+                                        </StackPanel>
+                                    </TabItem>
+                                    <TabItem Header="Etc" Foreground="White">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20"/>
+                                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Date}" Margin="30" FontSize="20"/>
+                                        </StackPanel>
+                                    </TabItem>
                                 </TabControl>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Lire la musique" Content="▶" Click="Play" Width="40" Height="40"/>
@@ -145,7 +153,7 @@
                                     <ComboBoxItem x:Name="bydate" Content="Par date (jj/mm/aaaa)" IsSelected="False"/>
                                 </ComboBox>
                             </StackPanel>
-                            <ListBox x:Name="Search" Background="Transparent" Margin="30" ItemsSource="{Binding All}" SelectionChanged="ListBox_SelectionChanged">
+                            <ListBox x:Name="Search" Background="Transparent" Margin="30" ItemsSource="{Binding PlaylistProperty}" SelectionChanged="ListBox_SelectionChanged">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -163,7 +171,7 @@
                 <!-- MaPlaylist -->
                 <DockPanel>
                     <TextBlock Text="Ma Playlist" Foreground="#222222" DockPanel.Dock="Top" FontSize="20"/>
-                    <ListView x:Name="listBox" ItemsSource="{Binding playlist}" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="SeeMusic" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent" Width="120">
+                    <ListView x:Name="listBox" ItemsSource="{Binding Favorite}" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="SeeMusic" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent" Width="120">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

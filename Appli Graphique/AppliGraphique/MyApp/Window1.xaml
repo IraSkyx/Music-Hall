@@ -29,10 +29,10 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock x:Name="label1" TextAlignment="Center" VerticalAlignment="Center" Text="Adresse e-mail"/>
-                <TextBox x:Name="email" Grid.Column="1" Height="23" Margin="10"/>
+                <TextBox x:Name="email" Grid.Column="1" Height="23" Margin="10" Text="toto@gmail.com"/>
 
                 <TextBlock x:Name="passwordlab" TextAlignment="Center" VerticalAlignment="Center" Text="Mot de passe" Grid.Row="1"/>
-                <PasswordBox x:Name="passwd" Height="23" Grid.Row="1" Grid.Column="1" Margin="10"/>
+                <PasswordBox x:Name="passwd" Height="23" Grid.Row="1" Grid.Column="1" Margin="10" Password="toto"/>
                 
             </Grid>
             <TextBlock x:Name="wrong" Text="Email ou mot de passe invalide" Visibility="Hidden" Foreground="#D91E18" TextAlignment="Center"/>
