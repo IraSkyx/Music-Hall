@@ -1,4 +1,7 @@
-﻿using System;
+﻿using System.IO;
+using Newtonsoft.Json.Linq;
+using System.Linq;
+using System;
 
 namespace Biblio
 {
@@ -6,37 +9,18 @@ namespace Biblio
     {   
         public static Playlist Load()
         {
-            Playlist liste = new Playlist();
+            JObject json = JObject.Parse(File.ReadAllText("AllMusics.json"));
 
-            liste.Add(new Musique("T1", "A1", "D1", "G1", "I1", new Uri("audio/Feder.mp3", UriKind.RelativeOrAbsolute), "images/eFeder.jpg"));
-            liste.Add(new Musique("T2", "A2", "D2", "G2", "I2", new Uri("audio/Holding.mp3", UriKind.RelativeOrAbsolute), "images/eHolding.jpg"));
-            liste.Add(new Musique("T3", "A3", "D3", "G3", "I3", new Uri("audio/Shelter.mp3", UriKind.RelativeOrAbsolute), "images/eShelter.jpg"));
-            liste.Add(new Musique("T4", "A4", "D4", "G4", "I4", new Uri("audio/JustLike.mp3", UriKind.RelativeOrAbsolute), "images/eJustLike.jpg"));
-            liste.Add(new Musique("T5", "A5", "D5", "G5", "I5", new Uri("audio/Paris.mp3", UriKind.RelativeOrAbsolute), "images/eParis.jpg"));
-            liste.Add(new Musique("T6", "A6", "D6", "G6", "I6", new Uri("audio/AintMe.mp3", UriKind.RelativeOrAbsolute), "images/eAintMe.jpg"));
-
-            liste.Add(new Musique("T1", "A1", "D1", "G1", "I1", new Uri("audio/Feder.mp3", UriKind.RelativeOrAbsolute), "images/eFeder.jpg"));
-            liste.Add(new Musique("T2", "A2", "D2", "G2", "I2", new Uri("audio/Holding.mp3", UriKind.RelativeOrAbsolute), "images/eHolding.jpg"));
-            liste.Add(new Musique("T3", "A3", "D3", "G3", "I3", new Uri("audio/Shelter.mp3", UriKind.RelativeOrAbsolute), "images/eShelter.jpg"));
-            liste.Add(new Musique("T4", "A4", "D4", "G4", "I4", new Uri("audio/JustLike.mp3", UriKind.RelativeOrAbsolute), "images/eJustLike.jpg"));
-            liste.Add(new Musique("T5", "A5", "D5", "G5", "I5", new Uri("audio/Paris.mp3", UriKind.RelativeOrAbsolute), "images/eParis.jpg"));
-            liste.Add(new Musique("T6", "A6", "D6", "G6", "I6", new Uri("audio/AintMe.mp3", UriKind.RelativeOrAbsolute), "images/eAintMe.jpg"));
-
-            liste.Add(new Musique("T1", "A1", "D1", "G1", "I1", new Uri("audio/Feder.mp3", UriKind.RelativeOrAbsolute), "images/eFeder.jpg"));
-            liste.Add(new Musique("T2", "A2", "D2", "G2", "I2", new Uri("audio/Holding.mp3", UriKind.RelativeOrAbsolute), "images/eHolding.jpg"));
-            liste.Add(new Musique("T3", "A3", "D3", "G3", "I3", new Uri("audio/Shelter.mp3", UriKind.RelativeOrAbsolute), "images/eShelter.jpg"));
-            liste.Add(new Musique("T4", "A4", "D4", "G4", "I4", new Uri("audio/JustLike.mp3", UriKind.RelativeOrAbsolute), "images/eJustLike.jpg"));
-            liste.Add(new Musique("T5", "A5", "D5", "G5", "I5", new Uri("audio/Paris.mp3", UriKind.RelativeOrAbsolute), "images/eParis.jpg"));
-            liste.Add(new Musique("T6", "A6", "D6", "G6", "I6", new Uri("audio/AintMe.mp3", UriKind.RelativeOrAbsolute), "images/eAintMe.jpg"));
-
-            liste.Add(new Musique("T1", "A1", "D1", "G1", "I1", new Uri("audio/Feder.mp3", UriKind.RelativeOrAbsolute), "images/eFeder.jpg"));
-            liste.Add(new Musique("T2", "A2", "D2", "G2", "I2", new Uri("audio/Holding.mp3", UriKind.RelativeOrAbsolute), "images/eHolding.jpg"));
-            liste.Add(new Musique("T3", "A3", "D3", "G3", "I3", new Uri("audio/Shelter.mp3", UriKind.RelativeOrAbsolute), "images/eShelter.jpg"));
-            liste.Add(new Musique("T4", "A4", "D4", "G4", "I4", new Uri("audio/JustLike.mp3", UriKind.RelativeOrAbsolute), "images/eJustLike.jpg"));
-            liste.Add(new Musique("T5", "A5", "D5", "G5", "I5", new Uri("audio/Paris.mp3", UriKind.RelativeOrAbsolute), "images/eParis.jpg"));
-            liste.Add(new Musique("T6", "A6", "D6", "G6", "I6", new Uri("audio/AintMe.mp3", UriKind.RelativeOrAbsolute), "images/eAintMe.jpg"));
-
-            return liste;
+            return new Playlist(json["musiques"].Select(j => new Musique()
+            {
+                Title = (string)j["musique"]["title"],
+                Artist = (string)j["musique"]["nom"],
+                Date = (string)j["musique"]["date"],
+                Genre = (string)j["musique"]["genre"],
+                Infos = (string)j["musique"]["infos"],
+                Audio = new Uri((string)j["musique"]["audio"], UriKind.RelativeOrAbsolute),
+                Image = (string)j["musique"]["image"]
+            }).ToList());
         }
     }
 }

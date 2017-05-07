@@ -14,8 +14,11 @@ namespace Biblio
         {
             this.Infos = Infos;
             this.Psswd = Psswd;
-            this.Favorite = Favorite;
-            
+            this.Favorite = Favorite;            
+        }
+
+        public User()
+        {
         }
 
         public override string ToString()

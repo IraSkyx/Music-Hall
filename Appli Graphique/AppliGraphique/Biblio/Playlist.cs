@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -36,4 +37,11 @@ namespace Biblio
             return string.Join<Musique>("", this.ToArray());
         }
     }
+
+    public class PlaylistJson
+    {
+        [JsonProperty("playlist")]
+        public Playlist playlist { get; set; }
+    }
+
 }

@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using System.Windows.Media.Imaging;
 using System.Text.RegularExpressions;
 
 namespace MyApp
@@ -33,7 +32,7 @@ namespace MyApp
             Player.MediaEnded += MediaEnded;
 
             //Persistance
-            Allusers = LoadUsers.Load();
+            Allusers = new ObservableCollection<User>(LoadUsers.Load());
             Allmusics = LoadMusic.Load();
 
             //Initialisation des DataContext  
@@ -44,6 +43,8 @@ namespace MyApp
 
         private void Exit(object sender, RoutedEventArgs e)
         {
+            SaveMusics.Save(Allmusics);
+            SaveUsers.Save(Allusers);
             Close();
         }
 
@@ -250,9 +251,7 @@ namespace MyApp
             SetDuration();
             Add.Visibility = Visibility.Visible;
             Prog.Maximum = Player.NaturalDuration.TimeSpan.TotalSeconds;
-            image.Source = new BitmapImage(new Uri(Player.CurrentlyPlaying.Image, UriKind.RelativeOrAbsolute));
-            title.Text = Player.CurrentlyPlaying.Title;
-            artist.Text = Player.CurrentlyPlaying.Artist;
+            ActualPlay.DataContext = Player.CurrentlyPlaying;
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(myEvent);
             timer.Interval = new TimeSpan(0, 0, 1);
