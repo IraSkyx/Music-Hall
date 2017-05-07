@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
@@ -9,7 +7,7 @@ namespace Biblio
 {
     public class SaveMusics
     {
-        public static void Save(ObservableCollection<Musique> AllMusics)
+        public static void Save(Playlist AllMusics)
         {
             var musicElts = AllMusics.Select(music => new JObject(
                                                                     new JProperty("musique",

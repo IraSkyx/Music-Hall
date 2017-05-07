@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System;
+using System.Net.Mail;
 
 namespace Biblio
 {
@@ -17,14 +18,22 @@ namespace Biblio
             this.Favorite = Favorite;            
         }
 
-        public User()
+        public static bool ValidMail(string email)
         {
+            try
+            {
+                MailAddress m = new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
 
         public override string ToString()
         {
             return $"{Infos}\n{Psswd}\n{Favorite}\n";
         }
-
     }
 }

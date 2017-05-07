@@ -34,7 +34,7 @@ namespace MyApp
 
         private void Commit(object sender, RoutedEventArgs e)
         {                   
-            if (IsValid(email.Text) && (pseudo.Text).Length>3 && (mdp.Password).Length > 3)
+            if (User.ValidMail(email.Text) && (pseudo.Text).Length>3 && (mdp.Password).Length > 3)
             {
                 Check?.Invoke(new User(new MailAddress(email.Text, pseudo.Text), mdp.Password, null));
                 Close();
@@ -42,7 +42,7 @@ namespace MyApp
             else
             {
                 SolidColorBrush red = new SolidColorBrush(Color.FromRgb(217, 30, 24));
-                if (!IsValid(email.Text))
+                if (!User.ValidMail(email.Text))
                 {
                     labelemail.Text = "Email invalide";
                     labelemail.Foreground = red;
@@ -60,19 +60,6 @@ namespace MyApp
                     labelmdp.Foreground = red;
                 }
             }
-        }
-
-        public bool IsValid(string email)
-        {
-            try
-            {
-                MailAddress m = new MailAddress(email);
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-        }
+        }      
     }
 }
