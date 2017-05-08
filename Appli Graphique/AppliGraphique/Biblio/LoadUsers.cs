@@ -11,37 +11,58 @@ namespace Biblio
 {
     public class LoadUsers
     {
-        public static IEnumerable<User> Load()
+        public static ObservableCollection<User> Load()
         {
-            /*ObservableCollection<User> liste = new ObservableCollection<User>();
+            //Test 1
 
-            Playlist playlist = new Playlist();
-            playlist.AddMusic(new Musique("T1", "A1", "D1", "G1", "I1", new Uri("audio/Feder.mp3", UriKind.RelativeOrAbsolute), "images/eFeder.jpg"));
-            playlist.AddMusic(new Musique("T1", "A1", "D1", "G1", "I1", new Uri("audio/JustLike.mp3", UriKind.RelativeOrAbsolute), "images/eJustLike.jpg"));
-
-            liste.Add(new User(new MailAddress("toto@gmail.com","toto"), "toto", playlist));
-
-            return liste;*/
-
-            JObject json = JObject.Parse(File.ReadAllText("AllUsers.json"));
-
-            /*string js = @"{
+            /*JObject json;
+            try
+            {
+                json = JObject.Parse(File.ReadAllText("AllUsers.json"));
+            }
+            catch (FileNotFoundException)
+            {
+                yield break;
+            }
+            string jsonString = @"{
                     'Title': 'T1',
                     'Artist': A1,
-                    'Date': '00/00/0000',
-                    'Genre': G1,
-                    'Audio': Feder.mp3,
-                    'Image': eFeder.jpg,
-                         }";*/
+                    'Date': 'D1',
+                    'Genre': 'G1',
+                    'Infos': 'I1',
+                    'Audio': 'audio/Feder.mp3',
+                    'Image': 'images/eFeder.jpg',
+                         }";
 
             foreach (JObject j in json["users"])
             {
                 yield return new User(
                     new MailAddress((string)j["user"]["infos"]["Address"], (string)j["user"]["infos"]["DisplayName"]),
                     (string)j["user"]["psswd"],
-                    JsonConvert.DeserializeObject<Playlist>((string)json)
+                    new Playlist(JsonConvert.DeserializeObject<Playlist>(jsonString))
                 );
-            }
+            }*/
+
+            //Test 2
+
+            string jsonText = File.ReadAllText("AllUsers.json");
+            JObject json = JObject.Parse(jsonText);
+
+            return new ObservableCollection<User>(json["users"].Select(j => new User()
+            {
+                Infos = new MailAddress((string)j["user"]["infos"]["Address"][0], (string)j["user"]["infos"]["DisplayName"][0]),
+                Psswd = (string)j["user"]["psswd"][0],
+                Favorite = new Playlist(json["users"]["playlist"][0].Select(elt => new Musique()
+                {
+                    Title = (string)elt["musique"]["title"][0],
+                    Artist = (string)elt["musique"]["nom"][0],
+                    Date = (string)elt["musique"]["date"][0],
+                    Genre = (string)elt["musique"]["genre"][0],
+                    Infos = (string)elt["musique"]["infos"][0],
+                    Audio = new Uri((string)elt["musique"]["audio"][0], UriKind.RelativeOrAbsolute),
+                    Image = (string)elt["musique"]["image"][0]
+                }))
+            }));
         }
     }
 }

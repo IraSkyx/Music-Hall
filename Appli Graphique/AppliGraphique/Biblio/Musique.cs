@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.ComponentModel;
 
 namespace Biblio
@@ -7,19 +6,12 @@ namespace Biblio
     public class Musique : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        [JsonProperty("Title")]
         public string Title { get; set; }
-        [JsonProperty("Artist")]
         public string Artist { get; set; }
-        [JsonProperty("Date")]
         public string Date { get; set; }
-        [JsonProperty("Genre")]
         public string Genre { get; set; }
-        [JsonProperty("Infos")]
         public string Infos { get; set; }
-        [JsonProperty("Audio")]
         public Uri Audio { get; set; }
-        [JsonProperty("Image")]
         public string Image { get; set; }
 
         public Musique(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Image)
@@ -40,6 +32,26 @@ namespace Biblio
         protected void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        public override bool Equals(object o)
+        {
+            if (ReferenceEquals(o, null))
+                return false;
+
+            if (ReferenceEquals(this, o))
+                return true;
+
+            if (GetType() != o.GetType())
+                return false;
+
+            return Equals(o as Musique);
+        }
+
+        public bool Equals(Musique other)
+        {
+            return (Title.Equals(other.Title) && Artist.Equals(other.Artist) && Date.Equals(other.Date) && Genre.Equals(other.Genre)
+                && Infos.Equals(other.Infos) && Audio.ToString().Equals(other.Audio.ToString()) && Image.Equals(other.Image));
         }
 
         public override string ToString()

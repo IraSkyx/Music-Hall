@@ -58,7 +58,7 @@
         <!-- Lecteur -->
 
         <!-- Corps -->
-        <DockPanel>
+        <DockPanel x:Name="Body">
 
             <ListView x:Name="scroller" DockPanel.Dock="Top" Style="{StaticResource HorizontalListbox}" MouseDoubleClick="Play" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" ItemsSource="{Binding PlaylistProperty}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="scroller_SelectionChanged" Height="100" Margin="10,30" Background="Transparent">
                 <ListBox.ItemTemplate>
@@ -73,7 +73,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="30">
 
                 <!-- Onglets -->
-                <TabControl x:Name="TabControl" BorderThickness="0" Width="800" Margin="0,0,70,0" Opacity="0.9" Background="#222222">
+                <TabControl x:Name="TabControl" Width="800" BorderThickness="0" Margin="0,0,70,0" Opacity="0.9" Background="#222222">
 
                     <TabItem Header="Accueil" Foreground="White" FontFamily="Microsoft YaHei UI" Margin="-3,0,3,0">
                         <Grid>
@@ -171,7 +171,7 @@
                 <!-- MaPlaylist -->
                 <DockPanel>
                     <TextBlock Text="Ma Playlist" Foreground="#222222" DockPanel.Dock="Top" FontSize="20"/>
-                    <ListView x:Name="listBox" ItemsSource="{Binding Favorite}" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="SeeMusic" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent" Width="120">
+                    <ListView x:Name="listBox" ItemsSource="{Binding Favorite}" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="SeeMusic" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -190,8 +190,6 @@
             </StackPanel>
         </DockPanel>
         <!-- Corps -->
-
-        
-        
+       
     </DockPanel>
 </Window>

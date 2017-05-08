@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,14 +22,12 @@ namespace Biblio
         {
         }
 
-        public void AddMusic(Musique music)
+        public Playlist(Array array)
         {
-            Add(music);
-        }
-
-        public void DeleteMusic(Musique music)
-        {
-            Remove(music);
+            foreach(Musique m in array)
+            {
+                Add(m);
+            }
         }
 
         public override string ToString()
@@ -37,11 +35,4 @@ namespace Biblio
             return string.Join<Musique>("", this.ToArray());
         }
     }
-
-    public class PlaylistJson
-    {
-        [JsonProperty("playlist")]
-        public Playlist playlist { get; set; }
-    }
-
 }

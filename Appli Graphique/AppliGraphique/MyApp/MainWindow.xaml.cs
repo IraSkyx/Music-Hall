@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using System.Text.RegularExpressions;
+using MainTest;
 
 namespace MyApp
 {
@@ -31,9 +32,9 @@ namespace MyApp
             Player.MediaOpened += MediaOpened;
             Player.MediaEnded += MediaEnded;
 
-            //Persistance
-            Allusers = new ObservableCollection<User>(LoadUsers.Load());
-            Allmusics = LoadMusic.Load();
+            //Persistance (Pas encore donc seulement des tests avec des données en dur)
+            Allusers = Stub.LoadUsersTest();
+            Allmusics = Stub.LoadMusicsTest();
 
             //Initialisation des DataContext  
             scroller.DataContext = Allmusics;                     
@@ -43,8 +44,8 @@ namespace MyApp
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            SaveMusics.Save(Allmusics);
-            SaveUsers.Save(Allusers);
+            //SaveMusics.Save(Allmusics);
+            //SaveUsers.Save(Allusers);
             Close();
         }
 
@@ -138,9 +139,9 @@ namespace MyApp
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (criterion.SelectedItem == bytitle)
-                Search.DataContext=new Playlist(Allmusics.Where(x => Regex.IsMatch(x.Title, Input.Text)));
+                Search.DataContext = new Playlist(Allmusics.Where(x => Regex.IsMatch(x.Title, Input.Text)));
             else if (criterion.SelectedItem == byartist)
-                Search.DataContext= new Playlist(Allmusics.Where(x => Regex.IsMatch(x.Artist, Input.Text)));
+                Search.DataContext = new Playlist(Allmusics.Where(x => Regex.IsMatch(x.Artist, Input.Text)));
             else if (criterion.SelectedItem == bygenre)
                 Search.DataContext = new Playlist(Allmusics.Where(x => Regex.IsMatch(x.Genre, Input.Text)));
             else if (criterion.SelectedItem == bydate)
@@ -149,7 +150,7 @@ namespace MyApp
 
         private void criterion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Input.Text != "")
+            if (Input.Text != String.Empty)
                 TextBox_TextChanged(this, new TextChangedEventArgs(e.RoutedEvent, UndoAction.None));
         }
 
@@ -297,20 +298,29 @@ namespace MyApp
             if (currentUser != null) //Si un user est connecté
                 if (currentUser.Favorite!=null) //Si l'utilisateur a une playlist
                 {
-                    if (currentUser.Favorite.Where(x => x.Title.Equals(((Musique)scroller.SelectedItem).Title)).Count() == 0) //Si la musique est déjà dans sa playlist
-                        currentUser.Favorite.AddMusic((Musique)scroller.SelectedItem);
+                    if (currentUser.Favorite.Where(x => x.Equals((Musique)scroller.SelectedItem)).Count() == 0) //Si la musique est déjà dans sa playlist
+                        currentUser.Favorite.Add((Musique)scroller.SelectedItem);
                 }
                 else //Si l'utilisateur n'a pas de playlist
                 {
                     currentUser.Favorite = new Playlist();
-                    currentUser.Favorite.AddMusic((Musique)scroller.SelectedItem);
+                    currentUser.Favorite.Add((Musique)scroller.SelectedItem);
                 }
         }
 
         private void AddToPlaylist2(object sender, RoutedEventArgs e)
         {
-            if (Player.CurrentlyPlaying != null && currentUser!=null) //Si une musique est en train d'être lu et qu'un user est connecté 
-                currentUser.Favorite.AddMusic(Player.CurrentlyPlaying);
+            if (Player.CurrentlyPlaying != null && currentUser != null) //Si une musique est en train d'être lu et qu'un user est connecté 
+                if (currentUser.Favorite != null) //Si l'utilisateur a une playlist
+                {
+                    if (currentUser.Favorite.Where(x => x.Equals(Player.CurrentlyPlaying)).Count() == 0) //Si la musique est déjà dans sa playlist
+                        currentUser.Favorite.Add(Player.CurrentlyPlaying);
+                }
+                else //Si l'utilisateur n'a pas de playlist
+                {
+                    currentUser.Favorite = new Playlist();
+                    currentUser.Favorite.Add(Player.CurrentlyPlaying);
+                }
         }
 
         private void ReadFromPlaylist(object sender, MouseButtonEventArgs e)
@@ -325,17 +335,17 @@ namespace MyApp
         private void DeleteFromPlaylist(object sender, MouseButtonEventArgs e)
         {
             if (currentUser != null && listBox.SelectedItem != null)
-                    currentUser.Favorite.DeleteMusic((Musique)listBox.SelectedItem);
+                    currentUser.Favorite.Remove((Musique)listBox.SelectedItem);
         }
 
         private void SeeMusic(object sender, MouseButtonEventArgs e)
         {
             if (listBox.SelectedItem!=null)
-                scroller.SelectedIndex = Allmusics.IndexOf(Allmusics.Where(x => x.Title.Equals(((Musique)listBox.SelectedItem).Title)).ElementAt(0));
+                scroller.SelectedIndex = Allmusics.IndexOf(Allmusics.Where(x => x.Equals((Musique)listBox.SelectedItem)).ElementAt(0));
         }
         private void SeeMusic2(object sender, MouseButtonEventArgs e)
         {
-            scroller.SelectedIndex = Allmusics.IndexOf(Allmusics.Where(x => x.Title.Equals((Player.CurrentlyPlaying).Title)).ElementAt(0));
+            scroller.SelectedIndex = Allmusics.IndexOf(Allmusics.Where(x => x.Equals(Player.CurrentlyPlaying)).ElementAt(0));
         }
 
     }  
