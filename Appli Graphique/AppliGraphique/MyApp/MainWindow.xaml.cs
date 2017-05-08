@@ -32,8 +32,12 @@ namespace MyApp
             Player.MediaOpened += MediaOpened;
             Player.MediaEnded += MediaEnded;
 
-            //Persistance (Pas encore donc seulement des tests avec des données en dur)
-            Allusers = Stub.LoadUsersTest();
+            //Persistance Loading
+            //Allusers = LoadUsers.Load();
+            //Allmusics = LoadMusics.Load();
+
+            //Tests données
+            Allusers = Stub.LoadUsersTest();       
             Allmusics = Stub.LoadMusicsTest();
 
             //Initialisation des DataContext  
@@ -44,6 +48,7 @@ namespace MyApp
 
         private void Exit(object sender, RoutedEventArgs e)
         {
+            //Persistance Saving
             //SaveMusics.Save(Allmusics);
             //SaveUsers.Save(Allusers);
             Close();
@@ -67,14 +72,14 @@ namespace MyApp
 
         private void Connexion(object sender, RoutedEventArgs e)
         {
-            if ((string)connexion.Content == "Connexion" && (string)inscription.Content == "Inscription")
+            if ((string)connexion.Content == "Connexion" && (string)inscription.Content == "Inscription") //Fenêtre de connexion
             {
                 Window1 subWindow = new Window1(Allusers);
                 subWindow.Check += value => LogIn(value);
                 subWindow.Owner = Application.Current.MainWindow;
                 subWindow.Show();
             }
-            else
+            else //Bouton déconnexion
             {
                 currentUser = null;
                 listBox.DataContext = null;
@@ -97,7 +102,7 @@ namespace MyApp
 
         private void Inscription(object sender, RoutedEventArgs e)
         {
-            if ((string)connexion.Content == "Déconnexion" && (string)inscription.Content == currentUser.Infos.DisplayName)
+            if ((string)connexion.Content == "Déconnexion" && (string)inscription.Content == currentUser.Infos.DisplayName) //Fenêtre de profil
             {
                 Window3 subWindow3 = new Window3(currentUser);
                 subWindow3.Check += value =>
@@ -109,7 +114,7 @@ namespace MyApp
                 subWindow3.Owner = Application.Current.MainWindow;
                 subWindow3.Show();
             }
-            else
+            else //Fenêtre d'inscription
             {
                 Window2 subWindow2 = new Window2();
                 subWindow2.Check += value =>
@@ -336,6 +341,5 @@ namespace MyApp
         {
             scroller.SelectedIndex = Allmusics.IndexOf(Allmusics.Where(x => x.Equals(Player.CurrentlyPlaying)).ElementAt(0));
         }
-
     }  
 }

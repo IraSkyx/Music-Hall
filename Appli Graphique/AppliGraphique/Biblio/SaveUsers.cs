@@ -10,15 +10,16 @@ namespace Biblio
     {
         public static void Save(ObservableCollection<User> AllUsers)
         {
-            var userElts = AllUsers.Select(user => new JObject(
+            /*var userElts = AllUsers.Select(user => new JObject(
                                                                     new JProperty("user",
                                                                         new JObject(
                                                                             new JProperty("infos", JToken.FromObject(user.Infos)),
                                                                             new JProperty("psswd", user.Psswd),
                                                                             new JProperty("playlist", (user.Favorite==null) ? "" : JsonConvert.SerializeObject(user.Favorite))))));
 
-            var usersFichier = new JObject(new JProperty("users", userElts));
-            File.WriteAllText("AllUsers.json", usersFichier.ToString());
+            var usersFichier = new JObject(new JProperty("users", userElts));*/
+            string json = JsonConvert.SerializeObject(AllUsers);
+            File.WriteAllText("AllUsers.json", json);
         }
     }
 }

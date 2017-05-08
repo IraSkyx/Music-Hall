@@ -5,7 +5,7 @@ using System;
 
 namespace Biblio
 {
-    public class LoadMusic
+    public class LoadMusics
     {   
         public static Playlist Load()
         {
