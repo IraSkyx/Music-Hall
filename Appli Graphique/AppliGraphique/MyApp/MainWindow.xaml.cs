@@ -49,10 +49,7 @@ namespace MyApp
             Close();
         }
 
-        private void Reduce(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
+        private void Reduce(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
 
         private void Increase(object sender, RoutedEventArgs e)
         {
@@ -125,10 +122,7 @@ namespace MyApp
             }
         }
 
-        private void scroller_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            TabControl.SelectedIndex = 1;
-        }
+        private void scroller_SelectionChanged(object sender, SelectionChangedEventArgs e) => TabControl.SelectedIndex = 1;
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -174,10 +168,7 @@ namespace MyApp
             TabControl.SelectedIndex = 1;
         }
 
-        private void Play(object sender, RoutedEventArgs e)
-        {
-            PausePlay.Content = (Player.Play((Musique)scroller.SelectedItem)) ? "||" : "▶";
-        }
+        private void Play(object sender, RoutedEventArgs e) => PausePlay.Content = (Player.Play((Musique)scroller.SelectedItem)) ? "||" : "▶";
 
         private void PausePlay_Click(object sender, RoutedEventArgs e)
         {
@@ -243,9 +234,7 @@ namespace MyApp
                     PausePlay.Content = Player.Play(Allmusics.ElementAt(new Random().Next())) ? "||" : "▶";
             }
             else //Mode Replay & Random désactivé
-            {
                 Next(this, new RoutedEventArgs());
-            }
         }
         private void MediaOpened(object sender, RoutedEventArgs e)
         {
@@ -269,10 +258,10 @@ namespace MyApp
             if (Player.Source != null && Player.NaturalDuration.HasTimeSpan)
             {
                 duration.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
-                Player.Position.Hours,
-                Player.Position.Minutes,
-                Player.Position.Seconds
-                );
+                    Player.Position.Hours,
+                    Player.Position.Minutes,
+                    Player.Position.Seconds
+                    );
                 Prog.Value = Player.Position.TotalSeconds;
                 duration2.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
                     Player.NaturalDuration.TimeSpan.Hours,

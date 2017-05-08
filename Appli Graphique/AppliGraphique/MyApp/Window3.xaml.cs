@@ -21,20 +21,9 @@ namespace MyApp
             gridresources.DataContext = currentuser;
         }
 
-        private void Exit(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        private void Exit(object sender, RoutedEventArgs e) => Close();
 
-        private void Reduce(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
+        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
 
         private void Commit(object sender, RoutedEventArgs e)
         {

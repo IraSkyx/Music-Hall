@@ -35,9 +35,6 @@ namespace Biblio
             }
         }
 
-        public override string ToString()
-        {
-            return $"{Infos}\n{Psswd}\n{Favorite}\n";
-        }
+        public override string ToString() => $"{Infos}\n{Psswd}\n{Favorite}\n";
     }
 }

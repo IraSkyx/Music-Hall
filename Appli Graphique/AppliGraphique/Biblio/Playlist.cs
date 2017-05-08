@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -13,7 +12,6 @@ namespace Biblio
         }
 
         public Playlist()
-            : base()
         {
         }
 
@@ -22,17 +20,6 @@ namespace Biblio
         {
         }
 
-        public Playlist(Array array)
-        {
-            foreach(Musique m in array)
-            {
-                Add(m);
-            }
-        }
-
-        public override string ToString()
-        {
-            return string.Join<Musique>("", this.ToArray());
-        }
+        public override string ToString() => string.Join<Musique>("", this.ToArray());
     }
 }

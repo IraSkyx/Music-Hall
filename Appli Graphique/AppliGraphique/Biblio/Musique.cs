@@ -54,9 +54,6 @@ namespace Biblio
                 && Infos.Equals(other.Infos) && Audio.ToString().Equals(other.Audio.ToString()) && Image.Equals(other.Image));
         }
 
-        public override string ToString()
-        {          
-            return $"{Title}\n{Artist}\n{Date}\n{Genre}\n{Infos}\n";
-        }
+        public override string ToString() => $"{Title}\n{Artist}\n{Date}\n{Genre}\n{Infos}\n";
     }
 }

@@ -13,24 +13,11 @@ namespace MyApp
     {
         public event Action<User> Check;
 
-        public Window2()
-        {            
-            InitializeComponent();
-        }
-        private void Exit(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        public Window2() => InitializeComponent();
 
-        private void Reduce(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
+        private void Exit(object sender, RoutedEventArgs e) => Close();
 
-        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
+        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
 
         private void Commit(object sender, RoutedEventArgs e)
         {                   
