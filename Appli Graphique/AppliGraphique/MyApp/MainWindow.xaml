@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyApp"
         mc:Ignorable="d"
-        Background="#ECF0F1"      
-        BorderBrush="#ECF0F1"     
+        Background="#ECF0F1" 
         Title="Music'Hall" Height="720" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Foreground="White" FontFamily="Microsoft YaHei Light">
     <DockPanel>
         
@@ -70,124 +69,123 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListView>
+
+            <!-- MaPlaylist -->
+            <DockPanel DockPanel.Dock="Right" Margin="10">
+                <TextBlock Text="Ma Playlist" Foreground="#222222" DockPanel.Dock="Top" FontSize="20"/>
+                <ListView x:Name="listBox" ItemsSource="{Binding Favorite}" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="SeeMusic" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="50" Width="50" Source="{Binding Image}"/>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Title}"/>
+                                    <TextBlock Text="{Binding Artist}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListView>
+            </DockPanel>
+            <!-- MaPlaylist -->
             
             <!-- Onglets -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TabControl x:Name="TabControl" BorderThickness="0" Margin="0,0,70,0" Opacity="0.9" Background="#222222">
+            <TabControl x:Name="TabControl" BorderThickness="0" Margin="10" Background="#222222">
 
-                    <TabItem Header="Accueil" Foreground="White" FontFamily="Microsoft YaHei UI" Margin="-3,0,3,0">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel x:Name="hall" Margin="20"  VerticalAlignment="Bottom" MouseUp="StackPanel_MouseUp">
-                                <TextBlock Text="Top 1 Music'Hall" FontSize="20" Margin="10" TextAlignment="Center"/>
-                                <Image Source="images/eAintMe.jpg" Width="150" ToolTip="Cliquer pour + d'infos"/>
-                            </StackPanel>
-                            <StackPanel x:Name="world" Margin="20" Grid.Column="1" VerticalAlignment="Top" MouseUp="StackPanel_MouseUp">
-                                <Image Source="images/eFeder.jpg" Width="150" ToolTip="Cliquer pour + d'infos"/>
-                                <TextBlock Text="Top 1 World" FontSize="20" Margin="10" TextAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel x:Name="france" Margin="20" Grid.Column="2" VerticalAlignment="Center" MouseUp="StackPanel_MouseUp">
-                                <TextBlock Text="Top 1 France" FontSize="20" Margin="10" TextAlignment="Center"/>
-                                <Image Source="images/eParis.jpg" Width="150" ToolTip="Cliquer pour + d'infos"/>
-                            </StackPanel>
-                        </Grid>
-                    </TabItem>
+                <TabItem Header="Accueil" Foreground="White" FontFamily="Microsoft YaHei UI" Margin="-3,0,3,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel x:Name="hall" Margin="20"  VerticalAlignment="Bottom" MouseUp="StackPanel_MouseUp">
+                            <TextBlock Text="Top 1 Music'Hall" FontSize="20" Margin="10" TextAlignment="Center"/>
+                            <Image Source="images/eAintMe.jpg" Width="250" ToolTip="Cliquer pour + d'infos"/>
+                        </StackPanel>
+                        <StackPanel x:Name="world" Margin="20" Grid.Column="1" VerticalAlignment="Top" MouseUp="StackPanel_MouseUp">
+                            <Image Source="images/eFeder.jpg" Width="250" ToolTip="Cliquer pour + d'infos"/>
+                            <TextBlock Text="Top 1 World" FontSize="20" Margin="10" TextAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel x:Name="france" Margin="20" Grid.Column="2" VerticalAlignment="Center" MouseUp="StackPanel_MouseUp">
+                            <TextBlock Text="Top 1 France" FontSize="20" Margin="10" TextAlignment="Center"/>
+                            <Image Source="images/eParis.jpg" Width="250" ToolTip="Cliquer pour + d'infos"/>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
 
-                    <TabItem Header="Sélection" FontFamily="Microsoft YaHei UI" Foreground="White" Margin="-4,0,4,0">
-                        <Grid x:Name="Selection">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="2*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Margin="30">
-                                <Image VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" Height="120" Source="{Binding ElementName=scroller, Path=SelectedItem.Image}">
-                                    <Image.BitmapEffect>
-                                        <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="10" Softness="1" Opacity="0.5"/>
-                                    </Image.BitmapEffect>
-                                </Image>
-                                <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Title}" FontSize="20"/>
-                                <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Artist}"/>
-                            </StackPanel>
-                            <StackPanel VerticalAlignment="Center" Grid.Column="2">
-                                <TabControl Background="#222222" Margin="20">
-                                    <TabItem Header="Infos" Foreground="White">
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20"/>
-                                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Date}" Margin="30" FontSize="20"/>
-                                        </StackPanel>
-                                    </TabItem>
-                                    <TabItem Header="Etc" Foreground="White">
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20"/>
-                                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Date}" Margin="30" FontSize="20"/>
-                                        </StackPanel>
-                                    </TabItem>
-                                    <TabItem Header="Etc" Foreground="White">
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20"/>
-                                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Date}" Margin="30" FontSize="20"/>
-                                        </StackPanel>
-                                    </TabItem>
-                                </TabControl>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Lire la musique" Content="▶" Click="Play" Width="40" Height="40"/>
-                                    <Button x:Name="Add2" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Cliquer pour ajouter" Content="+ Ajouter à ma playlist" Click="AddToPlaylist"  Width="150" Height="40"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Grid>
-                    </TabItem>
+                <TabItem Header="Sélection" FontFamily="Microsoft YaHei UI" Foreground="White" Margin="-4,0,4,0">
+                    <Grid x:Name="Selection">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="20,20,0,0">
+                            <Image VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,15" Width="300" Height="300" Source="{Binding ElementName=scroller, Path=SelectedItem.Image}">
+                                <Image.BitmapEffect>
+                                    <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
+                                </Image.BitmapEffect>
+                            </Image>
+                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Title}" FontSize="20"/>
+                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Artist}"/>
+                        </StackPanel>
+                        <DockPanel Grid.Column="2">
 
-                    <TabItem Header="Recherche" FontFamily="Microsoft YaHei UI" Foreground="White" Margin="-5,0,5,0">
-                        <DockPanel Margin="10">
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
-                                <TextBox x:Name="Input" DockPanel.Dock="Top" TextChanged="TextBox_TextChanged" Width="200" Margin="0,0,20,0"/>
-                                <ComboBox x:Name="criterion" SelectionChanged="criterion_SelectionChanged">
-                                    <ComboBoxItem x:Name="bytitle" Content="Par titre" IsSelected="False"/>
-                                    <ComboBoxItem x:Name="byartist" Content="Par artiste" IsSelected="False"/>
-                                    <ComboBoxItem x:Name="bygenre" Content="Par genre" IsSelected="False"/>
-                                    <ComboBoxItem x:Name="bydate" Content="Par date (jj/mm/aaaa)" IsSelected="False"/>
-                                </ComboBox>
+                            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                                <Button Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Lire la musique" Content="▶" Click="Play" Width="40" Height="40"/>
+                                <Button x:Name="Add2" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Cliquer pour ajouter" Content="+ Ajouter à ma playlist" Click="AddToPlaylist"  Width="150" Height="40"/>
                             </StackPanel>
-                            <ListBox x:Name="Search" Background="Transparent" Margin="30" ItemsSource="{Binding PlaylistProperty}" SelectionChanged="ListBox_SelectionChanged">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Height="50" Width="50" Source="{Binding Image}"/>
-                                            <TextBlock FontSize="30" Foreground="White" Text="{Binding Title}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </DockPanel>
-                    </TabItem>
-                </TabControl>
-                <!-- Onglets -->
-                
-                <!-- MaPlaylist -->
-                <DockPanel>
-                    <TextBlock Text="Ma Playlist" Foreground="#222222" DockPanel.Dock="Top" FontSize="20"/>
-                    <ListView x:Name="listBox" ItemsSource="{Binding Favorite}" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="SeeMusic" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Height="50" Width="50" Source="{Binding Image}"/>
+
+                            <TabControl Background="#222222" Margin="10">
+                                <TabItem Header="Infos" Foreground="White">
                                     <StackPanel>
-                                        <TextBlock Text="{Binding Title}"/>
-                                        <TextBlock Text="{Binding Artist}"/>
+                                        <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20"/>
+                                        <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Date}" Margin="30" FontSize="20"/>
                                     </StackPanel>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListView>
-                </DockPanel>
-                <!-- MaPlaylist -->
-                
-            </StackPanel>
+                                </TabItem>
+                                <TabItem Header="Etc" Foreground="White">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20"/>
+                                        <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Date}" Margin="30" FontSize="20"/>
+                                    </StackPanel>
+                                </TabItem>
+                                <TabItem Header="Etc" Foreground="White">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20"/>
+                                        <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Date}" Margin="30" FontSize="20"/>
+                                    </StackPanel>
+                                </TabItem>
+                            </TabControl>
+                        </DockPanel>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Recherche" FontFamily="Microsoft YaHei UI" Foreground="White" Margin="-5,0,5,0">
+                    <DockPanel Margin="10">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
+                            <TextBox x:Name="Input" DockPanel.Dock="Top" TextChanged="TextBox_TextChanged" Width="200" Margin="0,0,20,0"/>
+                            <ComboBox x:Name="criterion" SelectionChanged="criterion_SelectionChanged">
+                                <ComboBoxItem x:Name="bytitle" Content="Par titre" IsSelected="False"/>
+                                <ComboBoxItem x:Name="byartist" Content="Par artiste" IsSelected="False"/>
+                                <ComboBoxItem x:Name="bygenre" Content="Par genre" IsSelected="False"/>
+                                <ComboBoxItem x:Name="bydate" Content="Par date (jj/mm/aaaa)" IsSelected="False"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <ListBox x:Name="Search" Background="Transparent" Margin="30" ItemsSource="{Binding PlaylistProperty}" SelectionChanged="ListBox_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Height="50" Width="50" Source="{Binding Image}"/>
+                                        <TextBlock FontSize="30" Foreground="White" Text="{Binding Title}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </DockPanel>
+                </TabItem>
+            </TabControl>
+            <!-- Onglets -->          
+
         </DockPanel>
         <!-- Corps -->
        
