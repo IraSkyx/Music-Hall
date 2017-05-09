@@ -12,7 +12,7 @@ namespace MyApp
     public partial class Window1 : Window
     {
         public event Action <User> Check;
-        ObservableCollection<User> DataBase;
+        private ObservableCollection<User> DataBase;
 
         public Window1(ObservableCollection<User> DataBase)
         {

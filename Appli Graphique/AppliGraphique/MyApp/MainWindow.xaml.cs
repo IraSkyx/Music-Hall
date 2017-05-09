@@ -116,7 +116,7 @@ namespace MyApp
             }
             else //Fenêtre d'inscription
             {
-                Window2 subWindow2 = new Window2();
+                Window2 subWindow2 = new Window2(Allusers);
                 subWindow2.Check += value =>
                 {
                     Allusers.Add(value);
@@ -205,18 +205,23 @@ namespace MyApp
         private void Next(object sender, RoutedEventArgs e)
         {
             if (currentUser == null || currentUser.Favorite == null)
-            {
-                PausePlay.Content = "▶";
-                return;
-            }
-            PausePlay.Content = (Player.GoToNextOrPrevious(currentUser, 1)) ? "||" : "▶";
+                if (Player.RandomPlay)
+                    PausePlay.Content = Player.Play(Allmusics.ElementAt(new Random().Next(0, Allmusics.Count))) ? "||" : "▶";
+                else
+                    return;
+            else
+                PausePlay.Content = (Player.GoToNextOrPrevious(currentUser, 1)) ? "||" : "▶";
         }
 
         private void Previous(object sender, RoutedEventArgs e)
         {
             if (currentUser == null || currentUser.Favorite == null)
-                return;
-            PausePlay.Content = (Player.GoToNextOrPrevious(currentUser, -1)) ? "||" : "▶";
+                if (Player.RandomPlay)
+                    PausePlay.Content = Player.Play(Allmusics.ElementAt(new Random().Next(0, Allmusics.Count))) ? "||" : "▶";
+                else
+                    return;
+            else
+                PausePlay.Content = (Player.GoToNextOrPrevious(currentUser, -1)) ? "||" : "▶";
         }
 
         private void MediaEnded(object sender, RoutedEventArgs e)
@@ -231,9 +236,9 @@ namespace MyApp
                 if (currentUser != null)
                 {
                     if (currentUser.Favorite != null)
-                        PausePlay.Content = Player.Play(Allmusics.ElementAt(new Random().Next())) ? "||" : "▶";
+                        PausePlay.Content = Player.Play(Allmusics.ElementAt(new Random().Next(0, Allmusics.Count))) ? "||" : "▶";
                     else
-                        PausePlay.Content = Player.Play(currentUser.Favorite.ElementAt(new Random().Next())) ? "||" : "▶";
+                        PausePlay.Content = Player.Play(currentUser.Favorite.ElementAt(new Random().Next(0, currentUser.Favorite.Count))) ? "||" : "▶";
                 }
                 else
                     PausePlay.Content = Player.Play(Allmusics.ElementAt(new Random().Next())) ? "||" : "▶";
