@@ -18,10 +18,6 @@ namespace Biblio
             this.Favorite = Favorite;            
         }
 
-        public User()
-        {
-        }
-
         public static bool ValidMail(string email)
         {
             try

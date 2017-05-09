@@ -30,8 +30,8 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock x:Name="Add" Text="✚" Visibility="Hidden" FontSize="20" Margin="20" VerticalAlignment="Center" TextAlignment="Center" MouseUp="AddToPlaylist2"/>
-                    <StackPanel x:Name="ActualPlay" HorizontalAlignment="Center" VerticalAlignment="Center" MouseUp="SeeMusic2">
+                    <TextBlock x:Name="Add1" Text="✚" Visibility="Hidden" FontSize="20" Margin="20" VerticalAlignment="Center" TextAlignment="Center" MouseUp="AddToPlaylist"/>
+                    <StackPanel x:Name="ActualPlay" HorizontalAlignment="Center" VerticalAlignment="Center" MouseUp="SeeMusic">
                         <Image x:Name="image" Width="60" Height="60" Margin="3" Source="{Binding Image}"/>
                         <TextBlock x:Name="title" FontSize="15" Text="{Binding Title}"/>
                         <TextBlock x:Name="artist" FontSize="10" Text="{Binding Artist}"/>
@@ -60,7 +60,7 @@
         <!-- Corps -->
         <DockPanel x:Name="Body">
 
-            <ListView x:Name="scroller" DockPanel.Dock="Top" Style="{StaticResource HorizontalListbox}" MouseDoubleClick="Play" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" ItemsSource="{Binding PlaylistProperty}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="scroller_SelectionChanged" Height="100" Margin="10,30" Background="Transparent">
+            <ListView x:Name="scroller" DockPanel.Dock="Top" Style="{StaticResource HorizontalListbox}" MouseDoubleClick="Play" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" ItemsSource="{Binding PlaylistProperty}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="scroller_SelectionChanged" Height="100" Background="Transparent">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -70,10 +70,10 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListView>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="30">
-
-                <!-- Onglets -->
-                <TabControl x:Name="TabControl" Width="800" BorderThickness="0" Margin="0,0,70,0" Opacity="0.9" Background="#222222">
+            
+            <!-- Onglets -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TabControl x:Name="TabControl" BorderThickness="0" Margin="0,0,70,0" Opacity="0.9" Background="#222222">
 
                     <TabItem Header="Accueil" Foreground="White" FontFamily="Microsoft YaHei UI" Margin="-3,0,3,0">
                         <Grid>
@@ -136,7 +136,7 @@
                                 </TabControl>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Lire la musique" Content="▶" Click="Play" Width="40" Height="40"/>
-                                    <Button Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Cliquer pour ajouter" Content="+ Ajouter à ma playlist" Click="AddToPlaylist"  Width="150" Height="40"/>
+                                    <Button x:Name="Add2" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Cliquer pour ajouter" Content="+ Ajouter à ma playlist" Click="AddToPlaylist"  Width="150" Height="40"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

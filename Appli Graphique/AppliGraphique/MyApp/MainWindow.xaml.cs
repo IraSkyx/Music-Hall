@@ -249,7 +249,7 @@ namespace MyApp
         private void MediaOpened(object sender, RoutedEventArgs e)
         {
             SetDuration();
-            Add.Visibility = Visibility.Visible;
+            Add1.Visibility = Visibility.Visible;
             Prog.Maximum = Player.NaturalDuration.TimeSpan.TotalSeconds;
             ActualPlay.DataContext = Player.CurrentlyPlaying;
             DispatcherTimer timer = new DispatcherTimer();
@@ -285,8 +285,7 @@ namespace MyApp
         {
             if (Player.Source != null && Player.NaturalDuration.HasTimeSpan) 
             {
-                Prog.Value = (e.GetPosition(Prog).X / Prog.ActualWidth) * Prog.Maximum;
-                Player.Position = new TimeSpan(0,0,(int)Prog.Value);
+                Player.Position = new TimeSpan(0,0,(int)((e.GetPosition(Prog).X / Prog.ActualWidth) * Prog.Maximum));
                 Player.Play();
                 PausePlay.Content = "||";
             }
@@ -298,27 +297,12 @@ namespace MyApp
                 if (currentUser.Favorite!=null) //Si l'utilisateur a une playlist
                 {
                     if (currentUser.Favorite.Where(x => x.Equals((Musique)scroller.SelectedItem)).Count() == 0) //Si la musique est déjà dans sa playlist
-                        currentUser.Favorite.Add((Musique)scroller.SelectedItem);
+                        currentUser.Favorite.Add(Add1 == sender ? Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
                 }
                 else //Si l'utilisateur n'a pas de playlist
                 {
                     currentUser.Favorite = new Playlist();
-                    currentUser.Favorite.Add((Musique)scroller.SelectedItem);
-                }
-        }
-
-        private void AddToPlaylist2(object sender, RoutedEventArgs e)
-        {
-            if (Player.CurrentlyPlaying != null && currentUser != null) //Si une musique est en train d'être lu et qu'un user est connecté 
-                if (currentUser.Favorite != null) //Si l'utilisateur a une playlist
-                {
-                    if (currentUser.Favorite.Where(x => x.Equals(Player.CurrentlyPlaying)).Count() == 0) //Si la musique est déjà dans sa playlist
-                        currentUser.Favorite.Add(Player.CurrentlyPlaying);
-                }
-                else //Si l'utilisateur n'a pas de playlist
-                {
-                    currentUser.Favorite = new Playlist();
-                    currentUser.Favorite.Add(Player.CurrentlyPlaying);
+                    currentUser.Favorite.Add(Add1 == sender ? Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
                 }
         }
 
@@ -339,12 +323,10 @@ namespace MyApp
 
         private void SeeMusic(object sender, MouseButtonEventArgs e)
         {
-            if (listBox.SelectedItem!=null)
+            if(sender== listBox)
+                scroller.SelectedIndex = Allmusics.IndexOf(Allmusics.Where(x => x.Equals(Player.CurrentlyPlaying)).ElementAt(0));
+            else if (listBox.SelectedItem!=null && sender==scroller)
                 scroller.SelectedIndex = Allmusics.IndexOf(Allmusics.Where(x => x.Equals((Musique)listBox.SelectedItem)).ElementAt(0));
-        }
-        private void SeeMusic2(object sender, MouseButtonEventArgs e)
-        {
-            scroller.SelectedIndex = Allmusics.IndexOf(Allmusics.Where(x => x.Equals(Player.CurrentlyPlaying)).ElementAt(0));
         }
     }  
 }
