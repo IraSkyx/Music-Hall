@@ -132,7 +132,7 @@ namespace MyApp
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             scroller.SelectedIndex = Allmusics.PlaylistProperty.IndexOf((Musique)Search.SelectedItem);
-            Input.Text = String.Empty;
+            Input.Text = string.Empty;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -156,7 +156,7 @@ namespace MyApp
             scroller.ScrollIntoView(Allmusics.PlaylistProperty.ElementAt(scroller.SelectedIndex));
         }
 
-        private void StackPanel_MouseUp(object sender, MouseButtonEventArgs e)
+        /*private void StackPanel_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (sender == world)
                 scroller.SelectedIndex = Allmusics.SelectHomeMusic("T1");
@@ -165,7 +165,7 @@ namespace MyApp
             if (sender == hall)
                 scroller.SelectedIndex = Allmusics.SelectHomeMusic("T6");
             TabControl.SelectedIndex = 1;
-        }
+        }*/
 
         private void Play(object sender, RoutedEventArgs e) => PausePlay.Content = (Player.Play((Musique)scroller.SelectedItem)) ? "||" : "▶";
 
