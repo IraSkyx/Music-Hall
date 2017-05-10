@@ -20,7 +20,10 @@ namespace Biblio
             if (CurrentlyPlaying == null)
                 return false;
             int index = currentUser.Favorite.Index(CurrentlyPlaying);
-            CurrentlyPlaying = (Sens==1) ? (index + 1 == currentUser.Favorite.PlaylistProperty.Count()) ? currentUser.Favorite.PlaylistProperty.ElementAt(0) : currentUser.Favorite.PlaylistProperty.ElementAt(index + 1) : (index - 1 == -1) ? currentUser.Favorite.PlaylistProperty.ElementAt(currentUser.Favorite.PlaylistProperty.Count() - 1) : currentUser.Favorite.PlaylistProperty.ElementAt(index - 1);
+            if(Sens == 1)
+                CurrentlyPlaying = (index + 1 == currentUser.Favorite.PlaylistProperty.Count()) ? currentUser.Favorite.PlaylistProperty.ElementAt(0) : currentUser.Favorite.PlaylistProperty.ElementAt(index + 1);
+            else
+                CurrentlyPlaying = (index - 1 == -1) ? currentUser.Favorite.PlaylistProperty.ElementAt(currentUser.Favorite.PlaylistProperty.Count() - 1) : currentUser.Favorite.PlaylistProperty.ElementAt(index - 1);          
             return SetPlay();
 
         }
@@ -58,9 +61,7 @@ namespace Biblio
                     return true;
                 }
                 else
-                {
                     return false;
-                }
             }
             return false;   
         }

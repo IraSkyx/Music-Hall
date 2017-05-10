@@ -314,7 +314,7 @@ namespace MyApp
 
         private void SeeMusic(object sender, MouseButtonEventArgs e)
         {
-            if(sender== listBox)
+            if(sender == listBox || sender == ActualPlay)
                 scroller.SelectedIndex = Allmusics.Index(Player.CurrentlyPlaying);
             else if (listBox.SelectedItem!=null && sender==scroller)
                 scroller.SelectedIndex = Allmusics.Index((Musique)listBox.SelectedItem);
