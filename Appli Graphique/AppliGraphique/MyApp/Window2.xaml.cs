@@ -14,9 +14,9 @@ namespace MyApp
     public partial class Window2 : Window
     {
         public event Action<User> Check;
-        private ObservableCollection<User> DataBase;
+        private UserDB DataBase;
 
-        public Window2(ObservableCollection<User> DataBase)
+        public Window2(UserDB DataBase)
         {
             InitializeComponent();
             this.DataBase = DataBase;
@@ -27,8 +27,8 @@ namespace MyApp
         private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
 
         private void Commit(object sender, RoutedEventArgs e)
-        {                   
-            if (User.ValidMail(email.Text) && (pseudo.Text).Length>3 && (mdp.Password).Length > 3 && DataBase.Count(x => x.Infos.Address.Equals(email.Text))==0)
+        {
+            if (DataBase.NotExists(email.Text, pseudo.Text, mdp.Password))
             {
                 Check?.Invoke(new User(new MailAddress(email.Text, pseudo.Text), mdp.Password, null));
                 Close();

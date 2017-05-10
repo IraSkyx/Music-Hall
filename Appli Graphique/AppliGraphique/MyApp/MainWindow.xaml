@@ -76,7 +76,7 @@
             <!-- MaPlaylist -->
             <DockPanel DockPanel.Dock="Right" Margin="10">
                 <TextBlock Text="Ma Playlist" Foreground="#222222" DockPanel.Dock="Top" FontSize="20"/>
-                <ListView x:Name="listBox" ItemsSource="{Binding Favorite}" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="SeeMusic" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent">
+                <ListView x:Name="listBox" ItemsSource="{Binding PlaylistProperty}" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="SeeMusic" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -124,7 +124,7 @@
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel x:Name="imgparent" Margin="20,20,0,0">
-                            <Image VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,15" Width="{Binding ElementName=imgparent, Path=ActualWidth, Converter={StaticResource ScaleConverter}}" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Source="{Binding ElementName=scroller, Path=SelectedItem.Image}">
+                            <Image VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,15" Width="{Binding ElementName=imgparent, Path=ActualWidth, Converter={StaticResource ScaleConverter}}" Height="{Binding ElementName=imgparent, Path=ActualWidth, Converter={StaticResource ScaleConverter}}" Source="{Binding ElementName=scroller, Path=SelectedItem.Image}">
                                 <Image.BitmapEffect>
                                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
                                 </Image.BitmapEffect>

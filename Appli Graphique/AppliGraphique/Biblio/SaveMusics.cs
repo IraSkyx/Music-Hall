@@ -9,7 +9,7 @@ namespace Biblio
     {
         public static void Save(Playlist AllMusics)
         {
-            var musicElts = AllMusics.Select(music => new JObject(
+            var musicElts = AllMusics.PlaylistProperty.Select(music => new JObject(
                                                                     new JProperty("musique",
                                                                         new JObject(
                                                                             new JProperty("title", music.Title),

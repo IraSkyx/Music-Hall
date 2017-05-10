@@ -29,7 +29,7 @@ namespace MyApp
         {
             if (IsValid(emailbox.Text) && (pseudobox.Text).Length > 3 && (mdpbox.Text).Length > 3)
             {
-                if (!(currentuser.Infos.Address.Equals(emailbox.Text)) || !(currentuser.Infos.DisplayName.Equals(pseudobox.Text)) || !(currentuser.Psswd.Equals(mdpbox.Text)))
+                if (!(currentuser.Infos.Address.Equals(emailbox.Text)) || !(currentuser.Infos.DisplayName.Equals(pseudobox.Text)) || !(currentuser.Psswd.Equals(mdpbox.Text))) // A revoir
                     Check?.Invoke(new User(new MailAddress(IsValid(emailbox.Text) ? emailbox.Text : currentuser.Infos.Address, (pseudobox.Text).Length > 3 ? pseudobox.Text : currentuser.Infos.DisplayName), (mdpbox.Text).Length > 3 ? mdpbox.Text : currentuser.Psswd, currentuser.Favorite));
                 Close();
             }

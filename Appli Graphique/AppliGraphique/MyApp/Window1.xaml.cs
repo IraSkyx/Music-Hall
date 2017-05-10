@@ -1,7 +1,5 @@
 ﻿using Biblio;
 using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 
 namespace MyApp
@@ -11,13 +9,13 @@ namespace MyApp
     /// </summary>
     public partial class Window1 : Window
     {
-        public event Action <User> Check;
-        private ObservableCollection<User> DataBase;
+        private UserDB Database;
+        public event Action<User> Check;
 
-        public Window1(ObservableCollection<User> DataBase)
+        public Window1(UserDB Database)
         {
             InitializeComponent();
-            this.DataBase = DataBase;
+            this.Database = Database;
         }
 
         private void Exit(object sender, RoutedEventArgs e) => Close();
@@ -25,15 +23,14 @@ namespace MyApp
         private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
 
         private void Commit(object sender, RoutedEventArgs e)
-        {           
-            var currentuser = DataBase.Where(x => x.Infos.Address.Equals(email.Text) && x.Psswd.Equals(passwd.Password));
-            if (currentuser.Count()>0)
+        {
+            if (Database.Exists(email.Text, passwd.Password))
             {
-                Check?.Invoke(currentuser.ElementAt(0));
+                Check?.Invoke(Database.SearchFor(email.Text, passwd.Password));
                 Close();
             }
             else
                 wrong.Visibility = Visibility.Visible;
-        }   
+        }
     }
 }

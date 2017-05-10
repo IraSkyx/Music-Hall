@@ -20,7 +20,7 @@ namespace MyApp
         private Player Player = new Player();
         private Playlist Allmusics = new Playlist();
         private Playlist result = new Playlist();
-        private ObservableCollection<User> Allusers = new ObservableCollection<User>();
+        private UserDB Allusers = new UserDB();
         private User currentUser;
 
         public MainWindow()
@@ -93,7 +93,7 @@ namespace MyApp
         private void LogIn(User value)
         {
             currentUser = value;
-            listBox.DataContext = currentUser;
+            listBox.DataContext = currentUser.Favorite;
             connexion.Content = "Déconnexion";
             connexion.ToolTip = "Fermer la session";
             inscription.Content = currentUser.Infos.DisplayName;
@@ -107,8 +107,8 @@ namespace MyApp
                 Window3 subWindow3 = new Window3(currentUser);
                 subWindow3.Check += value =>
                 {
-                    Allusers.Add(value);
-                    Allusers.Remove(currentUser);
+                    Allusers.Database.Add(value);
+                    Allusers.Database.Remove(currentUser);
                     LogIn(value);
                 };
                 subWindow3.Owner = Application.Current.MainWindow;
@@ -119,7 +119,7 @@ namespace MyApp
                 Window2 subWindow2 = new Window2(Allusers);
                 subWindow2.Check += value =>
                 {
-                    Allusers.Add(value);
+                    Allusers.Database.Add(value);
                     LogIn(value);
                 };
                 subWindow2.Owner = Application.Current.MainWindow;
@@ -131,20 +131,14 @@ namespace MyApp
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            scroller.SelectedIndex = Allmusics.IndexOf((Musique)Search.SelectedItem);
+            scroller.SelectedIndex = Allmusics.PlaylistProperty.IndexOf((Musique)Search.SelectedItem);
             Input.Text = String.Empty;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (criterion.SelectedItem == bytitle)
-                Search.DataContext = new Playlist(Allmusics.Where(x => Regex.IsMatch(x.Title, Input.Text)));
-            else if (criterion.SelectedItem == byartist)
-                Search.DataContext = new Playlist(Allmusics.Where(x => Regex.IsMatch(x.Artist, Input.Text)));
-            else if (criterion.SelectedItem == bygenre)
-                Search.DataContext = new Playlist(Allmusics.Where(x => Regex.IsMatch(x.Genre, Input.Text)));
-            else if (criterion.SelectedItem == bydate)
-                Search.DataContext = new Playlist(Allmusics.Where(x => Regex.IsMatch(x.Date, Input.Text)));
+            if(criterion.SelectedItem!=null)
+                Search.DataContext = Allmusics.Filter((string)((ComboBoxItem)criterion.SelectedItem).Content, Input.Text);
         }
 
         private void criterion_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -158,18 +152,18 @@ namespace MyApp
             if (e.Delta > 0)
                 scroller.SelectedIndex = (scroller.SelectedIndex == 0) ? 0 : scroller.SelectedIndex - 1;                     
             else
-                scroller.SelectedIndex = (scroller.SelectedIndex == Allmusics.Count-1) ? Allmusics.Count - 1 : scroller.SelectedIndex + 1;
-            scroller.ScrollIntoView(Allmusics.ElementAt(scroller.SelectedIndex));
+                scroller.SelectedIndex = (scroller.SelectedIndex == Allmusics.PlaylistProperty.Count-1) ? Allmusics.PlaylistProperty.Count - 1 : scroller.SelectedIndex + 1;
+            scroller.ScrollIntoView(Allmusics.PlaylistProperty.ElementAt(scroller.SelectedIndex));
         }
 
         private void StackPanel_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (sender == world)
-                scroller.SelectedIndex = Allmusics.IndexOf(new ObservableCollection<Musique>(Allmusics.Where(x => x.Title.Equals("T1"))).ElementAt(0));
+                scroller.SelectedIndex = Allmusics.SelectHomeMusic("T1");
             if (sender == france)
-                scroller.SelectedIndex = Allmusics.IndexOf(new ObservableCollection<Musique>(Allmusics.Where(x => x.Title.Equals("T5"))).ElementAt(0));
+                scroller.SelectedIndex = Allmusics.SelectHomeMusic("T5");
             if (sender == hall)
-                scroller.SelectedIndex = Allmusics.IndexOf(new ObservableCollection<Musique>(Allmusics.Where(x => x.Title.Equals("T6"))).ElementAt(0));
+                scroller.SelectedIndex = Allmusics.SelectHomeMusic("T6");
             TabControl.SelectedIndex = 1;
         }
 
@@ -206,7 +200,7 @@ namespace MyApp
         {
             if (currentUser == null || currentUser.Favorite == null)
                 if (Player.RandomPlay)
-                    PausePlay.Content = Player.Play(Allmusics.ElementAt(new Random().Next(0, Allmusics.Count))) ? "||" : "▶";
+                    PausePlay.Content = Player.Play(Allmusics.PlaylistProperty.ElementAt(new Random().Next(0, Allmusics.PlaylistProperty.Count))) ? "||" : "▶";
                 else
                     return;
             else
@@ -217,7 +211,7 @@ namespace MyApp
         {
             if (currentUser == null || currentUser.Favorite == null)
                 if (Player.RandomPlay)
-                    PausePlay.Content = Player.Play(Allmusics.ElementAt(new Random().Next(0, Allmusics.Count))) ? "||" : "▶";
+                    PausePlay.Content = Player.Play(Allmusics.PlaylistProperty.ElementAt(new Random().Next(0, Allmusics.PlaylistProperty.Count))) ? "||" : "▶";
                 else
                     return;
             else
@@ -236,12 +230,12 @@ namespace MyApp
                 if (currentUser != null)
                 {
                     if (currentUser.Favorite != null)
-                        PausePlay.Content = Player.Play(Allmusics.ElementAt(new Random().Next(0, Allmusics.Count))) ? "||" : "▶";
+                        PausePlay.Content = Player.Play(Allmusics.PlaylistProperty.ElementAt(new Random().Next(0, Allmusics.PlaylistProperty.Count))) ? "||" : "▶";
                     else
-                        PausePlay.Content = Player.Play(currentUser.Favorite.ElementAt(new Random().Next(0, currentUser.Favorite.Count))) ? "||" : "▶";
+                        PausePlay.Content = Player.Play(currentUser.Favorite.PlaylistProperty.ElementAt(new Random().Next(0, currentUser.Favorite.PlaylistProperty.Count))) ? "||" : "▶";
                 }
                 else
-                    PausePlay.Content = Player.Play(Allmusics.ElementAt(new Random().Next())) ? "||" : "▶";
+                    PausePlay.Content = Player.Play(Allmusics.PlaylistProperty.ElementAt(new Random().Next())) ? "||" : "▶";
             }
             else //Mode Replay & Random désactivé
                 Next(this, new RoutedEventArgs());
@@ -293,13 +287,13 @@ namespace MyApp
             if (currentUser != null) //Si un user est connecté
                 if (currentUser.Favorite!=null) //Si l'utilisateur a une playlist
                 {
-                    if (currentUser.Favorite.Count(x => x.Equals((Musique)scroller.SelectedItem)) == 0) //Si la musique est déjà dans sa playlist
-                        currentUser.Favorite.Add(Add1 == sender ? Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
+                    if (currentUser.Favorite.PlaylistProperty.Count(x => x.Equals((Musique)scroller.SelectedItem)) == 0) //Si la musique est déjà dans sa playlist
+                        currentUser.Favorite.PlaylistProperty.Add(Add1 == sender ? Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
                 }
                 else //Si l'utilisateur n'a pas de playlist
                 {
                     currentUser.Favorite = new Playlist();
-                    currentUser.Favorite.Add(Add1 == sender ? Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
+                    currentUser.Favorite.PlaylistProperty.Add(Add1 == sender ? Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
                 }
         }
 
@@ -315,15 +309,15 @@ namespace MyApp
         private void DeleteFromPlaylist(object sender, MouseButtonEventArgs e)
         {
             if (currentUser != null && listBox.SelectedItem != null)
-                    currentUser.Favorite.Remove((Musique)listBox.SelectedItem);
+                    currentUser.Favorite.PlaylistProperty.Remove((Musique)listBox.SelectedItem);
         }
 
         private void SeeMusic(object sender, MouseButtonEventArgs e)
         {
             if(sender== listBox)
-                scroller.SelectedIndex = Allmusics.IndexOf(Allmusics.Where(x => x.Equals(Player.CurrentlyPlaying)).ElementAt(0));
+                scroller.SelectedIndex = Allmusics.Index(Player.CurrentlyPlaying);
             else if (listBox.SelectedItem!=null && sender==scroller)
-                scroller.SelectedIndex = Allmusics.IndexOf(Allmusics.Where(x => x.Equals((Musique)listBox.SelectedItem)).ElementAt(0));
+                scroller.SelectedIndex = Allmusics.Index((Musique)listBox.SelectedItem);
         }
     }  
 }

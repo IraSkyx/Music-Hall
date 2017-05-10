@@ -56,6 +56,7 @@
     <Compile Include="SaveMusics.cs" />
     <Compile Include="SaveUsers.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserDB.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

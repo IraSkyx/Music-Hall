@@ -19,8 +19,8 @@ namespace Biblio
         {
             if (CurrentlyPlaying == null)
                 return false;
-            int index = currentUser.Favorite.IndexOf(CurrentlyPlaying);
-            CurrentlyPlaying = (Sens==1) ? (index + 1 == currentUser.Favorite.Count) ? currentUser.Favorite.ElementAt(0) : currentUser.Favorite.ElementAt(index + 1) : (index - 1 == -1) ? currentUser.Favorite.ElementAt(currentUser.Favorite.Count() - 1) : currentUser.Favorite.ElementAt(index - 1);
+            int index = currentUser.Favorite.Index(CurrentlyPlaying);
+            CurrentlyPlaying = (Sens==1) ? (index + 1 == currentUser.Favorite.PlaylistProperty.Count()) ? currentUser.Favorite.PlaylistProperty.ElementAt(0) : currentUser.Favorite.PlaylistProperty.ElementAt(index + 1) : (index - 1 == -1) ? currentUser.Favorite.PlaylistProperty.ElementAt(currentUser.Favorite.PlaylistProperty.Count() - 1) : currentUser.Favorite.PlaylistProperty.ElementAt(index - 1);
             return SetPlay();
 
         }
