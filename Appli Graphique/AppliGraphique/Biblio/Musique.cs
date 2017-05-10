@@ -29,10 +29,7 @@ namespace Biblio
         {
         }
 
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+        protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
         public override bool Equals(object o)
         {
@@ -48,11 +45,8 @@ namespace Biblio
             return Equals(o as Musique);
         }
 
-        public bool Equals(Musique other)
-        {
-            return (Title.Equals(other.Title) && Artist.Equals(other.Artist) && Date.Equals(other.Date) && Genre.Equals(other.Genre)
+        public bool Equals(Musique other) => (Title.Equals(other.Title) && Artist.Equals(other.Artist) && Date.Equals(other.Date) && Genre.Equals(other.Genre)
                 && Infos.Equals(other.Infos) && Audio.ToString().Equals(other.Audio.ToString()) && Image.Equals(other.Image));
-        }
 
         public override string ToString() => $"{Title}\n{Artist}\n{Date}\n{Genre}\n{Infos}\n";
     }

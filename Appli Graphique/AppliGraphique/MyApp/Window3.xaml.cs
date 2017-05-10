@@ -58,7 +58,7 @@ namespace MyApp
 
         public bool IsValid(string emailaddress)
         {
-            if (emailaddress == null || emailaddress == "")
+            if (emailaddress == null || emailaddress == String.Empty)
                 return false;
             try
             {

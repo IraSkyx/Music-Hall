@@ -22,7 +22,7 @@ namespace MyApp
             this.DataBase = DataBase;
         }
 
-            private void Exit(object sender, RoutedEventArgs e) => Close();
+        private void Exit(object sender, RoutedEventArgs e) => Close();
 
         private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
 

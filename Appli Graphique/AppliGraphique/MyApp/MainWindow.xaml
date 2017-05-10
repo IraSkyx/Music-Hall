@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Background="#ECF0F1" 
         Title="Music'Hall" Height="720" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Foreground="White" FontFamily="Microsoft YaHei Light">
+    <Window.Resources>
+        <local:ScaleConverter x:Key="ScaleConverter"/>
+    </Window.Resources> 
     <DockPanel>
         
         <!--En-tête-->
@@ -120,8 +123,8 @@
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Margin="20,20,0,0">
-                            <Image VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,15" Width="300" Height="300" Source="{Binding ElementName=scroller, Path=SelectedItem.Image}">
+                        <StackPanel x:Name="imgparent" Margin="20,20,0,0">
+                            <Image VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,15" Width="{Binding ElementName=imgparent, Path=ActualWidth, Converter={StaticResource ScaleConverter}}" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Source="{Binding ElementName=scroller, Path=SelectedItem.Image}">
                                 <Image.BitmapEffect>
                                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
                                 </Image.BitmapEffect>

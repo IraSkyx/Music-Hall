@@ -258,10 +258,7 @@ namespace MyApp
             timer.Start();
         }
 
-        private void myEvent(object sender, EventArgs e)
-        {
-            SetDuration();
-        }
+        private void myEvent(object sender, EventArgs e) => SetDuration();
 
         private void SetDuration()
         {
@@ -296,7 +293,7 @@ namespace MyApp
             if (currentUser != null) //Si un user est connecté
                 if (currentUser.Favorite!=null) //Si l'utilisateur a une playlist
                 {
-                    if (currentUser.Favorite.Where(x => x.Equals((Musique)scroller.SelectedItem)).Count() == 0) //Si la musique est déjà dans sa playlist
+                    if (currentUser.Favorite.Count(x => x.Equals((Musique)scroller.SelectedItem)) == 0) //Si la musique est déjà dans sa playlist
                         currentUser.Favorite.Add(Add1 == sender ? Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
                 }
                 else //Si l'utilisateur n'a pas de playlist
