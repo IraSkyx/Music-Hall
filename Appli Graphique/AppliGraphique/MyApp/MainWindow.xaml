@@ -103,16 +103,28 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel x:Name="hall" Margin="20"  VerticalAlignment="Bottom" MouseUp="StackPanel_MouseUp">
-                            <TextBlock Text="Top 1 Music'Hall" FontSize="20" Margin="10" TextAlignment="Center"/>
-                            <Image Source="images/eAintMe.jpg" Width="250" ToolTip="Cliquer pour + d'infos"/>
+                            <TextBlock Text="Top 1 Music'Hall" FontSize="30" Margin="10" TextAlignment="Center"/>
+                            <Image Source="images/eAintMe.jpg" Width="{Binding ElementName=world, Path=ActualWidth}" ToolTip="Cliquer pour + d'infos">
+                                <Image.BitmapEffect>
+                                    <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
+                                </Image.BitmapEffect>
+                            </Image>
                         </StackPanel>
                         <StackPanel x:Name="world" Margin="20" Grid.Column="1" VerticalAlignment="Top" MouseUp="StackPanel_MouseUp">
-                            <Image Source="images/eFeder.jpg" Width="250" ToolTip="Cliquer pour + d'infos"/>
-                            <TextBlock Text="Top 1 World" FontSize="20" Margin="10" TextAlignment="Center"/>
+                            <Image Source="images/eFeder.jpg" Width="{Binding ElementName=world, Path=ActualWidth}" ToolTip="Cliquer pour + d'infos">
+                                <Image.BitmapEffect>
+                                    <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
+                                </Image.BitmapEffect>
+                            </Image>
+                            <TextBlock Text="Top 1 World" FontSize="30" Margin="10" TextAlignment="Center"/>
                         </StackPanel>
                         <StackPanel x:Name="france" Margin="20" Grid.Column="2" VerticalAlignment="Center" MouseUp="StackPanel_MouseUp">
-                            <TextBlock Text="Top 1 France" FontSize="20" Margin="10" TextAlignment="Center"/>
-                            <Image Source="images/eParis.jpg" Width="250" ToolTip="Cliquer pour + d'infos"/>
+                            <TextBlock Text="Top 1 France" FontSize="30" Margin="10" TextAlignment="Center"/>
+                            <Image Source="images/eParis.jpg" Width="{Binding ElementName=world, Path=ActualWidth}" ToolTip="Cliquer pour + d'infos">
+                                <Image.BitmapEffect>
+                                    <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
+                                </Image.BitmapEffect>
+                            </Image>
                         </StackPanel>
                     </Grid>
                 </TabItem>
@@ -129,8 +141,8 @@
                                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
                                 </Image.BitmapEffect>
                             </Image>
-                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Title}" FontSize="20"/>
-                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Artist}"/>
+                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Title}" FontSize="40"/>
+                            <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Artist}" FontSize="20"/>
                         </StackPanel>
                         <DockPanel Grid.Column="2">
 
