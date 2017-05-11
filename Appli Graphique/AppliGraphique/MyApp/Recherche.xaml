@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="MyApp.Recherche"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyApp"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="720">
+    <DockPanel Margin="10">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
+            <TextBox x:Name="Input" DockPanel.Dock="Top" TextChanged="TextBox_TextChanged" Width="200" Margin="0,0,20,0"/>
+            <ComboBox x:Name="criterion" SelectionChanged="criterion_SelectionChanged">
+                <ComboBoxItem x:Name="bytitle" Content="Par titre" IsSelected="False"/>
+                <ComboBoxItem x:Name="byartist" Content="Par artiste" IsSelected="False"/>
+                <ComboBoxItem x:Name="bygenre" Content="Par genre" IsSelected="False"/>
+                <ComboBoxItem x:Name="bydate" Content="Par date (jj/mm/aaaa)" IsSelected="False"/>
+            </ComboBox>
+        </StackPanel>
+        <ListBox x:Name="Search" Background="Transparent" Margin="30" ItemsSource="{Binding PlaylistProperty}" SelectionChanged="ListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="50" Width="50" Source="{Binding Image}"/>
+                        <TextBlock FontSize="30" Foreground="White" Text="{Binding Title}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
+</UserControl>
