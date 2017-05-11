@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyApp"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="720">
-    <Grid>
+             d:DesignHeight="500" d:DesignWidth="720" Foreground="White">
+    <Grid Background="#222222">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel x:Name="hall" Margin="20"  VerticalAlignment="Bottom">
-            <TextBlock Text="Top 1 Music'Hall" FontSize="30" Margin="10" TextAlignment="Center"/>
+            <TextBlock Text="Top 1 Music'Hall" FontSize="20" Margin="10" TextAlignment="Center"/>
             <Image Source="images/eAintMe.jpg" Width="{Binding ElementName=world, Path=ActualWidth}" ToolTip="Cliquer pour + d'infos">
                 <Image.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
@@ -26,10 +26,10 @@
                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
                 </Image.BitmapEffect>
             </Image>
-            <TextBlock Text="Top 1 World" FontSize="30" Margin="10" TextAlignment="Center"/>
+            <TextBlock Text="Top 1 World" FontSize="20" Margin="10" TextAlignment="Center"/>
         </StackPanel>
         <StackPanel x:Name="france" Margin="20" Grid.Column="2" VerticalAlignment="Center">
-            <TextBlock Text="Top 1 France" FontSize="30" Margin="10" TextAlignment="Center"/>
+            <TextBlock Text="Top 1 France" FontSize="20" Margin="10" TextAlignment="Center"/>
             <Image Source="images/eParis.jpg" Width="{Binding ElementName=world, Path=ActualWidth}" ToolTip="Cliquer pour + d'infos">
                 <Image.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>

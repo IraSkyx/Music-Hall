@@ -5,52 +5,53 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyApp"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="720">
+             d:DesignHeight="500" d:DesignWidth="720" Foreground="White" Background="#222222">
     <UserControl.Resources>
         <local:ScaleConverter x:Key="ScaleConverter"/>
     </UserControl.Resources>
-            <Grid x:Name="GridSelection">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel x:Name="imgparent" Margin="20,20,0,0">
-                    <Image VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,15" Width="{Binding ElementName=imgparent, Path=ActualWidth, Converter={StaticResource ScaleConverter}}" Height="{Binding ElementName=imgparent, Path=ActualWidth, Converter={StaticResource ScaleConverter}}" Source="{Binding ElementName=scroller, Path=SelectedItem.Image}">
-                        <Image.BitmapEffect>
-                            <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
-                        </Image.BitmapEffect>
-                    </Image>
-                    <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Title}" FontSize="40"/>
-                    <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Artist}" FontSize="20"/>
-                </StackPanel>
-                <DockPanel Grid.Column="2">
+    <Grid x:Name="GridSelection">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel x:Name="imgparent" Margin="20,20,0,0">
+            <StackPanel DockPanel.Dock="Bottom">
+                <TextBlock Text="{Binding Title}" FontSize="40"/>
+                <TextBlock Text="{Binding Artist}" FontSize="20"/>
+            </StackPanel>
+            <Image VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,15" Source="{Binding Image}">
+                <Image.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
+                </Image.BitmapEffect>
+            </Image>
+        </DockPanel>
+        <DockPanel Grid.Column="2">
 
-                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-                        <Button Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Lire la musique" Content="▶" Click="Play" Width="40" Height="40"/>
-                        <Button x:Name="Add2" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Cliquer pour ajouter" Content="+ Ajouter à ma playlist" Click="AddToPlaylist"  Width="150" Height="40"/>
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                <Button x:Name="PlaySong" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Lire la musique" Content="▶" Width="40" Height="40"/>
+                <Button x:Name="Add2" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Cliquer pour ajouter" Content="+ Ajouter à ma playlist" Width="150" Height="40"/>
+            </StackPanel>
+
+            <TabControl Background="#222222" Margin="10">
+                <TabItem Header="Infos" Foreground="White">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Infos}" Margin="30" FontSize="20"/>
+                        <TextBlock Text="{Binding Date}" Margin="30" FontSize="20"/>
                     </StackPanel>
-
-                    <TabControl Background="#222222" Margin="10">
-                        <TabItem Header="Infos" Foreground="White">
-                            <StackPanel>
-                                <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20"/>
-                                <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Date}" Margin="30" FontSize="20"/>
-                            </StackPanel>
-                        </TabItem>
-                        <TabItem Header="Etc" Foreground="White">
-                            <StackPanel>
-                                <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20"/>
-                                <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Date}" Margin="30" FontSize="20"/>
-                            </StackPanel>
-                        </TabItem>
-                        <TabItem Header="Etc" Foreground="White">
-                            <StackPanel>
-                                <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Infos}" Margin="30" FontSize="20"/>
-                                <TextBlock Text="{Binding ElementName=scroller, Path=SelectedItem.Date}" Margin="30" FontSize="20"/>
-                            </StackPanel>
-                        </TabItem>
-                    </TabControl>
-                </DockPanel>
-            </Grid>
-    
+                </TabItem>
+                <TabItem Header="Etc" Foreground="White">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Infos}" Margin="30" FontSize="20"/>
+                        <TextBlock Text="{Binding Date}" Margin="30" FontSize="20"/>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Etc" Foreground="White">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Infos}" Margin="30" FontSize="20"/>
+                        <TextBlock Text="{Binding Date}" Margin="30" FontSize="20"/>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+    </Grid>
 </UserControl>

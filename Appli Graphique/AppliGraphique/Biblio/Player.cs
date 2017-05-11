@@ -6,6 +6,7 @@ namespace Biblio
     public class Player : MediaElement
     {
         public Musique CurrentlyPlaying { get; set; }
+        public bool IsPlaying { get; set; }
         public bool Loop { get; set; }
         public bool RandomPlay { get; set; }
 
