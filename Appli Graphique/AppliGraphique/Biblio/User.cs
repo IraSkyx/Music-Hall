@@ -20,20 +20,7 @@ namespace Biblio
 
         public User()
         {
-        }
-
-        public static bool ValidMail(string email)
-        {
-            try
-            {
-                MailAddress m = new MailAddress(email);
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-        }
+        }       
 
         public override string ToString() => $"{Infos}\n{Psswd}\n{Favorite}\n";
     }

@@ -1,14 +1,57 @@
-﻿using System.Linq;
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Biblio
 {
-    public class Player : MediaElement
+    public class Player : MediaElement, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         public Musique CurrentlyPlaying { get; set; }
-        public bool IsPlaying { get; set; }
-        public bool Loop { get; set; }
-        public bool RandomPlay { get; set; }
+        private User _CurrentUser;
+        public User CurrentUser
+        {
+            get => _CurrentUser;
+            set
+            {
+                _CurrentUser = value;
+                OnPropertyChanged("CurrentUser");
+            }
+        }
+        private bool _IsPlaying;
+        public bool IsPlaying
+        {
+            get => _IsPlaying;
+            set
+            {
+                _IsPlaying = value;
+                OnPropertyChanged("IsPlaying");
+            }
+        }
+        private bool _Loop;
+        public bool Loop
+        {
+            get => _Loop;
+            set
+            {
+                _Loop = value;
+                OnPropertyChanged("Loop");
+            }
+        }
+        private bool _RandomPlay;
+        public bool RandomPlay
+        {
+            get => _RandomPlay;
+            set
+            {
+                _RandomPlay = value;
+                OnPropertyChanged("RandomPlay");
+            }
+        }
+
+        protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
         public Player():base()
         {
@@ -16,55 +59,51 @@ namespace Biblio
             UnloadedBehavior = MediaState.Stop;
         }
 
-        public bool GoToNextOrPrevious(User currentUser, int Sens)
+        public void GoToNextOrPrevious(int Sens)
         {
-            if (CurrentlyPlaying == null)
-                return false;
-            int index = currentUser.Favorite.Index(CurrentlyPlaying);
-            if(Sens == 1)
-                CurrentlyPlaying = (index + 1 == currentUser.Favorite.PlaylistProperty.Count()) ? currentUser.Favorite.PlaylistProperty.ElementAt(0) : currentUser.Favorite.PlaylistProperty.ElementAt(index + 1);
-            else
-                CurrentlyPlaying = (index - 1 == -1) ? currentUser.Favorite.PlaylistProperty.ElementAt(currentUser.Favorite.PlaylistProperty.Count() - 1) : currentUser.Favorite.PlaylistProperty.ElementAt(index - 1);          
-            return SetPlay();
-
-        }
-
-        public bool SetRandomPlay()
-        {
-            RandomPlay = !RandomPlay;
-            if (RandomPlay)
-                Loop = false;
-            return RandomPlay;
-        }
-
-        public bool SetLoop()
-        {
-            Loop = !Loop;
-            if (Loop)
-                RandomPlay = false;
-            return Loop;
-        }
-
-        public bool Play(Musique currentlyPlaying)
-        {
-            CurrentlyPlaying = currentlyPlaying;      
-            return SetPlay();
-        }
-
-        private bool SetPlay()
-        {
-            if (CurrentlyPlaying != null)
+            try
             {
-                if (CurrentlyPlaying.Audio != null)
-                {
-                    Source = CurrentlyPlaying.Audio;
-                    Play();
-                    return true;
+                int index = CurrentUser.Favorite.Index(CurrentlyPlaying);
+                if (!RandomPlay)
+                {                    
+                    if (Sens == 1)
+                        CurrentlyPlaying = (index + 1 == CurrentUser.Favorite.PlaylistProperty.Count()) ? CurrentUser.Favorite.PlaylistProperty.ElementAt(0) : CurrentUser.Favorite.PlaylistProperty.ElementAt(index + 1);
+                    else
+                        CurrentlyPlaying = (index - 1 == -1) ? CurrentUser.Favorite.PlaylistProperty.ElementAt(CurrentUser.Favorite.PlaylistProperty.Count() - 1) : CurrentUser.Favorite.PlaylistProperty.ElementAt(index - 1);
                 }
                 else
-                    return false;
+                     CurrentlyPlaying = CurrentUser.Favorite.PlaylistProperty.ElementAt(new Random().Next(0, CurrentUser.Favorite.PlaylistProperty.Count()));                    
+                SetPlay();
             }
-            return false;   
+            catch (NullReferenceException)
+            {
+                throw;
+            }            
+        }
+
+        public void SetRandomPlay()
+        {
+            RandomPlay = !RandomPlay;
+            Loop = RandomPlay ? false : Loop;
+        }
+
+        public void SetLoop()
+        {
+            Loop = !Loop;
+            RandomPlay = Loop ? false : RandomPlay;
+        }
+
+        public void Play(Musique currentlyPlaying)
+        {
+            CurrentlyPlaying = currentlyPlaying;      
+            SetPlay();
+        }
+
+        private void SetPlay()
+        {
+            Source = CurrentlyPlaying.Audio;
+            Play();
+            IsPlaying = true;                      
         }
     }
 }

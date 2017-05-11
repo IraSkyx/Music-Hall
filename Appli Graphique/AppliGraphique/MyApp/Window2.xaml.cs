@@ -28,7 +28,7 @@ namespace MyApp
 
         private void Commit(object sender, RoutedEventArgs e)
         {
-            if (DataBase.NotExists(email.Text, pseudo.Text, mdp.Password))
+            if (UserDB.IsValid(email.Text) && (pseudo.Text).Length > 3 && (mdp.Password).Length > 3 && !(DataBase.Exists(email.Text)))
             {
                 Check?.Invoke(new User(new MailAddress(email.Text, pseudo.Text), mdp.Password, null));
                 Close();
@@ -36,12 +36,18 @@ namespace MyApp
             else
             {
                 SolidColorBrush red = new SolidColorBrush(Color.FromRgb(217, 30, 24));
-                if (!User.ValidMail(email.Text))
+                if (!UserDB.IsValid(email.Text))
                 {
                     labelemail.Text = "Email invalide";
                     labelemail.Foreground = red;
                 }
-                    
+
+                else if (DataBase.Exists(email.Text))
+                {
+                    labelemail.Text = "Email déjà utilisé";
+                    labelemail.Foreground = red;
+                }
+
                 if ((pseudo.Text).Length < 3)
                 {
                     labelpseudo.Text = "4 caractères mini";
@@ -54,6 +60,6 @@ namespace MyApp
                     labelmdp.Foreground = red;
                 }
             }
-        }      
+        }   
     }
 }

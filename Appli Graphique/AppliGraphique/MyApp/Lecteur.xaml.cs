@@ -1,11 +1,10 @@
 ﻿using Biblio;
+using MainTest;
 using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Threading;
+using System.Linq;
 
 namespace MyApp
 {
@@ -14,108 +13,66 @@ namespace MyApp
     /// </summary>
     public partial class Lecteur : UserControl
     {
-        Player Player = new Player();
+        public Player Player { get; set; } = new Player();
+        public Playlist Allmusics = new Playlist();
+
         public Lecteur()
         {
             InitializeComponent();
-            Player.MediaOpened += MediaOpened;
+
+            FullPlayer.Children.Add(Player);
+
+            DataContext = Player;
+
             Player.MediaEnded += MediaEnded;
+
+            Allmusics = Stub.LoadMusicsTest();
         }
 
-        private void PausePlay_Click(object sender, RoutedEventArgs e)
+        private void PausePlayClick(object sender, RoutedEventArgs e)
         {
-            if(Player.IsPlaying)
+            if (Player.IsPlaying)
+            {
                 Player.Pause();
+                Player.IsPlaying = false;
+            }
             else
+            {
                 Player.Play();
+                Player.IsPlaying = true;
+            }
         }
 
-        private void Replay(object sender, RoutedEventArgs e)
-        {
-            Player.SetLoop();
-            Player.SetRandomPlay();
-        }
+        private void Replay(object sender, RoutedEventArgs e) 
+            => Player.SetLoop();
 
-        private void SetRandom(object sender, RoutedEventArgs e)
-        {
-            random.Foreground = (Player.SetRandomPlay()) ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            replay.Foreground = (Player.Loop) ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
-        }
+        private void Random(object sender, RoutedEventArgs e) 
+            => Player.SetRandomPlay();
 
-        private void Next(object sender, RoutedEventArgs e)
+        private void NextAndPrevious(object sender, RoutedEventArgs e)
         {
-            if (currentUser == null || currentUser.Favorite == null)
-                if (Player.RandomPlay)
-                    Player.Play(Allmusics.PlaylistProperty.ElementAt(new Random().Next(0, Allmusics.PlaylistProperty.Count)));
+            try
+            {
+                if (sender == next)
+                    Player.GoToNextOrPrevious(1);
                 else
-                    return;
-            else
-                Player.GoToNextOrPrevious(currentUser, 1);
-        }
-
-        private void Previous(object sender, RoutedEventArgs e)
-        {
-            if (currentUser == null || currentUser.Favorite == null)
-                if (Player.RandomPlay)
-                    Player.Play(Allmusics.PlaylistProperty.ElementAt(new Random().Next(0, Allmusics.PlaylistProperty.Count)));
-                else
-                    return;
-            else
-                Player.GoToNextOrPrevious(currentUser, -1);
+                    Player.GoToNextOrPrevious(-1);
+            }
+            catch (NullReferenceException)
+            {
+                return;
+            }
         }
 
         private void MediaEnded(object sender, RoutedEventArgs e)
         {
-            if (Player.Loop) //Mode Replay activé
+            if (Player.Loop)
             {
                 Player.Position = TimeSpan.Zero;
                 Player.Play();
-            }
-            else if (Player.RandomPlay) //Mode Random activé
-            {
-                if (currentUser != null)
-                {
-                    if (currentUser.Favorite != null)
-                        Player.Play(Allmusics.PlaylistProperty.ElementAt(new Random().Next(0, Allmusics.PlaylistProperty.Count)));
-                    else
-                        Player.Play(currentUser.Favorite.PlaylistProperty.ElementAt(new Random().Next(0, currentUser.Favorite.PlaylistProperty.Count)));
-                }
-                else
-                    Player.Play(Allmusics.PlaylistProperty.ElementAt(new Random().Next()));
-            }
-            else //Mode Replay & Random désactivé
-                Next(this, new RoutedEventArgs());
-        }
-        private void MediaOpened(object sender, RoutedEventArgs e)
-        {
-            SetDuration();
-            Add1.Visibility = Visibility.Visible;
-            Prog.Maximum = Player.NaturalDuration.TimeSpan.TotalSeconds;
-            ActualPlay.DataContext = Player.CurrentlyPlaying;
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Tick += new EventHandler(myEvent);
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Start();
-        }
-
-        private void myEvent(object sender, EventArgs e) => SetDuration();
-
-        private void SetDuration()
-        {
-            if (Player.Source != null && Player.NaturalDuration.HasTimeSpan)
-            {
-                duration.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
-                    Player.Position.Hours,
-                    Player.Position.Minutes,
-                    Player.Position.Seconds
-                    );
-                Prog.Value = Player.Position.TotalSeconds;
-                duration2.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
-                    Player.NaturalDuration.TimeSpan.Hours,
-                    Player.NaturalDuration.TimeSpan.Minutes,
-                    Player.NaturalDuration.TimeSpan.Seconds
-                    );
-            }
+            }            
+            else
+                NextAndPrevious(this, new RoutedEventArgs());
         }
 
         private void ProgMouseClick(object sender, MouseButtonEventArgs e)
@@ -123,9 +80,20 @@ namespace MyApp
             if (Player.Source != null && Player.NaturalDuration.HasTimeSpan)
             {
                 Player.Position = new TimeSpan(0, 0, (int)((e.GetPosition(Prog).X / Prog.ActualWidth) * Prog.Maximum));
+                Player.IsPlaying = true;
                 Player.Play();
-                PausePlay.Content = "||";
             }
+        }
+
+        private void AddToPlaylist(object sender, RoutedEventArgs e)
+        {
+            if (Player.CurrentUser != null) //Si un user est connecté
+            {
+                if (Player.CurrentUser.Favorite == null) //Si l'utilisateur n'a pas de playlist
+                    Player.CurrentUser.Favorite = new Playlist();
+                if (Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals(Player.CurrentlyPlaying)) == 0) //Si pas déjà présente
+                    Player.CurrentUser.Favorite.PlaylistProperty.Add(Player.CurrentlyPlaying);
+            }               
         }
     }
 }

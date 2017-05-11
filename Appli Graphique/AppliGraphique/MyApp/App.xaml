@@ -5,12 +5,17 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         
-        <!-- Buttons Styles-->
+        <!-- Styles-->
         <Style TargetType="Button" x:Key="ButtonStyle">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="White" />
         </Style>
-        <!-- Buttons Styles-->
+
+        <Style TargetType="TextBlock" x:Key="TextStyle">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <!-- Styles-->
         
         <!-- Buttons Over Styles-->
         <ControlTemplate x:Key="OverButton" TargetType="Button">

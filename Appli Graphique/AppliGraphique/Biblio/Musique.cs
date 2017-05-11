@@ -5,14 +5,41 @@ namespace Biblio
 {
     public class Musique : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public string Title { get; set; }
-        public string Artist { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;   
+        private string _Title;
+        public string Title
+        {
+            get => _Title;
+            set
+            {
+                _Title = value;
+                OnPropertyChanged("Title");
+            }
+        }
+        private string _Artist;
+        public string Artist
+        {
+            get => _Artist;
+            set
+            {
+                _Artist = value;
+                OnPropertyChanged("Artist");
+            }
+        }
         public string Date { get; set; }
         public string Genre { get; set; }
         public string Infos { get; set; }
         public Uri Audio { get; set; }
-        public string Image { get; set; }
+        private string _Image;
+        public string Image
+        {
+            get => _Image;
+            set
+            {
+                _Image = value;
+                OnPropertyChanged("Image");
+            }
+        }
 
         public Musique(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Image)
         {

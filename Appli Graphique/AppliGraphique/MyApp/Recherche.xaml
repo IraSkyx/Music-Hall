@@ -9,7 +9,7 @@
     <DockPanel Margin="10">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
             <TextBox x:Name="Input" DockPanel.Dock="Top" Width="200" Margin="0,0,20,0"/>
-            <ComboBox x:Name="Criterion">
+            <ComboBox x:Name="Criterion" SelectedIndex="0">
                 <ComboBoxItem x:Name="bytitle" Content="Par titre" IsSelected="False"/>
                 <ComboBoxItem x:Name="byartist" Content="Par artiste" IsSelected="False"/>
                 <ComboBoxItem x:Name="bygenre" Content="Par genre" IsSelected="False"/>

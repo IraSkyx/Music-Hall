@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MyApp"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <local:BoolToContent x:Key="BoolToContent"/>
+        <local:ValueToContent x:Key="ValueToContent"/>
     </UserControl.Resources>
     <StackPanel x:Name="FullPlayer" DockPanel.Dock="Bottom" Background="#222222">
         <Grid>
@@ -17,26 +17,57 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock x:Name="Add1" Text="✚" Visibility="Hidden" FontSize="20" Margin="20" VerticalAlignment="Center" TextAlignment="Center" MouseUp="AddToPlaylist"/>
-                <StackPanel x:Name="ActualPlay" HorizontalAlignment="Center" VerticalAlignment="Center" MouseUp="SeeMusic">
-                    <Image x:Name="image" Width="60" Height="60" Margin="3" Source="{Binding Image}"/>
-                    <TextBlock x:Name="title" FontSize="15" Text="{Binding Title}"/>
-                    <TextBlock x:Name="artist" FontSize="10" Text="{Binding Artist}"/>
+                <TextBlock x:Name="Add1" Text="✚" MouseUp="AddToPlaylist" Visibility="{Binding IsPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=booltovisibility}" FontSize="20" Margin="20" VerticalAlignment="Center" TextAlignment="Center"/>
+                <StackPanel x:Name="ActualPlay" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Width="60" Height="60" Margin="3" Source="{Binding CurrentlyPlaying.Image}"/>
+                    <TextBlock FontSize="15" Text="{Binding CurrentlyPlaying.Title}"/>
+                    <TextBlock FontSize="10" Text="{Binding CurrentlyPlaying.Artist}"/>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock x:Name="duration" TextAlignment="Center" VerticalAlignment="Center"/>
-                    <ProgressBar x:Name="Prog" MouseUp="ProgMouseClick" Height="10" Width="350" Value="0" Background="Transparent" Margin="10" Foreground="White"/>
-                    <TextBlock x:Name="duration2" TextAlignment="Center" VerticalAlignment="Center"/>
+                <StackPanel x:Name="stackPanel" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock x:Name="duration" TextAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat=" {0:D2}:{1:D2}:{2:D2} ">
+                                <Binding Path="Position.Hours"/>
+                                <Binding Path="Position.Minutes" />
+                                <Binding Path="Position.Seconds" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <ProgressBar x:Name="Prog" MouseUp="ProgMouseClick" Height="10" Width="350" Maximum="{Binding Path=NaturalDuration.TimeSpan.TotalSeconds}" Value="{Binding Path=Position.Seconds, Mode=OneWay}" Background="Transparent" Margin="10" Foreground="White"/>
+                    <TextBlock x:Name="duration2" TextAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Text" Value="00:00:00" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=NaturalDuration.HasTimeSpan}" Value="True" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Text">
+                                            <Setter.Value>
+                                                <MultiBinding StringFormat=" {0:D2}:{1:D2}:{2:D2} ">
+                                                    <Binding Path="NaturalDuration.TimeSpan.Hours"/>
+                                                    <Binding Path="NaturalDuration.TimeSpan.Minutes"/>
+                                                    <Binding Path="NaturalDuration.TimeSpan.Seconds"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button x:Name="previous" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="Previous" ToolTip="Précédent" Content="◀◀" Width="50" Height="50" FontSize="22"/>
-                    <Button x:Name="random" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="SetRandom" ToolTip="Lecture aléatoire" Content="∞" Width="50" Height="50" FontSize="22"/>
-                    <Button x:Name="PausePlay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="PausePlay_Click" ToolTip="Lecture" Content="{Binding ElementName=Player, Path=IsPlaying, Converter={StaticResource BoolToContent}}" Width="50" Height="50" FontSize="22"/>
-                    <Button x:Name="replay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="Replay" ToolTip="Lecture en boucle" Content="⟲" Foreground="{Binding ElementName=Player, Path=Loop, Converter={StaticResource BoolToForeground}}" Width="50" Height="50" FontSize="22"/>
-                    <Button x:Name="next" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="Next" ToolTip="Suivant" Content="▶▶" Width="50" Height="50" FontSize="22"/>
+                    <Button x:Name="previous" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="NextAndPrevious" ToolTip="Précédent" Content="◀◀" Width="50" Height="50" FontSize="22"/>
+                    <Button x:Name="random" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="Random" ToolTip="Lecture aléatoire" Content="∞" Foreground="{Binding RandomPlay, Converter={StaticResource ValueToContent}, ConverterParameter=booltoforeground}" Width="50" Height="50" FontSize="22"/>
+                    <Button x:Name="PausePlay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="PausePlayClick" ToolTip="Lecture" Content="{Binding IsPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=booltocontent}" Width="50" Height="50" FontSize="22"/>
+                    <Button x:Name="replay" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="Replay" ToolTip="Lecture en boucle" Content="⟲" Foreground="{Binding Loop, Converter={StaticResource ValueToContent}, ConverterParameter=booltoforeground}" Width="50" Height="50" FontSize="22"/>
+                    <Button x:Name="next" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="NextAndPrevious" ToolTip="Suivant" Content="▶▶" Width="50" Height="50" FontSize="22"/>
                 </StackPanel>
                 <Slider x:Name="slider" Style="{StaticResource CustomSlider}" Width="135" Value="{Binding Volume}" Minimum="0" Maximum="1" ToolTip="Modifier le volume" Margin="0,10,0,10" IsMoveToPointEnabled="True"/>
             </StackPanel>

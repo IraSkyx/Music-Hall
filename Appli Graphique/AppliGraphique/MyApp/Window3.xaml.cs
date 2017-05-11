@@ -12,33 +12,42 @@ namespace MyApp
     public partial class Window3 : Window
     {
         public event Action<User> Check;
-        private User currentuser; 
+        private User currentuser;
+        private UserDB DataBase;
 
-        public Window3(User currentuser)
+        public Window3(User currentuser, UserDB DataBase)
         {           
-            this.currentuser = currentuser;          
-            InitializeComponent();
+            this.currentuser = currentuser;
+            this.DataBase = DataBase;
+            InitializeComponent();           
             gridresources.DataContext = currentuser;
         }
 
-        private void Exit(object sender, RoutedEventArgs e) => Close();
+        private void Exit(object sender, RoutedEventArgs e) 
+            => Close();
 
-        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
+        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e) 
+            => DragMove();
 
         private void Commit(object sender, RoutedEventArgs e)
         {
-            if (IsValid(emailbox.Text) && (pseudobox.Text).Length > 3 && (mdpbox.Text).Length > 3)
+            if (UserDB.IsValid(emailbox.Text) && (pseudobox.Text).Length > 3 && (mdpbox.Text).Length > 3 && !(DataBase.Exists(emailbox.Text)))
             {
-                if (!(currentuser.Infos.Address.Equals(emailbox.Text)) || !(currentuser.Infos.DisplayName.Equals(pseudobox.Text)) || !(currentuser.Psswd.Equals(mdpbox.Text))) // A revoir
-                    Check?.Invoke(new User(new MailAddress(IsValid(emailbox.Text) ? emailbox.Text : currentuser.Infos.Address, (pseudobox.Text).Length > 3 ? pseudobox.Text : currentuser.Infos.DisplayName), (mdpbox.Text).Length > 3 ? mdpbox.Text : currentuser.Psswd, currentuser.Favorite));
+                Check?.Invoke(new User(new MailAddress(emailbox.Text, pseudobox.Text), mdpbox.Text, currentuser.Favorite));
                 Close();
-            }
+            }                    
             else
             {
                 SolidColorBrush red = new SolidColorBrush(Color.FromRgb(217, 30, 24));
-                if (!IsValid(email.Text))
+                if (!UserDB.IsValid(emailbox.Text))
                 {
                     email.Text = "Email invalide";
+                    email.Foreground = red;
+                }
+
+                else if (DataBase.Exists(emailbox.Text))
+                {
+                    email.Text = "Email déjà utilisé";
                     email.Foreground = red;
                 }
 
@@ -53,21 +62,6 @@ namespace MyApp
                     mdp.Text = "4 caractères mini";
                     mdp.Foreground = red;
                 }
-            }
-        }
-
-        public bool IsValid(string emailaddress)
-        {
-            if (emailaddress == null || emailaddress == String.Empty)
-                return false;
-            try
-            {
-                MailAddress m = new MailAddress(emailaddress);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
             }
         }
     }

@@ -10,6 +10,6 @@ namespace MyApp
         public Home()
         {
             InitializeComponent();
-        }      
+        }
     }
 }

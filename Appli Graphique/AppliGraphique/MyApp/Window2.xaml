@@ -30,13 +30,13 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock x:Name="labelpseudo" TextAlignment="Center" VerticalAlignment="Center" Text="Pseudo"/>
-                <TextBox x:Name="pseudo" Grid.Column="1" Height="23" Margin="10"/>
+                <TextBox x:Name="pseudo" Grid.Column="1" Height="23" Margin="10" Text="totoo"/>
 
                 <TextBlock x:Name="labelemail" TextAlignment="Center" VerticalAlignment="Center" Text="Adresse mail" Grid.Row="1"/>
-                <TextBox x:Name="email" Grid.Row="1" Grid.Column="1" Height="23" Margin="10"/>
+                <TextBox x:Name="email" Grid.Row="1" Grid.Column="1" Height="23" Margin="10" Text="totoo@gmail.com"/>
 
                 <TextBlock x:Name="labelmdp" TextAlignment="Center" VerticalAlignment="Center" Text="Mot de passe" Grid.Row="2"/>
-                <PasswordBox x:Name="mdp" Grid.Row="2" Grid.Column="1" Height="23" Margin="10"/>
+                <PasswordBox x:Name="mdp" Grid.Row="2" Grid.Column="1" Height="23" Margin="10" Password="totoo"/>
 
             </Grid>
             <Button x:Name="valider" Content="Valider" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Commit" Width="100" Height="35" Margin="50"/>

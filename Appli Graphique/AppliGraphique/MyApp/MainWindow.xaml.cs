@@ -4,8 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Threading;
 using MainTest;
 
 namespace MyApp
@@ -15,11 +13,8 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {       
-        private Player Player = new Player();
-        private Playlist Allmusics = new Playlist();
         private Playlist result = new Playlist();
         private UserDB Allusers = new UserDB();
-        private User currentUser;
 
         public MainWindow()
         {
@@ -31,8 +26,8 @@ namespace MyApp
 
             //UserControl events
             xSearch.Input.TextChanged += TextBox_TextChanged;
-            xSearch.Search.SelectionChanged += Criterion_SelectionChanged;
-            xSearch.Criterion.SelectionChanged += ListBox_SelectionChanged;
+            xSearch.Search.SelectionChanged += Search_SelectionChanged;
+            xSearch.Criterion.SelectionChanged += Criterion_SelectionChanged;
 
             xSelection.Add2.Click += AddToPlaylist;
             xSelection.PlaySong.Click += Play;
@@ -41,12 +36,14 @@ namespace MyApp
             xHome.france.MouseUp += Home_MouseUp;
             xHome.hall.MouseUp += Home_MouseUp;
 
+            lecteur.ActualPlay.MouseUp += SeeMusic;
+
             //Tests données
-            Allusers = Stub.LoadUsersTest();       
-            Allmusics = Stub.LoadMusicsTest();
+            Allusers = Stub.LoadUsersTest();
 
             //Initialisation des DataContext  
-            scroller.DataContext = Allmusics;                                 
+            Panel.DataContext = lecteur.Player;
+            scroller.DataContext = lecteur.Allmusics;                                 
             xSearch.Search.DataContext = result;            
         }
 
@@ -58,7 +55,11 @@ namespace MyApp
             Close();
         }
 
-        private void Reduce(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+        private void Reduce(object sender, RoutedEventArgs e) 
+            => WindowState = WindowState.Minimized;
+
+        private void Drag(object sender, MouseButtonEventArgs e) 
+            => DragMove();
 
         private void Increase(object sender, RoutedEventArgs e)
         {
@@ -76,7 +77,7 @@ namespace MyApp
 
         private void Connexion(object sender, RoutedEventArgs e)
         {
-            if ((string)connexion.Content == "Connexion" && (string)inscription.Content == "Inscription") //Fenêtre de connexion
+            if (lecteur.Player.CurrentUser==null) //Fenêtre de connexion
             {
                 Window1 subWindow = new Window1(Allusers);
                 subWindow.Check += value => LogIn(value);
@@ -85,34 +86,26 @@ namespace MyApp
             }
             else //Bouton déconnexion
             {
-                currentUser = null;
+                lecteur.Player.CurrentUser = null;
                 listBox.DataContext = null;
-                connexion.Content = "Connexion";
-                connexion.ToolTip = "Se connecter";
-                inscription.Content = "Inscription";
-                inscription.ToolTip = "S'inscrire";
             }
         }
 
         private void LogIn(User value)
         {
-            currentUser = value;
-            listBox.DataContext = currentUser.Favorite;
-            connexion.Content = "Déconnexion";
-            connexion.ToolTip = "Fermer la session";
-            inscription.Content = currentUser.Infos.DisplayName;
-            inscription.ToolTip = "Voir profil";         
+            lecteur.Player.CurrentUser = value;
+            listBox.DataContext = lecteur.Player.CurrentUser.Favorite;        
         }
 
         private void Inscription(object sender, RoutedEventArgs e)
         {
-            if ((string)connexion.Content == "Déconnexion" && (string)inscription.Content == currentUser.Infos.DisplayName) //Fenêtre de profil
+            if (lecteur.Player.CurrentUser != null) //Fenêtre de profil
             {
-                Window3 subWindow3 = new Window3(currentUser);
+                Window3 subWindow3 = new Window3(lecteur.Player.CurrentUser, Allusers);
                 subWindow3.Check += value =>
                 {
                     Allusers.Database.Add(value);
-                    Allusers.Database.Remove(currentUser);
+                    Allusers.Database.Remove(lecteur.Player.CurrentUser);
                     LogIn(value);
                 };
                 subWindow3.Owner = Application.Current.MainWindow;
@@ -131,83 +124,88 @@ namespace MyApp
             }
         }
 
-        private void scroller_SelectionChanged(object sender, SelectionChangedEventArgs e) => Tab.SelectedIndex = 1;
+        private void scroller_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            => Tab.SelectedIndex = 1;
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            scroller.SelectedIndex = Allmusics.PlaylistProperty.IndexOf((Musique)xSearch.Search.SelectedItem);
-            xSearch.Input.Text = String.Empty;
-        }
+        private void Search_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            => scroller.SelectedItem = (Musique)xSearch.Search.SelectedItem;
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (xSearch.Criterion.SelectedItem != null)
-                xSearch.Search.DataContext = Allmusics.Filter((string)((ComboBoxItem)xSearch.Criterion.SelectedItem).Content, xSearch.Input.Text);
+            if(xSearch.Input.Text != String.Empty)
+                xSearch.Search.DataContext = lecteur.Allmusics.Filter((string)((ComboBoxItem)xSearch.Criterion.SelectedItem).Content, xSearch.Input.Text);
+        }
+
+        private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Tab.SelectedIndex == 2)
+            {
+                xSearch.Search.SelectedIndex = -1;
+                Tab.SelectedIndex = 2;
+            }              
         }
 
         private void Criterion_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (xSearch.Input.Text != String.Empty)
-                TextBox_TextChanged(this, new TextChangedEventArgs(e.RoutedEvent, UndoAction.None));
-        }
+            => TextBox_TextChanged(this, new TextChangedEventArgs(e.RoutedEvent, UndoAction.None));
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (e.Delta > 0)
                 scroller.SelectedIndex = (scroller.SelectedIndex == 0) ? 0 : scroller.SelectedIndex - 1;                     
             else
-                scroller.SelectedIndex = (scroller.SelectedIndex == Allmusics.PlaylistProperty.Count-1) ? Allmusics.PlaylistProperty.Count - 1 : scroller.SelectedIndex + 1;
-            scroller.ScrollIntoView(Allmusics.PlaylistProperty.ElementAt(scroller.SelectedIndex));
+                scroller.SelectedIndex = (scroller.SelectedIndex == lecteur.Allmusics.PlaylistProperty.Count-1) ? lecteur.Allmusics.PlaylistProperty.Count - 1 : scroller.SelectedIndex + 1;
+            scroller.ScrollIntoView(lecteur.Allmusics.PlaylistProperty.ElementAt(scroller.SelectedIndex));
         }
 
         private void Home_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (sender == xHome.world)
-                scroller.SelectedIndex = Allmusics.SelectHomeMusic("T1");
+                scroller.SelectedIndex = lecteur.Allmusics.SelectHomeMusic("T1");
             if (sender == xHome.france)
-                scroller.SelectedIndex = Allmusics.SelectHomeMusic("T5");
+                scroller.SelectedIndex = lecteur.Allmusics.SelectHomeMusic("T5");
             if (sender == xHome.hall)
-                scroller.SelectedIndex = Allmusics.SelectHomeMusic("T6");
+                scroller.SelectedIndex = lecteur.Allmusics.SelectHomeMusic("T6");
             Tab.SelectedIndex = 1;
-        }       
+        }
+
+        private void Play(object sender, RoutedEventArgs e)
+            => lecteur.Player.Play((Musique)scroller.SelectedItem);
 
         private void AddToPlaylist(object sender, RoutedEventArgs e)
         {
-            if (currentUser != null) //Si un user est connecté
-                if (currentUser.Favorite!=null) //Si l'utilisateur a une playlist
+            if (lecteur.Player.CurrentUser != null) //Si un user est connecté
+                if (lecteur.Player.CurrentUser.Favorite!=null) //Si l'utilisateur a une playlist
                 {
-                    if (currentUser.Favorite.PlaylistProperty.Count(x => x.Equals((Musique)scroller.SelectedItem)) == 0) //Si la musique est déjà dans sa playlist
-                        currentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
+                    if (lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((Musique)scroller.SelectedItem)) == 0) //Si la musique est déjà dans sa playlist
+                        lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
                 }
                 else //Si l'utilisateur n'a pas de playlist
                 {
-                    currentUser.Favorite = new Playlist();
-                    currentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
+                    lecteur.Player.CurrentUser.Favorite = new Playlist();
+                    lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
                 }
         }
 
         private void ReadFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (currentUser != null && listBox.SelectedItem != null)
-            {
-                Player.Play((Musique)listBox.SelectedItem);
-            }            
+            if (lecteur.Player.CurrentUser != null && listBox.SelectedItem != null)
+                lecteur.Player.Play((Musique)listBox.SelectedItem);        
         }
 
         private void DeleteFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (currentUser != null && listBox.SelectedItem != null)
-                    currentUser.Favorite.PlaylistProperty.Remove((Musique)listBox.SelectedItem);
+            if (lecteur.Player.CurrentUser != null && listBox.SelectedItem != null)
+                lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Remove((Musique)listBox.SelectedItem);
         }
 
         private void SeeMusic(object sender, MouseButtonEventArgs e)
         {
             if (sender == listBox)
-                scroller.SelectedIndex = Allmusics.Index((Musique)listBox.SelectedItem);
+                scroller.SelectedIndex = lecteur.Allmusics.Index((Musique)listBox.SelectedItem);
             if (sender == lecteur.ActualPlay)
-                scroller.SelectedIndex = Allmusics.Index(Player.CurrentlyPlaying);
+                scroller.SelectedIndex = lecteur.Allmusics.Index(lecteur.Player.CurrentlyPlaying);
             else if (listBox.SelectedItem!=null && sender==scroller)
-                scroller.SelectedIndex = Allmusics.Index((Musique)listBox.SelectedItem);
+                scroller.SelectedIndex = lecteur.Allmusics.Index((Musique)listBox.SelectedItem);
         }
     }  
 }

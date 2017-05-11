@@ -71,7 +71,7 @@
     <Compile Include="Recherche.xaml.cs">
       <DependentUpon>Recherche.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ScaleConverter.cs" />
+    <Compile Include="Converters.cs" />
     <Compile Include="Selection.xaml.cs">
       <DependentUpon>Selection.xaml</DependentUpon>
     </Compile>
