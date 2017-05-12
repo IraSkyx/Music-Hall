@@ -36,7 +36,7 @@
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
-                    <ProgressBar x:Name="Prog" MouseUp="ProgMouseClick" Height="10" Width="350" Maximum="{Binding Path=NaturalDuration.TimeSpan.TotalSeconds}" Value="{Binding Path=Position.Seconds, Mode=OneWay}" Background="Transparent" Margin="10" Foreground="White"/>
+                    <ProgressBar x:Name="Prog" MouseUp="ProgMouseClick" Height="10" Width="350" Maximum="{Binding Path=NaturalDuration.TimeSpan.TotalSeconds, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=Position.Seconds, Mode=OneWay}" Background="Transparent" Margin="10" Foreground="White"/>
                     <TextBlock x:Name="duration2" TextAlignment="Center" VerticalAlignment="Center">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
@@ -70,6 +70,7 @@
                     <Button x:Name="next" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverButton}" Click="NextAndPrevious" ToolTip="Suivant" Content="▶▶" Width="50" Height="50" FontSize="22"/>
                 </StackPanel>
                 <Slider x:Name="slider" Style="{StaticResource CustomSlider}" Width="135" Value="{Binding Volume}" Minimum="0" Maximum="1" ToolTip="Modifier le volume" Margin="0,10,0,10" IsMoveToPointEnabled="True"/>
+                <Label Content="{Binding Volume, Mode=OneWay}" Foreground="White" FontSize="20"/>
             </StackPanel>
         </Grid>
     </StackPanel>

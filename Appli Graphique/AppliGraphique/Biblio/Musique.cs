@@ -9,7 +9,10 @@ namespace Biblio
         private string _Title;
         public string Title
         {
-            get => _Title;
+            get
+            {
+                return _Title;
+            }            
             set
             {
                 _Title = value;
@@ -19,7 +22,10 @@ namespace Biblio
         private string _Artist;
         public string Artist
         {
-            get => _Artist;
+            get
+            {
+                return _Artist;
+            }
             set
             {
                 _Artist = value;
@@ -33,7 +39,10 @@ namespace Biblio
         private string _Image;
         public string Image
         {
-            get => _Image;
+            get
+            {
+                return _Image;
+            }
             set
             {
                 _Image = value;

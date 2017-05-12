@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace Biblio
 {
@@ -13,7 +14,10 @@ namespace Biblio
         private User _CurrentUser;
         public User CurrentUser
         {
-            get => _CurrentUser;
+            get
+            {
+                return _CurrentUser;
+            }
             set
             {
                 _CurrentUser = value;
@@ -23,7 +27,10 @@ namespace Biblio
         private bool _IsPlaying;
         public bool IsPlaying
         {
-            get => _IsPlaying;
+            get
+            {
+                return _IsPlaying;
+            }
             set
             {
                 _IsPlaying = value;
@@ -33,7 +40,10 @@ namespace Biblio
         private bool _Loop;
         public bool Loop
         {
-            get => _Loop;
+            get
+            {
+                return _Loop;
+            }
             set
             {
                 _Loop = value;
@@ -43,7 +53,10 @@ namespace Biblio
         private bool _RandomPlay;
         public bool RandomPlay
         {
-            get => _RandomPlay;
+            get
+            {
+                return _RandomPlay;
+            }
             set
             {
                 _RandomPlay = value;
@@ -101,9 +114,12 @@ namespace Biblio
 
         private void SetPlay()
         {
-            Source = CurrentlyPlaying.Audio;
-            Play();
-            IsPlaying = true;                      
+            if (CurrentlyPlaying != null)
+            {
+                Source = CurrentlyPlaying.Audio;
+                Play();
+                IsPlaying = true;
+            }                                      
         }
     }
 }

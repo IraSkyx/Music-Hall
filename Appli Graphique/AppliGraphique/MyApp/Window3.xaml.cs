@@ -12,7 +12,7 @@ namespace MyApp
     public partial class Window3 : Window
     {
         public event Action<User> Check;
-        private User currentuser;
+        public User currentuser;
         private UserDB DataBase;
 
         public Window3(User currentuser, UserDB DataBase)
@@ -20,7 +20,7 @@ namespace MyApp
             this.currentuser = currentuser;
             this.DataBase = DataBase;
             InitializeComponent();           
-            gridresources.DataContext = currentuser;
+            DataContext = currentuser;
         }
 
         private void Exit(object sender, RoutedEventArgs e) 

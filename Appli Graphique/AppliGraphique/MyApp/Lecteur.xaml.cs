@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
+using System.Windows.Threading;
 
 namespace MyApp
 {
@@ -26,7 +27,7 @@ namespace MyApp
 
             Player.MediaEnded += MediaEnded;
 
-            Allmusics = Stub.LoadMusicsTest();
+            Allmusics = Stub.LoadMusicsTest(); 
         }
 
         private void PausePlayClick(object sender, RoutedEventArgs e)
