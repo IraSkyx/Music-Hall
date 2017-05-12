@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
+using System.Windows.Threading;
 
 namespace MyApp
 {
@@ -22,13 +23,27 @@ namespace MyApp
 
             FullPlayer.Children.Add(Player);
 
-            DataContext = Player;
+            Control.DataContext = Player;
 
             Player.MediaEnded += MediaEnded;
+            Player.MediaOpened += MediaOpened;
 
-            Allmusics = Stub.LoadMusicsTest(); 
+            Allmusics = Stub.LoadMusicsTest();
+
+            DispatcherTimer _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromMilliseconds(1000);
+            _timer.Tick += new EventHandler(myEvent);
+            _timer.Start();
         }
-
+        private void MediaOpened(object sender, RoutedEventArgs e)
+        {
+            Prog.Minimum = 0;
+            Prog.Maximum = Player.NaturalDuration.TimeSpan.TotalSeconds;
+        }
+        void myEvent(object sender, EventArgs e)
+        {
+            Prog.Value = Player.Position.TotalSeconds;
+        }
         private void PausePlayClick(object sender, RoutedEventArgs e)
         {
             if (Player.IsPlaying)
@@ -62,6 +77,7 @@ namespace MyApp
             {
                 return;
             }
+            Control.DataContext = Player;
         }
 
         private void MediaEnded(object sender, RoutedEventArgs e)
@@ -83,6 +99,7 @@ namespace MyApp
                 Player.IsPlaying = true;
                 Player.Play();
             }
+            Control.DataContext = Player;
         }
 
         private void AddToPlaylist(object sender, RoutedEventArgs e)
