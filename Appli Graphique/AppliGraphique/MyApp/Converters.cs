@@ -9,7 +9,8 @@ namespace MyApp
 {
     public class ScaleConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => (double)value * (double)parameter;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) 
+            => (double)value * 0.05;
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -26,10 +27,11 @@ namespace MyApp
                 case "booltocontent": return (bool)value ? "||" : "▶";
                 case "booltoforeground":  return (bool)value ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
                 case "booltovisibility": return (bool)value ? Visibility.Visible : Visibility.Hidden;
-                case "connexion": return (User)value == null ? "Connexion" : "Déconnexion";
-                case "inscription": return (User)value == null ? "Inscription" : ((User)value).Infos.DisplayName;
-                case "seconnecter": return (User)value == null ? "Se connecter" : "Fermer la session";
-                case "sinscrire": return (User)value == null ? "S'inscrire" : "Voir mon profil";
+                case "nulltovisibility": return value == null ? Visibility.Hidden : Visibility.Visible;
+                case "connexion": return value == null ? "Connexion" : "Déconnexion";
+                case "inscription": return value == null ? "Inscription" : ((User)value).Infos.DisplayName;
+                case "seconnecter": return value == null ? "Se connecter" : "Fermer la session";
+                case "sinscrire": return value == null ? "S'inscrire" : "Voir mon profil";
                 default : return null;
             }
         }

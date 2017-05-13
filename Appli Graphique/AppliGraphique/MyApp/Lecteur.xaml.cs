@@ -28,6 +28,9 @@ namespace MyApp
             Player.MediaEnded += MediaEnded;
             Player.MediaOpened += MediaOpened;
 
+            Detail.DataContext = FullPlayer;
+            Detail2.DataContext = FullPlayer;
+
             Allmusics = Stub.LoadMusicsTest();
 
             DispatcherTimer _timer = new DispatcherTimer();
@@ -35,28 +38,53 @@ namespace MyApp
             _timer.Tick += new EventHandler(myEvent);
             _timer.Start();
         }
+
         private void MediaOpened(object sender, RoutedEventArgs e)
         {
-            Prog.Minimum = 0;
-            Prog.Maximum = Player.NaturalDuration.TimeSpan.TotalSeconds;
+            if (Player.NaturalDuration.HasTimeSpan)
+            {
+                Prog.Minimum = 0;
+                Prog.Maximum = Player.NaturalDuration.TimeSpan.TotalSeconds;
+                ActualPlay.DataContext = Player.CurrentlyPlaying;
+            }       
         }
         void myEvent(object sender, EventArgs e)
         {
-            Prog.Value = Player.Position.TotalSeconds;
+            if (Player.NaturalDuration.HasTimeSpan)
+            {
+                Prog.Value = Player.Position.TotalSeconds;
+                duration.Text = String.Format("{0:D2}:{1:D2}:{2:D2}",
+                    Player.Position.Hours,
+                    Player.Position.Minutes,
+                    Player.Position.Seconds);
+                duration2.Text = String.Format("{0:D2}:{1:D2}:{2:D2}",
+                    Player.NaturalDuration.TimeSpan.Hours,
+                    Player.NaturalDuration.TimeSpan.Minutes,
+                    Player.NaturalDuration.TimeSpan.Seconds);
+            }
         }
         private void PausePlayClick(object sender, RoutedEventArgs e)
         {
-            if (Player.IsPlaying)
+            if(Player.CurrentlyPlaying != null)
             {
-                Player.Pause();
-                Player.IsPlaying = false;
-            }
-            else
-            {
-                Player.Play();
-                Player.IsPlaying = true;
+                if (Player.IsPlaying)
+                {
+                    Player.Pause();
+                    Player.IsPlaying = false;
+                }
+                else
+                {
+                    if (Player.NaturalDuration.TimeSpan.TotalSeconds == Player.Position.TotalSeconds)
+                        Player.ChangePosition(TimeSpan.Zero);
+                    else
+                    {
+                        Player.Play();
+                        Player.IsPlaying = true;
+                    }                 
+                }
             }
         }
+            
 
         private void Replay(object sender, RoutedEventArgs e) 
             => Player.SetLoop();
@@ -75,18 +103,15 @@ namespace MyApp
             }
             catch (NullReferenceException)
             {
+                Player.IsPlaying = false;
                 return;
             }
-            Control.DataContext = Player;
         }
 
         private void MediaEnded(object sender, RoutedEventArgs e)
         {
             if (Player.Loop)
-            {
-                Player.Position = TimeSpan.Zero;
-                Player.Play();
-            }            
+                Player.ChangePosition(TimeSpan.Zero);
             else
                 NextAndPrevious(this, new RoutedEventArgs());
         }
@@ -94,12 +119,7 @@ namespace MyApp
         private void ProgMouseClick(object sender, MouseButtonEventArgs e)
         {
             if (Player.Source != null && Player.NaturalDuration.HasTimeSpan)
-            {
-                Player.Position = new TimeSpan(0, 0, (int)((e.GetPosition(Prog).X / Prog.ActualWidth) * Prog.Maximum));
-                Player.IsPlaying = true;
-                Player.Play();
-            }
-            Control.DataContext = Player;
+                Player.ChangePosition(new TimeSpan(0, 0, (int)((e.GetPosition(Prog).X / Prog.ActualWidth) * Prog.Maximum)));
         }
 
         private void AddToPlaylist(object sender, RoutedEventArgs e)

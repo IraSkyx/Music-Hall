@@ -1,9 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
 
 namespace Biblio
 {
@@ -120,6 +118,13 @@ namespace Biblio
                 Play();
                 IsPlaying = true;
             }                                      
+        }
+
+        public void ChangePosition(TimeSpan NewPosition)
+        {
+            Position = NewPosition;           
+            Play();
+            IsPlaying = true;
         }
     }
 }

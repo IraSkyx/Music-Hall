@@ -57,7 +57,7 @@
                 </ListView>
             </DockPanel>
             <!-- MaPlaylist -->
-            
+
             <!-- Onglets -->
             <TabControl x:Name="Tab" SelectionChanged="Tab_SelectionChanged" Margin="10" Background="#222222">
                 <TabItem Header="Accueil" Foreground="White" FontFamily="Microsoft YaHei UI" Margin="-3,0,3,0">
@@ -70,10 +70,10 @@
                     <local:Recherche x:Name="xSearch"/>
                 </TabItem>
             </TabControl>
-            <!-- Onglets -->          
+            <!-- Onglets -->
 
         </DockPanel>
         <!-- Corps -->
-       
+
     </DockPanel>
 </Window>

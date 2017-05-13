@@ -105,7 +105,7 @@ namespace MyApp
                 subWindow3.Check += value =>
                 {
                     Allusers.Database.Add(value);
-                    Allusers.Database.Remove(lecteur.Player.CurrentUser);
+                    Allusers.Database.Remove(Allusers.Database.First(x => x.Equals(lecteur.Player.CurrentUser)));
                     LogIn(value);
                 };
                 subWindow3.Owner = Application.Current.MainWindow;
@@ -173,8 +173,9 @@ namespace MyApp
 
         private void AddToPlaylist(object sender, RoutedEventArgs e)
         {
-            if (lecteur.Player.CurrentUser != null) //Si un user est connecté
-                if (lecteur.Player.CurrentUser.Favorite!=null) //Si l'utilisateur a une playlist
+            if (lecteur.Player.CurrentUser != null && lecteur.Player.CurrentlyPlaying != null)  //Si un user est connecté
+            {
+                if (lecteur.Player.CurrentUser.Favorite != null) //Si l'utilisateur a une playlist
                 {
                     if (lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((Musique)scroller.SelectedItem)) == 0) //Si la musique est déjà dans sa playlist
                         lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
@@ -184,6 +185,7 @@ namespace MyApp
                     lecteur.Player.CurrentUser.Favorite = new Playlist();
                     lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
                 }
+            }                 
         }
 
         private void ReadFromPlaylist(object sender, MouseButtonEventArgs e)
