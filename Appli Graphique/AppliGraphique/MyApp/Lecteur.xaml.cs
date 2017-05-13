@@ -33,10 +33,10 @@ namespace MyApp
 
             Allmusics = Stub.LoadMusicsTest();
 
-            DispatcherTimer _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMilliseconds(1000);
-            _timer.Tick += new EventHandler(myEvent);
-            _timer.Start();
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += new EventHandler(myEvent);
+            timer.Start();
         }
 
         private void MediaOpened(object sender, RoutedEventArgs e)
@@ -53,11 +53,11 @@ namespace MyApp
             if (Player.NaturalDuration.HasTimeSpan)
             {
                 Prog.Value = Player.Position.TotalSeconds;
-                duration.Text = String.Format("{0:D2}:{1:D2}:{2:D2}",
+                duration.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
                     Player.Position.Hours,
                     Player.Position.Minutes,
                     Player.Position.Seconds);
-                duration2.Text = String.Format("{0:D2}:{1:D2}:{2:D2}",
+                duration2.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
                     Player.NaturalDuration.TimeSpan.Hours,
                     Player.NaturalDuration.TimeSpan.Minutes,
                     Player.NaturalDuration.TimeSpan.Seconds);
@@ -83,14 +83,13 @@ namespace MyApp
                     }                 
                 }
             }
-        }
-            
+        }           
 
         private void Replay(object sender, RoutedEventArgs e) 
-            => Player.SetLoop();
+            => Player.Loop=!Player.Loop;
 
         private void Random(object sender, RoutedEventArgs e) 
-            => Player.SetRandomPlay();
+            => Player.RandomPlay=!Player.RandomPlay;
 
         private void NextAndPrevious(object sender, RoutedEventArgs e)
         {
@@ -104,6 +103,7 @@ namespace MyApp
             catch (NullReferenceException)
             {
                 Player.IsPlaying = false;
+                Player.Pause();
                 return;
             }
         }

@@ -29,7 +29,7 @@
         <!-- Corps -->
         <DockPanel x:Name="Body">
 
-            <ListView x:Name="scroller" DockPanel.Dock="Top" Style="{StaticResource HorizontalListbox}" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" ItemsSource="{Binding PlaylistProperty}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="scroller_SelectionChanged" Height="100" Background="Transparent">
+            <ListView x:Name="scroller" DockPanel.Dock="Top" Style="{StaticResource HorizontalListbox}" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" ItemsSource="{Binding PlaylistProperty}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectedItem="{Binding Path=Search.SelectedItem}" SelectionChanged="scroller_SelectionChanged" Height="100" Background="Transparent">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>

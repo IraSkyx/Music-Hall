@@ -13,7 +13,6 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {       
-        private Playlist result = new Playlist();
         private UserDB Allusers = new UserDB();
 
         public MainWindow()
@@ -43,8 +42,7 @@ namespace MyApp
 
             //Initialisation des DataContext  
             Panel.DataContext = lecteur.Player;
-            scroller.DataContext = lecteur.Allmusics;                                 
-            xSearch.Search.DataContext = result;            
+            scroller.DataContext = lecteur.Allmusics;                                            
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -58,8 +56,12 @@ namespace MyApp
         private void Reduce(object sender, RoutedEventArgs e) 
             => WindowState = WindowState.Minimized;
 
-        private void Drag(object sender, MouseButtonEventArgs e) 
-            => DragMove();
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+                Increase(this, new RoutedEventArgs());
+            DragMove();
+        }
 
         private void Increase(object sender, RoutedEventArgs e)
         {

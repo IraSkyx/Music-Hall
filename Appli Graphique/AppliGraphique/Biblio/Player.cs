@@ -12,10 +12,7 @@ namespace Biblio
         private User _CurrentUser;
         public User CurrentUser
         {
-            get
-            {
-                return _CurrentUser;
-            }
+            get { return _CurrentUser; }
             set
             {
                 _CurrentUser = value;
@@ -25,40 +22,37 @@ namespace Biblio
         private bool _IsPlaying;
         public bool IsPlaying
         {
-            get
-            {
-                return _IsPlaying;
-            }
+            get { return _IsPlaying; }
             set
             {
                 _IsPlaying = value;
                 OnPropertyChanged("IsPlaying");
             }
         }
-        private bool _Loop;
+        private bool _Loop { get; set; }
         public bool Loop
         {
             get
-            {
-                return _Loop;
-            }
+            { return _Loop; }
             set
             {
                 _Loop = value;
+                _RandomPlay = _Loop ? false : _RandomPlay;
                 OnPropertyChanged("Loop");
+                OnPropertyChanged("RandomPlay");
             }
         }
-        private bool _RandomPlay;
+        private bool _RandomPlay { get; set; }
         public bool RandomPlay
         {
             get
-            {
-                return _RandomPlay;
-            }
+            { return _RandomPlay; }
             set
             {
                 _RandomPlay = value;
+                _Loop = _RandomPlay ? false : _Loop;
                 OnPropertyChanged("RandomPlay");
+                OnPropertyChanged("Loop");
             }
         }
 
@@ -90,18 +84,6 @@ namespace Biblio
             {
                 throw;
             }            
-        }
-
-        public void SetRandomPlay()
-        {
-            RandomPlay = !RandomPlay;
-            Loop = RandomPlay ? false : Loop;
-        }
-
-        public void SetLoop()
-        {
-            Loop = !Loop;
-            RandomPlay = Loop ? false : RandomPlay;
         }
 
         public void Play(Musique currentlyPlaying)
