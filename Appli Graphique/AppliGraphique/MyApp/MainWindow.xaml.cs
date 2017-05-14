@@ -28,7 +28,6 @@ namespace MyApp
             lecteur.Detail1.myThread.Abort();
             lecteur.Detail2.myThread.Abort();
             lecteur.Detail3.myThread.Abort();
-            lecteur.myThread.Abort();
             Close();
         }
 

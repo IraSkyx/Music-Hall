@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace MyApp
 {
@@ -18,7 +19,7 @@ namespace MyApp
     {
         public Player Player { get; set; } = new Player();
         public Playlist Allmusics = Stub.LoadMusicsTest();
-        public Thread myThread;
+        public DispatcherTimer timer = new DispatcherTimer();
 
         public Lecteur()
         {
@@ -31,34 +32,26 @@ namespace MyApp
 
             Player.MediaEnded += MediaEnded;
             Player.MediaOpened += MediaOpened;
-
-            Update();
+           
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += new EventHandler(Update);
+            timer.Start();
         }
 
-        private void Update()
+        private void Update(object sender, EventArgs e)
         {
-            myThread = new Thread(() =>
+            if (Player.NaturalDuration.HasTimeSpan)
             {
-                while (Thread.CurrentThread.IsAlive)
-                {
-                    Application.Current.Dispatcher.Invoke(() => //Permet de modifier les Control appartenant au Thread GUI
-                    {
-                        if (Player.NaturalDuration.HasTimeSpan)
-                        {
-                            Prog.Value = Player.Position.TotalSeconds;
-                            duration.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
-                                Player.Position.Hours,
-                                Player.Position.Minutes,
-                                Player.Position.Seconds);
-                            duration2.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
-                                Player.NaturalDuration.TimeSpan.Hours,
-                                Player.NaturalDuration.TimeSpan.Minutes,
-                                Player.NaturalDuration.TimeSpan.Seconds);
-                        }
-                    });
-                }         
-            });
-            myThread.Start();
+                Prog.Value = Player.Position.TotalSeconds;
+                duration.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                    Player.Position.Hours,
+                    Player.Position.Minutes,
+                    Player.Position.Seconds);
+                duration2.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                    Player.NaturalDuration.TimeSpan.Hours,
+                    Player.NaturalDuration.TimeSpan.Minutes,
+                    Player.NaturalDuration.TimeSpan.Seconds);
+            }
         }
 
         private void MediaOpened(object sender, RoutedEventArgs e)
