@@ -1,11 +1,13 @@
 ﻿using Biblio;
 using MainTest;
 using System;
+using static System.Console;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
-using System.Windows.Threading;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MyApp
 {
@@ -15,7 +17,8 @@ namespace MyApp
     public partial class Lecteur : UserControl
     {
         public Player Player { get; set; } = new Player();
-        public Playlist Allmusics = new Playlist();
+        public Playlist Allmusics = Stub.LoadMusicsTest();
+        public Thread myThread;
 
         public Lecteur()
         {
@@ -23,20 +26,39 @@ namespace MyApp
 
             FullPlayer.Children.Add(Player);
 
-            Control.DataContext = Player;
+            Test.DataContext = this;
+            FullPlayer.DataContext = Player;
 
             Player.MediaEnded += MediaEnded;
             Player.MediaOpened += MediaOpened;
 
-            Detail.DataContext = FullPlayer;
-            Detail2.DataContext = FullPlayer;
+            Update();
+        }
 
-            Allmusics = Stub.LoadMusicsTest();
-
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += new EventHandler(myEvent);
-            timer.Start();
+        private void Update()
+        {
+            myThread = new Thread(() =>
+            {
+                while (Thread.CurrentThread.IsAlive)
+                {
+                    Application.Current.Dispatcher.Invoke(() => //Permet de modifier les Control appartenant au Thread GUI
+                    {
+                        if (Player.NaturalDuration.HasTimeSpan)
+                        {
+                            Prog.Value = Player.Position.TotalSeconds;
+                            duration.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                                Player.Position.Hours,
+                                Player.Position.Minutes,
+                                Player.Position.Seconds);
+                            duration2.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                                Player.NaturalDuration.TimeSpan.Hours,
+                                Player.NaturalDuration.TimeSpan.Minutes,
+                                Player.NaturalDuration.TimeSpan.Seconds);
+                        }
+                    });
+                }         
+            });
+            myThread.Start();
         }
 
         private void MediaOpened(object sender, RoutedEventArgs e)
@@ -48,21 +70,7 @@ namespace MyApp
                 ActualPlay.DataContext = Player.CurrentlyPlaying;
             }       
         }
-        void myEvent(object sender, EventArgs e)
-        {
-            if (Player.NaturalDuration.HasTimeSpan)
-            {
-                Prog.Value = Player.Position.TotalSeconds;
-                duration.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
-                    Player.Position.Hours,
-                    Player.Position.Minutes,
-                    Player.Position.Seconds);
-                duration2.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
-                    Player.NaturalDuration.TimeSpan.Hours,
-                    Player.NaturalDuration.TimeSpan.Minutes,
-                    Player.NaturalDuration.TimeSpan.Seconds);
-            }
-        }
+
         private void PausePlayClick(object sender, RoutedEventArgs e)
         {
             if(Player.CurrentlyPlaying != null)

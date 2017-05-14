@@ -15,16 +15,16 @@
             <RotateTransform Angle="-90"/>
         </DockPanel.LayoutTransform>
         <StackPanel>
-            <ProgressBar x:Name="Prog1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog2" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog3" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog4" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog5" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog6" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog7" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog8" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog9" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog10" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog2" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog3" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog4" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog5" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog6" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog7" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog8" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog9" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog10" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
         </StackPanel>
     </DockPanel>
 </UserControl>

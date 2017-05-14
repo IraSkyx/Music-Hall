@@ -8,10 +8,10 @@
     <UserControl.Resources>
         <local:ValueToContent x:Key="ValueToContent"/>
     </UserControl.Resources>
-    <ContentControl x:Name="Control">
-        <Grid Background="#222222">
+    <ContentControl>
+        <Grid x:Name="FullPlayer" Background="#222222">
 
-            <StackPanel x:Name="FullPlayer" Panel.ZIndex="5" DockPanel.Dock="Bottom">
+            <StackPanel Panel.ZIndex="5" DockPanel.Dock="Bottom">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -19,8 +19,8 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock x:Name="Add1" Text="✚" MouseUp="AddToPlaylist" Visibility="{Binding CurrentlyPlaying.Audio, Converter={StaticResource ValueToContent}, ConverterParameter=nulltovisibility}" FontSize="20" Margin="20" VerticalAlignment="Center" TextAlignment="Center"/>
+                    <StackPanel x:Name="Test" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="Add1" Text="✚" MouseUp="AddToPlaylist" Visibility="{Binding CurrentlyPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=nulltovisibility}" FontSize="20" Margin="20" VerticalAlignment="Center" TextAlignment="Center"/>
                         <StackPanel x:Name="ActualPlay" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Width="60" Height="60" Margin="3" Source="{Binding Image}"/>
                             <TextBlock FontSize="15" Text="{Binding Title}"/>
@@ -30,7 +30,7 @@
 
                     <StackPanel Grid.Column="1">
 
-                        <StackPanel x:Name="stackPanel" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBlock x:Name="duration" TextAlignment="Center" VerticalAlignment="Center"/>
                             <ProgressBar x:Name="Prog" MouseUp="ProgMouseClick" Height="10" Width="350" Background="Transparent" Margin="10" Foreground="White"/>
                             <TextBlock x:Name="duration2" TextAlignment="Center" VerticalAlignment="Center"/>
@@ -48,8 +48,9 @@
                 </Grid>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <local:SongDetail x:Name="Detail" Panel.ZIndex="0" Visibility="{Binding IsPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=booltovisibility}" DataContext="{Binding FullPlayer}"/>
-                <local:SongDetail x:Name="Detail2" Panel.ZIndex="0" Visibility="{Binding IsPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=booltovisibility}" DataContext="{Binding FullPlayer}"/>
+                <local:SongDetail x:Name="Detail" Panel.ZIndex="0" Visibility="{Binding IsPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=booltovisibility}" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}"/>
+                <local:SongDetail x:Name="Detail2" Panel.ZIndex="0" Visibility="{Binding IsPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=booltovisibility}" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}"/>
+                <local:SongDetail x:Name="Detail3" Panel.ZIndex="0" Visibility="{Binding IsPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=booltovisibility}" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}"/>
             </StackPanel>
         </Grid>
     </ContentControl>

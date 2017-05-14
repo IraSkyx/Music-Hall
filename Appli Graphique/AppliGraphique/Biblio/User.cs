@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Mail;
 
 namespace Biblio
@@ -21,6 +22,11 @@ namespace Biblio
         public User()
         {
         }       
+
+        public string HaveOrNot(Musique music)
+        {
+            return Favorite.PlaylistProperty.Count(x => x.Equals(music)) == 0 ? "✚" : "✓";
+        } 
 
         public override string ToString() => $"{Infos}\n{Psswd}\n{Favorite}\n";
     }

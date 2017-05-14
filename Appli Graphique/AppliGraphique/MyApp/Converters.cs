@@ -2,6 +2,7 @@
 using System;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -10,7 +11,7 @@ namespace MyApp
     public class ScaleConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) 
-            => (double)value * 0.05;
+            => (double)value * (0.10/3.00);
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

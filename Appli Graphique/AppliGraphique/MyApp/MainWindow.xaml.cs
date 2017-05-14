@@ -13,15 +13,11 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {       
-        private UserDB Allusers = new UserDB();
+        private UserDB Allusers = Stub.LoadUsersTest();
 
         public MainWindow()
         {
             InitializeComponent();         
-
-            //Persistance Loading
-            //Allusers = LoadUsers.Load();
-            //Allmusics = LoadMusics.Load();
 
             //UserControl events
             xSearch.Input.TextChanged += TextBox_TextChanged;
@@ -37,9 +33,6 @@ namespace MyApp
 
             lecteur.ActualPlay.MouseUp += SeeMusic;
 
-            //Tests données
-            Allusers = Stub.LoadUsersTest();
-
             //Initialisation des DataContext  
             Panel.DataContext = lecteur.Player;
             scroller.DataContext = lecteur.Allmusics;                                            
@@ -47,9 +40,10 @@ namespace MyApp
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            //Persistance Saving
-            //SaveMusics.Save(Allmusics);
-            //SaveUsers.Save(Allusers);
+            lecteur.Detail.myThread.Abort();
+            lecteur.Detail2.myThread.Abort();
+            lecteur.Detail3.myThread.Abort();
+            lecteur.myThread.Abort();
             Close();
         }
 

@@ -8,7 +8,16 @@ namespace Biblio
     public class Player : MediaElement, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public Musique CurrentlyPlaying { get; set; }
+        private Musique _CurrentlyPlaying;
+        public Musique CurrentlyPlaying
+        {
+            get { return _CurrentlyPlaying; }
+            set
+            {
+                _CurrentlyPlaying = value;
+                OnPropertyChanged("CurrentlyPlaying");
+            }
+        }
         private User _CurrentUser;
         public User CurrentUser
         {
@@ -29,7 +38,7 @@ namespace Biblio
                 OnPropertyChanged("IsPlaying");
             }
         }
-        private bool _Loop { get; set; }
+        private bool _Loop;
         public bool Loop
         {
             get
@@ -42,7 +51,7 @@ namespace Biblio
                 OnPropertyChanged("RandomPlay");
             }
         }
-        private bool _RandomPlay { get; set; }
+        private bool _RandomPlay;
         public bool RandomPlay
         {
             get

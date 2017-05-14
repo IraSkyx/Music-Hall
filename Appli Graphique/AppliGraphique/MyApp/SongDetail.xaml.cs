@@ -1,7 +1,10 @@
 ﻿using NAudio.CoreAudioApi;
 using System;
+using static System.Console;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
 
 namespace MyApp
 {
@@ -10,49 +13,67 @@ namespace MyApp
     /// </summary>
     public partial class SongDetail : UserControl
     {
-        private MMDevice defaultDevice { get; set; }
+        public Thread myThread;
 
         public SongDetail()
         {
             InitializeComponent();
-
-            defaultDevice = new MMDeviceEnumerator().GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(40);
-            timer.Tick += new EventHandler(myEvent);
-            timer.Start();
+            Task.Run(() => SetValues());
         }
 
-        private void myEvent(object sender, EventArgs e)
+        [MTAThread]
+        public void SetValues()
         {
-            if (defaultDevice.AudioMeterInformation.MasterPeakValue * 100 > 0)
+            MMDevice DefaultDevice = new MMDeviceEnumerator().GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            float BaseValue;
+            double RoundedValue;
+            int MaxAddedValue;
+            Random r = new Random();
+
+             myThread = new Thread(() =>
             {
-                Random r = new Random();
-                Prog1.Value = (int)(Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue * 100)) + r.Next(0, (int)(100 - Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue)) / 2);
-                Prog2.Value = (int)(Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue * 100)) + r.Next(0, (int)(100 - Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue)) / 2);
-                Prog3.Value = (int)(Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue * 100)) + r.Next(0, (int)(100 - Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue)) / 2);
-                Prog4.Value = (int)(Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue * 100)) + r.Next(0, (int)(100 - Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue)) / 2);
-                Prog5.Value = (int)(Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue * 100)) + r.Next(0, (int)(100 - Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue)) / 2);
-                Prog6.Value = (int)(Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue * 100)) + r.Next(0, (int)(100 - Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue)) / 2);
-                Prog7.Value = (int)(Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue * 100)) + r.Next(0, (int)(100 - Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue)) / 2);
-                Prog8.Value = (int)(Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue * 100)) + r.Next(0, (int)(100 - Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue)) / 2);
-                Prog9.Value = (int)(Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue * 100)) + r.Next(0, (int)(100 - Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue)) / 2);
-                Prog10.Value = (int)(Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue * 100)) + r.Next(0, (int)(100 - Math.Round(defaultDevice.AudioMeterInformation.MasterPeakValue)) / 2);
-            }
-            else
-            {
-                Prog1.Value = 0;
-                Prog2.Value = 0;
-                Prog3.Value = 0;
-                Prog4.Value = 0;
-                Prog5.Value = 0;
-                Prog6.Value = 0;
-                Prog7.Value = 0;
-                Prog8.Value = 0;
-                Prog9.Value = 0;
-                Prog10.Value = 0;
-            }
+                while (Thread.CurrentThread.IsAlive)
+                {
+                    BaseValue = DefaultDevice.AudioMeterInformation.MasterPeakValue;
+                    RoundedValue = Math.Round(BaseValue * 100);                        
+                    MaxAddedValue = (int)(100 - RoundedValue);
+
+                    if (BaseValue > 0)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            Prog1.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
+                            Prog2.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
+                            Prog3.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
+                            Prog4.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
+                            Prog5.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
+                            Prog6.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
+                            Prog7.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
+                            Prog8.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
+                            Prog9.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
+                            Prog10.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
+                        });
+                    }
+                    else
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            Prog1.Value = 0;
+                            Prog2.Value = 0;
+                            Prog3.Value = 0;
+                            Prog4.Value = 0;
+                            Prog5.Value = 0;
+                            Prog6.Value = 0;
+                            Prog7.Value = 0;
+                            Prog8.Value = 0;
+                            Prog9.Value = 0;
+                            Prog10.Value = 0;
+                        });
+                    }
+                    Thread.Sleep(85);
+                }
+            });
+            myThread.Start();
         }
     }
 }
