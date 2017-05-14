@@ -1,5 +1,4 @@
 ﻿using Biblio;
-using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,20 +18,6 @@ namespace MyApp
         {
             InitializeComponent();         
 
-            //UserControl events
-            xSearch.Input.TextChanged += TextBox_TextChanged;
-            xSearch.Search.SelectionChanged += Search_SelectionChanged;
-            xSearch.Criterion.SelectionChanged += Criterion_SelectionChanged;
-
-            xSelection.Add2.Click += AddToPlaylist;
-            xSelection.PlaySong.Click += Play;
-
-            xHome.world.MouseUp += Home_MouseUp;
-            xHome.france.MouseUp += Home_MouseUp;
-            xHome.hall.MouseUp += Home_MouseUp;
-
-            lecteur.ActualPlay.MouseUp += SeeMusic;
-
             //Initialisation des DataContext  
             Panel.DataContext = lecteur.Player;
             scroller.DataContext = lecteur.Allmusics;                                            
@@ -40,7 +25,7 @@ namespace MyApp
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            lecteur.Detail.myThread.Abort();
+            lecteur.Detail1.myThread.Abort();
             lecteur.Detail2.myThread.Abort();
             lecteur.Detail3.myThread.Abort();
             lecteur.myThread.Abort();
@@ -121,16 +106,7 @@ namespace MyApp
         }
 
         private void scroller_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            => Tab.SelectedIndex = 1;
-
-        private void Search_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            => scroller.SelectedItem = (Musique)xSearch.Search.SelectedItem;
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if(xSearch.Input.Text != String.Empty)
-                xSearch.Search.DataContext = lecteur.Allmusics.Filter((string)((ComboBoxItem)xSearch.Criterion.SelectedItem).Content, xSearch.Input.Text);
-        }
+            => Tab.SelectedIndex = 1;        
 
         private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -141,9 +117,6 @@ namespace MyApp
             }              
         }
 
-        private void Criterion_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            => TextBox_TextChanged(this, new TextChangedEventArgs(e.RoutedEvent, UndoAction.None));
-
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (e.Delta > 0)
@@ -153,57 +126,24 @@ namespace MyApp
             scroller.ScrollIntoView(lecteur.Allmusics.PlaylistProperty.ElementAt(scroller.SelectedIndex));
         }
 
-        private void Home_MouseUp(object sender, MouseButtonEventArgs e)
+        private void ViewFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (sender == xHome.world)
-                scroller.SelectedIndex = lecteur.Allmusics.SelectHomeMusic("T1");
-            if (sender == xHome.france)
-                scroller.SelectedIndex = lecteur.Allmusics.SelectHomeMusic("T5");
-            if (sender == xHome.hall)
-                scroller.SelectedIndex = lecteur.Allmusics.SelectHomeMusic("T6");
-            Tab.SelectedIndex = 1;
-        }
-
-        private void Play(object sender, RoutedEventArgs e)
-            => lecteur.Player.Play((Musique)scroller.SelectedItem);
-
-        private void AddToPlaylist(object sender, RoutedEventArgs e)
-        {
-            if (lecteur.Player.CurrentUser != null && lecteur.Player.CurrentlyPlaying != null)  //Si un user est connecté
-            {
-                if (lecteur.Player.CurrentUser.Favorite != null) //Si l'utilisateur a une playlist
-                {
-                    if (lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((Musique)scroller.SelectedItem)) == 0) //Si la musique est déjà dans sa playlist
-                        lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
-                }
-                else //Si l'utilisateur n'a pas de playlist
-                {
-                    lecteur.Player.CurrentUser.Favorite = new Playlist();
-                    lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
-                }
-            }                 
+            if (lecteur.Player.CurrentUser != null && listBox.SelectedItem != null)
+                scroller.SelectedItem=((Musique)listBox.SelectedItem);
         }
 
         private void ReadFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (lecteur.Player.CurrentUser != null && listBox.SelectedItem != null)
-                lecteur.Player.Play((Musique)listBox.SelectedItem);        
+            if (lecteur.Player.CurrentUser != null && listBox.SelectedItem != null && ReferenceEquals(sender,listBox))
+                lecteur.Player.Play((Musique)listBox.SelectedItem);    
+            else
+                lecteur.Player.Play((Musique)scroller.SelectedItem);
         }
 
         private void DeleteFromPlaylist(object sender, MouseButtonEventArgs e)
         {
             if (lecteur.Player.CurrentUser != null && listBox.SelectedItem != null)
                 lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Remove((Musique)listBox.SelectedItem);
-        }
-
-        private void SeeMusic(object sender, MouseButtonEventArgs e)
-        {
-            if (sender == listBox)
-                scroller.SelectedIndex = lecteur.Allmusics.Index((Musique)listBox.SelectedItem);
-            if (sender == lecteur.ActualPlay)
-                scroller.SelectedIndex = lecteur.Allmusics.Index(lecteur.Player.CurrentlyPlaying);
-            else if (listBox.SelectedItem!=null && sender==scroller)
-                scroller.SelectedIndex = lecteur.Allmusics.Index((Musique)listBox.SelectedItem);
-        }
+        }      
     }  
 }

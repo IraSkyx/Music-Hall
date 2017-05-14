@@ -28,8 +28,7 @@
 
         <!-- Corps -->
         <DockPanel x:Name="Body">
-
-            <ListView x:Name="scroller" DockPanel.Dock="Top" Style="{StaticResource HorizontalListbox}" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" ItemsSource="{Binding PlaylistProperty}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectedItem="{Binding Path=Search.SelectedItem}" SelectionChanged="scroller_SelectionChanged" Height="100" Background="Transparent">
+            <ListView x:Name="scroller" DockPanel.Dock="Top" Style="{StaticResource HorizontalListbox}" MouseDoubleClick="ReadFromPlaylist" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" ItemsSource="{Binding PlaylistProperty}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectedItem="{Binding Path=Search.SelectedItem}" SelectionChanged="scroller_SelectionChanged" Height="100" Background="Transparent">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -42,7 +41,7 @@
             <!-- MaPlaylist -->
             <DockPanel DockPanel.Dock="Right" Margin="10">
                 <TextBlock Text="Ma Playlist" Foreground="#222222" DockPanel.Dock="Top" FontSize="20"/>
-                <ListView x:Name="listBox" ItemsSource="{Binding PlaylistProperty}" MouseDoubleClick="ReadFromPlaylist" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent">
+                <ListView x:Name="listBox" ItemsSource="{Binding PlaylistProperty}" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="ViewFromPlaylist" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

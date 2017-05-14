@@ -28,8 +28,8 @@
         <DockPanel Grid.Column="2">
 
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-                <Button x:Name="PlaySong" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Lire la musique" Content="▶" Width="40" Height="40"/>
-                <Button x:Name="Add2" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Margin="20" ToolTip="Cliquer pour ajouter" Content="+ Ajouter à ma playlist" Width="150" Height="40"/>
+                <Button x:Name="PlaySong" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="PlayASong" Margin="20" ToolTip="Lire la musique" Content="▶" Width="40" Height="40"/>
+                <Button x:Name="Add2" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="AddToPlaylist" Margin="20" ToolTip="Cliquer pour ajouter" Content="+ Ajouter à ma playlist" Width="150" Height="40"/>
             </StackPanel>
 
             <TabControl Background="#222222" Margin="10">

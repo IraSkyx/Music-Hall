@@ -8,15 +8,15 @@
              d:DesignHeight="500" d:DesignWidth="720" Foreground="White" Background="#222222">
     <DockPanel Margin="10">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
-            <TextBox x:Name="Input" DockPanel.Dock="Top" Width="200" Margin="0,0,20,0"/>
-            <ComboBox x:Name="Criterion" SelectedIndex="0">
+            <TextBox x:Name="Input" DockPanel.Dock="Top" Width="200" Margin="0,0,20,0" TextChanged="Input_TextChanged"/>
+            <ComboBox x:Name="Criterion" SelectedIndex="0" SelectionChanged="Criterion_SelectionChanged">
                 <ComboBoxItem x:Name="bytitle" Content="Par titre" IsSelected="False"/>
                 <ComboBoxItem x:Name="byartist" Content="Par artiste" IsSelected="False"/>
                 <ComboBoxItem x:Name="bygenre" Content="Par genre" IsSelected="False"/>
                 <ComboBoxItem x:Name="bydate" Content="Par date (jj/mm/aaaa)" IsSelected="False"/>
             </ComboBox>
         </StackPanel>
-        <ListBox x:Name="Search" Background="Transparent" Margin="30" ItemsSource="{Binding PlaylistProperty}">
+        <ListBox x:Name="Search" Background="Transparent" Margin="30" SelectionChanged="Search_SelectionChanged" ItemsSource="{Binding PlaylistProperty}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

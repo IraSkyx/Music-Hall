@@ -19,9 +19,9 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel x:Name="Test" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <TextBlock x:Name="Add1" Text="✚" MouseUp="AddToPlaylist" Visibility="{Binding CurrentlyPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=nulltovisibility}" FontSize="20" Margin="20" VerticalAlignment="Center" TextAlignment="Center"/>
-                        <StackPanel x:Name="ActualPlay" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel x:Name="ActualPlay" HorizontalAlignment="Center" VerticalAlignment="Center" MouseUp="SeeMusic">
                             <Image Width="60" Height="60" Margin="3" Source="{Binding Image}"/>
                             <TextBlock FontSize="15" Text="{Binding Title}"/>
                             <TextBlock FontSize="10" Text="{Binding Artist}"/>
@@ -47,10 +47,11 @@
                     </StackPanel>
                 </Grid>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <local:SongDetail x:Name="Detail" Panel.ZIndex="0" Visibility="{Binding IsPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=booltovisibility}" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}"/>
-                <local:SongDetail x:Name="Detail2" Panel.ZIndex="0" Visibility="{Binding IsPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=booltovisibility}" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}"/>
-                <local:SongDetail x:Name="Detail3" Panel.ZIndex="0" Visibility="{Binding IsPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=booltovisibility}" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}"/>
+            <StackPanel x:Name="Detail" Orientation="Horizontal">
+                <local:SongDetail x:Name="Detail1" Panel.ZIndex="0" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}"/>
+                <local:SongDetail x:Name="Detail2" Panel.ZIndex="0" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}"/>
+                <local:SongDetail x:Name="Detail3" Panel.ZIndex="0" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}"/>
+                <!--Visibility="{Binding IsPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=booltovisibility}"-->
             </StackPanel>
         </Grid>
     </ContentControl>

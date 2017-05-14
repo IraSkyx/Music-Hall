@@ -1,6 +1,5 @@
 ﻿using NAudio.CoreAudioApi;
 using System;
-using static System.Console;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -70,7 +69,7 @@ namespace MyApp
                             Prog10.Value = 0;
                         });
                     }
-                    Thread.Sleep(85);
+                    Thread.Sleep(70);
                 }
             });
             myThread.Start();

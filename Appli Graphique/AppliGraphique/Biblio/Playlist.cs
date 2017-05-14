@@ -18,9 +18,7 @@ namespace Biblio
         public Playlist(IEnumerable<Musique> mus)
         {
             PlaylistProperty=new ObservableCollection<Musique>(mus);
-        }
-
-        public override string ToString() => string.Join<Musique>("", PlaylistProperty.ToArray());
+        }     
 
         public Playlist Filter(string critere, string input)
         {
@@ -37,5 +35,7 @@ namespace Biblio
         public int SelectHomeMusic(string title) => PlaylistProperty.IndexOf(PlaylistProperty.First(x => x.Title.Equals(title)));
 
         public int Index(Musique currentlyPlaying) => PlaylistProperty.IndexOf(PlaylistProperty.First(x => x.Equals(currentlyPlaying)));
+
+        public override string ToString() => string.Join<Musique>("", PlaylistProperty.ToArray());
     }
 }

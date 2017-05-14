@@ -26,8 +26,8 @@ namespace MyApp
 
             FullPlayer.Children.Add(Player);
 
-            Test.DataContext = this;
             FullPlayer.DataContext = Player;
+            Detail.DataContext = Player;
 
             Player.MediaEnded += MediaEnded;
             Player.MediaOpened += MediaOpened;
@@ -139,6 +139,18 @@ namespace MyApp
                 if (Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals(Player.CurrentlyPlaying)) == 0) //Si pas déjà présente
                     Player.CurrentUser.Favorite.PlaylistProperty.Add(Player.CurrentlyPlaying);
             }               
+        }
+
+        private void SeeMusic(object sender, MouseButtonEventArgs e)
+        {
+            if (ReferenceEquals(sender,((ListView)Application.Current.MainWindow.FindName("listBox"))))
+                ((ListView)Application.Current.MainWindow.FindName("scroller")).SelectedIndex = Allmusics.Index((Musique)((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem);
+
+            if (ReferenceEquals(sender,ActualPlay) && Player.CurrentlyPlaying!=null)
+                ((ListView)Application.Current.MainWindow.FindName("scroller")).SelectedIndex = Allmusics.Index(Player.CurrentlyPlaying);
+
+            else if (((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem != null && ReferenceEquals(sender,((ListView)Application.Current.MainWindow.FindName("scroller"))))
+                ((ListView)Application.Current.MainWindow.FindName("scroller")).SelectedIndex = Allmusics.Index((Musique)((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem);
         }
     }
 }
