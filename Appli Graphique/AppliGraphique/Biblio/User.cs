@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System.ComponentModel;
+using System.Net.Mail;
 
 namespace Biblio
 {
@@ -7,9 +8,8 @@ namespace Biblio
     {
         public MailAddress Infos { get; set; }
         public string Psswd { get; set; }
-        public Playlist Favorite { get; set; }
+        public Playlist Favorite;
 
-       
         public User(MailAddress Infos, string Psswd, Playlist Favorite)
         {
             this.Infos = Infos;

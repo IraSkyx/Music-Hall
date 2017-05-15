@@ -1,7 +1,9 @@
 ﻿using Biblio;
 using System;
+using System.Linq;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -25,7 +27,19 @@ namespace MyApp
         {
             switch ((string)parameter)
             {
+                case "objecttovalue":
+                    {
+                        try
+                        {
+                            return ((Lecteur)Application.Current.MainWindow.FindName("lecteur")).Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((Musique)value)) == 0 ? "✚" : "✓";
+                        }
+                        catch (NullReferenceException)
+                        {
+                            return "";
+                        }                       
+                    }
                 case "booltocontent": return (bool)value ? "||" : "▶";
+                case "volume": return (double)value == 0 ? "🔇" : "🔊";
                 case "booltoforeground":  return (bool)value ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
                 case "booltovisibility": return (bool)value ? Visibility.Visible : Visibility.Hidden;
                 case "nulltovisibility": return value == null ? Visibility.Hidden : Visibility.Visible;

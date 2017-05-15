@@ -92,7 +92,7 @@ namespace MyApp
         {
             try
             {
-                if (sender == next)
+                if (ReferenceEquals(sender,next))
                     Player.GoToNextOrPrevious(1);
                 else
                     Player.GoToNextOrPrevious(-1);
@@ -127,7 +127,8 @@ namespace MyApp
                     Player.CurrentUser.Favorite = new Playlist();
                 if (Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals(Player.CurrentlyPlaying)) == 0) //Si pas déjà présente
                     Player.CurrentUser.Favorite.PlaylistProperty.Add(Player.CurrentlyPlaying);
-            }               
+            }
+            Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
 
         private void SeeMusic(object sender, MouseButtonEventArgs e)
@@ -141,5 +142,8 @@ namespace MyApp
             else if (((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem != null && ReferenceEquals(sender,((ListView)Application.Current.MainWindow.FindName("scroller"))))
                 ((ListView)Application.Current.MainWindow.FindName("scroller")).SelectedIndex = Allmusics.Index((Musique)((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem);
         }
+
+        private void Mute(object sender, MouseButtonEventArgs e)
+            => Player.Volume = Player.Volume == 0.00 ? 0.50 : 0.00;
     }
 }

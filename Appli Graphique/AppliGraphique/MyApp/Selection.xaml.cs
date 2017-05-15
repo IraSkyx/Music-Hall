@@ -36,6 +36,7 @@ namespace MyApp
                     lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
                 }
             }
+            lecteur.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
     }
 }

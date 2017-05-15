@@ -26,7 +26,6 @@ namespace MyApp
             MMDevice DefaultDevice = new MMDeviceEnumerator().GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
             float BaseValue;
             double RoundedValue;
-            int MaxAddedValue;
             double previous = 0;
             Random r = new Random();
 
@@ -41,22 +40,40 @@ namespace MyApp
 
                         if (BaseValue > 0)
                         {
-                            Application.Current.Dispatcher.Invoke(() =>
+                            try
                             {
-                                ((ProgressBar)(((Lecteur)Application.Current.MainWindow.FindName("lecteur")).Detail1.FindName("Prog" + i))).Value = RoundedValue + previous/3 + r.Next(5,15) > 100 ? 100 : RoundedValue + previous/2 + r.Next(0, 10);
-                            });
+                                Application.Current.Dispatcher.Invoke(() =>
+                                {
+                                    if (Application.Current.MainWindow == null)
+                                        return;
+                                    ((ProgressBar)(((Lecteur)Application.Current.MainWindow.FindName("lecteur")).Detail1.FindName("Prog" + i))).Value = RoundedValue + previous / 3 + r.Next(5, 15) > 100 ? 100 : RoundedValue + previous / 3 + r.Next(5, 15);
+                                });
+                            }
+                            catch (NullReferenceException)
+                            {
+                                myThread = null;
+                                return;
+                            }
                         }
                         else
                         {
-                            Application.Current.Dispatcher.Invoke(() =>
+                            try
                             {
-                                for (int j = 1; j < 31; ++j)
-                                    ((ProgressBar)(((Lecteur)Application.Current.MainWindow.FindName("lecteur")).Detail1.FindName("Prog" + j))).Value = 0;
-                            });
+                                Application.Current.Dispatcher.Invoke(() =>
+                                {
+                                    for (int j = 1; j < 31; ++j)
+                                        ((ProgressBar)(((Lecteur)Application.Current.MainWindow.FindName("lecteur")).Detail1.FindName("Prog" + j))).Value = 0;
+                                });
+                            }                               
+                            catch (NullReferenceException)
+                            {
+                                myThread = null;
+                                return;
+                            }
                         }
                         if (i == 1)
                             previous = RoundedValue;
-                        Thread.Sleep(1);
+                        Thread.Sleep(2);
                     }                   
                 }
             });

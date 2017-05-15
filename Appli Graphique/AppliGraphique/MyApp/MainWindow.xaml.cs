@@ -24,10 +24,7 @@ namespace MyApp
         }
 
         private void Exit(object sender, RoutedEventArgs e)
-        {
-            lecteur.Detail1.myThread.Abort();
-            Close();
-        }
+            => Close();
 
         private void Reduce(object sender, RoutedEventArgs e) 
             => WindowState = WindowState.Minimized;
@@ -72,7 +69,8 @@ namespace MyApp
         private void LogIn(User value)
         {
             lecteur.Player.CurrentUser = value;
-            listBox.DataContext = lecteur.Player.CurrentUser.Favorite;        
+            listBox.DataContext = lecteur.Player.CurrentUser.Favorite;
+            lecteur.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget(); //Force le Binding à se refresh 
         }
 
         private void Inscription(object sender, RoutedEventArgs e)
@@ -141,6 +139,7 @@ namespace MyApp
         {
             if (lecteur.Player.CurrentUser != null && listBox.SelectedItem != null)
                 lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Remove((Musique)listBox.SelectedItem);
+            lecteur.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }      
     }  
 }
