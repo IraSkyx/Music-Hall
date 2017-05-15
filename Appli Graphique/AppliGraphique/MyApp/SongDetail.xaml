@@ -15,16 +15,36 @@
             <RotateTransform Angle="-90"/>
         </DockPanel.LayoutTransform>
         <StackPanel>
-            <ProgressBar x:Name="Prog1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog2" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog3" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog4" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog5" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog6" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog7" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog8" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog9" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
-            <ProgressBar x:Name="Prog10" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog1" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog2" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog3" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog4" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog5" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog6" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog7" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog8" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog9" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog10" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog11" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog12" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog13" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog14" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog15" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog16" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog17" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog18" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog19" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog20" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog21" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog22" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog23" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog24" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog25" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog26" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog27" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog28" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog29" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
+            <ProgressBar x:Name="Prog30" Margin="0,1,0,1" Height="{Binding ActualWidth, Converter={StaticResource ScaleConverter}}" Minimum="1" Maximum="100" Background="Transparent" Foreground="#171717" BorderThickness="0"/>
         </StackPanel>
     </DockPanel>
 </UserControl>

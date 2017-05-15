@@ -9,8 +9,9 @@ namespace MyApp
 {
     public class ScaleConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) 
-            => (double)value * (0.10/3.00);
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            return (double)value / 30.00;
+        }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

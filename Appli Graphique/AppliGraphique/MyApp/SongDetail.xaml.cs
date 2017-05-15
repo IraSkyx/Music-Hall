@@ -17,7 +17,7 @@ namespace MyApp
         public SongDetail()
         {
             InitializeComponent();
-            Task.Run(() => SetValues());
+            Task t = Task.Run(() => SetValues());
         }
 
         [MTAThread]
@@ -27,49 +27,37 @@ namespace MyApp
             float BaseValue;
             double RoundedValue;
             int MaxAddedValue;
+            double previous = 0;
             Random r = new Random();
 
-             myThread = new Thread(() =>
+            myThread = new Thread(() =>
             {
                 while (Thread.CurrentThread.IsAlive)
                 {
-                    BaseValue = DefaultDevice.AudioMeterInformation.MasterPeakValue;
-                    RoundedValue = Math.Round(BaseValue * 100);                        
-                    MaxAddedValue = (int)(100 - RoundedValue);
+                    for (int i = 1; i < 31; ++i)
+                    {
+                        BaseValue = DefaultDevice.AudioMeterInformation.MasterPeakValue;
+                        RoundedValue = Math.Round(BaseValue * 100);                        
 
-                    if (BaseValue > 0)
-                    {
-                        Application.Current.Dispatcher.Invoke(() =>
+                        if (BaseValue > 0)
                         {
-                            Prog1.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
-                            Prog2.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
-                            Prog3.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
-                            Prog4.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
-                            Prog5.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
-                            Prog6.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
-                            Prog7.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
-                            Prog8.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
-                            Prog9.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
-                            Prog10.Value = RoundedValue + r.Next(MaxAddedValue / 4, MaxAddedValue/2);
-                        });
-                    }
-                    else
-                    {
-                        Application.Current.Dispatcher.Invoke(() =>
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                ((ProgressBar)(((Lecteur)Application.Current.MainWindow.FindName("lecteur")).Detail1.FindName("Prog" + i))).Value = RoundedValue + previous/3 + r.Next(5,15) > 100 ? 100 : RoundedValue + previous/2 + r.Next(0, 10);
+                            });
+                        }
+                        else
                         {
-                            Prog1.Value = 0;
-                            Prog2.Value = 0;
-                            Prog3.Value = 0;
-                            Prog4.Value = 0;
-                            Prog5.Value = 0;
-                            Prog6.Value = 0;
-                            Prog7.Value = 0;
-                            Prog8.Value = 0;
-                            Prog9.Value = 0;
-                            Prog10.Value = 0;
-                        });
-                    }
-                    Thread.Sleep(70);
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                for (int j = 1; j < 31; ++j)
+                                    ((ProgressBar)(((Lecteur)Application.Current.MainWindow.FindName("lecteur")).Detail1.FindName("Prog" + j))).Value = 0;
+                            });
+                        }
+                        if (i == 1)
+                            previous = RoundedValue;
+                        Thread.Sleep(1);
+                    }                   
                 }
             });
             myThread.Start();

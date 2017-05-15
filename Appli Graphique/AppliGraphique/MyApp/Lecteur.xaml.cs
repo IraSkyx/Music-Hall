@@ -1,13 +1,10 @@
 ﻿using Biblio;
 using MainTest;
 using System;
-using static System.Console;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 
 namespace MyApp
@@ -28,7 +25,6 @@ namespace MyApp
             FullPlayer.Children.Add(Player);
 
             FullPlayer.DataContext = Player;
-            Detail.DataContext = Player;
 
             Player.MediaEnded += MediaEnded;
             Player.MediaOpened += MediaOpened;

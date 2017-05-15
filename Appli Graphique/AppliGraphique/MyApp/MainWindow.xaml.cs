@@ -26,8 +26,6 @@ namespace MyApp
         private void Exit(object sender, RoutedEventArgs e)
         {
             lecteur.Detail1.myThread.Abort();
-            lecteur.Detail2.myThread.Abort();
-            lecteur.Detail3.myThread.Abort();
             Close();
         }
 
