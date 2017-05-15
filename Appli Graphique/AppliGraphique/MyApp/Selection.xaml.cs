@@ -23,7 +23,7 @@ namespace MyApp
 
         private void AddToPlaylist(object sender, RoutedEventArgs e)
         {
-            if (lecteur.Player.CurrentUser != null && lecteur.Player.CurrentlyPlaying != null)  //Si un user est connecté
+            if (lecteur.Player.CurrentUser != null)  //Si un user est connecté
             {
                 if (lecteur.Player.CurrentUser.Favorite != null) //Si l'utilisateur a une playlist
                 {
