@@ -14,23 +14,21 @@ namespace MyApp
         private ListView scroller = ((ListView)Application.Current.MainWindow.FindName("scroller"));
 
         public Selection()
-        {
-            InitializeComponent();
-        }
+            => InitializeComponent();
 
         private void PlayASong(object sender, RoutedEventArgs e)
             => lecteur.Player.Play((IMusic)scroller.SelectedItem);
 
         private void AddToPlaylist(object sender, RoutedEventArgs e)
         {
-            if (lecteur.Player.CurrentUser != null)  //Si un user est connecté
+            if (!ReferenceEquals(lecteur.Player.CurrentUser,null))
             {
-                if (lecteur.Player.CurrentUser.Favorite != null) //Si l'utilisateur a une playlist
+                if (!ReferenceEquals(lecteur.Player.CurrentUser.Favorite,null))
                 {
-                    if (lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)scroller.SelectedItem)) == 0) //Si la musique est déjà dans sa playlist
+                    if (lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)scroller.SelectedItem)) == 0)
                         lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (IMusic)scroller.SelectedItem);
                 }
-                else //Si l'utilisateur n'a pas de playlist
+                else
                 {
                     lecteur.Player.CurrentUser.Favorite = new Playlist();
                     lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (IMusic)scroller.SelectedItem);

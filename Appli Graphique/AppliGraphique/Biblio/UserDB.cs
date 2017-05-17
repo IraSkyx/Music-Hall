@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace Biblio
 {
@@ -14,19 +15,21 @@ namespace Biblio
         public UserDB(ObservableCollection<IUser> Database)
             => this.Database = Database;
 
-        public bool Exists(string address)
-            => Database.Count(x => x.Infos.Address.Equals(address)) > 0;
+        public void IsAlreadyUsed(string address)
+        {
+            if (Database.Count(x => x.Infos.Address.Equals(address)) > 0)
+                throw new AlreadyUsedException("Email déjà utilisé");
+        }
 
-        public bool Exists(string address, string password) 
-            => Database.Count(x => x.Infos.Address.Equals(address) && x.Psswd.Equals(password)) > 0;
-
-        public bool NotExists(string address, string pseudo, string password) 
-            => UserMaker.IsValid(address) && pseudo.Length > 3 && password.Length > 3 && Database.Count(x => x.Infos.Address.Equals(address) && x.Psswd.Equals(password)) == 0;
-
-        public IUser SearchFor(string mail, string password) 
-            => Database.First(x => x.Infos.Address.Equals(mail) && x.Psswd.Equals(password));
+        public IUser CanLogIn(string address, string password)
+        {
+            if (Database.Count(x => x.Infos.Address.Equals(address) && x.Psswd.Equals(password)) > 0)
+                throw new DoesntExistException("Mail ou mot de passe invalide");
+            else
+                return Database.First(x => x.Infos.Address.Equals(address) && x.Psswd.Equals(password));
+        }
 
         public override string ToString()
             => String.Join("", Database);
-    }
+    }    
 }

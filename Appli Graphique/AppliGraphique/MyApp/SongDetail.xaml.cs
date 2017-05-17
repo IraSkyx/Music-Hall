@@ -62,7 +62,11 @@ namespace MyApp
                                 Application.Current.Dispatcher.Invoke(() =>
                                 {
                                     for (int j = 1; j < 31; ++j)
+                                    {
+                                        if (Application.Current.MainWindow == null)
+                                            return;
                                         ((ProgressBar)(((Lecteur)Application.Current.MainWindow.FindName("lecteur")).Detail1.FindName("Prog" + j))).Value = 0;
+                                    }                                        
                                 });
                             }                               
                             catch (NullReferenceException)

@@ -16,7 +16,7 @@ namespace MyApp
     {
         public Player Player { get; set; } = new Player();
         public Playlist Allmusics = Stub.LoadMusicsTest();
-        public DispatcherTimer timer = new DispatcherTimer();
+        private DispatcherTimer timer = new DispatcherTimer();
 
         public Lecteur()
         {
