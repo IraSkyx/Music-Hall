@@ -178,12 +178,8 @@
       <Project>{087caf5b-e6cd-4ed8-9c1b-2bbf4a29a649}</Project>
       <Name>Biblio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MainTest\MainTest.csproj">
-      <Project>{701788b0-1450-457c-8757-6223e10aee76}</Project>
-      <Name>MainTest</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Stub\Stub.csproj">
-      <Project>{27F289E9-B424-44B2-9B50-E13DB6C0F0A5}</Project>
+      <Project>{27f289e9-b424-44b2-9b50-e13db6c0f0a5}</Project>
       <Name>Stub</Name>
     </ProjectReference>
   </ItemGroup>

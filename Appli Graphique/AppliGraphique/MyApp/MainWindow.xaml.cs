@@ -1,9 +1,9 @@
 ﻿using Biblio;
+using Stub;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Stub;
 
 namespace MyApp
 {
@@ -12,11 +12,12 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {       
+
         private UserDB Allusers = new StubUsers().LoadUsers();
 
         public MainWindow()
         {
-            InitializeComponent();         
+            InitializeComponent();      
 
             //Initialisation des DataContext  
             Panel.DataContext = lecteur.Player;

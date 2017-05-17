@@ -36,7 +36,7 @@ namespace MyApp
                 case "inscription": return value == null ? "Inscription" : ((IUser)value).Infos.DisplayName;
                 case "seconnecter": return value == null ? "Se connecter" : "Fermer la session";
                 case "sinscrire": return value == null ? "S'inscrire" : "Voir mon profil";
-                case "count": return string.Format("{0} titres", ((ObservableCollection<IMusic>)value).Count());
+                case "compteur": return string.Format($"{0} titres", ((ObservableCollection<IMusic>)value).Count());
                 case "objecttovalue":
                     {
                         try
