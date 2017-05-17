@@ -19,7 +19,7 @@ namespace MyApp
         }
 
         private void PlayASong(object sender, RoutedEventArgs e)
-            => lecteur.Player.Play((Musique)scroller.SelectedItem);
+            => lecteur.Player.Play((IMusic)scroller.SelectedItem);
 
         private void AddToPlaylist(object sender, RoutedEventArgs e)
         {
@@ -27,13 +27,13 @@ namespace MyApp
             {
                 if (lecteur.Player.CurrentUser.Favorite != null) //Si l'utilisateur a une playlist
                 {
-                    if (lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((Musique)scroller.SelectedItem)) == 0) //Si la musique est déjà dans sa playlist
-                        lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
+                    if (lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)scroller.SelectedItem)) == 0) //Si la musique est déjà dans sa playlist
+                        lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (IMusic)scroller.SelectedItem);
                 }
                 else //Si l'utilisateur n'a pas de playlist
                 {
                     lecteur.Player.CurrentUser.Favorite = new Playlist();
-                    lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (Musique)scroller.SelectedItem);
+                    lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (IMusic)scroller.SelectedItem);
                 }
             }
             lecteur.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();

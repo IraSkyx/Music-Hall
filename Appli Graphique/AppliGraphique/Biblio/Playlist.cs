@@ -7,17 +7,13 @@ namespace Biblio
 {
     public class Playlist
     {
-        public ObservableCollection<Musique> PlaylistProperty { get; set; }
+        public ObservableCollection<IMusic> PlaylistProperty { get; set; }
 
         public Playlist()
-        {
-            PlaylistProperty = new ObservableCollection<Musique>();
-        }
+            => PlaylistProperty = new ObservableCollection<IMusic>();
 
-        public Playlist(IEnumerable<Musique> mus)
-        {
-            PlaylistProperty=new ObservableCollection<Musique>(mus);
-        }     
+        public Playlist(IEnumerable<IMusic> mus)
+            => PlaylistProperty=new ObservableCollection<IMusic>(mus); 
 
         public Playlist Filter(string critere, string input)
         {
@@ -31,10 +27,13 @@ namespace Biblio
             }
         }
 
-        public int SelectHomeMusic(string title) => PlaylistProperty.IndexOf(PlaylistProperty.First(x => x.Title.Equals(title)));
+        public int SelectHomeMusic(string title) 
+            => PlaylistProperty.IndexOf(PlaylistProperty.First(x => x.Title.Equals(title)));
 
-        public int Index(Musique currentlyPlaying) => PlaylistProperty.IndexOf(PlaylistProperty.First(x => x.Equals(currentlyPlaying)));
+        public int Index(IMusic currentlyPlaying) 
+            => PlaylistProperty.IndexOf(PlaylistProperty.First(x => x.Equals(currentlyPlaying)));
 
-        public override string ToString() => string.Join<Musique>("", PlaylistProperty.ToArray());
+        public override string ToString() 
+            => string.Join<IMusic>("", PlaylistProperty.ToArray());
     }
 }

@@ -8,8 +8,8 @@ namespace Biblio
     public class Player : MediaElement, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private Musique _CurrentlyPlaying;
-        public Musique CurrentlyPlaying
+        private IMusic _CurrentlyPlaying;
+        public IMusic CurrentlyPlaying
         {
             get { return _CurrentlyPlaying; }
             set
@@ -18,8 +18,8 @@ namespace Biblio
                 OnPropertyChanged("CurrentlyPlaying");
             }
         }
-        private User _CurrentUser;
-        public User CurrentUser
+        private IUser _CurrentUser;
+        public IUser CurrentUser
         {
             get { return _CurrentUser; }
             set
@@ -95,7 +95,7 @@ namespace Biblio
             }            
         }
 
-        public void Play(Musique currentlyPlaying)
+        public void Play(IMusic currentlyPlaying)
         {
             CurrentlyPlaying = currentlyPlaying;      
             SetPlay();

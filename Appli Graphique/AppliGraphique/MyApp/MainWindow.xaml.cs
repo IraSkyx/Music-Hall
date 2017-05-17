@@ -66,7 +66,7 @@ namespace MyApp
             }
         }
 
-        private void LogIn(User value)
+        private void LogIn(IUser value)
         {
             lecteur.Player.CurrentUser = value;
             listBox.DataContext = lecteur.Player.CurrentUser.Favorite;
@@ -124,21 +124,21 @@ namespace MyApp
         private void ViewFromPlaylist(object sender, MouseButtonEventArgs e)
         {
             if (lecteur.Player.CurrentUser != null && listBox.SelectedItem != null)
-                scroller.SelectedItem=((Musique)listBox.SelectedItem);
+                scroller.SelectedItem=((IMusic)listBox.SelectedItem);
         }
 
         private void ReadFromPlaylist(object sender, MouseButtonEventArgs e)
         {
             if (lecteur.Player.CurrentUser != null && listBox.SelectedItem != null && ReferenceEquals(sender,listBox))
-                lecteur.Player.Play((Musique)listBox.SelectedItem);    
+                lecteur.Player.Play((IMusic)listBox.SelectedItem);    
             else
-                lecteur.Player.Play((Musique)scroller.SelectedItem);
+                lecteur.Player.Play((IMusic)scroller.SelectedItem);
         }
 
         private void DeleteFromPlaylist(object sender, MouseButtonEventArgs e)
         {
             if (lecteur.Player.CurrentUser != null && listBox.SelectedItem != null)
-                lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Remove((Musique)listBox.SelectedItem);
+                lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Remove((IMusic)listBox.SelectedItem);
             lecteur.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }      
     }  

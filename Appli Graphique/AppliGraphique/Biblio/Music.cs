@@ -2,7 +2,7 @@
 
 namespace Biblio
 {
-    public class Musique
+    internal class Music : IMusic
     { 
         public string Title { get; set; }
         public string Artist { get; set; }
@@ -12,7 +12,7 @@ namespace Biblio
         public Uri Audio { get; set; }
         public string Image { get; set; }
 
-        public Musique(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Image)
+        public Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Image)
         {
             this.Title = Title;
             this.Artist = Artist;
@@ -34,12 +34,13 @@ namespace Biblio
             if (GetType() != o.GetType())
                 return false;
 
-            return Equals(o as Musique);
+            return Equals(o as IMusic);
         }
 
-        public bool Equals(Musique other) => (Title.Equals(other.Title) && Artist.Equals(other.Artist) && Date.Equals(other.Date) && Genre.Equals(other.Genre)
-                && Infos.Equals(other.Infos) && Audio.ToString().Equals(other.Audio.ToString()) && Image.Equals(other.Image));
+        public bool Equals(IMusic other) 
+            => (Title.Equals(other.Title) && Artist.Equals(other.Artist) && Date.Equals(other.Date) && Genre.Equals(other.Genre) && Infos.Equals(other.Infos) && Audio.ToString().Equals(other.Audio.ToString()) && Image.Equals(other.Image));
 
-        public override string ToString() => $"{Title}\n{Artist}\n{Date}\n{Genre}\n{Infos}\n";
+        public override string ToString() 
+            => $"{Title}\n{Artist}\n{Date}\n{Genre}\n{Infos}\n";
     }
 }

@@ -11,7 +11,7 @@ namespace MyApp
     /// </summary>
     public partial class Window2 : Window
     {
-        public event Action<User> Check;
+        public event Action<IUser> Check;
         private UserDB DataBase;
 
         public Window2(UserDB DataBase)
@@ -26,15 +26,15 @@ namespace MyApp
 
         private void Commit(object sender, RoutedEventArgs e)
         {
-            if (UserDB.IsValid(email.Text) && (pseudo.Text).Length > 3 && (mdp.Password).Length > 3 && !(DataBase.Exists(email.Text)))
+            if (UserMaker.IsValid(email.Text) && (pseudo.Text).Length > 3 && (mdp.Password).Length > 3 && !(DataBase.Exists(email.Text)))
             {
-                Check?.Invoke(new User(new MailAddress(email.Text, pseudo.Text), mdp.Password, null));
+                Check?.Invoke(UserMaker.MakeUser(new MailAddress(email.Text, pseudo.Text), mdp.Password, null));
                 Close();
             }
             else
             {
                 SolidColorBrush red = new SolidColorBrush(Color.FromRgb(217, 30, 24));
-                if (!UserDB.IsValid(email.Text))
+                if (!UserMaker.IsValid(email.Text))
                 {
                     labelemail.Text = "Email invalide";
                     labelemail.Foreground = red;

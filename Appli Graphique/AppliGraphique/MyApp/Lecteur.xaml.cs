@@ -134,13 +134,13 @@ namespace MyApp
         private void SeeMusic(object sender, MouseButtonEventArgs e)
         {
             if (ReferenceEquals(sender,((ListView)Application.Current.MainWindow.FindName("listBox"))))
-                ((ListView)Application.Current.MainWindow.FindName("scroller")).SelectedIndex = Allmusics.Index((Musique)((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem);
+                ((ListView)Application.Current.MainWindow.FindName("scroller")).SelectedIndex = Allmusics.Index((IMusic)((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem);
 
             if (ReferenceEquals(sender,ActualPlay) && Player.CurrentlyPlaying!=null)
                 ((ListView)Application.Current.MainWindow.FindName("scroller")).SelectedIndex = Allmusics.Index(Player.CurrentlyPlaying);
 
             else if (((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem != null && ReferenceEquals(sender,((ListView)Application.Current.MainWindow.FindName("scroller"))))
-                ((ListView)Application.Current.MainWindow.FindName("scroller")).SelectedIndex = Allmusics.Index((Musique)((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem);
+                ((ListView)Application.Current.MainWindow.FindName("scroller")).SelectedIndex = Allmusics.Index((IMusic)((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem);
         }
 
         private void Mute(object sender, MouseButtonEventArgs e)

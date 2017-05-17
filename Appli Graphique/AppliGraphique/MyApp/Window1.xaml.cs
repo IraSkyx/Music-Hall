@@ -10,7 +10,7 @@ namespace MyApp
     public partial class Window1 : Window
     {
         private UserDB Database;
-        public event Action<User> Check;
+        public event Action<IUser> Check;
 
         public Window1(UserDB Database)
         {

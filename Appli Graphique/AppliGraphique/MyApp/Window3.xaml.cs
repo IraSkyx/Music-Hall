@@ -11,11 +11,11 @@ namespace MyApp
     /// </summary>
     public partial class Window3 : Window
     {
-        public event Action<User> Check;
-        public User currentuser;
+        public event Action<IUser> Check;
+        public IUser currentuser;
         private UserDB DataBase;
 
-        public Window3(User currentuser, UserDB DataBase)
+        public Window3(IUser currentuser, UserDB DataBase)
         {           
             this.currentuser = currentuser;
             this.DataBase = DataBase;
@@ -31,15 +31,15 @@ namespace MyApp
 
         private void Commit(object sender, RoutedEventArgs e)
         {
-            if (UserDB.IsValid(emailbox.Text) && (pseudobox.Text).Length > 3 && (mdpbox.Text).Length > 3 && !(DataBase.Exists(emailbox.Text)))
+            if (UserMaker.IsValid(emailbox.Text) && (pseudobox.Text).Length > 3 && (mdpbox.Text).Length > 3 && !(DataBase.Exists(emailbox.Text)))
             {
-                Check?.Invoke(new User(new MailAddress(emailbox.Text, pseudobox.Text), mdpbox.Text, currentuser.Favorite));
+                Check?.Invoke(UserMaker.MakeUser(new MailAddress(emailbox.Text, pseudobox.Text), mdpbox.Text, currentuser.Favorite));
                 Close();
             }                    
             else
             {
                 SolidColorBrush red = new SolidColorBrush(Color.FromRgb(217, 30, 24));
-                if (!UserDB.IsValid(emailbox.Text))
+                if (!UserMaker.IsValid(emailbox.Text))
                 {
                     email.Text = "Email invalide";
                     email.Foreground = red;

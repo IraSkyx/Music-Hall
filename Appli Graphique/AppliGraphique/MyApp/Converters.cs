@@ -32,7 +32,7 @@ namespace MyApp
                     {
                         try
                         {
-                            return ((Lecteur)Application.Current.MainWindow.FindName("lecteur")).Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((Musique)value)) == 0 ? "✚" : "✓";
+                            return ((Lecteur)Application.Current.MainWindow.FindName("lecteur")).Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)value)) == 0 ? "✚" : "✓";
                         }
                         catch (NullReferenceException)
                         {
@@ -45,10 +45,10 @@ namespace MyApp
                 case "booltovisibility": return (bool)value ? Visibility.Visible : Visibility.Hidden;
                 case "nulltovisibility": return value == null ? Visibility.Hidden : Visibility.Visible;
                 case "connexion": return value == null ? "Connexion" : "Déconnexion";
-                case "inscription": return value == null ? "Inscription" : ((User)value).Infos.DisplayName;
+                case "inscription": return value == null ? "Inscription" : ((IUser)value).Infos.DisplayName;
                 case "seconnecter": return value == null ? "Se connecter" : "Fermer la session";
                 case "sinscrire": return value == null ? "S'inscrire" : "Voir mon profil";
-                case "count": return string.Format("{0} titres", ((ObservableCollection<Musique>)value).Count());
+                case "count": return string.Format("{0} titres", ((ObservableCollection<IMusic>)value).Count());
                 default : return null;
             }
         }
