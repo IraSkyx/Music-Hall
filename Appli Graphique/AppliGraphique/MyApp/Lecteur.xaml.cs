@@ -17,11 +17,11 @@ namespace MyApp
         public Player Player { get; set; } = new Player();
         public Playlist Allmusics { get; set; } = new StubMusics().LoadMusics();
         private DispatcherTimer timer = new DispatcherTimer();
-        private ListView scroller = (ListView)Application.Current.MainWindow.FindName("scroller");
-        private ListView listBox = (ListView)Application.Current.MainWindow.FindName("listBox");
+        private ListView MyScroller = (ListView)Application.Current.MainWindow.FindName("MyScroller");
+        private ListView MyPlaylist = (ListView)Application.Current.MainWindow.FindName("MyPlaylist");
 
         /// <summary>
-        /// Instancie Lecteur, ajoute dynamiquement un Player, fixe les évènements du Player, définit les paramètres du Timer et les DataContext
+        /// Instancie Lecteur, ajoute dynamiquement un Player, fixe les évènements du Player, définit les paramètres du Timer et les DataContext de la vue
         /// </summary>
         public Lecteur()
         {
@@ -82,7 +82,7 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void PausePlayClick(object sender, RoutedEventArgs e)
         {
-            if(!ReferenceEquals(Player.CurrentlyPlaying,null))
+            if(!ReferenceEquals(Player.CurrentlyPlaying, null))
             {
                 if (Player.IsPlaying)
                 {
@@ -199,11 +199,11 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void SeeMusic(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(listBox.SelectedItem, null) && ReferenceEquals(sender, listBox))
-                scroller.SelectedIndex = Allmusics.Index((IMusic)listBox.SelectedItem);
+            if (!ReferenceEquals(MyPlaylist.SelectedItem, null) && ReferenceEquals(sender, MyPlaylist))
+                MyScroller.SelectedIndex = Allmusics.Index((IMusic)MyPlaylist.SelectedItem);
 
             if (ReferenceEquals(sender, ActualPlay) && !ReferenceEquals(Player.CurrentlyPlaying, null))
-                scroller.SelectedIndex = Allmusics.Index(Player.CurrentlyPlaying);
+                MyScroller.SelectedIndex = Allmusics.Index(Player.CurrentlyPlaying);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace MyApp
                 case "sinscrire": return value == null ? "S'inscrire" : "Voir mon profil";               
                 case "objecttovalue":
                     {
-                        try { return ((Lecteur)Application.Current.MainWindow.FindName("lecteur")).Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)value)) == 0 ? "✚" : "✓"; }
+                        try { return ((Lecteur)Application.Current.MainWindow.FindName("MyPlayer")).Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)value)) == 0 ? "✚" : "✓"; }
                         catch (NullReferenceException) { return ""; }
                     }
                 default : return null;

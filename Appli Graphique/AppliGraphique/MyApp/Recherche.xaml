@@ -9,7 +9,7 @@
              d:DesignHeight="500" d:DesignWidth="720" Foreground="White" Background="#222222">
     <DockPanel Margin="10">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
-            <TextBox x:Name="Input" DockPanel.Dock="Top" Width="200" Margin="0,0,20,0" TextChanged="Input_TextChanged"/>
+            <TextBox x:Name="Input" DockPanel.Dock="Top" Width="200" Margin="0,0,20,0" TextChanged="UserInputChanged"/>
             <ComboBox x:Name="Criterion" SelectedIndex="0" SelectionChanged="Criterion_SelectionChanged">
                 <ComboBoxItem x:Name="bytitle" Content="Par titre" IsSelected="False"/>
                 <ComboBoxItem x:Name="byartist" Content="Par artiste" IsSelected="False"/>
@@ -19,16 +19,16 @@
         </StackPanel>
         <DockPanel>
             <TextBlock DockPanel.Dock="Top" Margin="10" Text="Résultats de la recherche :" FontSize="20"/>
-            <ListBox x:Name="Search" Background="Transparent" SelectionChanged="Search_SelectionChanged" ItemsSource="{Binding PlaylistProperty}">
-                <ListBox.ItemTemplate>
+            <ListView x:Name="Search" Background="Transparent" SelectionChanged="ResultSelectionChanged" ItemsSource="{Binding PlaylistProperty}">
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <Image Height="50" Width="50" Source="{Binding Image}"/>
                             <TextBlock FontSize="30" Foreground="White" Text="{Binding Title}"/>
                         </StackPanel>
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </ListView.ItemTemplate>
+            </ListView>
         </DockPanel>
     </DockPanel>
 </UserControl>

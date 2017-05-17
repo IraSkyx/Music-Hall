@@ -9,8 +9,8 @@ namespace MyApp
     /// </summary>
     public partial class Accueil : UserControl
     {        
-        private ListView scroller =  ((ListView) Application.Current.MainWindow.FindName("scroller"));
-        private Lecteur lecteur = ((Lecteur)Application.Current.MainWindow.FindName("lecteur"));
+        private ListView MyScroller =  ((ListView) Application.Current.MainWindow.FindName("MyScroller"));
+        private Lecteur MyPlayer = ((Lecteur)Application.Current.MainWindow.FindName("MyPlayer"));
 
         public Accueil()
         {
@@ -24,12 +24,12 @@ namespace MyApp
         /// <param name="e"> Évènements du clic de souris </param>
         private void Home_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (ReferenceEquals(world, sender))
-                scroller.SelectedIndex = lecteur.Allmusics.SelectHomeMusic("T1");               
-            if (ReferenceEquals(france, sender))
-                scroller.SelectedIndex = lecteur.Allmusics.SelectHomeMusic("T5");
-            if (ReferenceEquals(hall, sender))
-                scroller.SelectedIndex = lecteur.Allmusics.SelectHomeMusic("T6");
+            if (ReferenceEquals(World, sender))
+                MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic("T1");               
+            if (ReferenceEquals(France, sender))
+                MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic("T5");
+            if (ReferenceEquals(Hall, sender))
+                MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic("T6");
             ((TabControl)Application.Current.MainWindow.FindName("Tab")).SelectedIndex = 1;
         }
     }

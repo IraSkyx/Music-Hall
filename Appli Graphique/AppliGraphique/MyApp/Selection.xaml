@@ -7,12 +7,12 @@
              mc:Ignorable="d" 
              FontFamily="Microsoft YaHei Light"
              d:DesignHeight="500" d:DesignWidth="720" Foreground="White" Background="#222222">
-    <Grid x:Name="GridSelection">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <DockPanel x:Name="imgparent" Margin="20,20,0,0">
+        <DockPanel Margin="20,20,0,0">
             <StackPanel DockPanel.Dock="Bottom">
                 <TextBlock Text="{Binding Title}" FontSize="40" TextWrapping="Wrap"/>
                 <TextBlock Text="{Binding Artist}" FontSize="20" TextWrapping="Wrap"/>
@@ -26,7 +26,7 @@
         <DockPanel Grid.Column="2">
 
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-                <Button x:Name="PlaySong" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="PlayASong" Margin="20" ToolTip="Lire la musique" Content="▶" Width="40" Height="40"/>
+                <Button Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="PlayASong" Margin="20" ToolTip="Lire la musique" Content="▶" Width="40" Height="40"/>
                 <Button x:Name="Add2" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="AddToPlaylist" Margin="20" ToolTip="Cliquer pour ajouter" Content="+ Ajouter à ma playlist" Width="150" Height="40"/>
             </StackPanel>
 

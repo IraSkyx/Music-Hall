@@ -10,8 +10,8 @@ namespace MyApp
     /// </summary>
     public partial class Selection : UserControl
     {
-        private Lecteur lecteur = ((Lecteur)Application.Current.MainWindow.FindName("lecteur"));
-        private ListView scroller = ((ListView)Application.Current.MainWindow.FindName("scroller"));
+        private Lecteur MyPlayer = ((Lecteur)Application.Current.MainWindow.FindName("MyPlayer"));
+        private ListView MyScroller = ((ListView)Application.Current.MainWindow.FindName("MyScroller"));
 
         public Selection()
         {
@@ -19,24 +19,24 @@ namespace MyApp
         }
             
         private void PlayASong(object sender, RoutedEventArgs e)
-            => lecteur.Player.Play((IMusic)scroller.SelectedItem);
+            => MyPlayer.Player.Play((IMusic)MyScroller.SelectedItem);
 
         private void AddToPlaylist(object sender, RoutedEventArgs e)
         {
-            if (!ReferenceEquals(lecteur.Player.CurrentUser,null))
+            if (!ReferenceEquals(MyPlayer.Player.CurrentUser,null))
             {
-                if (!ReferenceEquals(lecteur.Player.CurrentUser.Favorite,null))
+                if (!ReferenceEquals(MyPlayer.Player.CurrentUser.Favorite,null))
                 {
-                    if (lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)scroller.SelectedItem)) == 0)
-                        lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (IMusic)scroller.SelectedItem);
+                    if (MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)MyScroller.SelectedItem)) == 0)
+                        MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Add(ReferenceEquals(MyPlayer.Add1, sender) ? MyPlayer.Player.CurrentlyPlaying : (IMusic)MyScroller.SelectedItem);
                 }
                 else
                 {
-                    lecteur.Player.CurrentUser.Favorite = new Playlist();
-                    lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Add(lecteur.Add1 == sender ? lecteur.Player.CurrentlyPlaying : (IMusic)scroller.SelectedItem);
+                    MyPlayer.Player.CurrentUser.Favorite = new Playlist();
+                    MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Add(ReferenceEquals(MyPlayer.Add1, sender) ? MyPlayer.Player.CurrentlyPlaying : (IMusic)MyScroller.SelectedItem);
                 }
             }
-            lecteur.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+            MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
     }
 }

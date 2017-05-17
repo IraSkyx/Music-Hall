@@ -99,9 +99,9 @@
             </Setter>
         </Style>
         <!-- TabItem Style-->
-        
-        <!-- Listbox style horizontal-->
-        <Style TargetType="ListView" x:Key="HorizontalListbox">
+
+        <!-- ListView style horizontal-->
+        <Style TargetType="ListView" x:Key="HorizontalListView">
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>
@@ -111,7 +111,7 @@
             </Setter>
             <Setter Property="Foreground" Value="#222222" />
         </Style>
-        <!-- Listbox style horizontal-->
+        <!-- ListView style horizontal-->
 
         <!-- Slider Style-->
         <Style x:Key="SliderRepeatButtonStyle" TargetType="{x:Type RepeatButton}">

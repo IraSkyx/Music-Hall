@@ -10,8 +10,8 @@ namespace MyApp
     /// </summary>
     public partial class Window3 : Window
     {
-        public event Action<IUser> Check;
-        public IUser User;
+        public event Action <IUser> Check;
+        private IUser User;
         private UserDB DataBase;
 
         public Window3(IUser User, UserDB DataBase)

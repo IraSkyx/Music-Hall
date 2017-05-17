@@ -13,25 +13,25 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel x:Name="hall" Margin="20"  VerticalAlignment="Bottom" MouseUp="Home_MouseUp">
+        <StackPanel x:Name="Hall" Margin="20"  VerticalAlignment="Bottom" MouseUp="Home_MouseUp">
             <TextBlock Text="Top 1 Music'Hall" FontSize="20" Margin="10" TextAlignment="Center"/>
-            <Image Source="images/eAintMe.jpg" Width="{Binding ElementName=world, Path=ActualWidth}" ToolTip="Cliquer pour + d'infos">
+            <Image Source="images/eAintMe.jpg" Width="{Binding ElementName=World, Path=ActualWidth}" ToolTip="Cliquer pour + d'infos">
                 <Image.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
                 </Image.BitmapEffect>
             </Image>
         </StackPanel>
-        <StackPanel x:Name="world" Margin="20" Grid.Column="1" VerticalAlignment="Top" MouseUp="Home_MouseUp">
-            <Image Source="images/eFeder.jpg" Width="{Binding ElementName=world, Path=ActualWidth}" ToolTip="Cliquer pour + d'infos">
+        <StackPanel x:Name="World" Margin="20" Grid.Column="1" VerticalAlignment="Top" MouseUp="Home_MouseUp">
+            <Image Source="images/eFeder.jpg" Width="{Binding ElementName=World, Path=ActualWidth}" ToolTip="Cliquer pour + d'infos">
                 <Image.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
                 </Image.BitmapEffect>
             </Image>
             <TextBlock Text="Top 1 World" FontSize="20" Margin="10" TextAlignment="Center"/>
         </StackPanel>
-        <StackPanel x:Name="france" Margin="20" Grid.Column="2" VerticalAlignment="Center" MouseUp="Home_MouseUp">
+        <StackPanel x:Name="France" Margin="20" Grid.Column="2" VerticalAlignment="Center" MouseUp="Home_MouseUp">
             <TextBlock Text="Top 1 France" FontSize="20" Margin="10" TextAlignment="Center"/>
-            <Image Source="images/eParis.jpg" Width="{Binding ElementName=world, Path=ActualWidth}" ToolTip="Cliquer pour + d'infos">
+            <Image Source="images/eParis.jpg" Width="{Binding ElementName=World, Path=ActualWidth}" ToolTip="Cliquer pour + d'infos">
                 <Image.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
                 </Image.BitmapEffect>

@@ -20,10 +20,9 @@ namespace MyApp
         /// </summary>
         public MainWindow()
         {
-            InitializeComponent();      
- 
-            Panel.DataContext = lecteur.Player;
-            scroller.DataContext = lecteur.Allmusics;                                            
+            InitializeComponent();       
+            Panel.DataContext = MyPlayer.Player;
+            MyScroller.DataContext = MyPlayer.Allmusics;                                            
         }
 
         /// <summary>
@@ -82,7 +81,7 @@ namespace MyApp
         /// <remarks>Le else correspond à la gestion de la déconnexion</remarks>
         private void Connexion(object sender, RoutedEventArgs e)
         {
-            if (ReferenceEquals(lecteur.Player.CurrentUser,null))
+            if (ReferenceEquals(MyPlayer.Player.CurrentUser,null))
             {
                 Window1 subWindow = new Window1(Allusers);
                 subWindow.Check += value => LogIn(value);
@@ -91,8 +90,8 @@ namespace MyApp
             }
             else
             {
-                lecteur.Player.CurrentUser = null;
-                listBox.DataContext = null;
+                MyPlayer.Player.CurrentUser = null;
+                MyPlaylist.DataContext = null;
             }
         }
 
@@ -102,9 +101,9 @@ namespace MyApp
         /// <param name="value"> L'User à connecter </param>
         private void LogIn(IUser value)
         {
-            lecteur.Player.CurrentUser = value;
-            listBox.DataContext = lecteur.Player.CurrentUser.Favorite;
-            lecteur.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget(); //Force le Binding à se refresh 
+            MyPlayer.Player.CurrentUser = value;
+            MyPlaylist.DataContext = MyPlayer.Player.CurrentUser.Favorite;
+            MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget(); //Force le Binding à se refresh 
         }
 
         /// <summary>
@@ -116,13 +115,13 @@ namespace MyApp
         /// <remarks>Le else correspond à l'ouverture de la fenêtre du profil</remarks>
         private void Inscription(object sender, RoutedEventArgs e)
         {
-            if (!ReferenceEquals(lecteur.Player.CurrentUser,null))
+            if (!ReferenceEquals(MyPlayer.Player.CurrentUser,null))
             {
-                Window3 subWindow3 = new Window3(lecteur.Player.CurrentUser, Allusers);
+                Window3 subWindow3 = new Window3(MyPlayer.Player.CurrentUser, Allusers);
                 subWindow3.Check += value =>
                 {
                     Allusers.Database.Add(value);
-                    Allusers.Database.Remove(Allusers.Database.First(x => x.Equals(lecteur.Player.CurrentUser)));
+                    Allusers.Database.Remove(Allusers.Database.First(x => x.Equals(MyPlayer.Player.CurrentUser)));
                     LogIn(value);
                 };
                 subWindow3.Owner = Application.Current.MainWindow;
@@ -146,7 +145,7 @@ namespace MyApp
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
-        private void scroller_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void MyScrollerSelectionChanged(object sender, SelectionChangedEventArgs e)
             => Tab.SelectedIndex = 1;
 
         /// <summary>
@@ -154,7 +153,7 @@ namespace MyApp
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
-        private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void MyTabSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Tab.SelectedIndex == 2)
             {
@@ -170,13 +169,13 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         /// <remarks> Le if permet un scroll vers la gauche </remarks>
         /// <remarks> Le else permet un scroll vers la droite </remarks>
-        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void MyScrollerWheeling(object sender, MouseWheelEventArgs e)
         {
             if (e.Delta > 0)
-                scroller.SelectedIndex = (scroller.SelectedIndex == 0) ? 0 : scroller.SelectedIndex - 1;                     
+                MyScroller.SelectedIndex = (MyScroller.SelectedIndex == 0) ? 0 : MyScroller.SelectedIndex - 1;                     
             else
-                scroller.SelectedIndex = (scroller.SelectedIndex == lecteur.Allmusics.PlaylistProperty.Count-1) ? lecteur.Allmusics.PlaylistProperty.Count - 1 : scroller.SelectedIndex + 1;
-            scroller.ScrollIntoView(lecteur.Allmusics.PlaylistProperty.ElementAt(scroller.SelectedIndex));
+                MyScroller.SelectedIndex = (MyScroller.SelectedIndex == MyPlayer.Allmusics.PlaylistProperty.Count-1) ? MyPlayer.Allmusics.PlaylistProperty.Count - 1 : MyScroller.SelectedIndex + 1;
+            MyScroller.ScrollIntoView(MyPlayer.Allmusics.PlaylistProperty.ElementAt(MyScroller.SelectedIndex));
         }
 
         /// <summary>
@@ -186,8 +185,8 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void ViewFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(lecteur.Player.CurrentUser,null) && !ReferenceEquals(listBox.SelectedItem,null))
-                scroller.SelectedItem=((IMusic)listBox.SelectedItem);
+            if (!ReferenceEquals(MyPlayer.Player.CurrentUser,null) && !ReferenceEquals(MyPlaylist.SelectedItem,null))
+                MyScroller.SelectedItem=((IMusic)MyPlaylist.SelectedItem);
         }
 
         /// <summary>
@@ -197,10 +196,10 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void ReadFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(lecteur.Player.CurrentUser,null) && !ReferenceEquals(listBox.SelectedItem,null) && ReferenceEquals(sender,listBox))
-                lecteur.Player.Play((IMusic)listBox.SelectedItem);    
+            if (!ReferenceEquals(MyPlayer.Player.CurrentUser,null) && !ReferenceEquals(MyPlaylist.SelectedItem,null) && ReferenceEquals(sender, MyPlaylist))
+                MyPlayer.Player.Play((IMusic)MyPlaylist.SelectedItem);    
             else
-                lecteur.Player.Play((IMusic)scroller.SelectedItem);
+                MyPlayer.Player.Play((IMusic)MyScroller.SelectedItem);
         }
 
         /// <summary>
@@ -210,9 +209,9 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void DeleteFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(lecteur.Player.CurrentUser,null) && !ReferenceEquals(listBox.SelectedItem,null))
-                lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Remove((IMusic)listBox.SelectedItem);
-            lecteur.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+            if (!ReferenceEquals(MyPlayer.Player.CurrentUser,null) && !ReferenceEquals(MyPlaylist.SelectedItem,null))
+                MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Remove((IMusic)MyPlaylist.SelectedItem);
+            MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }      
     }  
 }
