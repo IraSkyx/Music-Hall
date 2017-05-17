@@ -41,6 +41,7 @@
             <!-- MaPlaylist -->
             <DockPanel DockPanel.Dock="Right" Margin="10">
                 <TextBlock Text="Ma Playlist" Foreground="#222222" DockPanel.Dock="Top" FontSize="20"/>
+                <TextBlock Text="{Binding PlaylistProperty,Converter={StaticResource ValueToContent} , ConverterParameter=count}" Foreground="#222222" DockPanel.Dock="Top" FontSize="20"/>
                 <ListView x:Name="listBox" ItemsSource="{Binding PlaylistProperty}" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="ViewFromPlaylist" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent">
                     <ListBox.ItemTemplate>
                         <DataTemplate>

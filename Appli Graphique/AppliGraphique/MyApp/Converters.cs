@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Collections.ObjectModel;
 
 namespace MyApp
 {
@@ -47,6 +48,7 @@ namespace MyApp
                 case "inscription": return value == null ? "Inscription" : ((User)value).Infos.DisplayName;
                 case "seconnecter": return value == null ? "Se connecter" : "Fermer la session";
                 case "sinscrire": return value == null ? "S'inscrire" : "Voir mon profil";
+                case "count": return string.Format("{0} titres", ((ObservableCollection<Musique>)value).Count());
                 default : return null;
             }
         }
@@ -55,6 +57,8 @@ namespace MyApp
         {
             throw new NotImplementedException();
         }
+
+
     }
 }
 
