@@ -81,14 +81,14 @@
     <Compile Include="SongDetail.xaml.cs">
       <DependentUpon>SongDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="Connexion.xaml.cs">
+      <DependentUpon>Connexion.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window2.xaml.cs">
-      <DependentUpon>Window2.xaml</DependentUpon>
+    <Compile Include="Inscription.xaml.cs">
+      <DependentUpon>Inscription.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window3.xaml.cs">
-      <DependentUpon>Window3.xaml</DependentUpon>
+    <Compile Include="Profil.xaml.cs">
+      <DependentUpon>Profil.xaml</DependentUpon>
     </Compile>
     <Page Include="Home.xaml">
       <SubType>Designer</SubType>
@@ -122,15 +122,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Window1.xaml">
+    <Page Include="Connexion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Window2.xaml">
+    <Page Include="Inscription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Window3.xaml">
+    <Page Include="Profil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -181,6 +181,10 @@
     <ProjectReference Include="..\MainTest\MainTest.csproj">
       <Project>{701788b0-1450-457c-8757-6223e10aee76}</Project>
       <Name>MainTest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Stub\Stub.csproj">
+      <Project>{27F289E9-B424-44B2-9B50-E13DB6C0F0A5}</Project>
+      <Name>Stub</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

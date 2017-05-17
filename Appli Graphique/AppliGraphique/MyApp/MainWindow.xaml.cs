@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using MainTest;
+using Stub;
 
 namespace MyApp
 {
@@ -12,7 +12,7 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {       
-        private UserDB Allusers = Stub.LoadUsersTest();
+        private UserDB Allusers = new StubUsers().LoadUsers();
 
         public MainWindow()
         {
@@ -52,7 +52,7 @@ namespace MyApp
 
         private void Connexion(object sender, RoutedEventArgs e)
         {
-            if (lecteur.Player.CurrentUser==null) //Fenêtre de connexion
+            if (ReferenceEquals(lecteur.Player.CurrentUser,null)) //Fenêtre de connexion
             {
                 Window1 subWindow = new Window1(Allusers);
                 subWindow.Check += value => LogIn(value);
@@ -75,7 +75,7 @@ namespace MyApp
 
         private void Inscription(object sender, RoutedEventArgs e)
         {
-            if (lecteur.Player.CurrentUser != null) //Fenêtre de profil
+            if (!ReferenceEquals(lecteur.Player.CurrentUser,null)) //Fenêtre de profil
             {
                 Window3 subWindow3 = new Window3(lecteur.Player.CurrentUser, Allusers);
                 subWindow3.Check += value =>
@@ -123,13 +123,13 @@ namespace MyApp
 
         private void ViewFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (lecteur.Player.CurrentUser != null && listBox.SelectedItem != null)
+            if (!ReferenceEquals(lecteur.Player.CurrentUser,null) && !ReferenceEquals(listBox.SelectedItem,null))
                 scroller.SelectedItem=((IMusic)listBox.SelectedItem);
         }
 
         private void ReadFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (lecteur.Player.CurrentUser != null && listBox.SelectedItem != null && ReferenceEquals(sender,listBox))
+            if (!ReferenceEquals(lecteur.Player.CurrentUser,null) && !ReferenceEquals(listBox.SelectedItem,null) && ReferenceEquals(sender,listBox))
                 lecteur.Player.Play((IMusic)listBox.SelectedItem);    
             else
                 lecteur.Player.Play((IMusic)scroller.SelectedItem);
@@ -137,7 +137,7 @@ namespace MyApp
 
         private void DeleteFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (lecteur.Player.CurrentUser != null && listBox.SelectedItem != null)
+            if (!ReferenceEquals(lecteur.Player.CurrentUser,null) && !ReferenceEquals(listBox.SelectedItem,null))
                 lecteur.Player.CurrentUser.Favorite.PlaylistProperty.Remove((IMusic)listBox.SelectedItem);
             lecteur.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }      

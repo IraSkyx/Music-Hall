@@ -33,11 +33,12 @@
                 <TextBlock x:Name="email" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Text="Adresse email" FontSize="15"/>
                 <TextBlock x:Name="mdp" Grid.Row="2" VerticalAlignment="Center" TextAlignment="Center" Text="Mot de passe" FontSize="15"/>
 
-                <TextBox x:Name="pseudobox" Grid.Column="1" Height="30" Margin="10" Text="{Binding Infos.DisplayName, Mode=OneWay}"/>
-                <TextBox x:Name="emailbox" Grid.Column="1" Grid.Row="1"  Height="30" Margin="10" Text="{Binding Infos.Address, Mode=OneWay}"/>
-                <TextBox x:Name="mdpbox" Grid.Column="1" Grid.Row="2" Height="30" Margin="10" Text="{Binding Psswd, Mode=OneWay}"/>
+                <TextBox x:Name="PseudoBox" Grid.Column="1" Height="30" Margin="10" Text="{Binding Infos.DisplayName, Mode=OneWay}"/>
+                <TextBox x:Name="EmailBox" Grid.Column="1" Grid.Row="1"  Height="30" Margin="10" Text="{Binding Infos.Address, Mode=OneWay}"/>
+                <TextBox x:Name="MdpBox" Grid.Column="1" Grid.Row="2" Height="30" Margin="10" Text="{Binding Psswd, Mode=OneWay}"/>
 
             </Grid>
+            <TextBlock x:Name="wrong" Foreground="#D91E18" TextAlignment="Center" TextWrapping="Wrap"/>
             <Button x:Name="valider" Click="Commit" Content="Sauvegarder mon profil" Width="200" Height="35" Margin="30" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}"/>
         </StackPanel>
         <!--Corps-->

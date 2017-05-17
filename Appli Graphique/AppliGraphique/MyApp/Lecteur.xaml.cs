@@ -1,11 +1,11 @@
 ﻿using Biblio;
-using MainTest;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
 using System.Windows.Threading;
+using Stub;
 
 namespace MyApp
 {
@@ -15,7 +15,7 @@ namespace MyApp
     public partial class Lecteur : UserControl
     {
         public Player Player { get; set; } = new Player();
-        public Playlist Allmusics = Stub.LoadMusicsTest();
+        public Playlist Allmusics = new StubMusics().LoadMusics();
         private DispatcherTimer timer = new DispatcherTimer();
 
         public Lecteur()
@@ -62,7 +62,7 @@ namespace MyApp
 
         private void PausePlayClick(object sender, RoutedEventArgs e)
         {
-            if(Player.CurrentlyPlaying != null)
+            if(!ReferenceEquals(Player.CurrentlyPlaying,null))
             {
                 if (Player.IsPlaying)
                 {
@@ -115,15 +115,15 @@ namespace MyApp
 
         private void ProgMouseClick(object sender, MouseButtonEventArgs e)
         {
-            if (Player.Source != null && Player.NaturalDuration.HasTimeSpan)
+            if (!ReferenceEquals(Player.Source,null) && Player.NaturalDuration.HasTimeSpan)
                 Player.ChangePosition(new TimeSpan(0, 0, (int)((e.GetPosition(Prog).X / Prog.ActualWidth) * Prog.Maximum)));
         }
 
         private void AddToPlaylist(object sender, RoutedEventArgs e)
         {
-            if (Player.CurrentUser != null) //Si un user est connecté
+            if (!ReferenceEquals(Player.CurrentUser,null)) //Si un user est connecté
             {
-                if (Player.CurrentUser.Favorite == null) //Si l'utilisateur n'a pas de playlist
+                if (ReferenceEquals(Player.CurrentUser.Favorite,null)) //Si l'utilisateur n'a pas de playlist
                     Player.CurrentUser.Favorite = new Playlist();
                 if (Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals(Player.CurrentlyPlaying)) == 0) //Si pas déjà présente
                     Player.CurrentUser.Favorite.PlaylistProperty.Add(Player.CurrentlyPlaying);
@@ -136,10 +136,10 @@ namespace MyApp
             if (ReferenceEquals(sender,((ListView)Application.Current.MainWindow.FindName("listBox"))))
                 ((ListView)Application.Current.MainWindow.FindName("scroller")).SelectedIndex = Allmusics.Index((IMusic)((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem);
 
-            if (ReferenceEquals(sender,ActualPlay) && Player.CurrentlyPlaying!=null)
+            if (ReferenceEquals(sender,ActualPlay) && !ReferenceEquals(Player.CurrentlyPlaying,null))
                 ((ListView)Application.Current.MainWindow.FindName("scroller")).SelectedIndex = Allmusics.Index(Player.CurrentlyPlaying);
 
-            else if (((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem != null && ReferenceEquals(sender,((ListView)Application.Current.MainWindow.FindName("scroller"))))
+            else if (!ReferenceEquals(((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem,null) && ReferenceEquals(sender,((ListView)Application.Current.MainWindow.FindName("scroller"))))
                 ((ListView)Application.Current.MainWindow.FindName("scroller")).SelectedIndex = Allmusics.Index((IMusic)((ListView)Application.Current.MainWindow.FindName("listBox")).SelectedItem);
         }
 

@@ -39,6 +39,7 @@
                 <PasswordBox x:Name="mdp" Grid.Row="2" Grid.Column="1" Height="23" Margin="10" Password="totoo"/>
 
             </Grid>
+            <TextBlock x:Name="wrong" Foreground="#D91E18" TextAlignment="Center" TextWrapping="Wrap"/>
             <Button x:Name="valider" Content="Valider" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Commit" Width="100" Height="35" Margin="50"/>
         </StackPanel>
         <!--Corps-->

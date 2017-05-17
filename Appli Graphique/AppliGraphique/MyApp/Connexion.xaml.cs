@@ -18,21 +18,23 @@ namespace MyApp
             this.Database = Database;
         }
 
-        private void Exit(object sender, RoutedEventArgs e) 
+        private void Exit(object sender, RoutedEventArgs e)
             => Close();
 
-        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e) 
+        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e)
             => DragMove();
 
         private void Commit(object sender, RoutedEventArgs e)
         {
-            if (Database.Exists(email.Text, passwd.Password))
+            try
             {
-                Check?.Invoke(Database.SearchFor(email.Text, passwd.Password));
+                Check?.Invoke(Database.LogIn(email.Text, passwd.Password));
                 Close();
             }
-            else
-                wrong.Visibility = Visibility.Visible;
+            catch (Exception ex)
+            {
+                wrong.Text = ex.Message;
+            }
         }
     }
 }

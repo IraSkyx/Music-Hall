@@ -7,11 +7,11 @@ namespace Biblio
     {
         public static IUser MakeUser(MailAddress Infos, string Psswd, Playlist Favorite)
         {
-            if (Infos.DisplayName.Length < 3 || Infos.DisplayName.Length < 3 || Psswd.Length < 3)
-                throw new FormatException();
+            if (Infos.DisplayName.Length < 3)
+                throw new FormatException("Pseudo trop court (3 caractères mini)");
+            if (Psswd.Length < 3)
+                throw new FormatException("Mot de passe trop court (3 caractères mini)");
             return new User(Infos, Psswd, Favorite);
         }
-        
-
     }
 }

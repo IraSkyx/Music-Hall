@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.Serialization;
 
 namespace Biblio
 {
@@ -18,18 +17,17 @@ namespace Biblio
         public void IsAlreadyUsed(string address)
         {
             if (Database.Count(x => x.Infos.Address.Equals(address)) > 0)
-                throw new AlreadyUsedException("Email déjà utilisé");
+                throw new Exception("Email déjà utilisé");
         }
 
-        public IUser CanLogIn(string address, string password)
+        public IUser LogIn(string address, string password)
         {
-            if (Database.Count(x => x.Infos.Address.Equals(address) && x.Psswd.Equals(password)) > 0)
-                throw new DoesntExistException("Mail ou mot de passe invalide");
-            else
-                return Database.First(x => x.Infos.Address.Equals(address) && x.Psswd.Equals(password));
+            if (Database.Count(x => x.Infos.Address.Equals(address) && x.Psswd.Equals(password)) == 0)
+                throw new Exception("Mail ou mot de passe invalide");
+            return Database.First(x => x.Infos.Address.Equals(address) && x.Psswd.Equals(password));
         }
 
         public override string ToString()
-            => String.Join("", Database);
+            => string.Join("", Database);
     }    
 }
