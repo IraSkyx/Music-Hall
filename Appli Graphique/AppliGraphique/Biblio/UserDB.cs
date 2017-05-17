@@ -9,10 +9,16 @@ namespace Biblio
         public ObservableCollection<IUser> Database;
 
         public UserDB()
-            => Database = new ObservableCollection<IUser>();
+        {
+             Database = new ObservableCollection<IUser>();
+        }
+           
 
         public UserDB(ObservableCollection<IUser> Database)
-            => this.Database = Database;
+        {
+            this.Database = Database;
+        }
+           
 
         public void IsAlreadyUsed(string address)
         {

@@ -14,7 +14,10 @@ namespace MyApp
         private ListView scroller = ((ListView)Application.Current.MainWindow.FindName("scroller"));
 
         public Selection()
-            => InitializeComponent();
+        {
+            InitializeComponent();
+        }
+            
 
         private void PlayASong(object sender, RoutedEventArgs e)
             => lecteur.Player.Play((IMusic)scroller.SelectedItem);

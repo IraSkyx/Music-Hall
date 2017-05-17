@@ -10,10 +10,14 @@ namespace Biblio
         public ObservableCollection<IMusic> PlaylistProperty { get; set; }
 
         public Playlist()
-            => PlaylistProperty = new ObservableCollection<IMusic>();
-
+        { 
+             PlaylistProperty = new ObservableCollection<IMusic>();
+        }
         public Playlist(IEnumerable<IMusic> mus)
-            => PlaylistProperty=new ObservableCollection<IMusic>(mus); 
+        {
+            PlaylistProperty=new ObservableCollection<IMusic>(mus); 
+        }
+           
 
         public Playlist Filter(string critere, string input)
         {
