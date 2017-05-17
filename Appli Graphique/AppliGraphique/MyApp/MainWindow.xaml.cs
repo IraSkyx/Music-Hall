@@ -15,21 +15,38 @@ namespace MyApp
 
         private UserDB Allusers = new StubUsers().LoadUsers();
 
+        /// <summary>
+        /// Instancie MainWindow
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();      
-
-            //Initialisation des DataContext  
+ 
             Panel.DataContext = lecteur.Player;
             scroller.DataContext = lecteur.Allmusics;                                            
         }
 
+        /// <summary>
+        /// Quitte le programme 
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
         private void Exit(object sender, RoutedEventArgs e)
             => Close();
 
+        /// <summary>
+        /// Réduit la fenêtre
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
         private void Reduce(object sender, RoutedEventArgs e) 
             => WindowState = WindowState.Minimized;
 
+        /// <summary>
+        /// Déplace la fenêtre
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
         private void Drag(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
@@ -37,6 +54,11 @@ namespace MyApp
             DragMove();
         }
 
+        /// <summary>
+        /// Agrandit/Réduit la fênetre
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
         private void Increase(object sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Maximized)
@@ -51,22 +73,33 @@ namespace MyApp
             }
         }
 
+        /// <summary>
+        /// Ouvre la fenêtre de connexion ou déconnecte un User
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
+        /// <remarks>Le if correspond à l'ouverture  de la fenêtre de connexion</remarks>
+        /// <remarks>Le else correspond à la gestion de la déconnexion</remarks>
         private void Connexion(object sender, RoutedEventArgs e)
         {
-            if (ReferenceEquals(lecteur.Player.CurrentUser,null)) //Fenêtre de connexion
+            if (ReferenceEquals(lecteur.Player.CurrentUser,null))
             {
                 Window1 subWindow = new Window1(Allusers);
                 subWindow.Check += value => LogIn(value);
                 subWindow.Owner = Application.Current.MainWindow;
                 subWindow.Show();
             }
-            else //Bouton déconnexion
+            else
             {
                 lecteur.Player.CurrentUser = null;
                 listBox.DataContext = null;
             }
         }
 
+        /// <summary>
+        /// Connecte un User
+        /// </summary>
+        /// <param name="value"> L'User à connecter </param>
         private void LogIn(IUser value)
         {
             lecteur.Player.CurrentUser = value;
@@ -74,9 +107,16 @@ namespace MyApp
             lecteur.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget(); //Force le Binding à se refresh 
         }
 
+        /// <summary>
+        /// Ouvre la fenêtre d'inscription ou de profil
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
+        /// <remarks>Le if correspond à l'ouverture de la fenêtre d'inscription</remarks>
+        /// <remarks>Le else correspond à l'ouverture de la fenêtre du profil</remarks>
         private void Inscription(object sender, RoutedEventArgs e)
         {
-            if (!ReferenceEquals(lecteur.Player.CurrentUser,null)) //Fenêtre de profil
+            if (!ReferenceEquals(lecteur.Player.CurrentUser,null))
             {
                 Window3 subWindow3 = new Window3(lecteur.Player.CurrentUser, Allusers);
                 subWindow3.Check += value =>
@@ -88,7 +128,7 @@ namespace MyApp
                 subWindow3.Owner = Application.Current.MainWindow;
                 subWindow3.Show();
             }
-            else //Fenêtre d'inscription
+            else
             {
                 Window2 subWindow2 = new Window2(Allusers);
                 subWindow2.Check += value =>
@@ -101,9 +141,19 @@ namespace MyApp
             }
         }
 
+        /// <summary>
+        /// Met l'élement sélectionné de la Listview supérieure à l'indice 1 
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
         private void scroller_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            => Tab.SelectedIndex = 1;        
+            => Tab.SelectedIndex = 1;
 
+        /// <summary>
+        /// Réinitialise l'indice de sélection de la ListView de recherche lorsqu'on clique sur un de ces éléments
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
         private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Tab.SelectedIndex == 2)
@@ -113,6 +163,13 @@ namespace MyApp
             }              
         }
 
+        /// <summary>
+        /// Permet de Scroller de gauche à droite et inversement 
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
+        /// <remarks> Le if permet un scroll vers la gauche </remarks>
+        /// <remarks> Le else permet un scroll vers la droite </remarks>
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (e.Delta > 0)
@@ -122,12 +179,22 @@ namespace MyApp
             scroller.ScrollIntoView(lecteur.Allmusics.PlaylistProperty.ElementAt(scroller.SelectedIndex));
         }
 
+        /// <summary>
+        /// Permet de consulter une Music en cliquant sur un élément de sa playlist
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
         private void ViewFromPlaylist(object sender, MouseButtonEventArgs e)
         {
             if (!ReferenceEquals(lecteur.Player.CurrentUser,null) && !ReferenceEquals(listBox.SelectedItem,null))
                 scroller.SelectedItem=((IMusic)listBox.SelectedItem);
         }
 
+        /// <summary>
+        /// Permet de lire une Music en double-cliquant sur un élément de sa playlist
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
         private void ReadFromPlaylist(object sender, MouseButtonEventArgs e)
         {
             if (!ReferenceEquals(lecteur.Player.CurrentUser,null) && !ReferenceEquals(listBox.SelectedItem,null) && ReferenceEquals(sender,listBox))
@@ -136,6 +203,11 @@ namespace MyApp
                 lecteur.Player.Play((IMusic)scroller.SelectedItem);
         }
 
+        /// <summary>
+        /// Permet de supprimer une Music en faisant un clic gauche sur un élément de sa playlist
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
         private void DeleteFromPlaylist(object sender, MouseButtonEventArgs e)
         {
             if (!ReferenceEquals(lecteur.Player.CurrentUser,null) && !ReferenceEquals(listBox.SelectedItem,null))

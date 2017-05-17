@@ -6,8 +6,7 @@ using System.Windows.Controls;
 namespace Biblio
 {
     public class Player : MediaElement, INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
+    {        
         private IMusic _CurrentlyPlaying;
         public IMusic CurrentlyPlaying
         {
@@ -64,15 +63,21 @@ namespace Biblio
                 OnPropertyChanged("Loop");
             }
         }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
+        /// <summary>
+        /// Instancie Player (+ appel Constructeur mère)
+        /// </summary>
         public Player():base()
         {
             LoadedBehavior = MediaState.Manual;            
             UnloadedBehavior = MediaState.Stop;
         }
 
+        /// <summary>
+        /// Avance ou recule dans la lecture de la playlist
+        /// </summary>
+        /// <param name="Sens"> 1 pour Suivant, -1 pour Précédent </param>
         public void GoToNextOrPrevious(int Sens)
         {
             try
@@ -95,12 +100,19 @@ namespace Biblio
             }            
         }
 
+        /// <summary>
+        /// Lis la Music passée en paramètre
+        /// </summary>
+        /// <param name="currentlyPlaying"> Music souhaitant être lue </param>
         public void Play(IMusic currentlyPlaying)
         {
             CurrentlyPlaying = currentlyPlaying;      
             SetPlay();
         }
 
+        /// <summary>
+        /// Lis la Music actuellement venant d'être affectée à CurrentlyPlaying
+        /// </summary>
         private void SetPlay()
         {
             if (CurrentlyPlaying != null)
@@ -111,11 +123,21 @@ namespace Biblio
             }                                      
         }
 
+        /// <summary>
+        /// Change la position de la lecture par celle passée en paramètre
+        /// </summary>
+        /// <param name="NewPosition"> Nouvelle position dans la musique </param>
         public void ChangePosition(TimeSpan NewPosition)
         {
             Position = NewPosition;           
             Play();
             IsPlaying = true;
         }
+
+        /// <summary>
+        /// Averti la vue du changement de valeur de la propriété
+        /// </summary>
+        /// <param name="Name"> Nom de la propriété modifiée </param>
+        protected void OnPropertyChanged(string Name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
     }
 }

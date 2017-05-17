@@ -18,7 +18,6 @@ namespace MyApp
             InitializeComponent();
         }
             
-
         private void PlayASong(object sender, RoutedEventArgs e)
             => lecteur.Player.Play((IMusic)scroller.SelectedItem);
 

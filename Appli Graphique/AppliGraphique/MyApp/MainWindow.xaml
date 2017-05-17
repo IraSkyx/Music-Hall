@@ -8,10 +8,10 @@
         Background="#ECF0F1" 
         Title="Music'Hall" Height="720" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Foreground="White" FontFamily="Microsoft YaHei Light">
     <Window.Resources>
-        <local:ScaleConverter x:Key="ScaleConverter"/>
         <local:ValueToContent x:Key="ValueToContent"/>
     </Window.Resources>
     <DockPanel>
+        
         <!--En-tête-->
         <StackPanel x:Name="Panel" DockPanel.Dock="Top" FlowDirection="RightToLeft" Orientation="Horizontal" MouseLeftButtonDown="Drag" Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="#222222">
             <Button x:Name="quit" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20" BorderThickness="0"/>
@@ -23,7 +23,7 @@
         <!--En-tête-->
 
         <!-- Lecteur -->
-        <local:Lecteur DockPanel.Dock="Bottom" x:Name="lecteur"/>
+        <local:Lecteur x:Name="lecteur" DockPanel.Dock="Bottom"/>
         <!-- Lecteur -->
 
         <!-- Corps -->
@@ -31,17 +31,15 @@
             <ListView x:Name="scroller" DockPanel.Dock="Top" Style="{StaticResource HorizontalListbox}" MouseDoubleClick="ReadFromPlaylist" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" ItemsSource="{Binding PlaylistProperty}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectedItem="{Binding Path=Search.SelectedItem}" SelectionChanged="scroller_SelectionChanged" Height="100" Background="Transparent">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <Image Height="50" Width="50" Source="{Binding Image}"/>
-                            <TextBlock Text="{Binding Title}"/>
-                        </StackPanel>
+                        <Image Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" Width="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" Source="{Binding Image}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListView>
+            
             <!-- MaPlaylist -->
             <DockPanel DockPanel.Dock="Right" Margin="10">
                 <TextBlock Text="Ma Playlist" Foreground="#222222" DockPanel.Dock="Top" FontSize="20"/>
-                <TextBlock Text="{Binding ElementName=listBox,Path=ItemsSource.Count}" Foreground="#222222" DockPanel.Dock="Top" FontSize="20"/>
+                <TextBlock Text="{Binding ItemsSource.Count, ElementName=listBox, StringFormat='\{0} titres'}" Foreground="#222222" DockPanel.Dock="Top" FontSize="10"/>
                 <ListView x:Name="listBox" ItemsSource="{Binding PlaylistProperty}" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="ViewFromPlaylist" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -57,11 +55,11 @@
                 </ListView>
             </DockPanel>
             <!-- MaPlaylist -->
-
+            
             <!-- Onglets -->
             <TabControl x:Name="Tab" SelectionChanged="Tab_SelectionChanged" Margin="10" Background="#222222">
                 <TabItem Header="Accueil" Foreground="White" FontFamily="Microsoft YaHei UI" Margin="-3,0,3,0">
-                    <local:Home x:Name="xHome"/>
+                    <local:Accueil x:Name="xHome"/>
                 </TabItem>
                 <TabItem Header="Sélection" FontFamily="Microsoft YaHei UI" Foreground="White" Margin="-4,0,4,0">
                     <local:Selection x:Name="xSelection" DataContext="{Binding ElementName=scroller, Path=SelectedItem}"/>
