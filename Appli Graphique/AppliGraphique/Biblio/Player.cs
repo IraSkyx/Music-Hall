@@ -111,7 +111,7 @@ namespace Biblio
         }
 
         /// <summary>
-        /// Lis la Music actuellement venant d'être affectée à CurrentlyPlaying
+        /// Lis la Music venant d'être affectée à CurrentlyPlaying
         /// </summary>
         private void SetPlay()
         {

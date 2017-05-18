@@ -26,53 +26,6 @@ namespace MyApp
         }
 
         /// <summary>
-        /// Quitte le programme 
-        /// </summary>
-        /// <param name="sender"> Object envoyeur </param>
-        /// <param name="e"> Évènement déclenché par la vue </param>
-        private void Exit(object sender, RoutedEventArgs e)
-            => Close();
-
-        /// <summary>
-        /// Réduit la fenêtre
-        /// </summary>
-        /// <param name="sender"> Object envoyeur </param>
-        /// <param name="e"> Évènement déclenché par la vue </param>
-        private void Reduce(object sender, RoutedEventArgs e) 
-            => WindowState = WindowState.Minimized;
-
-        /// <summary>
-        /// Déplace la fenêtre ou l'agrandit si double-clic
-        /// </summary>
-        /// <param name="sender"> Object envoyeur </param>
-        /// <param name="e"> Évènement déclenché par la vue </param>
-        private void Drag(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 2)
-                Increase(this, new RoutedEventArgs());
-            DragMove();
-        }
-
-        /// <summary>
-        /// Agrandit/Réduit la fênetre
-        /// </summary>
-        /// <param name="sender"> Object envoyeur </param>
-        /// <param name="e"> Évènement déclenché par la vue </param>
-        private void Increase(object sender, RoutedEventArgs e)
-        {
-            if (WindowState == WindowState.Maximized)
-            {
-                WindowState = WindowState.Normal;
-                increase.Content = "⇱";
-            }
-            else
-            {
-                WindowState = WindowState.Maximized;
-                increase.Content = "⇲";
-            }
-        }
-
-        /// <summary>
         /// Ouvre la fenêtre de connexion ou déconnecte un User
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
@@ -103,7 +56,7 @@ namespace MyApp
         {
             MyPlayer.Player.CurrentUser = value;
             MyPlaylist.DataContext = MyPlayer.Player.CurrentUser.Favorite;
-            MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget(); //Force le Binding à se refresh 
+            MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
 
         /// <summary>

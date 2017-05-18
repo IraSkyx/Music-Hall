@@ -1,6 +1,7 @@
 ﻿using Biblio;
 using System;
 using System.Windows;
+using System.Windows.Input;
 
 namespace MyApp
 {
@@ -34,7 +35,7 @@ namespace MyApp
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
-        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Drag(object sender, MouseButtonEventArgs e)
             => DragMove();
 
         /// <summary>
