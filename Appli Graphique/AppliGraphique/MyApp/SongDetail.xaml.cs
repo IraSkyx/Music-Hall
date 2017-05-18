@@ -20,6 +20,9 @@ namespace MyApp
         private LinkedList<ProgressBar> MyProgs = new LinkedList<ProgressBar>();
         private int[] Previous = new int[30];
 
+        /// <summary>
+        /// Instancie SongDetail
+        /// </summary>
         public SongDetail()
         {
             InitializeComponent();
@@ -29,6 +32,9 @@ namespace MyApp
             Task t = Task.Run(() => SetValues());
         }
 
+        /// <summary>
+        /// Initialise les Progress Bar
+        /// </summary>
         private void InitializeProgressBar()
         {
             for (int i = 0; i < 30; ++i)
@@ -54,6 +60,9 @@ namespace MyApp
             }
         }
 
+        /// <summary>
+        /// Modifie les valeurs des Progress Bar en fonction du MasterPeakValue de Naudio.dll en Multi-Threadé
+        /// </summary>
         [MTAThread]
         public void SetValues()
         {
@@ -70,7 +79,6 @@ namespace MyApp
                     {
                         BaseValue = DefaultDevice.AudioMeterInformation.MasterPeakValue;
                         RoundedValue = Math.Round(BaseValue * 100);
-
                         if (BaseValue > 0)
                         {
                             try

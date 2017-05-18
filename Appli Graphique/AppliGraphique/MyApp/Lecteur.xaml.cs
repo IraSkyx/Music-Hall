@@ -34,7 +34,7 @@ namespace MyApp
             Player.MediaEnded += MediaEnded;
             Player.MediaOpened += MediaOpened;
 
-            timer.Interval = TimeSpan.FromMilliseconds(100);
+            timer.Interval = TimeSpan.FromMilliseconds(500);
             timer.Tick += new EventHandler(Update);
             timer.Start();
         }

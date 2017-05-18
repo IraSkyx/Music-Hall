@@ -42,7 +42,7 @@ namespace MyApp
             => WindowState = WindowState.Minimized;
 
         /// <summary>
-        /// Déplace la fenêtre
+        /// Déplace la fenêtre ou l'agrandit si double-clic
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
@@ -83,7 +83,7 @@ namespace MyApp
         {
             if (ReferenceEquals(MyPlayer.Player.CurrentUser,null))
             {
-                Window1 subWindow = new Window1(Allusers);
+                Connexion subWindow = new Connexion(Allusers);
                 subWindow.Check += value => LogIn(value);
                 subWindow.Owner = Application.Current.MainWindow;
                 subWindow.Show();
@@ -115,9 +115,9 @@ namespace MyApp
         /// <remarks>Le else correspond à l'ouverture de la fenêtre du profil</remarks>
         private void Inscription(object sender, RoutedEventArgs e)
         {
-            if (!ReferenceEquals(MyPlayer.Player.CurrentUser,null))
+            if (!ReferenceEquals(MyPlayer.Player.CurrentUser, null))
             {
-                Window3 subWindow3 = new Window3(MyPlayer.Player.CurrentUser, Allusers);
+                Profil subWindow3 = new Profil(MyPlayer.Player.CurrentUser, Allusers);
                 subWindow3.Check += value =>
                 {
                     Allusers.Database.Add(value);
@@ -129,7 +129,7 @@ namespace MyApp
             }
             else
             {
-                Window2 subWindow2 = new Window2(Allusers);
+                Inscription subWindow2 = new Inscription(Allusers);
                 subWindow2.Check += value =>
                 {
                     Allusers.Database.Add(value);

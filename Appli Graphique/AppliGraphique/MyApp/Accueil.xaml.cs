@@ -5,7 +5,7 @@ using System.Windows.Input;
 namespace MyApp
 {
     /// <summary>
-    /// Logique d'interaction pour Home.xaml
+    /// Logique d'interaction pour Accueil.xaml
     /// </summary>
     public partial class Accueil : UserControl
     {        

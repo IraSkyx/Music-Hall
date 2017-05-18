@@ -13,14 +13,27 @@ namespace MyApp
         private Lecteur MyPlayer = ((Lecteur)Application.Current.MainWindow.FindName("MyPlayer"));
         private ListView MyScroller = ((ListView)Application.Current.MainWindow.FindName("MyScroller"));
 
+        /// <summary>
+        /// Instancie Selection
+        /// </summary>
         public Selection()
         {
             InitializeComponent();
         }
-            
+
+        /// <summary>
+        /// Joue le son actuellement selectionné par le Scroller
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
         private void PlayASong(object sender, RoutedEventArgs e)
             => MyPlayer.Player.Play((IMusic)MyScroller.SelectedItem);
 
+        /// <summary>
+        /// Ajotue la Music à la Playlist, gère les différents cas de figures (Exemple : si la playlist n'est pas encore instancié)
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
         private void AddToPlaylist(object sender, RoutedEventArgs e)
         {
             if (!ReferenceEquals(MyPlayer.Player.CurrentUser,null))
