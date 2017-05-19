@@ -19,6 +19,7 @@ namespace MyApp
         public Selection()
         {
             InitializeComponent();
+            MyComments.DataContext = IMusic.Comments;
         }
 
         /// <summary>

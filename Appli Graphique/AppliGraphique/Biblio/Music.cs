@@ -1,16 +1,35 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
 
 namespace Biblio
 {
+    [DataContract]
     internal class Music : IMusic
-    { 
+    {
+        [DataMember(Name = "Title", Order = 0)]
         public string Title { get; set; }
+
+        [DataMember(Name = "Artist", Order = 1)]
         public string Artist { get; set; }
+
+        [DataMember(Name = "Date", Order = 2)]
         public string Date { get; set; }
+
+        [DataMember(Name = "Genre", Order = 3)]
         public string Genre { get; set; }
+
+        [DataMember(Name = "Infos", Order = 4)]
         public string Infos { get; set; }
+
+        [DataMember(Name = "Audio", Order = 5)]
         public Uri Audio { get; set; }
+
+        [DataMember(Name = "Image", Order = 6)]
         public string Image { get; set; }
+
+        public ObservableCollection<Comment> Comments { get; set; }
+
 
         /// <summary>
         /// Constructeur de Music
@@ -24,6 +43,19 @@ namespace Biblio
             this.Infos = Infos;
             this.Audio = Audio;
             this.Image = Image;           
+        }
+
+
+        public Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Image, ObservableCollection<Comment> Comments)
+        {
+            this.Title = Title;
+            this.Artist = Artist;
+            this.Date = Date;
+            this.Genre = Genre;
+            this.Infos = Infos;
+            this.Audio = Audio;
+            this.Image = Image;
+            this.Comments = new ObservableCollection<Comment>();
         }
 
         /// <summary>

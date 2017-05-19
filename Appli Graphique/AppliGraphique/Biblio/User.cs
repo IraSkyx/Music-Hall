@@ -1,12 +1,18 @@
 ﻿using System.Net.Mail;
+using System.Runtime.Serialization;
 
 namespace Biblio
 {
-
+    [DataContract]
     internal class User : IUser
     {
+        [DataMember(Name = "Infos", Order = 0)]
         public MailAddress Infos { get; set; }
+
+        [DataMember(Name = "Psswd", Order = 1)]
         public string Psswd { get; set; }
+
+        [DataMember(Name = "Favorite", Order = 2)]
         public Playlist Favorite { get; set; }
 
         /// <summary>

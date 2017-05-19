@@ -31,7 +31,10 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void Exit(object sender, RoutedEventArgs e)
-            => Close();
+        {
+            //new PersistanceMusics().SaveMusics(MyPlayer.Allmusics);
+            Close();
+        }
 
         /// <summary>
         /// Réduit la fenêtre

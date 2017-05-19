@@ -37,11 +37,26 @@
                         <TextBlock Text="{Binding Date}" Margin="30" FontSize="20"/>
                     </StackPanel>
                 </TabItem>
-                <TabItem Header="Etc" Foreground="White">
+                
+                
+                <TabItem Header="Commentaires" Foreground="White">
                     <StackPanel>
-                        <TextBlock Text="{Binding Infos}" Margin="30" FontSize="20"/>
-                        <TextBlock Text="{Binding Date}" Margin="30" FontSize="20"/>
+                        <TextBlock Text="Avis:" Margin="15" FontSize="20"/>
+                        <TextBlock Text="{Binding ItemSource.Count, ElementName=MyComments, StringFormat='\{0} commentaires'}" FontSize="30" />
+                        <ListView x:Name="MyComments" ItemsSource="{Binding Comments}" Background="White">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Pseudo}"/>
+                                        <TextBlock Text="{Binding Message}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView> 
                     </StackPanel>
+                    
+                    
+                    
                 </TabItem>
                 <TabItem Header="Etc" Foreground="White">
                     <StackPanel>

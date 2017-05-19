@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Biblio
 {
@@ -17,5 +18,8 @@ namespace Biblio
         /// <returns> La Music fabriquée </returns>
         public static IMusic MakeMusic(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Image)
             => new Music(Title, Artist, Date, Genre, Infos, Audio, Image);
+
+        public static IMusic MakeMusic(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Image, ObservableCollection<Comment> Comments)
+           => new Music(Title, Artist, Date, Genre, Infos, Audio, Image, Comments);
     }
 }
