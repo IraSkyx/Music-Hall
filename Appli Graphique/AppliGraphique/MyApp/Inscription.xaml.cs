@@ -46,7 +46,8 @@ namespace MyApp
             try
             {
                 DataBase.IsAlreadyUsed(email.Text);
-                Check?.Invoke(UserMaker.MakeUser(new MailAddress(email.Text, pseudo.Text), mdp.Password, null));
+                UserDB.IsValid(email.Text);
+                Check?.Invoke(UserMaker.MakeUser(email.Text, pseudo.Text, mdp.Password, null));
                 Close();
             }
             catch (Exception ex)

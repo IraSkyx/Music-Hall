@@ -29,7 +29,7 @@ namespace MyApp
                 case "booltovisibility": return (bool)value ? Visibility.Visible : Visibility.Hidden;
                 case "nulltovisibility": return value == null ? Visibility.Hidden : Visibility.Visible;
                 case "connexion": return value == null ? "Connexion" : "Déconnexion";
-                case "inscription": return value == null ? "Inscription" : ((IUser)value).Infos.DisplayName;
+                case "inscription": return value == null ? "Inscription" : ((IUser)value).Username;
                 case "seconnecter": return value == null ? "Se connecter" : "Fermer la session";
                 case "sinscrire": return value == null ? "S'inscrire" : "Voir mon profil";               
                 case "objecttovalue":

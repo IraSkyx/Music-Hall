@@ -33,8 +33,8 @@
                 <TextBlock x:Name="email" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Text="Adresse email" FontSize="15"/>
                 <TextBlock x:Name="mdp" Grid.Row="2" VerticalAlignment="Center" TextAlignment="Center" Text="Mot de passe" FontSize="15"/>
 
-                <TextBox x:Name="PseudoBox" Grid.Column="1" Height="30" Margin="10" Text="{Binding Infos.DisplayName, Mode=OneWay}"/>
-                <TextBox x:Name="EmailBox" Grid.Column="1" Grid.Row="1"  Height="30" Margin="10" Text="{Binding Infos.Address, Mode=OneWay}"/>
+                <TextBox x:Name="PseudoBox" Grid.Column="1" Height="30" Margin="10" Text="{Binding Username, Mode=OneWay}"/>
+                <TextBox x:Name="EmailBox" Grid.Column="1" Grid.Row="1"  Height="30" Margin="10" Text="{Binding Address, Mode=OneWay}"/>
                 <TextBox x:Name="MdpBox" Grid.Column="1" Grid.Row="2" Height="30" Margin="10" Text="{Binding Psswd, Mode=OneWay}"/>
 
             </Grid>

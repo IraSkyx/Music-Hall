@@ -1,7 +1,7 @@
 ﻿using Biblio;
 using System;
-using System.Net.Mail;
 using System.Windows;
+using System.Windows.Input;
 
 namespace MyApp
 {
@@ -38,7 +38,7 @@ namespace MyApp
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
-        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e) 
+        private void Drag(object sender, MouseButtonEventArgs e) 
             => DragMove();
 
         /// <summary>
@@ -51,9 +51,10 @@ namespace MyApp
         {
             try
             {
-                if(!User.Infos.Address.Equals(EmailBox.Text))
+                if(!User.Address.Equals(EmailBox.Text))
                     DataBase.IsAlreadyUsed(EmailBox.Text);
-                Check?.Invoke(UserMaker.MakeUser(new MailAddress(EmailBox.Text, PseudoBox.Text), MdpBox.Text, User.Favorite));
+                UserDB.IsValid(EmailBox.Text);
+                Check?.Invoke(UserMaker.MakeUser(EmailBox.Text, PseudoBox.Text, MdpBox.Text, User.Favorite));
                 Close();
             }
             catch(Exception ex)

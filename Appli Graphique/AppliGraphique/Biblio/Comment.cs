@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Biblio
+﻿namespace Biblio
 {
     public class Comment
     {
-        public string Pseudo;
-        public string Message;
+        public string Username;
+        public int Rate;
+        public string Com;
 
-        public Comment(string Pseudo,string Message)
+        public Comment(string Username, int Rate, string Com)
         {
-            this.Pseudo = Pseudo;
-            this.Message = Message;
+            this.Username = Username;
+            this.Rate = Rate;
+            this.Com = Com;
         }
 
-        public override string ToString() => $"{Pseudo}\n{Message}\n";
-        
+        public override string ToString() 
+            => $"{Username}\n{Rate}\n{Com}\n";       
     }
 }

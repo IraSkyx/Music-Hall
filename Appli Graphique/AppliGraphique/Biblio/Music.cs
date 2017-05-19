@@ -28,8 +28,8 @@ namespace Biblio
         [DataMember(Name = "Image", Order = 6)]
         public string Image { get; set; }
 
+        [DataMember(Name = "Comments", Order = 7)]
         public ObservableCollection<Comment> Comments { get; set; }
-
 
         /// <summary>
         /// Constructeur de Music
@@ -42,10 +42,13 @@ namespace Biblio
             this.Genre = Genre;
             this.Infos = Infos;
             this.Audio = Audio;
-            this.Image = Image;           
+            this.Image = Image;
+            Comments = new ObservableCollection<Comment>();   
         }
 
-
+        /// <summary>
+        /// Constructeur de Music
+        /// </summary>
         public Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Image, ObservableCollection<Comment> Comments)
         {
             this.Title = Title;
@@ -55,7 +58,7 @@ namespace Biblio
             this.Infos = Infos;
             this.Audio = Audio;
             this.Image = Image;
-            this.Comments = new ObservableCollection<Comment>();
+            this.Comments = Comments;
         }
 
         /// <summary>

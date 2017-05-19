@@ -11,9 +11,9 @@ namespace MyApp
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {       
-
-        private UserDB Allusers = new StubUsers().LoadUsers();
+    {
+        //private UserDB AllUsers = new StubUsers().LoadUsers();
+        private UserDB AllUsers = new PersistanceUsers().LoadUsers();
 
         /// <summary>
         /// Instancie MainWindow
@@ -32,7 +32,8 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void Exit(object sender, RoutedEventArgs e)
         {
-            //new PersistanceMusics().SaveMusics(MyPlayer.Allmusics);
+            new PersistanceMusics().SaveMusics(MyPlayer.Allmusics);
+            new PersistanceUsers().SaveUsers(AllUsers);
             Close();
         }
 
@@ -86,10 +87,9 @@ namespace MyApp
         {
             if (ReferenceEquals(MyPlayer.Player.CurrentUser,null))
             {
-                Connexion subWindow = new Connexion(Allusers);
+                Connexion subWindow = new Connexion(AllUsers);
                 subWindow.Check += value => LogIn(value);
-                subWindow.Owner = Application.Current.MainWindow;
-                subWindow.Show();
+                subWindow.ShowDialog();
             }
             else
             {
@@ -120,26 +120,24 @@ namespace MyApp
         {
             if (!ReferenceEquals(MyPlayer.Player.CurrentUser, null))
             {
-                Profil subWindow3 = new Profil(MyPlayer.Player.CurrentUser, Allusers);
+                Profil subWindow3 = new Profil(MyPlayer.Player.CurrentUser, AllUsers);
                 subWindow3.Check += value =>
                 {
-                    Allusers.Database.Add(value);
-                    Allusers.Database.Remove(Allusers.Database.First(x => x.Equals(MyPlayer.Player.CurrentUser)));
+                    AllUsers.Database.Add(value);
+                    AllUsers.Database.Remove(AllUsers.Database.First(x => x.Equals(MyPlayer.Player.CurrentUser)));
                     LogIn(value);
                 };
-                subWindow3.Owner = Application.Current.MainWindow;
-                subWindow3.Show();
+                subWindow3.ShowDialog();
             }
             else
             {
-                Inscription subWindow2 = new Inscription(Allusers);
+                Inscription subWindow2 = new Inscription(AllUsers);
                 subWindow2.Check += value =>
                 {
-                    Allusers.Database.Add(value);
+                    AllUsers.Database.Add(value);
                     LogIn(value);
                 };
-                subWindow2.Owner = Application.Current.MainWindow;
-                subWindow2.Show();
+                subWindow2.ShowDialog();
             }
         }
 

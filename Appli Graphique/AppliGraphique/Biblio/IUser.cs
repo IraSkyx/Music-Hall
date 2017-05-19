@@ -4,7 +4,8 @@ namespace Biblio
 {
     public interface IUser
     {
-        MailAddress Infos { get; set; }
+        string Address { get; set; }
+        string Username { get; set; }
         string Psswd { get; set; }
         Playlist Favorite { get; set; }
 

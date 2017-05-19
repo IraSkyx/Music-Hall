@@ -55,6 +55,7 @@
     <Compile Include="Music.cs" />
     <Compile Include="MusicMaker.cs" />
     <Compile Include="PersistanceMusics.cs" />
+    <Compile Include="PersistanceUsers.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Playlist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

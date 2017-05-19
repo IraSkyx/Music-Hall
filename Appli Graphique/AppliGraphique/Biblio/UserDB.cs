@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Mail;
+using System.Runtime.Serialization;
 
 namespace Biblio
 {
+    [DataContract]
     public class UserDB
     {
+        [DataMember]
         public ObservableCollection<IUser> Database;
 
         /// <summary>
@@ -23,7 +27,7 @@ namespace Biblio
         /// <exception cref="Exception"> Lance une Exception si l'email est déjà utilisé </exception>
         public void IsAlreadyUsed(string address)
         {
-            if (Database.Count(x => x.Infos.Address.Equals(address)) > 0)
+            if (Database.Count(x => x.Address.Equals(address)) > 0)
                 throw new Exception("Email déjà utilisé");
         }
 
@@ -35,9 +39,19 @@ namespace Biblio
         /// <exception cref="Exception"> Lance une Exception si l'email ou le mot de passe sont invalides </exception>
         public IUser LogIn(string address, string password)
         {
-            if (Database.Count(x => x.Infos.Address.Equals(address) && x.Psswd.Equals(password)) == 0)
+            if (Database.Count(x => x.Address.Equals(address) && x.Psswd.Equals(password)) == 0)
                 throw new Exception("Mail ou mot de passe invalide");
-            return Database.First(x => x.Infos.Address.Equals(address) && x.Psswd.Equals(password));
+            return Database.First(x => x.Address.Equals(address) && x.Psswd.Equals(password));
+        }
+
+        /// <summary>
+        /// Détermine si une adresse est valide grâve à la FormatException de MailAddress
+        /// </summary>
+        /// <param name="Address"> L'adresse entrée par l'User </param>
+        /// <exception cref="Exception"> Lance une Exception si l'email est invalide </exception>
+        public static void IsValid(string Address)
+        {
+            MailAddress Add = new MailAddress(Address);
         }
 
         /// <summary>
