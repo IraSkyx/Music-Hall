@@ -3,6 +3,7 @@ using Gecko;
 using System;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -24,7 +25,7 @@ namespace MyApp
         private void Init()
         {            
             PersistanceMusics.SetCurrentDirectory(Directory.GetParent((Directory.GetParent((Path.GetDirectoryName(Assembly.GetEntryAssembly().Location))).FullName)).FullName);
-            if (!Directory.Exists("Firefox"))
+            if (!Directory.Exists("Firefox") || !Directory.EnumerateFileSystemEntries("Firefox").Any())
             {
                 Directory.CreateDirectory("Firefox");
                 ZipFile.ExtractToDirectory("Firefox.zip", "Firefox");
