@@ -85,7 +85,7 @@ namespace MyApp
                             {
                                 Application.Current.Dispatcher.Invoke(() =>
                                 {
-                                    if (Application.Current.MainWindow == null)
+                                    if (ReferenceEquals(Application.Current.MainWindow,null))
                                         return;
                                     (MyProgs.ElementAt(i)).Value = RoundedValue * 0.50 + Previous[i] / 3 + r.Next(0, 10);
                                     Previous[i] = Convert.ToInt32(RoundedValue);
@@ -99,7 +99,7 @@ namespace MyApp
                             {
                                 Application.Current.Dispatcher.Invoke(() =>
                                 {
-                                    if (Application.Current.MainWindow == null)
+                                    if (ReferenceEquals(Application.Current.MainWindow, null))
                                         return;
                                     (MyProgs.ElementAt(i)).Value = 0;
                                     Previous[i] = Convert.ToInt32(RoundedValue);

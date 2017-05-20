@@ -40,9 +40,9 @@
                 </TabItem>
 
                 <TabItem Header="Commentaires" Foreground="White">
-                    <StackPanel>
-                        <TextBlock Text="Avis :" Margin="15" FontSize="20"/>
-                        <TextBlock Text="{Binding Comments.Count, StringFormat='\{0} commentaires'}" FontSize="10" />
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="Avis :" Margin="15" FontSize="20"/>
+                        <TextBlock DockPanel.Dock="Top" Text="{Binding Comments.Count, StringFormat='\{0} commentaires'}" FontSize="10" />
                         <ListView ItemsSource="{Binding Comments}" Background="Transparent">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -54,7 +54,7 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                    </StackPanel>
+                    </DockPanel>
 
                 </TabItem>
                 <TabItem Header="Vidéos" Foreground="White">

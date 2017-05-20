@@ -1,6 +1,6 @@
 ﻿using Biblio;
 using Stub;
-using System.IO.Compression;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,10 +31,18 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void Exit(object sender, RoutedEventArgs e)
+            => Close();
+
+        /// <summary>
+        /// Lance les méthodes suivantes lorsque l'appli est fermée 
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
+        void MainWindow_Closed(object sender, EventArgs e)
         {
             new PersistanceMusics().SaveMusics(MyPlayer.Allmusics);
-            new PersistanceUsers().SaveUsers(AllUsers);               
-            Close();
+            new PersistanceUsers().SaveUsers(AllUsers);
+            xSelection.YT.Browser.Stop();
         }
 
         /// <summary>
@@ -142,14 +150,15 @@ namespace MyApp
         }
 
         /// <summary>
-        /// Met l'élement sélectionné de la Listview supérieure à l'indice 1 
+        /// Met l'élement sélectionné de la Listview du haut à l'indice 1 et met à jour la vidéo de la sélection
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void MyScrollerSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Tab.SelectedIndex = 1;
-            xSelection.YT.geckoWebBrowser.Navigate(((IMusic)(MyScroller.SelectedItem)).Video);
+            if(!ReferenceEquals((IMusic)(MyScroller.SelectedItem),null))
+                xSelection.YT.Browser.Navigate(((IMusic)(MyScroller.SelectedItem)).Video);
         }
 
         /// <summary>
