@@ -1,7 +1,7 @@
 ﻿using Biblio;
 using System;
-using System.Net.Mail;
 using System.Windows;
+using System.Windows.Input;
 
 namespace MyApp
 {
@@ -32,7 +32,7 @@ namespace MyApp
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
-        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e) 
+        private void Drag(object sender, MouseButtonEventArgs e) 
             => DragMove();
 
         /// <summary>
@@ -54,6 +54,17 @@ namespace MyApp
             {
                 wrong.Text = ex.Message;
             }
-        }   
+        }
+
+        /// <summary>
+        /// Permet à l'utilisateur de valider en pressant la touche Entrée
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+                Commit(this, new RoutedEventArgs());
+        }            
     }
 }

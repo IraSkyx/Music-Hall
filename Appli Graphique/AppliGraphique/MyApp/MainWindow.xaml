@@ -43,13 +43,7 @@
                 <ListView x:Name="MyPlaylist" ItemsSource="{Binding PlaylistProperty}" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="ViewFromPlaylist" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Height="50" Width="50" Source="{Binding Image}"/>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Title}"/>
-                                    <TextBlock Text="{Binding Artist}"/>
-                                </StackPanel>
-                            </StackPanel>
+                            <Image Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" Source="{Binding Image}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

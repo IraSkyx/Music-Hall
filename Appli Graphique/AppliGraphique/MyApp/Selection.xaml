@@ -5,15 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyApp"
              mc:Ignorable="d" 
+             Foreground="White"
              FontFamily="Microsoft YaHei Light"
-             d:DesignHeight="500" d:DesignWidth="720" Foreground="White" Background="#222222">
+             d:DesignHeight="500" d:DesignWidth="720" Background="#222222">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <DockPanel Margin="20,20,0,0">
-            <StackPanel DockPanel.Dock="Bottom">
+            <StackPanel DockPanel.Dock="Bottom" Margin="5">
                 <TextBlock Text="{Binding Title}" FontSize="40" TextWrapping="Wrap"/>
                 <TextBlock Text="{Binding Artist}" FontSize="20" TextWrapping="Wrap"/>
             </StackPanel>
@@ -37,32 +38,27 @@
                         <TextBlock Text="{Binding Date}" Margin="30" FontSize="20"/>
                     </StackPanel>
                 </TabItem>
-                
-                
+
                 <TabItem Header="Commentaires" Foreground="White">
                     <StackPanel>
-                        <TextBlock Text="Avis:" Margin="15" FontSize="20"/>
-                        <TextBlock Text="{Binding ItemSource.Count, ElementName=MyComments, StringFormat='\{0} commentaires'}" FontSize="30" />
-                        <ListView x:Name="MyComments" ItemsSource="{Binding Comments}" Background="White">
+                        <TextBlock Text="Avis :" Margin="15" FontSize="20"/>
+                        <TextBlock Text="{Binding Comments.Count, StringFormat='\{0} commentaires'}" FontSize="10" />
+                        <ListView ItemsSource="{Binding Comments}" Background="Transparent">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Pseudo}"/>
-                                        <TextBlock Text="{Binding Message}"/>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Username}" Foreground="White" FontSize="15"/>
+                                        <TextBlock Text="{Binding Rate, StringFormat='\{0}/5'}" Foreground="White" FontSize="10"/>
+                                        <TextBlock Text="{Binding Com}" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
-                        </ListView> 
+                        </ListView>
                     </StackPanel>
-                    
-                    
-                    
+
                 </TabItem>
-                <TabItem Header="Etc" Foreground="White">
-                    <StackPanel>
-                        <TextBlock Text="{Binding Infos}" Margin="30" FontSize="20"/>
-                        <TextBlock Text="{Binding Date}" Margin="30" FontSize="20"/>
-                    </StackPanel>
+                <TabItem Header="Vidéos" Foreground="White">
+                    <local:YoutubePlayer x:Name="YT"/>
                 </TabItem>
             </TabControl>
         </DockPanel>

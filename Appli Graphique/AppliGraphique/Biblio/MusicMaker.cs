@@ -14,12 +14,13 @@ namespace Biblio
         /// <param name="Genre"> Le Genre de la Music </param>
         /// <param name="Infos"> Les Infos de la Music </param>
         /// <param name="Audio"> L'Audio de la Music </param>
+        /// <param name="Video"> La Vidéo youtube de la Music </param>
         /// <param name="Image"> L'Image de la Music </param>
         /// <returns> La Music fabriquée </returns>
-        public static IMusic MakeMusic(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Image)
-            => new Music(Title, Artist, Date, Genre, Infos, Audio, Image);
+        public static IMusic MakeMusic(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Video, string Image)
+            => new Music(Title, Artist, Date, Genre, Infos, Audio, Video, Image);
 
-        public static IMusic MakeMusic(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Image, ObservableCollection<Comment> Comments)
-           => new Music(Title, Artist, Date, Genre, Infos, Audio, Image, Comments);
+        public static IMusic MakeMusic(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Video, string Image, ObservableCollection<Comment> Comments)
+           => new Music(Title, Artist, Date, Genre, Infos, Audio, Video ,Image, Comments);
     }
 }

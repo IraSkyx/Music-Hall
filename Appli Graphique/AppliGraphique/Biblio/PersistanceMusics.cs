@@ -11,7 +11,7 @@ namespace Biblio
 
         public Playlist LoadMusics()
         {
-            SetCurrentDirectory();            
+            SetCurrentDirectory(MyPath);            
 
             var Serializer = new DataContractSerializer(typeof(Playlist), new Type[] { typeof(Music) });
 
@@ -23,7 +23,7 @@ namespace Biblio
 
         public void SaveMusics(Playlist AllMusics)
         {
-            SetCurrentDirectory();
+            SetCurrentDirectory(MyPath);
 
             var Serializer = new DataContractSerializer(typeof(Playlist), new Type[] { typeof(Music) });
 
@@ -31,12 +31,12 @@ namespace Biblio
                 Serializer.WriteObject(writer, AllMusics);
         }
 
-        private void SetCurrentDirectory()
+        public static void SetCurrentDirectory(string Path)
         {
-            if (!Directory.Exists(MyPath))
-                Directory.CreateDirectory(MyPath);
+            if (!Directory.Exists(Path))
+                Directory.CreateDirectory(Path);
 
-            Directory.SetCurrentDirectory(MyPath);
+            Directory.SetCurrentDirectory(Path);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Biblio;
 using Stub;
+using System.IO.Compression;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,8 +13,7 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private UserDB AllUsers = new StubUsers().LoadUsers();
-        private UserDB AllUsers = new PersistanceUsers().LoadUsers();
+        private UserDB AllUsers = ReferenceEquals(new PersistanceUsers().LoadUsers(), null) ? new StubUsers().LoadUsers() : new PersistanceUsers().LoadUsers();
 
         /// <summary>
         /// Instancie MainWindow
@@ -33,7 +33,7 @@ namespace MyApp
         private void Exit(object sender, RoutedEventArgs e)
         {
             new PersistanceMusics().SaveMusics(MyPlayer.Allmusics);
-            new PersistanceUsers().SaveUsers(AllUsers);
+            new PersistanceUsers().SaveUsers(AllUsers);               
             Close();
         }
 
@@ -147,7 +147,10 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void MyScrollerSelectionChanged(object sender, SelectionChangedEventArgs e)
-            => Tab.SelectedIndex = 1;
+        {
+            Tab.SelectedIndex = 1;
+            xSelection.YT.geckoWebBrowser.Navigate(((IMusic)(MyScroller.SelectedItem)).Video);
+        }
 
         /// <summary>
         /// Réinitialise l'indice de sélection de la ListView de recherche lorsqu'on clique sur un de ces éléments

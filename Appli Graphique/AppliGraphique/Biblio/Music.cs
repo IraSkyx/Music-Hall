@@ -25,16 +25,19 @@ namespace Biblio
         [DataMember(Name = "Audio", Order = 5)]
         public Uri Audio { get; set; }
 
-        [DataMember(Name = "Image", Order = 6)]
-        public string Image { get; set; }
+        [DataMember(Name = "Video", Order = 6)]
+        public string Video { get; set; }
 
-        [DataMember(Name = "Comments", Order = 7)]
+        [DataMember(Name = "Image", Order = 7)]
+        public string Image { get; set; }     
+
+        [DataMember(Name = "Comments", Order = 8)]
         public ObservableCollection<Comment> Comments { get; set; }
 
         /// <summary>
         /// Constructeur de Music
         /// </summary>
-        public Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Image)
+        public Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Video, string Image)
         {
             this.Title = Title;
             this.Artist = Artist;
@@ -42,6 +45,7 @@ namespace Biblio
             this.Genre = Genre;
             this.Infos = Infos;
             this.Audio = Audio;
+            this.Video = Video;
             this.Image = Image;
             Comments = new ObservableCollection<Comment>();   
         }
@@ -49,7 +53,7 @@ namespace Biblio
         /// <summary>
         /// Constructeur de Music
         /// </summary>
-        public Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Image, ObservableCollection<Comment> Comments)
+        public Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Video, string Image, ObservableCollection<Comment> Comments)
         {
             this.Title = Title;
             this.Artist = Artist;
@@ -57,6 +61,7 @@ namespace Biblio
             this.Genre = Genre;
             this.Infos = Infos;
             this.Audio = Audio;
+            this.Video = Video;
             this.Image = Image;
             this.Comments = Comments;
         }

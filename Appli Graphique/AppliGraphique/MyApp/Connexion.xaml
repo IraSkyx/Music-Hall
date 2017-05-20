@@ -8,6 +8,7 @@
         FontFamily="Microsoft YaHei Light"
         Background="#222222"
         Foreground="White"
+        KeyDown="Window_KeyDown"
         Title="Connexion" Height="500" Width="300" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Drag">
     <DockPanel>
 

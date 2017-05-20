@@ -25,11 +25,11 @@ namespace MyApp
         private void Home_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (ReferenceEquals(World, sender))
-                MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic("T1");               
+                MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic("Back For More");               
             if (ReferenceEquals(France, sender))
-                MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic("T5");
+                MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic("Paris");
             if (ReferenceEquals(Hall, sender))
-                MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic("T6");
+                MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic("It Ain't Me");
             ((TabControl)Application.Current.MainWindow.FindName("Tab")).SelectedIndex = 1;
         }
     }

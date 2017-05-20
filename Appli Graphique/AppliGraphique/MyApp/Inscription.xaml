@@ -8,6 +8,7 @@
         Background="#222222"
         Foreground="White"
         FontFamily="Microsoft YaHei Light"
+        KeyDown="Window_KeyDown"
         Title="Inscription" Height="500" Width="300" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Drag">
     <DockPanel>
 

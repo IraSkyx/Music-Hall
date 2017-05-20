@@ -62,5 +62,16 @@ namespace MyApp
                 wrong.Text = ex.Message;
             }
         }
+
+        /// <summary>
+        /// Permet à l'utilisateur de valider en pressant la touche Entrée
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Commit(this, new RoutedEventArgs());
+        }
     }
 }

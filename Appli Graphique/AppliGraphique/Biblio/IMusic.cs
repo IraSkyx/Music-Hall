@@ -17,6 +17,8 @@ namespace Biblio
 
         Uri Audio { get; set; }
 
+        string Video { get; set; }
+
         string Image { get; set; }
 
         ObservableCollection<Comment> Comments { get; set; }

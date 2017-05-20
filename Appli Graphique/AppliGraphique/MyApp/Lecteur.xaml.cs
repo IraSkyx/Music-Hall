@@ -15,8 +15,7 @@ namespace MyApp
     public partial class Lecteur : UserControl
     {
         public Player Player { get; set; } = new Player();
-        //public Playlist Allmusics { get; set; } = new StubMusics().LoadMusics();
-        public Playlist Allmusics { get; set; } = new PersistanceMusics().LoadMusics();
+        public Playlist Allmusics { get; set; } = ReferenceEquals(new PersistanceMusics().LoadMusics(), null) ? new StubMusics().LoadMusics() : new PersistanceMusics().LoadMusics();
         private DispatcherTimer timer = new DispatcherTimer();
         private ListView MyScroller = (ListView)Application.Current.MainWindow.FindName("MyScroller");
         private ListView MyPlaylist = (ListView)Application.Current.MainWindow.FindName("MyPlaylist");

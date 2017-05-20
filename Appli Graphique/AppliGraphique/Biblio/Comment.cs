@@ -1,10 +1,16 @@
-﻿namespace Biblio
+﻿using System.Runtime.Serialization;
+
+namespace Biblio
 {
+    [DataContract]
     public class Comment
     {
-        public string Username;
-        public int Rate;
-        public string Com;
+        [DataMember(Name = "Username", Order = 1)]
+        public string Username { get; set; }
+        [DataMember(Name = "Rate", Order = 2)]
+        public int Rate { get; set; }
+        [DataMember(Name = "Com", Order = 3)]
+        public string Com { get; set; }
 
         public Comment(string Username, int Rate, string Com)
         {
