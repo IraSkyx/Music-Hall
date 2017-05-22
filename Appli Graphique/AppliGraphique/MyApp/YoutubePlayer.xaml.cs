@@ -35,11 +35,10 @@ namespace MyApp
             if (!Directory.Exists("Firefox") || Directory.EnumerateFileSystemEntries("Firefox").Count() != 20)
             {
                 if(Directory.Exists("Firefox"))
-                    Directory.Delete("Firefox");
+                    Directory.Delete("Firefox", true);
                 Directory.CreateDirectory("Firefox");
                 ZipFile.ExtractToDirectory("Firefox.zip", "Firefox");
             }
-            Console.WriteLine(Directory.GetCurrentDirectory());
             Xpcom.Initialize("Firefox");
             Host.Child = Browser;
             PersistanceMusics.SetCurrentDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MusicHall"));

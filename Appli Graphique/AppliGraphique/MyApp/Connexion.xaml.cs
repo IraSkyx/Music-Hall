@@ -47,8 +47,18 @@ namespace MyApp
         private void Commit(object sender, RoutedEventArgs e)
         {
             try
-            {
+            {                                
                 Check?.Invoke(Database.LogIn(email.Text, passwd.Password));
+                if ((bool)StayLoggedIn.IsChecked)
+                {
+                    Properties.Settings.Default.StayLogged = true;
+                    Console.WriteLine(Properties.Settings.Default.StayLogged);
+                }
+                else
+                {
+                    Properties.Settings.Default.StayLogged = false;
+                    Console.WriteLine(Properties.Settings.Default.StayLogged);
+                }                  
                 Close();
             }
             catch (Exception ex)

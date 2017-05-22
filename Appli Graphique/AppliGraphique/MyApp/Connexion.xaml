@@ -37,7 +37,8 @@
                 
             </Grid>
             <TextBlock x:Name="wrong" Foreground="#D91E18" TextAlignment="Center" TextWrapping="Wrap"/>
-            <Button x:Name="valider" Click="Commit" Content="Valider" Width="100" Height="35" Margin="10" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}"/>
+            <CheckBox x:Name="StayLoggedIn" Content="Rester connecté" HorizontalAlignment="Center" Foreground="White"/>
+            <Button x:Name="valider" Click="Commit" Content="Valider" Width="100" Height="35" Margin="20" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}"/>
         </StackPanel>
         <!--Corps-->
         

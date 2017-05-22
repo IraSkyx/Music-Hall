@@ -20,7 +20,11 @@ namespace MyApp
         /// </summary>
         public MainWindow()
         {
-            InitializeComponent();       
+            Properties.Settings.Default.Upgrade();
+            InitializeComponent();
+            Console.WriteLine(Properties.Settings.Default.StayLogged);
+            if (Properties.Settings.Default.StayLogged)
+                LogIn(AllUsers.Database.First(x => x.Address.Equals(Properties.Settings.Default.LastMail)));
             Panel.DataContext = MyPlayer.Player;
             MyScroller.DataContext = MyPlayer.Allmusics;                                            
         }
@@ -42,6 +46,7 @@ namespace MyApp
         {
             new PersistanceMusics().SaveMusics(MyPlayer.Allmusics);
             new PersistanceUsers().SaveUsers(AllUsers);
+            Properties.Settings.Default.Save();
             xSelection.YT.Browser.Stop();
         }
 
@@ -101,6 +106,8 @@ namespace MyApp
             }
             else
             {
+                Properties.Settings.Default.StayLogged = false;
+                Console.WriteLine(Properties.Settings.Default.StayLogged);
                 MyPlayer.Player.CurrentUser = null;
                 MyPlaylist.DataContext = null;
             }
@@ -114,6 +121,8 @@ namespace MyApp
         {
             MyPlayer.Player.CurrentUser = value;
             MyPlaylist.DataContext = MyPlayer.Player.CurrentUser.Favorite;
+            Properties.Settings.Default.LastMail = value.Address;
+            Console.WriteLine(Properties.Settings.Default.LastMail);
             MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
 
