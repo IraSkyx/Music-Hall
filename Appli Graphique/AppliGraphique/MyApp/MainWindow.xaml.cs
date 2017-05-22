@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MyApp.Properties;
 
 namespace MyApp
 {
@@ -20,11 +21,10 @@ namespace MyApp
         /// </summary>
         public MainWindow()
         {
-            Properties.Settings.Default.Upgrade();
             InitializeComponent();
-            Console.WriteLine(Properties.Settings.Default.StayLogged);
-            if (Properties.Settings.Default.StayLogged)
-                LogIn(AllUsers.Database.First(x => x.Address.Equals(Properties.Settings.Default.LastMail)));
+            Settings.Default.Upgrade();
+            if (Settings.Default.StayLogged)
+                LogIn(AllUsers.Database.First(x => x.Address.Equals(Settings.Default.LastMail)));
             Panel.DataContext = MyPlayer.Player;
             MyScroller.DataContext = MyPlayer.Allmusics;                                            
         }
@@ -46,7 +46,8 @@ namespace MyApp
         {
             new PersistanceMusics().SaveMusics(MyPlayer.Allmusics);
             new PersistanceUsers().SaveUsers(AllUsers);
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
+            Settings.Default.Reload();
             xSelection.YT.Browser.Stop();
         }
 
@@ -106,8 +107,7 @@ namespace MyApp
             }
             else
             {
-                Properties.Settings.Default.StayLogged = false;
-                Console.WriteLine(Properties.Settings.Default.StayLogged);
+                Settings.Default.StayLogged = false;
                 MyPlayer.Player.CurrentUser = null;
                 MyPlaylist.DataContext = null;
             }
@@ -121,8 +121,7 @@ namespace MyApp
         {
             MyPlayer.Player.CurrentUser = value;
             MyPlaylist.DataContext = MyPlayer.Player.CurrentUser.Favorite;
-            Properties.Settings.Default.LastMail = value.Address;
-            Console.WriteLine(Properties.Settings.Default.LastMail);
+            Settings.Default.LastMail = value.Address;           
             MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
 

@@ -2,6 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
+using MyApp.Properties;
 
 namespace MyApp
 {
@@ -50,15 +51,9 @@ namespace MyApp
             {                                
                 Check?.Invoke(Database.LogIn(email.Text, passwd.Password));
                 if ((bool)StayLoggedIn.IsChecked)
-                {
-                    Properties.Settings.Default.StayLogged = true;
-                    Console.WriteLine(Properties.Settings.Default.StayLogged);
-                }
+                    Settings.Default.StayLogged = true;
                 else
-                {
-                    Properties.Settings.Default.StayLogged = false;
-                    Console.WriteLine(Properties.Settings.Default.StayLogged);
-                }                  
+                    Settings.Default.StayLogged = false;              
                 Close();
             }
             catch (Exception ex)
