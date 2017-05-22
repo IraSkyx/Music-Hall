@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MyApp.Properties;
+using System.Threading;
 
 namespace MyApp
 {
@@ -22,9 +23,11 @@ namespace MyApp
         public MainWindow()
         {
             InitializeComponent();
+
             Settings.Default.Upgrade();
             if (Settings.Default.StayLogged)
                 LogIn(AllUsers.Database.First(x => x.Address.Equals(Settings.Default.LastMail)));
+
             Panel.DataContext = MyPlayer.Player;
             MyScroller.DataContext = MyPlayer.Allmusics;                                            
         }
@@ -42,7 +45,7 @@ namespace MyApp
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
-        void MainWindow_Closed(object sender, EventArgs e)
+        private void OnClose(object sender, EventArgs e)
         {
             new PersistanceMusics().SaveMusics(MyPlayer.Allmusics);
             new PersistanceUsers().SaveUsers(AllUsers);
@@ -165,7 +168,7 @@ namespace MyApp
         private void MyScrollerSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Tab.SelectedIndex = 1;
-            if(!ReferenceEquals((IMusic)(MyScroller.SelectedItem),null))
+            if (!ReferenceEquals((IMusic)(MyScroller.SelectedItem), null))
                 xSelection.YT.Browser.Navigate(((IMusic)(MyScroller.SelectedItem)).Video);
         }
 
@@ -217,7 +220,7 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void ReadFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(MyPlayer.Player.CurrentUser,null) && !ReferenceEquals(MyPlaylist.SelectedItem,null) && ReferenceEquals(sender, MyPlaylist))
+            if (!ReferenceEquals(MyPlayer.Player.CurrentUser, null) && !ReferenceEquals(MyPlaylist.SelectedItem, null) && ReferenceEquals(sender, MyPlaylist))
                 MyPlayer.Player.Play((IMusic)MyPlaylist.SelectedItem);    
             else
                 MyPlayer.Player.Play((IMusic)MyScroller.SelectedItem);
@@ -230,7 +233,7 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void DeleteFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(MyPlayer.Player.CurrentUser,null) && !ReferenceEquals(MyPlaylist.SelectedItem,null))
+            if (!ReferenceEquals(MyPlayer.Player.CurrentUser, null) && !ReferenceEquals(MyPlaylist.SelectedItem, null))
                 MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Remove((IMusic)MyPlaylist.SelectedItem);
             MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }      

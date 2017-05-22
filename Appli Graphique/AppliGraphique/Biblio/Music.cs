@@ -37,22 +37,6 @@ namespace Biblio
         /// <summary>
         /// Constructeur de Music
         /// </summary>
-        public Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Video, string Image)
-        {
-            this.Title = Title;
-            this.Artist = Artist;
-            this.Date = Date;
-            this.Genre = Genre;
-            this.Infos = Infos;
-            this.Audio = Audio;
-            this.Video = Video;
-            this.Image = Image;
-            Comments = new ObservableCollection<Comment>();   
-        }
-
-        /// <summary>
-        /// Constructeur de Music
-        /// </summary>
         public Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Video, string Image, ObservableCollection<Comment> Comments)
         {
             this.Title = Title;
@@ -98,7 +82,7 @@ namespace Biblio
         /// </summary>
         /// <returns>Un entier HashCode aléatoire </returns>
         public override int GetHashCode()
-                    => Title.Length * 31 + Title.GetHashCode();
+            => Title.Length * 31 + Title.GetHashCode();
 
         /// <summary>
         /// Fixe l'affichage de l'objet 

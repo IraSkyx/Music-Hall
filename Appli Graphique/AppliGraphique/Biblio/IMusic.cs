@@ -22,6 +22,5 @@ namespace Biblio
         string Image { get; set; }
 
         ObservableCollection<Comment> Comments { get; set; }
-
     }
 }

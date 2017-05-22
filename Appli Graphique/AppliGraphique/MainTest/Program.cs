@@ -27,9 +27,7 @@ namespace MainTest
             IMusic music2 = MusicMaker.MakeMusic("Holding On To You", "Twenty One Pilots", "2012", "Musique alternative/indé", "Directed by Jordan Bahat", new Uri("audio/Holding.mp3", UriKind.RelativeOrAbsolute), "https://www.youtube.com/embed/ktBMxkLUIwY", "images/eHolding.jpg", Com);
 
             //Create a playlist
-            Playlist list = new Playlist();
-            list.PlaylistProperty.Add(music1);
-            list.PlaylistProperty.Add(music2);
+            Playlist list = new Playlist(music1, music2);
 
             //Create a User
             IUser toto = UserMaker.MakeUser("toto@gmail.com", "toto", "toto", list);
