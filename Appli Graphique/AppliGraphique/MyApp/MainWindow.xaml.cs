@@ -166,7 +166,10 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void MyScrollerSelectionChanged(object sender, SelectionChangedEventArgs e)
-            => Tab.SelectedIndex = 1;
+        {
+            Tab.SelectedIndex = 1; 
+            xSelection.YT.Browser.Navigate("https://www.youtube.com/v/" + new Uri(((IMusic)MyScroller.SelectedItem).Video, UriKind.RelativeOrAbsolute).Segments.Last().ToString());
+        }
 
         /// <summary>
         /// Réinitialise l'indice de sélection de la ListView de recherche lorsqu'on clique sur un de ces éléments

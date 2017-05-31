@@ -3,7 +3,7 @@ using Biblio;
 
 namespace Stub
 {
-    public class StubUsers : IDataUsers
+    public class StubUsers
     {
         public UserDB LoadUsers()
         {

@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace Stub
 {
-    public class StubMusics : IDataMusics
+    public class StubMusics : IData
     {
         public Playlist LoadMusics()
         {

@@ -5,38 +5,20 @@ using System.Xml;
 
 namespace Biblio
 {
-    public class PersistanceMusics : IDataMusics
+    public class PersistanceMusics : IData
     {
-        string MyPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MusicHall");
-
         public Playlist LoadMusics()
         {
-            SetCurrentDirectory(MyPath);            
+            SetCurrentDirectory();
 
-            var Serializer = new DataContractSerializer(typeof(Playlist), new Type[] { typeof(Music) });
-
-            if (!File.Exists("PersistanceMusics.xml"))
-                return null;
-            using (XmlReader reader = XmlReader.Create("PersistanceMusics.xml"))
-                return (Playlist)Serializer.ReadObject(reader);
+            return (Playlist)Deserialize("PersistanceMusics.xml", new DataContractSerializer(typeof(Playlist), new Type[] { typeof(Music) }));
         }        
 
         public void SaveMusics(Playlist AllMusics)
         {
-            SetCurrentDirectory(MyPath);
+            SetCurrentDirectory();
 
-            var Serializer = new DataContractSerializer(typeof(Playlist), new Type[] { typeof(Music) });
-
-            using (XmlWriter writer = XmlWriter.Create("PersistanceMusics.xml", new XmlWriterSettings() { Indent = true }))
-                Serializer.WriteObject(writer, AllMusics);
-        }
-
-        public static void SetCurrentDirectory(string Path)
-        {
-            if (!Directory.Exists(Path))
-                Directory.CreateDirectory(Path);
-
-            Directory.SetCurrentDirectory(Path);
+            Serialize(AllMusics, new DataContractSerializer(typeof(Playlist), new Type[] { typeof(Music) }));
         }
     }
 }

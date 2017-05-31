@@ -48,9 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comment.cs" />
-    <Compile Include="IDataMusics.cs" />
-    <Compile Include="IDataUsers.cs" />
+    <Compile Include="IData.cs" />
     <Compile Include="IMusic.cs" />
+    <Compile Include="ISerialize.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="Music.cs" />
     <Compile Include="MusicMaker.cs" />
