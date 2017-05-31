@@ -1,0 +1,28 @@
+﻿<Window x:Class="MyApp.AddComment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyApp"
+        mc:Ignorable="d"
+     FontFamily="Microsoft YaHei Light"
+        Background="#222222"
+        Foreground="White"
+        KeyDown="Window_KeyDown"
+        Title="Connexion" Height="500" Width="300" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Drag">
+    <DockPanel>
+
+        <!--En-tête-->
+        <Button x:Name="quit" DockPanel.Dock="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20"/>
+        <!--En-tête-->
+
+        <!--Corps-->
+        <StackPanel>
+            <TextBlock x:Name="label" TextAlignment="Center" Text="Ajouter un commentaire" FontSize="35" Margin="30" TextWrapping="Wrap"/>
+            <TextBox DockPanel.Dock="Top" FontSize="40" Margin="8"/>
+            <Button x:Name="validcomment" DockPanel.Dock="Top" FontSize="20" Width="100" Height="35"  />
+        </StackPanel>
+        <!--Corps-->
+
+    </DockPanel>
+</Window>
