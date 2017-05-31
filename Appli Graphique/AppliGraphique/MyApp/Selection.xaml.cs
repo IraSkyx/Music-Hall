@@ -52,5 +52,12 @@ namespace MyApp
             }
             MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Profil subWindow3 = new Profil(MyPlayer.Player.CurrentUser, AllUsers)
+            AddComment adcom = new AddComment();
+            adcom.Show();
+        }
     }
 }

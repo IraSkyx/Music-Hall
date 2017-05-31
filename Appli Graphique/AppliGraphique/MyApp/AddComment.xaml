@@ -18,9 +18,19 @@
 
         <!--Corps-->
         <StackPanel>
-            <TextBlock x:Name="label" TextAlignment="Center" Text="Ajouter un commentaire" FontSize="35" Margin="30" TextWrapping="Wrap"/>
-            <TextBox DockPanel.Dock="Top" FontSize="40" Margin="8"/>
-            <Button x:Name="validcomment" DockPanel.Dock="Top" FontSize="20" Width="100" Height="35"  />
+                <TextBlock x:Name="label" TextAlignment="Center" Text="Ajouter un commentaire" FontSize="35" Margin="20" TextWrapping="Wrap"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Note:" Margin="15" FontSize="20" Grid.Column="0"/>
+               
+            </Grid>
+            <TextBox DockPanel.Dock="Top" FontSize="40" Margin="15"/>
+            <Button x:Name="validcomment" Content="Envoyer" Click="validcomment_Click" DockPanel.Dock="Top" FontSize="20" Width="100" Height="35" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" />
+     
         </StackPanel>
         <!--Corps-->
 

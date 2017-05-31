@@ -49,6 +49,22 @@ namespace MyApp
         {
             //if (e.Key == Key.Enter)
                 //Commit(this, new RoutedEventArgs());
+
+            
+        }
+
+        private void validcomment_Click(object sender, RoutedEventArgs e)
+        {
+             try
+            {
+                
+            //    Check?.Invoke(UserMaker.MakeUser(email.Text, pseudo.Text, mdp.Password, null)); username rate com
+                Close();
+            }
+            catch (Exception ex)
+            {
+             //   wrong.Text = ex.Message;
+            }
         }
     }
 }

@@ -17,14 +17,14 @@ namespace Biblio
             Directory.SetCurrentDirectory(MyPath);
         }
 
-        public object Deserialize(string file, DataContractSerializer Serializer)
+     public object Deserialize(string file, DataContractSerializer Serializer)
         {           
             if (!File.Exists(file))
                 return null;
             using (XmlReader reader = XmlReader.Create(file))
                 return Serializer.ReadObject(reader);
         }
-
+       
         public void Serialize(ISerialize obj, DataContractSerializer Serializer)
         {
             using (XmlWriter writer = XmlWriter.Create("PersistanceUsers.xml", new XmlWriterSettings() { Indent = true }))
