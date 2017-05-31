@@ -52,7 +52,6 @@ namespace MyApp
             new PersistanceUsers().SaveUsers(AllUsers);
             Settings.Default.Save();
             Settings.Default.Reload();
-            xSelection.YT.Browser.Stop();
         }
 
         /// <summary>
@@ -167,11 +166,7 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void MyScrollerSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Tab.SelectedIndex = 1;
-            if (!ReferenceEquals((IMusic)(MyScroller.SelectedItem), null))
-                xSelection.YT.Browser.Navigate(((IMusic)(MyScroller.SelectedItem)).Video);
-        }
+            => Tab.SelectedIndex = 1;
 
         /// <summary>
         /// Réinitialise l'indice de sélection de la ListView de recherche lorsqu'on clique sur un de ces éléments

@@ -1,0 +1,56 @@
+Diagramme de classes [sur 9 points]
+Ca m'embette un poil que la vue stocke des instances du modèle.
+Les créateurs ne sont pas utilisés.
+Les classes Stub et Persistances font la même chose, mais pas sur les mêmes objets, non ?
+Pour j'ai le métamodèle UML dans le document ?
+=> 6/9
+
+Diagramme de paquetage [sur 2 points]
+Un poil légé
+=> 1/2
+
+Description écrite de l’architecture (dont patrons de conception, dépendances…) [sur 9 points]
+Pas encore
+=> 0/9
+
+Collections avancées (dictionnaires) [sur 2 points]
+Pas encore
+=> 0/2
+
+Encapsulation [sur 5 points]
+Encore un peu de travail sur l'encapsulation du Modèle entier
+=> 2,5/5
+
+----------------
+
+IHM : Interface Homme-Machine (XAML, WPF)
+
+Description du contexte [sur 4 points]
+Ce n'est pas un contexte !
+=> 0/4
+
+Storyboards [sur 4 points]
+Ce n'est pas un storyboard, ça, c'est une description des UC
+=> 0/4
+
+DataBinding sur les UserControl + Dependency Property [sur 2 points]
+Pas encore
+=> 0/2
+
+-------------------
+
+Diagramme de classes mettant en avant la partie persistance [sur 4 points]
+Pas encore
+=> 0/4
+
+Diagramme de classes sur votre (vos) partie(s) ajoutée(s) [sur 4 points]
+Attention, GeckoFX est une librairy pour Windows Forms, pas WPF !!
+=> 0/4
+
+Diagramme de paquetage mettant en avant la partie persistance [sur 2 points]
+Pas encore
+=> 0/2
+
+Vidéo de 1 à 3 minute(s) du projet [sur 10 points]
+Pas encore
+=> 0/10

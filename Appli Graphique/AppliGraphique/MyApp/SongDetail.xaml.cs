@@ -16,6 +16,7 @@ namespace MyApp
     /// </summary>
     public partial class SongDetail : UserControl
     {
+        public Thread myThread;
         private LinkedList<ProgressBar> MyProgs = new LinkedList<ProgressBar>();
         private int[] Previous = new int[30];
 
