@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyApp"
         mc:Ignorable="d"
-     FontFamily="Microsoft YaHei Light"
+     FontFamily="Microsoft YaHei Light"   
         Background="#222222"
         Foreground="White"
         KeyDown="Window_KeyDown"
