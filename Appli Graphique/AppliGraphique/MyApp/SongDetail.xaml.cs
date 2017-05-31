@@ -16,7 +16,6 @@ namespace MyApp
     /// </summary>
     public partial class SongDetail : UserControl
     {
-        public Thread myThread;
         private LinkedList<ProgressBar> MyProgs = new LinkedList<ProgressBar>();
         private int[] Previous = new int[30];
 
@@ -53,7 +52,7 @@ namespace MyApp
                 {
                     Path = new PropertyPath("ActualWidth"),
                     Converter = new ValueToContent(),
-                    ConverterParameter= "scale"
+                    ConverterParameter = "scale"
                 });
                 MyProgs.AddFirst(bar);
                 ProgGrid.Children.Add(bar);
@@ -85,7 +84,7 @@ namespace MyApp
                             {
                                 Application.Current.Dispatcher.Invoke(() =>
                                 {
-                                    if (ReferenceEquals(Application.Current.MainWindow,null))
+                                    if (ReferenceEquals(Application.Current.MainWindow, null))
                                         return;
                                     (MyProgs.ElementAt(i)).Value = RoundedValue * 0.50 + Previous[i] / 3 + r.Next(0, 10);
                                     Previous[i] = Convert.ToInt32(RoundedValue);
@@ -106,7 +105,7 @@ namespace MyApp
                                 });
                             }
                             catch (NullReferenceException) { myThread = null; return; }
-                    }
+                        }
                         Thread.Sleep(1);
                     }
                 }

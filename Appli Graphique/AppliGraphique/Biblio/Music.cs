@@ -75,7 +75,7 @@ namespace Biblio
         /// <param name="other"> L'autre musique qui sera comparé à cette Music </param>
         /// <returns>true si égaux, false sinon </returns>
         public bool Equals(IMusic other) 
-            => (Title.Equals(other.Title) && Artist.Equals(other.Artist) && Date.Equals(other.Date) && Genre.Equals(other.Genre) && Infos.Equals(other.Infos) && Audio.ToString().Equals(other.Audio.ToString()) && Image.Equals(other.Image));
+            => (Title.Equals(other.Title) && Artist.Equals(other.Artist) && Date.Equals(other.Date) && Genre.Equals(other.Genre) && Infos.Equals(other.Infos) && Audio.ToString().Equals(other.Audio.ToString()) && Video.Equals(other.Video) && Image.Equals(other.Image));
 
         /// <summary>
         /// Fixe le HashCode de l'objet

@@ -5,8 +5,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace MyApp
 {
@@ -23,10 +24,7 @@ namespace MyApp
         public YoutubePlayer()
         {
             InitializeComponent();
-
-            Task t = Task.Run(() => Init());
-            t.Wait();
-
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate () { Init(); });
             Browser.CreateWindow += new EventHandler<GeckoCreateWindowEventArgs>(myEvent);
         }
 

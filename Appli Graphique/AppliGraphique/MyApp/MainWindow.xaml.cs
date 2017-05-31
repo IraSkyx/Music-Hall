@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using MyApp.Properties;
 using System.Threading;
+using System.IO;
 
 namespace MyApp
 {
@@ -236,6 +237,32 @@ namespace MyApp
             if (!ReferenceEquals(MyPlayer.Player.CurrentUser, null) && !ReferenceEquals(MyPlaylist.SelectedItem, null))
                 MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Remove((IMusic)MyPlaylist.SelectedItem);
             MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
-        }      
+        }
+
+        /// <summary>
+        /// Permet d'ajouter une music via un Drag&Drop
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
+        public void DragAndDrop(object sender, DragEventArgs e)
+        {
+            FileInfo infos = new FileInfo(((string[])e.Data.GetData(DataFormats.FileDrop))[0]);
+            if (infos.Extension == ".mp3")
+            {
+                AddMusicWin sub = new AddMusicWin(infos);
+                sub.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        /// Permet d'ouvrir le panneau d'administration
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
+        private void OpenPA(object sender, RoutedEventArgs e)
+        {
+            PA sub = new PA(MyPlayer.Allmusics);
+            sub.ShowDialog();
+        }
     }  
 }
