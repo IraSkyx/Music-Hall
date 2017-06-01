@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Biblio
 {
@@ -19,5 +14,11 @@ namespace Biblio
             Database = new ObservableCollection<IComment>();
         }
 
+        public void Add(IComment Com)
+        {
+            if (ReferenceEquals(Database, null))
+                Database = new ObservableCollection<IComment>();
+            Database.Add(Com);
+        }
     }
 }

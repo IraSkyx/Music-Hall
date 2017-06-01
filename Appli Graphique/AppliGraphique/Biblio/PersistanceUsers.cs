@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Runtime.Serialization;
-using System.Xml;
 
 namespace Biblio
 {
@@ -11,14 +9,14 @@ namespace Biblio
         {
             SetCurrentDirectory();
 
-            return (UserDB)Deserialize("PersistanceUsers.xml", new DataContractSerializer(typeof(UserDB), new Type[] { typeof(User), typeof(Playlist), typeof(Music) }));          
+            return (UserDB)Deserialize("PersistanceUsers.xml", new DataContractSerializer(typeof(UserDB), new Type[] { typeof(User), typeof(Playlist), typeof(Music) }));
         }
 
         public void SaveUsers(UserDB DataBase)
         {
             SetCurrentDirectory();
 
-            Serialize(DataBase, new DataContractSerializer(typeof(UserDB), new Type[] { typeof(User), typeof(Playlist), typeof(Music) }));
+            Serialize("PersistanceUsers.xml", DataBase, new DataContractSerializer(typeof(UserDB), new Type[] { typeof(User), typeof(Playlist), typeof(Music) }));
         }
     }
 }

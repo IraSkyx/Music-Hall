@@ -11,8 +11,31 @@ namespace MyApp
     /// </summary>
     public partial class Selection : UserControl
     {
-        private Lecteur MyPlayer = ((Lecteur)Application.Current.MainWindow.FindName("MyPlayer"));
-        private ListView MyScroller = ((ListView)Application.Current.MainWindow.FindName("MyScroller"));
+        public static readonly DependencyProperty Player = DependencyProperty.Register("MyPlayer", typeof(Lecteur), typeof(Selection));
+        public Lecteur MyPlayer
+        {
+            get
+            {
+                return GetValue(Player) as Lecteur;
+            }
+            set
+            {
+                SetValue(Player, value);
+            }
+        }
+
+        public static readonly DependencyProperty Scroller = DependencyProperty.Register("MyScroller", typeof(ListView), typeof(Selection));
+        public ListView MyScroller
+        {
+            get
+            {
+                return GetValue(Scroller) as ListView;
+            }
+            set
+            {
+                SetValue(Scroller, value);
+            }
+        }
 
         /// <summary>
         /// Instancie Selection
@@ -39,16 +62,8 @@ namespace MyApp
         {
             if (!ReferenceEquals(MyPlayer.Player.CurrentUser,null))
             {
-                if (!ReferenceEquals(MyPlayer.Player.CurrentUser.Favorite,null))
-                {
-                    if (MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)MyScroller.SelectedItem)) == 0)
-                        MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Add(ReferenceEquals(MyPlayer.Add1, sender) ? MyPlayer.Player.CurrentlyPlaying : (IMusic)MyScroller.SelectedItem);
-                }
-                else
-                {
-                    MyPlayer.Player.CurrentUser.Favorite = new Playlist();
+                if (MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)MyScroller.SelectedItem)) == 0)
                     MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Add(ReferenceEquals(MyPlayer.Add1, sender) ? MyPlayer.Player.CurrentlyPlaying : (IMusic)MyScroller.SelectedItem);
-                }
             }
             MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
@@ -56,8 +71,8 @@ namespace MyApp
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //Profil subWindow3 = new Profil(MyPlayer.Player.CurrentUser, AllUsers)
-            AddComment adcom = new AddComment (AllComment,MyPlayer.Player.CurrentUser); //!!
-            adcom.ShowDialog();
+            //AddComment adcom = new AddComment (AllComment, MyPlayer.Player.CurrentUser);
+            //adcom.ShowDialog();
         }
     }
 }

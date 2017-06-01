@@ -19,14 +19,9 @@
         <!--Corps-->
         <StackPanel>
                 <TextBlock x:Name="label" TextAlignment="Center" Text="Ajouter un commentaire" FontSize="35" Margin="20" TextWrapping="Wrap"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Note:" Margin="15" FontSize="20" Grid.Column="0" />
-                <ComboBox x:Name="notation" Grid.Column="1" Margin="10,10,133,10" Padding="5" FontSize="20" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Note:" FontSize="20" VerticalAlignment="Center" Margin="10"/>
+                <ComboBox x:Name="notation" FontSize="20" Margin="10">
                     <ComboBoxItem IsSelected="True">0</ComboBoxItem>
                     <ComboBoxItem>1</ComboBoxItem>
                     <ComboBoxItem>2</ComboBoxItem>
@@ -34,10 +29,10 @@
                     <ComboBoxItem>4</ComboBoxItem>
                     <ComboBoxItem>5</ComboBoxItem>
                 </ComboBox>
-            </Grid>
+            </StackPanel>
             <TextBox x:Name="textcom" DockPanel.Dock="Top" FontSize="15" Margin="15" Height="83" Text="Cool!!!" />
-            
-            <Button x:Name="validcomment" Content="Envoyer" Click="validcomment_Click" DockPanel.Dock="Top" FontSize="20" Width="100" Height="35" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" />
+
+            <Button Content="Envoyer" Click="Commit" DockPanel.Dock="Top" FontSize="20" Width="100" Height="35" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" />
      
         </StackPanel>
         <!--Corps-->

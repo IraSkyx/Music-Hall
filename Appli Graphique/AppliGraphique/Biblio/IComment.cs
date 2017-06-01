@@ -1,10 +1,8 @@
-﻿
-
-namespace Biblio
+﻿namespace Biblio
 {
     public interface IComment
     {
-       string Username { get; set; }
+        string Username { get; set; }
 
         int Rate { get; set; }
 

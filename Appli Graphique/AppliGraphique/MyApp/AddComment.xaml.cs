@@ -54,16 +54,16 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            //if (e.Key == Key.Enter)
-                //Commit(this, new RoutedEventArgs());
+            if (e.Key == Key.Enter)
+                Commit(this, new RoutedEventArgs());
         }
 
-        private void validcomment_Click(object sender, RoutedEventArgs e)
+        private void Commit(object sender, RoutedEventArgs e)
         {
              try
             {
                 //  Check?.Invoke(UserMaker.MakeUser(email.Text, pseudo.Text, mdp.Password, null)); exple
-                Check?.Invoke(CommentMaker.MakeComment(IUser.Username, notation, textcom.Text)); //? pb convertisseur combobox
+                Check?.Invoke(CommentMaker.MakeComment(IUser.Username, int.Parse(notation.Text), textcom.Text));
                 Close();
             }
             catch (Exception ex)

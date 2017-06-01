@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 
 namespace Biblio
 {
@@ -21,6 +20,6 @@ namespace Biblio
 
         string Image { get; set; }
 
-        ObservableCollection<Comment> Comments { get; set; }
+        CommentDB Comments { get; set; }
     }
 }

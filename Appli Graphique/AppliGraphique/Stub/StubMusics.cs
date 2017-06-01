@@ -1,6 +1,5 @@
 ﻿using Biblio;
 using System;
-using System.Collections.ObjectModel;
 
 namespace Stub
 {
@@ -10,9 +9,9 @@ namespace Stub
         {
             Playlist liste = new Playlist();
 
-            ObservableCollection<Comment> Com = new ObservableCollection<Comment>();
-            Com.Add(new Comment("Toto", 4, "lolol"));
-            Com.Add(new Comment("Toto2", 2,  "lolol2"));
+            CommentDB Com = new CommentDB();
+            Com.Add(CommentMaker.MakeComment("Toto", 4, "lolol"));
+            Com.Add(CommentMaker.MakeComment("Toto2", 2,  "lolol2"));
            
             liste.PlaylistProperty.Add(MusicMaker.MakeMusic("Back For More", "Feder feat Daecolm", "2017", "Dance", "Directed by Julien", new Uri("audio/Feder.mp3", UriKind.RelativeOrAbsolute), "https://www.youtube.com/embed/FvDk9paBf9I", "images/eFeder.jpg", Com));
             liste.PlaylistProperty.Add(MusicMaker.MakeMusic("Holding On To You", "Twenty One Pilots", "2012", "Musique alternative/indé", "Directed by Jordan Bahat", new Uri("audio/Holding.mp3", UriKind.RelativeOrAbsolute), "https://www.youtube.com/embed/ktBMxkLUIwY", "images/eHolding.jpg", Com));

@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MyApp.Properties;
-using System.Threading;
 using System.IO;
 
 namespace MyApp
@@ -17,7 +16,7 @@ namespace MyApp
     public partial class MainWindow : Window
     {
         private UserDB AllUsers = ReferenceEquals(new PersistanceUsers().LoadUsers(), null) ? new StubUsers().LoadUsers() : new PersistanceUsers().LoadUsers();
-        private CommentDB AllComment = new CommentDB(); // ?? Persistance! 
+        private CommentDB AllComment = new CommentDB();
 
         /// <summary>
         /// Instancie MainWindow

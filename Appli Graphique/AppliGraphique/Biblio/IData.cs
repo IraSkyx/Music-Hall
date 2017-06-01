@@ -17,20 +17,17 @@ namespace Biblio
             Directory.SetCurrentDirectory(MyPath);
         }
 
-     public object Deserialize(string file, DataContractSerializer Serializer)
-        {           
+        public object Deserialize(string file, DataContractSerializer Serializer)
+        {
             if (!File.Exists(file))
                 return null;
             using (XmlReader reader = XmlReader.Create(file))
-            {
-                 return Serializer.ReadObject(reader);    
-            }
-               
+                return Serializer.ReadObject(reader);
         }
-       
-        public void Serialize(ISerialize obj, DataContractSerializer Serializer)
+
+        public void Serialize(string file, ISerialize obj, DataContractSerializer Serializer)
         {
-            using (XmlWriter writer = XmlWriter.Create("PersistanceUsers.xml", new XmlWriterSettings() { Indent = true }))
+            using (XmlWriter writer = XmlWriter.Create(file, new XmlWriterSettings() { Indent = true }))
                 Serializer.WriteObject(writer, obj);
         }
     }
