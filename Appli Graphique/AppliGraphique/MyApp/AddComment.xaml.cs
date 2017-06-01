@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Biblio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,15 @@ namespace MyApp
     /// </summary>
     public partial class AddComment : Window
     {
-        public AddComment()
+
+        public event Action<IComment> Check;
+        private CommentDB DataBase;
+        private IUser IUser; //?
+        public AddComment(CommentDB DataBase, IUser IUser) //passer constructeur User
         {
             InitializeComponent();
+            this.DataBase = DataBase;
+            this.IUser = IUser; //?
         }
 
         /// <summary>
@@ -49,22 +56,19 @@ namespace MyApp
         {
             //if (e.Key == Key.Enter)
                 //Commit(this, new RoutedEventArgs());
-
-            
         }
 
         private void validcomment_Click(object sender, RoutedEventArgs e)
         {
              try
             {
-                
-            //    Check?.Invoke(UserMaker.MakeUser(email.Text, pseudo.Text, mdp.Password, null)); username rate com
-               
+                //  Check?.Invoke(UserMaker.MakeUser(email.Text, pseudo.Text, mdp.Password, null)); exple
+                Check?.Invoke(CommentMaker.MakeComment(IUser.Username, notation, textcom.Text)); //? pb convertisseur combobox
                 Close();
             }
             catch (Exception ex)
             {
-             //   wrong.Text = ex.Message;
+              // wrong.Text = ex.Message;
             }
         }
     }

@@ -9,7 +9,7 @@
         Background="#222222"
         Foreground="White"
         KeyDown="Window_KeyDown"
-        Title="Connexion" Height="500" Width="300" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Drag">
+        Title="Connexion" Height="400" Width="300" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Drag">
     <DockPanel>
 
         <!--En-tête-->
@@ -25,16 +25,17 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Note:" Margin="15" FontSize="20" Grid.Column="0"/>
-                <ComboBox x:Name="Notation" Grid.Column="1" Margin="10,10,133,10" Padding="5" FontSize="20">
-                    <ComboBoxItem IsSelected="True">1</ComboBoxItem>
+                <TextBlock Text="Note:" Margin="15" FontSize="20" Grid.Column="0" />
+                <ComboBox x:Name="notation" Grid.Column="1" Margin="10,10,133,10" Padding="5" FontSize="20" >
+                    <ComboBoxItem IsSelected="True">0</ComboBoxItem>
+                    <ComboBoxItem>1</ComboBoxItem>
                     <ComboBoxItem>2</ComboBoxItem>
                     <ComboBoxItem>3</ComboBoxItem>
                     <ComboBoxItem>4</ComboBoxItem>
                     <ComboBoxItem>5</ComboBoxItem>
                 </ComboBox>
             </Grid>
-            <TextBox x:Name="Textcom" DockPanel.Dock="Top" FontSize="20" Margin="15" Height="83" />
+            <TextBox x:Name="textcom" DockPanel.Dock="Top" FontSize="15" Margin="15" Height="83" Text="Cool!!!" />
             
             <Button x:Name="validcomment" Content="Envoyer" Click="validcomment_Click" DockPanel.Dock="Top" FontSize="20" Width="100" Height="35" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" />
      

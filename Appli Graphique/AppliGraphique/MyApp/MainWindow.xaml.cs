@@ -17,6 +17,7 @@ namespace MyApp
     public partial class MainWindow : Window
     {
         private UserDB AllUsers = ReferenceEquals(new PersistanceUsers().LoadUsers(), null) ? new StubUsers().LoadUsers() : new PersistanceUsers().LoadUsers();
+        private CommentDB AllComment = new CommentDB(); // ?? Persistance! 
 
         /// <summary>
         /// Instancie MainWindow

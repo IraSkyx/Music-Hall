@@ -3,7 +3,7 @@
 namespace Biblio
 {
     [DataContract]
-    public class Comment
+    internal class Comment : IComment
     {
         [DataMember(Name = "Username", Order = 1)]
         public string Username { get; set; }

@@ -56,8 +56,8 @@ namespace MyApp
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //Profil subWindow3 = new Profil(MyPlayer.Player.CurrentUser, AllUsers)
-            AddComment adcom = new AddComment();
-            adcom.Show();
+            AddComment adcom = new AddComment (AllComment,MyPlayer.Player.CurrentUser); //!!
+            adcom.ShowDialog();
         }
     }
 }
