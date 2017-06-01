@@ -22,7 +22,10 @@ namespace Biblio
             if (!File.Exists(file))
                 return null;
             using (XmlReader reader = XmlReader.Create(file))
-                return Serializer.ReadObject(reader);
+            {
+                 return Serializer.ReadObject(reader);    
+            }
+               
         }
        
         public void Serialize(ISerialize obj, DataContractSerializer Serializer)

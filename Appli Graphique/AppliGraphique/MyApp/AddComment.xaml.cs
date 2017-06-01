@@ -59,6 +59,7 @@ namespace MyApp
             {
                 
             //    Check?.Invoke(UserMaker.MakeUser(email.Text, pseudo.Text, mdp.Password, null)); username rate com
+               
                 Close();
             }
             catch (Exception ex)

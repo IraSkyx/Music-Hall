@@ -41,7 +41,7 @@
 
                 <TabItem Header="Commentaires" Foreground="White">
                     <DockPanel>
-                        <Button DockPanel.Dock="Top" Content="Ajouter un commentaire :" Margin="15" FontSize="20" Click="Button_Click"/>
+                        <Button DockPanel.Dock="Top" Content="Ajouter un commentaire :" Margin="15" FontSize="20"  Click="Button_Click" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" />
                         <TextBlock DockPanel.Dock="Top" Text="Avis :" Margin="15" FontSize="20"/>
                         <TextBlock DockPanel.Dock="Top" Text="{Binding Comments.Count, StringFormat='\{0} commentaires'}" FontSize="10" />
                         <ListView ItemsSource="{Binding Comments}" Background="Transparent">

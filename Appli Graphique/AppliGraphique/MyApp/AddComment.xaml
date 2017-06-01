@@ -26,9 +26,16 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="Note:" Margin="15" FontSize="20" Grid.Column="0"/>
-               
+                <ComboBox x:Name="Notation" Grid.Column="1" Margin="10,10,133,10" Padding="5" FontSize="20">
+                    <ComboBoxItem IsSelected="True">1</ComboBoxItem>
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>3</ComboBoxItem>
+                    <ComboBoxItem>4</ComboBoxItem>
+                    <ComboBoxItem>5</ComboBoxItem>
+                </ComboBox>
             </Grid>
-            <TextBox DockPanel.Dock="Top" FontSize="40" Margin="15"/>
+            <TextBox x:Name="Textcom" DockPanel.Dock="Top" FontSize="20" Margin="15" Height="83" />
+            
             <Button x:Name="validcomment" Content="Envoyer" Click="validcomment_Click" DockPanel.Dock="Top" FontSize="20" Width="100" Height="35" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" />
      
         </StackPanel>
