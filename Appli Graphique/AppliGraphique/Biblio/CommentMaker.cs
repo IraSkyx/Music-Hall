@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Biblio
 {
@@ -10,9 +6,9 @@ namespace Biblio
     {
         public static IComment MakeComment(string Username, int Rate, string Com)
         {
-            if (Com.Length == 0)
-                throw new FormatException("Commentaire nul");
-             return new Comment(Username,Rate, Com);
+            if (string.IsNullOrEmpty(Com))
+                throw new FormatException("Veuillez indiquez un commentaire");
+             return new Comment(Username, Rate, Com);
         }
     }
 }

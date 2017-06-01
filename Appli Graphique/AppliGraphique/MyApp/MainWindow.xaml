@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyApp"
         mc:Ignorable="d"
+        Name="root"
+        Icon="images/logo.ico"
         Closed="OnClose"
         AllowDrop="True"
         DragDrop.Drop="DragAndDrop"
@@ -27,7 +29,7 @@
         <!--En-tête-->
 
         <!-- Lecteur -->
-        <local:Lecteur x:Name="MyPlayer" DockPanel.Dock="Bottom"/>
+        <local:Lecteur x:Name="MyPlayer" DockPanel.Dock="Bottom" MyScroller="{Binding ElementName=MyScroller}" MyPlaylist="{Binding ElementName=MyPlaylist}"/>
         <!-- Lecteur -->
 
         <!-- Corps -->
@@ -56,14 +58,14 @@
             
             <!-- Onglets -->
             <TabControl x:Name="Tab" SelectionChanged="MyTabSelectionChanged" Margin="10" Background="#222222">
-                <TabItem Header="Accueil" Foreground="White" FontFamily="Microsoft YaHei UI" Margin="-3,0,3,0">
-                    <local:Accueil x:Name="xHome"/>
+                <TabItem Header="Accueil" FontFamily="Microsoft YaHei UI" Foreground="White" Margin="-3,0,3,0">
+                    <local:Accueil x:Name="xHome" MyTab="{Binding ElementName=Tab}" MyScroller="{Binding ElementName=MyScroller}" MyPlayer="{Binding ElementName=MyPlayer}"/>
                 </TabItem>
                 <TabItem Header="Sélection" FontFamily="Microsoft YaHei UI" Foreground="White" Margin="-4,0,4,0">
-                    <local:Selection x:Name="xSelection" DataContext="{Binding ElementName=MyScroller, Path=SelectedItem}"/>
+                    <local:Selection x:Name="xSelection" MyScroller="{Binding ElementName=MyScroller}" MyPlayer="{Binding ElementName=MyPlayer}" DataContext="{Binding ElementName=MyScroller, Path=SelectedItem}"/>
                 </TabItem>
                 <TabItem Header="Recherche" FontFamily="Microsoft YaHei UI" Foreground="White" Margin="-5,0,5,0">
-                    <local:Recherche x:Name="xSearch"/>
+                    <local:Recherche x:Name="xSearch" MyScroller="{Binding ElementName=MyScroller}" MyPlayer="{Binding ElementName=MyPlayer}"/>
                 </TabItem>
             </TabControl>
             <!-- Onglets -->

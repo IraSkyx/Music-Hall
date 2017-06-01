@@ -1,17 +1,7 @@
 ﻿using Biblio;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MyApp
 {
@@ -21,14 +11,17 @@ namespace MyApp
     public partial class AddComment : Window
     {
 
-        public event Action<IComment> Check;
-        private CommentDB DataBase;
-        private IUser IUser; //?
-        public AddComment(CommentDB DataBase, IUser IUser) //passer constructeur User
+        private IUser User;
+        private IMusic Music;
+
+        /// <summary>
+        /// Instancie un AddComment
+        /// </summary>
+        public AddComment(IUser User, IMusic Music)
         {
             InitializeComponent();
-            this.DataBase = DataBase;
-            this.IUser = IUser; //?
+            this.User = User;
+            this.Music = Music;
         }
 
         /// <summary>
@@ -58,17 +51,22 @@ namespace MyApp
                 Commit(this, new RoutedEventArgs());
         }
 
+        /// <summary>
+        /// Renvoit un Comment à ajouter à la Music
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
+        /// <exception cref="FormatException"> En cas de commentaire vide </exception>
         private void Commit(object sender, RoutedEventArgs e)
         {
-             try
-            {
-                //  Check?.Invoke(UserMaker.MakeUser(email.Text, pseudo.Text, mdp.Password, null)); exple
-                Check?.Invoke(CommentMaker.MakeComment(IUser.Username, int.Parse(notation.Text), textcom.Text));
+            try
+            {               
+                Music.AddComment(CommentMaker.MakeComment(User.Username, int.Parse(notation.Text), textcom.Text));
                 Close();
             }
-            catch (Exception ex)
+            catch (FormatException ex)
             {
-              // wrong.Text = ex.Message;
+                wrong.Text = ex.Message;
             }
         }
     }

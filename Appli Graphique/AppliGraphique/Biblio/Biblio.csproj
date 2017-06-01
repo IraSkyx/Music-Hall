@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comment.cs" />
-    <Compile Include="CommentDB.cs" />
     <Compile Include="CommentMaker.cs" />
     <Compile Include="IComment.cs" />
     <Compile Include="IData.cs" />

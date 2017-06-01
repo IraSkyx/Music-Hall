@@ -9,8 +9,44 @@ namespace MyApp
     /// </summary>
     public partial class Accueil : UserControl
     {        
-        private ListView MyScroller =  ((ListView) Application.Current.MainWindow.FindName("MyScroller"));
-        private Lecteur MyPlayer = ((Lecteur)Application.Current.MainWindow.FindName("MyPlayer"));
+        public static readonly DependencyProperty Player = DependencyProperty.Register("MyPlayer", typeof(Lecteur), typeof(Accueil));
+        public Lecteur MyPlayer
+        {
+            get
+            {
+                return GetValue(Player) as Lecteur;
+            }
+            set
+            {
+                SetValue(Player, value);
+            }
+        }
+
+        public static readonly DependencyProperty Scroller = DependencyProperty.Register("MyScroller", typeof(ListView), typeof(Accueil));
+        public ListView MyScroller
+        {
+            get
+            {
+                return GetValue(Scroller) as ListView;
+            }
+            set
+            {
+                SetValue(Scroller, value);
+            }
+        }
+
+        public static readonly DependencyProperty Tab = DependencyProperty.Register("MyTab", typeof(TabControl), typeof(Accueil));
+        public TabControl MyTab
+        {
+            get
+            {
+                return GetValue(Tab) as TabControl;
+            }
+            set
+            {
+                SetValue(Tab, value);
+            }
+        }
 
         public Accueil()
         {
@@ -24,13 +60,8 @@ namespace MyApp
         /// <param name="e"> Évènements du clic de souris </param>
         private void Home_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (ReferenceEquals(World, sender))
-                MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic("Back For More");               
-            if (ReferenceEquals(France, sender))
-                MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic("Paris");
-            if (ReferenceEquals(Hall, sender))
-                MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic("It Ain't Me");
-            ((TabControl)Application.Current.MainWindow.FindName("Tab")).SelectedIndex = 1;
+            MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic(((StackPanel)sender).Tag.ToString());
+            MyTab.SelectedIndex = 1;
         }
     }
 }

@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:MyApp"
         mc:Ignorable="d"
         FontFamily="Microsoft YaHei Light"
-        Background="#222222"
         Foreground="White"
+        Background="#222222"
         KeyDown="Window_KeyDown"
         Title="Connexion" Height="500" Width="300" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Drag">
     <DockPanel>
-
+        
         <!--En-tête-->
         <Button x:Name="quit" DockPanel.Dock="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20"/>
         <!--En-tête-->

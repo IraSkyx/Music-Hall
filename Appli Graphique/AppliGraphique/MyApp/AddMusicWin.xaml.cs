@@ -3,7 +3,6 @@ using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,16 +14,17 @@ namespace MyApp
     public partial class AddMusicWin : Window
     {
         private FileInfo infos;
-        private OpenFileDialog Explo;
-        private Lecteur lecteur = ((Lecteur)Application.Current.MainWindow.FindName("MyPlayer"));
+        private OpenFileDialog Explo;       
         private IMusic MusicToEdit;
+        public Lecteur MyPlayer;        
 
         /// <summary>
         /// Instancie un AddMusicWin pour un ajout
         /// </summary>
-        public AddMusicWin(FileInfo infos)
+        public AddMusicWin(FileInfo infos, Lecteur MyPlayer)
         {
             InitializeComponent();
+            this.MyPlayer = MyPlayer;
             this.infos = infos;
             Titre.Text = infos.Name;
             Date.Text = infos.CreationTime.ToShortDateString();
@@ -33,9 +33,10 @@ namespace MyApp
         /// <summary>
         /// Instancie un AddMusicWin pour une modification
         /// </summary>
-        public AddMusicWin(IMusic music)
+        public AddMusicWin(IMusic music, Lecteur MyPlayer)
         {
             InitializeComponent();
+            this.MyPlayer = MyPlayer;
             bigtitle.Text = "Modifier une musique";
             MusicToEdit = music;
             Titre.Text = MusicToEdit.Title;
@@ -96,11 +97,11 @@ namespace MyApp
                 else //Modif avec choix d'image
                     music = MusicMaker.MakeMusic(Titre.Text, Artist.Text, Date.Text, Genre.Text, Infos.Text, MusicToEdit.Audio, Video.Text, Explo.FileName, MusicToEdit.Comments);
 
-                if (lecteur.Allmusics.PlaylistProperty.Count(x => x.Equals(music)) == 0)
+                if (MyPlayer.Allmusics.PlaylistProperty.Count(x => x.Equals(music)) == 0)
                 {                   
                     if (!ReferenceEquals(MusicToEdit, null))
-                        lecteur.Allmusics.PlaylistProperty.Remove(lecteur.Allmusics.PlaylistProperty.First(x=> x.Equals(MusicToEdit)));
-                    lecteur.Allmusics.PlaylistProperty.Add(music);
+                        MyPlayer.Allmusics.PlaylistProperty.Remove(MyPlayer.Allmusics.PlaylistProperty.First(x=> x.Equals(MusicToEdit)));
+                    MyPlayer.Allmusics.PlaylistProperty.Add(music);
                     Close();
                 }
                 else if(music.Equals(MusicToEdit))

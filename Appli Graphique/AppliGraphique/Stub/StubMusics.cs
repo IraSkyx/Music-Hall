@@ -1,5 +1,6 @@
 ﻿using Biblio;
 using System;
+using System.Collections.ObjectModel;
 
 namespace Stub
 {
@@ -9,7 +10,7 @@ namespace Stub
         {
             Playlist liste = new Playlist();
 
-            CommentDB Com = new CommentDB();
+            ObservableCollection<IComment> Com = new ObservableCollection<IComment>();
             Com.Add(CommentMaker.MakeComment("Toto", 4, "lolol"));
             Com.Add(CommentMaker.MakeComment("Toto2", 2,  "lolol2"));
            

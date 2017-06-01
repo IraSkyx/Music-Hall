@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
-using System;
 
 namespace MyApp
 {
@@ -51,10 +50,10 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void PlayASong(object sender, RoutedEventArgs e)
-            => MyPlayer.Player.Play((IMusic)MyScroller.SelectedItem);
+            => MyPlayer.Player.Play((IMusic)DataContext);
 
         /// <summary>
-        /// Ajotue la Music à la Playlist, gère les différents cas de figures (Exemple : si la playlist n'est pas encore instancié)
+        /// Ajoute la Music à la Playlist si un User est connecté
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
@@ -63,16 +62,20 @@ namespace MyApp
             if (!ReferenceEquals(MyPlayer.Player.CurrentUser,null))
             {
                 if (MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)MyScroller.SelectedItem)) == 0)
-                    MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Add(ReferenceEquals(MyPlayer.Add1, sender) ? MyPlayer.Player.CurrentlyPlaying : (IMusic)MyScroller.SelectedItem);
+                    MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Add(ReferenceEquals(MyPlayer.Add1, sender) ? MyPlayer.Player.CurrentlyPlaying : (IMusic)DataContext);
             }
             MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //Profil subWindow3 = new Profil(MyPlayer.Player.CurrentUser, AllUsers)
-            //AddComment adcom = new AddComment (AllComment, MyPlayer.Player.CurrentUser);
-            //adcom.ShowDialog();
+        /// <summary>
+        /// Ajoute un Comment à la Music si un User est connecté 
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
+        private void AddComment(object sender, RoutedEventArgs e)
+        {           
+            AddComment adcom = new AddComment (MyPlayer.Player.CurrentUser, (IMusic)DataContext);           
+            adcom.ShowDialog();
         }
     }
 }

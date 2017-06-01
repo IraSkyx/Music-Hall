@@ -32,12 +32,12 @@ namespace Biblio
         public string Image { get; set; }     
 
         [DataMember(Name = "Comments", Order = 8)]
-        public CommentDB Comments { get; set; }
+        public ObservableCollection<IComment> Comments { get; set; }
 
         /// <summary>
         /// Constructeur de Music
         /// </summary>
-        public Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Video, string Image, CommentDB Comments)
+        public Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Video, string Image, ObservableCollection<IComment> Comments)
         {
             this.Title = Title;
             this.Artist = Artist;
@@ -48,6 +48,17 @@ namespace Biblio
             this.Video = Video;
             this.Image = Image;
             this.Comments = Comments;
+        }
+
+        /// <summary>
+        /// Ajoute un Comment
+        /// </summary>
+        /// <param name="Com"> Comment à ajouter </param>
+        public void AddComment(IComment Com)
+        {
+            if (ReferenceEquals(Comments, null))
+                Comments = new ObservableCollection<IComment>();
+            Comments.Add(Com);
         }
 
         /// <summary>

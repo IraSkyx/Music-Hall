@@ -9,14 +9,14 @@ namespace Biblio
         {
             SetCurrentDirectory();
 
-            return (Playlist)Deserialize("PersistanceMusics.xml", new DataContractSerializer(typeof(Playlist), new Type[] { typeof(Music) }));
+            return (Playlist)Deserialize("PersistanceMusics.xml", new DataContractSerializer(typeof(Playlist), new Type[] { typeof(Music), typeof(Comment) }));
         }
 
         public void SaveMusics(Playlist AllMusics)
         {
             SetCurrentDirectory();
 
-            Serialize("PersistanceMusics.xml", AllMusics, new DataContractSerializer(typeof(Playlist), new Type[] { typeof(Music) }));
+            Serialize("PersistanceMusics.xml", AllMusics, new DataContractSerializer(typeof(Playlist), new Type[] { typeof(Music), typeof(Comment) }));
         }
     }
 }

@@ -9,7 +9,7 @@
         Background="#222222"
         Foreground="White"
         KeyDown="Window_KeyDown"
-        Title="Connexion" Height="400" Width="300" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Drag">
+        Title="Connexion" Height="500" Width="300" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Drag">
     <DockPanel>
 
         <!--En-tête-->
@@ -30,10 +30,12 @@
                     <ComboBoxItem>5</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
-            <TextBox x:Name="textcom" DockPanel.Dock="Top" FontSize="15" Margin="15" Height="83" Text="Cool!!!" />
+            <TextBox x:Name="textcom" DockPanel.Dock="Top" FontSize="15" Height="100" Text="Cool!!!" Margin="10,0,10,0"/>
 
-            <Button Content="Envoyer" Click="Commit" DockPanel.Dock="Top" FontSize="20" Width="100" Height="35" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" />
-     
+            <TextBlock x:Name="wrong" Foreground="#D91E18" TextAlignment="Center" TextWrapping="Wrap" Margin="10"/>
+
+            <Button Click="Commit" Content="Valider" DockPanel.Dock="Top" Width="100" Height="35" Margin="20" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}"/>
+                
         </StackPanel>
         <!--Corps-->
 

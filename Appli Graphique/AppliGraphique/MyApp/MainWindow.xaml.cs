@@ -16,7 +16,6 @@ namespace MyApp
     public partial class MainWindow : Window
     {
         private UserDB AllUsers = ReferenceEquals(new PersistanceUsers().LoadUsers(), null) ? new StubUsers().LoadUsers() : new PersistanceUsers().LoadUsers();
-        private CommentDB AllComment = new CommentDB();
 
         /// <summary>
         /// Instancie MainWindow
@@ -29,6 +28,7 @@ namespace MyApp
             if (Settings.Default.StayLogged)
                 LogIn(AllUsers.Database.First(x => x.Address.Equals(Settings.Default.LastMail)));
 
+            root.DataContext = this;
             Panel.DataContext = MyPlayer.Player;
             MyScroller.DataContext = MyPlayer.Allmusics;                                            
         }
@@ -168,7 +168,7 @@ namespace MyApp
         private void MyScrollerSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Tab.SelectedIndex = 1; 
-            xSelection.YT.Browser.Navigate("https://www.youtube.com/v/" + new Uri(((IMusic)MyScroller.SelectedItem).Video, UriKind.RelativeOrAbsolute).Segments.Last().ToString());
+            xSelection.Browser.Navigate("https://www.youtube.com/v/" + new Uri(((IMusic)MyScroller.SelectedItem).Video, UriKind.RelativeOrAbsolute).Segments.Last().ToString());
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace MyApp
             FileInfo infos = new FileInfo(((string[])e.Data.GetData(DataFormats.FileDrop))[0]);
             if (infos.Extension == ".mp3")
             {
-                AddMusicWin sub = new AddMusicWin(infos);
+                AddMusicWin sub = new AddMusicWin(infos, MyPlayer);
                 sub.ShowDialog();
             }
         }
@@ -259,7 +259,7 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void OpenPA(object sender, RoutedEventArgs e)
         {
-            PA sub = new PA(MyPlayer.Allmusics);
+            PA sub = new PA(MyPlayer.Allmusics, MyPlayer);
             sub.ShowDialog();
         }
     }  

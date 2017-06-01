@@ -1,9 +1,7 @@
 ﻿using Biblio;
 using Microsoft.Win32;
-using System;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MyApp
@@ -13,12 +11,15 @@ namespace MyApp
     /// </summary>
     public partial class PA : Window
     {
+        private Lecteur MyPlayer;
+
         /// <summary>
         /// Instancie un PA
         /// </summary>
-        public PA(Playlist AllMusics)
+        public PA(Playlist AllMusics, Lecteur MyPlayer)
         {
             InitializeComponent();
+            this.MyPlayer = MyPlayer;
             DataContext = AllMusics;
         }
 
@@ -44,7 +45,7 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void DeleteMusic(object sender, RoutedEventArgs e)
-            => ((Lecteur)Application.Current.MainWindow.FindName("MyPlayer")).Allmusics.PlaylistProperty.Remove((IMusic)MyPlaylist.SelectedItem);
+            => MyPlayer.Allmusics.PlaylistProperty.Remove((IMusic)MyPlaylist.SelectedItem);
 
         /// <summary>
         /// Ajoute une music à la base de données
@@ -57,7 +58,7 @@ namespace MyApp
             Explo.Filter = "(.mp3)|*.mp3";
             if (Explo.ShowDialog() == true)
             {
-                AddMusicWin sub = new AddMusicWin(new FileInfo(Explo.FileName));
+                AddMusicWin sub = new AddMusicWin(new FileInfo(Explo.FileName), MyPlayer);
                 sub.ShowDialog();
             }  
         }
@@ -69,7 +70,7 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void EditMusic(object sender, RoutedEventArgs e)
         {
-            AddMusicWin sub = new AddMusicWin((IMusic)MyPlaylist.SelectedItem);
+            AddMusicWin sub = new AddMusicWin((IMusic)MyPlaylist.SelectedItem, MyPlayer);
             sub.ShowDialog();
         }
 

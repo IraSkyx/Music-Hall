@@ -17,8 +17,32 @@ namespace MyApp
         public Player Player { get; set; } = new Player();
         public Playlist Allmusics { get; set; } = ReferenceEquals(new PersistanceMusics().LoadMusics(), null) ? new StubMusics().LoadMusics() : new PersistanceMusics().LoadMusics();
         private DispatcherTimer timer = new DispatcherTimer();
-        private ListView MyScroller = (ListView)Application.Current.MainWindow.FindName("MyScroller");
-        private ListView MyPlaylist = (ListView)Application.Current.MainWindow.FindName("MyPlaylist");
+
+        public static readonly DependencyProperty Playlist = DependencyProperty.Register("MyPlaylist", typeof(ListView), typeof(Lecteur));
+        public ListView MyPlaylist
+        {
+            get
+            {
+                return GetValue(Playlist) as ListView;
+            }
+            set
+            {
+                SetValue(Playlist, value);
+            }
+        }
+
+        public static readonly DependencyProperty Scroller = DependencyProperty.Register("MyScroller", typeof(ListView), typeof(Lecteur));
+        public ListView MyScroller
+        {
+            get
+            {
+                return GetValue(Scroller) as ListView;
+            }
+            set
+            {
+                SetValue(Scroller, value);
+            }
+        }
 
         /// <summary>
         /// Instancie Lecteur, ajoute dynamiquement un Player, fixe les évènements du Player, définit les paramètres du Timer et les DataContext de la vue

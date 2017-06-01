@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -50,7 +49,7 @@ namespace Biblio
         /// Filtre les éléments de la ListView de recherche
         /// </summary>
         /// <param name="critere"> Critère de recherche </param>
-        /// <param name="input"> Ce qu'à tapé l'utilisateur </param>
+        /// <param name="input"> Ce qu'a tapé l'utilisateur </param>
         /// <returns> Playlist matchant ce qu'à rentré l'utilisateur et son critère de recherche </returns>
         public Playlist Filter(string critere, string input)
         {
