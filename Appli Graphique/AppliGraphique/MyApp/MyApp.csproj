@@ -207,6 +207,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BackEnd\BackEnd.csproj">
+      <Project>{19ec50a4-46b2-4844-b86f-c63c41af40cf}</Project>
+      <Name>BackEnd</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Biblio\Biblio.csproj">
       <Project>{087caf5b-e6cd-4ed8-9c1b-2bbf4a29a649}</Project>
       <Name>Biblio</Name>

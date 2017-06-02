@@ -1,4 +1,5 @@
-﻿using Biblio;
+﻿using BackEnd;
+using Biblio;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -14,17 +15,14 @@ namespace MyApp
     public partial class AddMusicWin : Window
     {
         private FileInfo infos;
-        private OpenFileDialog Explo;       
-        private IMusic MusicToEdit;
-        public Lecteur MyPlayer;        
+        private OpenFileDialog Explo;          
 
         /// <summary>
         /// Instancie un AddMusicWin pour un ajout
         /// </summary>
-        public AddMusicWin(FileInfo infos, Lecteur MyPlayer)
+        public AddMusicWin(FileInfo infos)
         {
             InitializeComponent();
-            this.MyPlayer = MyPlayer;
             this.infos = infos;
             Titre.Text = infos.Name;
             Date.Text = infos.CreationTime.ToShortDateString();
@@ -33,19 +31,10 @@ namespace MyApp
         /// <summary>
         /// Instancie un AddMusicWin pour une modification
         /// </summary>
-        public AddMusicWin(IMusic music, Lecteur MyPlayer)
+        public AddMusicWin()
         {
             InitializeComponent();
-            this.MyPlayer = MyPlayer;
             bigtitle.Text = "Modifier une musique";
-            MusicToEdit = music;
-            Titre.Text = MusicToEdit.Title;
-            Artist.Text = MusicToEdit.Artist;
-            Genre.Text = MusicToEdit.Genre;
-            Infos.Text = MusicToEdit.Infos;
-            Date.Text = MusicToEdit.Date;
-            Video.Text = MusicToEdit.Video;
-            Explorer.Content = MusicToEdit.Image;
         }
 
         /// <summary>
@@ -90,21 +79,22 @@ namespace MyApp
             Video.Text = (Video.Text).Replace(@"https://youtu.be/", @"https://www.youtube.com/embed/");
             try
             {                
-                if (ReferenceEquals(MusicToEdit, null)) //Ajout
+                if (ReferenceEquals((IMusic)DataContext, null)) //Ajout
                     music = MusicMaker.MakeMusic(Titre.Text, Artist.Text, Date.Text, Genre.Text, Infos.Text, new Uri(infos.FullName, UriKind.RelativeOrAbsolute), Video.Text, Explo.FileName, null);    
                 else if(ReferenceEquals(Explo, null)) //Modif sans choix d'image
-                    music = MusicMaker.MakeMusic(Titre.Text, Artist.Text, Date.Text, Genre.Text, Infos.Text, MusicToEdit.Audio, Video.Text, MusicToEdit.Image, MusicToEdit.Comments);        
+                    music = MusicMaker.MakeMusic(Titre.Text, Artist.Text, Date.Text, Genre.Text, Infos.Text, ((IMusic)DataContext).Audio, Video.Text, ((IMusic)DataContext).Image, ((IMusic)DataContext).Comments);        
                 else //Modif avec choix d'image
-                    music = MusicMaker.MakeMusic(Titre.Text, Artist.Text, Date.Text, Genre.Text, Infos.Text, MusicToEdit.Audio, Video.Text, Explo.FileName, MusicToEdit.Comments);
+                    music = MusicMaker.MakeMusic(Titre.Text, Artist.Text, Date.Text, Genre.Text, Infos.Text, ((IMusic)DataContext).Audio, Video.Text, Explo.FileName, ((IMusic)DataContext).Comments);
 
-                if (MyPlayer.Allmusics.PlaylistProperty.Count(x => x.Equals(music)) == 0)
-                {                   
-                    if (!ReferenceEquals(MusicToEdit, null))
-                        MyPlayer.Allmusics.PlaylistProperty.Remove(MyPlayer.Allmusics.PlaylistProperty.First(x=> x.Equals(MusicToEdit)));
-                    MyPlayer.Allmusics.PlaylistProperty.Add(music);
+                if (PlaylistFront.AllMusics.PlaylistProperty.Count(x => x.Equals(music)) == 0)
+                {
+                    if (!ReferenceEquals((IMusic)DataContext, null))
+                        DataContext = music;
+                    else
+                        PlaylistFront.AllMusics.PlaylistProperty.Add(music);
                     Close();
                 }
-                else if(music.Equals(MusicToEdit))
+                else if(music.Equals((IMusic)DataContext))
                     Close();
                 else
                     MessageBox.Show("Musique déjà présente");

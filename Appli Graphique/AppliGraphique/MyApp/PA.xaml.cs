@@ -1,4 +1,5 @@
-﻿using Biblio;
+﻿using BackEnd;
+using Biblio;
 using Microsoft.Win32;
 using System.IO;
 using System.Windows;
@@ -11,16 +12,14 @@ namespace MyApp
     /// </summary>
     public partial class PA : Window
     {
-        private Lecteur MyPlayer;
 
         /// <summary>
         /// Instancie un PA
         /// </summary>
-        public PA(Playlist AllMusics, Lecteur MyPlayer)
+        public PA()
         {
             InitializeComponent();
-            this.MyPlayer = MyPlayer;
-            DataContext = AllMusics;
+            DataContext = PlaylistFront.AllMusics;
         }
 
         /// <summary>
@@ -45,7 +44,7 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void DeleteMusic(object sender, RoutedEventArgs e)
-            => MyPlayer.Allmusics.PlaylistProperty.Remove((IMusic)MyPlaylist.SelectedItem);
+            => PlaylistFront.AllMusics.PlaylistProperty.Remove((IMusic)MyPlaylist.SelectedItem);
 
         /// <summary>
         /// Ajoute une music à la base de données
@@ -58,7 +57,7 @@ namespace MyApp
             Explo.Filter = "(.mp3)|*.mp3";
             if (Explo.ShowDialog() == true)
             {
-                AddMusicWin sub = new AddMusicWin(new FileInfo(Explo.FileName), MyPlayer);
+                AddMusicWin sub = new AddMusicWin(new FileInfo(Explo.FileName));
                 sub.ShowDialog();
             }  
         }
@@ -70,16 +69,9 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void EditMusic(object sender, RoutedEventArgs e)
         {
-            AddMusicWin sub = new AddMusicWin((IMusic)MyPlaylist.SelectedItem, MyPlayer);
+            AddMusicWin sub = new AddMusicWin();
+            sub.DataContext = (IMusic)MyPlaylist.SelectedItem;
             sub.ShowDialog();
         }
-
-        /// <summary>
-        /// Permet d'ajouter une music via un Drag&Drop
-        /// </summary>
-        /// <param name="sender"> Object envoyeur </param>
-        /// <param name="e"> Évènement déclenché par la vue </param>
-        private new void Drop(object sender, DragEventArgs e)
-            => ((MainWindow)Application.Current.MainWindow).DragAndDrop(this, e);
     }
 }

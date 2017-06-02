@@ -9,7 +9,6 @@
         Background="#222222"
         Foreground="White"
         AllowDrop="True"
-        DragDrop.Drop="Drop"
         Title="Panneau d'administration" Height="500" Width="300" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Drag">
     <DockPanel>
 

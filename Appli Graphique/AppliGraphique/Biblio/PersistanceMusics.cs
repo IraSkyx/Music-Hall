@@ -15,7 +15,6 @@ namespace Biblio
         public void SaveMusics(Playlist AllMusics)
         {
             SetCurrentDirectory();
-
             Serialize("PersistanceMusics.xml", AllMusics, new DataContractSerializer(typeof(Playlist), new Type[] { typeof(Music), typeof(Comment) }));
         }
     }

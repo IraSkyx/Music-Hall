@@ -18,9 +18,9 @@ namespace MainTest
             Player myPlayer = new Player();
 
             //Create comments
-            ObservableCollection<Comment> Com = new ObservableCollection<Comment>();
-            Com.Add(new Comment("Toto", 4, "lolol"));
-            Com.Add(new Comment("Toto2", 2, "lolol2"));
+            ObservableCollection<IComment> Com = new ObservableCollection<IComment>();
+            Com.Add(CommentMaker.MakeComment("Toto", 4, "lolol"));
+            Com.Add(CommentMaker.MakeComment("Toto2", 2, "lolol2"));
 
             //Create Musics
             IMusic music1 = MusicMaker.MakeMusic("Back For More", "Feder feat Daecolm", "2017", "Dance", "Directed by Julien", new Uri("audio/Feder.mp3", UriKind.RelativeOrAbsolute), "https://www.youtube.com/embed/FvDk9paBf9I", "images/eFeder.jpg", Com);

@@ -1,5 +1,4 @@
 ﻿using Biblio;
-using Stub;
 using System;
 using System.Linq;
 using System.Windows;
@@ -7,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using MyApp.Properties;
 using System.IO;
+using BackEnd;
 
 namespace MyApp
 {
@@ -15,22 +15,24 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private UserDB AllUsers = ReferenceEquals(new PersistanceUsers().LoadUsers(), null) ? new StubUsers().LoadUsers() : new PersistanceUsers().LoadUsers();
-
         /// <summary>
         /// Instancie MainWindow
         /// </summary>
         public MainWindow()
         {
-            InitializeComponent();
+            UserDBFront.LoadUsers();
+            PlaylistFront.LoadMusics();
+            PlayerFront.LoadPlayer();
+
+            InitializeComponent();           
 
             Settings.Default.Upgrade();
             if (Settings.Default.StayLogged)
-                LogIn(AllUsers.Database.First(x => x.Address.Equals(Settings.Default.LastMail)));
+                LogIn(UserDBFront.MyUserDB.Database.First(x => x.Address.Equals(Settings.Default.LastMail)));
 
             root.DataContext = this;
-            Panel.DataContext = MyPlayer.Player;
-            MyScroller.DataContext = MyPlayer.Allmusics;                                            
+            Panel.DataContext = PlayerFront.MyPlayer;
+            MyScroller.DataContext = PlaylistFront.AllMusics;                                            
         }
 
         /// <summary>
@@ -48,8 +50,8 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void OnClose(object sender, EventArgs e)
         {
-            new PersistanceMusics().SaveMusics(MyPlayer.Allmusics);
-            new PersistanceUsers().SaveUsers(AllUsers);
+            UserDBFront.SaveUsers();
+            PlaylistFront.SaveMusics();
             Settings.Default.Save();
             Settings.Default.Reload();
         }
@@ -102,16 +104,16 @@ namespace MyApp
         /// <remarks>Le else correspond à la gestion de la déconnexion</remarks>
         private void Connexion(object sender, RoutedEventArgs e)
         {
-            if (ReferenceEquals(MyPlayer.Player.CurrentUser,null))
+            if (ReferenceEquals(PlayerFront.MyPlayer.CurrentUser,null))
             {
-                Connexion subWindow = new Connexion(AllUsers);
+                Connexion subWindow = new Connexion();
                 subWindow.Check += value => LogIn(value);
                 subWindow.ShowDialog();
             }
             else
             {
                 Settings.Default.StayLogged = false;
-                MyPlayer.Player.CurrentUser = null;
+                PlayerFront.MyPlayer.CurrentUser = null;
                 MyPlaylist.DataContext = null;
             }
         }
@@ -122,8 +124,8 @@ namespace MyApp
         /// <param name="value"> L'User à connecter </param>
         private void LogIn(IUser value)
         {
-            MyPlayer.Player.CurrentUser = value;
-            MyPlaylist.DataContext = MyPlayer.Player.CurrentUser.Favorite;
+            PlayerFront.MyPlayer.CurrentUser = value;
+            MyPlaylist.DataContext = PlayerFront.MyPlayer.CurrentUser.Favorite;
             Settings.Default.LastMail = value.Address;           
             MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
@@ -137,23 +139,24 @@ namespace MyApp
         /// <remarks>Le else correspond à l'ouverture de la fenêtre du profil</remarks>
         private void Inscription(object sender, RoutedEventArgs e)
         {
-            if (!ReferenceEquals(MyPlayer.Player.CurrentUser, null))
+            if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser, null))
             {
-                Profil subWindow3 = new Profil(MyPlayer.Player.CurrentUser, AllUsers);
+                Profil subWindow3 = new Profil();
+                subWindow3.DataContext = PlayerFront.MyPlayer.CurrentUser;
                 subWindow3.Check += value =>
                 {
-                    AllUsers.Database.Add(value);
-                    AllUsers.Database.Remove(AllUsers.Database.First(x => x.Equals(MyPlayer.Player.CurrentUser)));
+                    UserDBFront.MyUserDB.Database.Add(value);
+                    UserDBFront.MyUserDB.Database.Remove(UserDBFront.MyUserDB.Database.First(x => x.Equals(PlayerFront.MyPlayer.CurrentUser)));
                     LogIn(value);
                 };
                 subWindow3.ShowDialog();
             }
             else
             {
-                Inscription subWindow2 = new Inscription(AllUsers);
+                Inscription subWindow2 = new Inscription(UserDBFront.MyUserDB);
                 subWindow2.Check += value =>
                 {
-                    AllUsers.Database.Add(value);
+                    UserDBFront.MyUserDB.Database.Add(value);
                     LogIn(value);
                 };
                 subWindow2.ShowDialog();
@@ -197,8 +200,8 @@ namespace MyApp
             if (e.Delta > 0)
                 MyScroller.SelectedIndex = (MyScroller.SelectedIndex == 0) ? 0 : MyScroller.SelectedIndex - 1;                     
             else
-                MyScroller.SelectedIndex = (MyScroller.SelectedIndex == MyPlayer.Allmusics.PlaylistProperty.Count-1) ? MyPlayer.Allmusics.PlaylistProperty.Count - 1 : MyScroller.SelectedIndex + 1;
-            MyScroller.ScrollIntoView(MyPlayer.Allmusics.PlaylistProperty.ElementAt(MyScroller.SelectedIndex));
+                MyScroller.SelectedIndex = (MyScroller.SelectedIndex == PlaylistFront.AllMusics.PlaylistProperty.Count-1) ? PlaylistFront.AllMusics.PlaylistProperty.Count - 1 : MyScroller.SelectedIndex + 1;
+            MyScroller.ScrollIntoView(PlaylistFront.AllMusics.PlaylistProperty.ElementAt(MyScroller.SelectedIndex));
         }
 
         /// <summary>
@@ -208,7 +211,7 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void ViewFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(MyPlayer.Player.CurrentUser,null) && !ReferenceEquals(MyPlaylist.SelectedItem,null))
+            if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser,null) && !ReferenceEquals(MyPlaylist.SelectedItem,null))
                 MyScroller.SelectedItem=((IMusic)MyPlaylist.SelectedItem);
         }
 
@@ -219,10 +222,10 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void ReadFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(MyPlayer.Player.CurrentUser, null) && !ReferenceEquals(MyPlaylist.SelectedItem, null) && ReferenceEquals(sender, MyPlaylist))
-                MyPlayer.Player.Play((IMusic)MyPlaylist.SelectedItem);    
+            if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser, null) && !ReferenceEquals(MyPlaylist.SelectedItem, null) && ReferenceEquals(sender, MyPlaylist))
+                PlayerFront.MyPlayer.Play((IMusic)MyPlaylist.SelectedItem);    
             else
-                MyPlayer.Player.Play((IMusic)MyScroller.SelectedItem);
+                PlayerFront.MyPlayer.Play((IMusic)MyScroller.SelectedItem);
         }
 
         /// <summary>
@@ -232,8 +235,8 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void DeleteFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(MyPlayer.Player.CurrentUser, null) && !ReferenceEquals(MyPlaylist.SelectedItem, null))
-                MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Remove((IMusic)MyPlaylist.SelectedItem);
+            if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser, null) && !ReferenceEquals(MyPlaylist.SelectedItem, null))
+                PlayerFront.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Remove((IMusic)MyPlaylist.SelectedItem);
             MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
 
@@ -247,7 +250,7 @@ namespace MyApp
             FileInfo infos = new FileInfo(((string[])e.Data.GetData(DataFormats.FileDrop))[0]);
             if (infos.Extension == ".mp3")
             {
-                AddMusicWin sub = new AddMusicWin(infos, MyPlayer);
+                AddMusicWin sub = new AddMusicWin(infos);                
                 sub.ShowDialog();
             }
         }
@@ -259,7 +262,7 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void OpenPA(object sender, RoutedEventArgs e)
         {
-            PA sub = new PA(MyPlayer.Allmusics, MyPlayer);
+            PA sub = new PA();
             sub.ShowDialog();
         }
     }  

@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using MyApp.Properties;
+using BackEnd;
 
 namespace MyApp
 {
@@ -11,16 +12,14 @@ namespace MyApp
     /// </summary>
     public partial class Connexion : Window
     {
-        private UserDB Database;
         public event Action<IUser> Check;
 
         /// <summary>
         /// Instancie Connexion
         /// </summary>
-        public Connexion(UserDB Database)
+        public Connexion()
         {
             InitializeComponent();
-            this.Database = Database;
         }
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace MyApp
         {
             try
             {                                
-                Check?.Invoke(Database.LogIn(email.Text, passwd.Password));
+                Check?.Invoke(UserDBFront.MyUserDB.LogIn(email.Text, passwd.Password));
                 if ((bool)StayLoggedIn.IsChecked)
                     Settings.Default.StayLogged = true;
                 else

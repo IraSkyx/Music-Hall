@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
 using System.Windows.Threading;
-using Stub;
+using BackEnd;
 
 namespace MyApp
 {
@@ -13,9 +13,7 @@ namespace MyApp
     /// Logique d'interaction pour Lecteur.xaml
     /// </summary>
     public partial class Lecteur : UserControl
-    {
-        public Player Player { get; set; } = new Player();
-        public Playlist Allmusics { get; set; } = ReferenceEquals(new PersistanceMusics().LoadMusics(), null) ? new StubMusics().LoadMusics() : new PersistanceMusics().LoadMusics();
+    {                
         private DispatcherTimer timer = new DispatcherTimer();
 
         public static readonly DependencyProperty Playlist = DependencyProperty.Register("MyPlaylist", typeof(ListView), typeof(Lecteur));
@@ -49,14 +47,14 @@ namespace MyApp
         /// </summary>
         public Lecteur()
         {
-            InitializeComponent();
+            InitializeComponent();            
 
-            FullPlayer.Children.Add(Player);
+            FullPlayer.Children.Add(PlayerFront.MyPlayer);
 
-            FullPlayer.DataContext = Player;
+            FullPlayer.DataContext = PlayerFront.MyPlayer;
 
-            Player.MediaEnded += MediaEnded;
-            Player.MediaOpened += MediaOpened;
+            PlayerFront.MyPlayer.MediaEnded += MediaEnded;
+            PlayerFront.MyPlayer.MediaOpened += MediaOpened;
 
             timer.Interval = TimeSpan.FromMilliseconds(500);
             timer.Tick += new EventHandler(Update);
@@ -70,17 +68,17 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void Update(object sender, EventArgs e)
         {
-            if (Player.NaturalDuration.HasTimeSpan)
+            if (PlayerFront.MyPlayer.NaturalDuration.HasTimeSpan)
             {
-                Prog.Value = Player.Position.TotalSeconds;
+                Prog.Value = PlayerFront.MyPlayer.Position.TotalSeconds;
                 duration.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
-                    Player.Position.Hours,
-                    Player.Position.Minutes,
-                    Player.Position.Seconds);
+                    PlayerFront.MyPlayer.Position.Hours,
+                    PlayerFront.MyPlayer.Position.Minutes,
+                    PlayerFront.MyPlayer.Position.Seconds);
                 duration2.Text = string.Format("{0:D2}:{1:D2}:{2:D2}",
-                    Player.NaturalDuration.TimeSpan.Hours,
-                    Player.NaturalDuration.TimeSpan.Minutes,
-                    Player.NaturalDuration.TimeSpan.Seconds);
+                    PlayerFront.MyPlayer.NaturalDuration.TimeSpan.Hours,
+                    PlayerFront.MyPlayer.NaturalDuration.TimeSpan.Minutes,
+                    PlayerFront.MyPlayer.NaturalDuration.TimeSpan.Seconds);
             }
         }
 
@@ -91,11 +89,11 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void MediaOpened(object sender, RoutedEventArgs e)
         {
-            if (Player.NaturalDuration.HasTimeSpan)
+            if (PlayerFront.MyPlayer.NaturalDuration.HasTimeSpan)
             {
                 Prog.Minimum = 0;
-                Prog.Maximum = Player.NaturalDuration.TimeSpan.TotalSeconds;
-                ActualPlay.DataContext = Player.CurrentlyPlaying;
+                Prog.Maximum = PlayerFront.MyPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+                ActualPlay.DataContext = PlayerFront.MyPlayer.CurrentlyPlaying;
             }       
         }
 
@@ -106,21 +104,21 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void PausePlayClick(object sender, RoutedEventArgs e)
         {
-            if(!ReferenceEquals(Player.CurrentlyPlaying, null))
+            if(!ReferenceEquals(PlayerFront.MyPlayer.CurrentlyPlaying, null))
             {
-                if (Player.IsPlaying)
+                if (PlayerFront.MyPlayer.IsPlaying)
                 {
-                    Player.Pause();
-                    Player.IsPlaying = false;
+                    PlayerFront.MyPlayer.Pause();
+                    PlayerFront.MyPlayer.IsPlaying = false;
                 }
                 else
                 {
-                    if (Player.NaturalDuration.TimeSpan.TotalSeconds == Player.Position.TotalSeconds)
-                        Player.ChangePosition(TimeSpan.Zero);
+                    if (PlayerFront.MyPlayer.NaturalDuration.TimeSpan.TotalSeconds == PlayerFront.MyPlayer.Position.TotalSeconds)
+                        PlayerFront.MyPlayer.ChangePosition(TimeSpan.Zero);
                     else
                     {
-                        Player.Play();
-                        Player.IsPlaying = true;
+                        PlayerFront.MyPlayer.Play();
+                        PlayerFront.MyPlayer.IsPlaying = true;
                     }                 
                 }
             }
@@ -132,7 +130,7 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void Replay(object sender, RoutedEventArgs e) 
-            => Player.Loop=!Player.Loop;
+            => PlayerFront.MyPlayer.Loop=!PlayerFront.MyPlayer.Loop;
 
         /// <summary>
         /// Active l'option lecture aléatoire
@@ -140,7 +138,7 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void Random(object sender, RoutedEventArgs e) 
-            => Player.RandomPlay=!Player.RandomPlay;
+            => PlayerFront.MyPlayer.RandomPlay=!PlayerFront.MyPlayer.RandomPlay;
 
         /// <summary>
         /// Désactive/active le son
@@ -148,7 +146,7 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void Mute(object sender, MouseButtonEventArgs e)
-            => Player.Volume = Player.Volume == 0.00 ? 0.50 : 0.00;
+            => PlayerFront.MyPlayer.Volume = PlayerFront.MyPlayer.Volume == 0.00 ? 0.50 : 0.00;
 
         /// <summary>
         /// Passe à la Music suivante/précédente
@@ -160,14 +158,14 @@ namespace MyApp
             try
             {
                 if (ReferenceEquals(sender,next))
-                    Player.GoToNextOrPrevious(1);
+                    PlayerFront.MyPlayer.GoToNextOrPrevious(1);
                 else
-                    Player.GoToNextOrPrevious(-1);
+                    PlayerFront.MyPlayer.GoToNextOrPrevious(-1);
             }
             catch (NullReferenceException)
             {
-                Player.IsPlaying = false;
-                Player.Pause();
+                PlayerFront.MyPlayer.IsPlaying = false;
+                PlayerFront.MyPlayer.Pause();
                 return;
             }
         }
@@ -182,8 +180,8 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void MediaEnded(object sender, RoutedEventArgs e)
         {
-            if (Player.Loop)
-                Player.ChangePosition(TimeSpan.Zero);
+            if (PlayerFront.MyPlayer.Loop)
+                PlayerFront.MyPlayer.ChangePosition(TimeSpan.Zero);
             else
                 NextAndPrevious(this, new RoutedEventArgs());
         }
@@ -195,8 +193,8 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void ProgMouseClick(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(Player.Source,null) && Player.NaturalDuration.HasTimeSpan)
-                Player.ChangePosition(new TimeSpan(0, 0, (int)((e.GetPosition(Prog).X / Prog.ActualWidth) * Prog.Maximum)));
+            if (!ReferenceEquals(PlayerFront.MyPlayer.Source,null) && PlayerFront.MyPlayer.NaturalDuration.HasTimeSpan)
+                PlayerFront.MyPlayer.ChangePosition(new TimeSpan(0, 0, (int)((e.GetPosition(Prog).X / Prog.ActualWidth) * Prog.Maximum)));
         }
 
         /// <summary>
@@ -206,12 +204,12 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void AddToPlaylist(object sender, RoutedEventArgs e)
         {
-            if (!ReferenceEquals(Player.CurrentUser,null))
+            if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser,null))
             {
-                if (ReferenceEquals(Player.CurrentUser.Favorite,null))
-                    Player.CurrentUser.Favorite = new Playlist();
-                if (Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals(Player.CurrentlyPlaying)) == 0)
-                    Player.CurrentUser.Favorite.PlaylistProperty.Add(Player.CurrentlyPlaying);
+                if (ReferenceEquals(PlayerFront.MyPlayer.CurrentUser.Favorite,null))
+                    PlayerFront.MyPlayer.CurrentUser.Favorite = new Playlist();
+                if (PlayerFront.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals(PlayerFront.MyPlayer.CurrentlyPlaying)) == 0)
+                    PlayerFront.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Add(PlayerFront.MyPlayer.CurrentlyPlaying);
             }
             Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
@@ -224,10 +222,10 @@ namespace MyApp
         private void SeeMusic(object sender, MouseButtonEventArgs e)
         {
             if (!ReferenceEquals(MyPlaylist.SelectedItem, null) && ReferenceEquals(sender, MyPlaylist))
-                MyScroller.SelectedIndex = Allmusics.Index((IMusic)MyPlaylist.SelectedItem);
+                MyScroller.SelectedIndex = PlaylistFront.AllMusics.Index((IMusic)MyPlaylist.SelectedItem);
 
-            if (ReferenceEquals(sender, ActualPlay) && !ReferenceEquals(Player.CurrentlyPlaying, null))
-                MyScroller.SelectedIndex = Allmusics.Index(Player.CurrentlyPlaying);
+            if (ReferenceEquals(sender, ActualPlay) && !ReferenceEquals(PlayerFront.MyPlayer.CurrentlyPlaying, null))
+                MyScroller.SelectedIndex = PlaylistFront.AllMusics.Index(PlayerFront.MyPlayer.CurrentlyPlaying);
         }
     }
 }

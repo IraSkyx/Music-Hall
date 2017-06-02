@@ -1,38 +1,139 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Runtime.Serialization;
 
 namespace Biblio
 {
     [DataContract]
-    internal class Music : IMusic
+    internal class Music : IMusic, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string _Title;
         [DataMember(Name = "Title", Order = 0)]
-        public string Title { get; set; }
+        public string Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                _Title = value;
+                OnPropertyChanged("Title");
+            }
+        }
 
+        private string _Artist;
         [DataMember(Name = "Artist", Order = 1)]
-        public string Artist { get; set; }
+        public string Artist {
+            get
+            {
+                return _Artist;
+            }
+            set
+            {
+                _Artist = value;
+                OnPropertyChanged("Artist");
+            }
+        }
 
+        private string _Date;
         [DataMember(Name = "Date", Order = 2)]
-        public string Date { get; set; }
+        public string Date
+        {
+            get
+            {
+                return _Date;
+            }
+            set
+            {
+                _Date = value;
+                OnPropertyChanged("Date");
+            }
+        }
 
+        private string _Genre;
         [DataMember(Name = "Genre", Order = 3)]
-        public string Genre { get; set; }
+        public string Genre
+        {
+            get
+            {
+                return _Genre;
+            }
+            set
+            {
+                _Genre = value;
+                OnPropertyChanged("Genre");
+            }
+        }
 
+        private string _Infos;
         [DataMember(Name = "Infos", Order = 4)]
-        public string Infos { get; set; }
+        public string Infos
+        {
+            get
+            {
+                return _Infos;
+            }
+            set
+            {
+                _Infos = value;
+                OnPropertyChanged("Infos");
+            }
+        }
 
+        private Uri _Audio;
         [DataMember(Name = "Audio", Order = 5)]
-        public Uri Audio { get; set; }
+        public Uri Audio
+        {
+            get
+            {
+                return _Audio;
+            }
+            set
+            {
+                _Audio = value;
+                OnPropertyChanged("Audio");
+            }
+        }
 
+        private string _Video;
         [DataMember(Name = "Video", Order = 6)]
-        public string Video { get; set; }
+        public string Video
+        {
+            get
+            {
+                return _Video;
+            }
+            set
+            {
+                _Video = value;
+                OnPropertyChanged("Video");
+            }
+        }
 
+        private string _Image;
         [DataMember(Name = "Image", Order = 7)]
-        public string Image { get; set; }     
+        public string Image
+        {
+            get
+            {
+                return _Image;
+            }
+            set
+            {
+                _Image = value;
+                OnPropertyChanged("Image");
+            }
+        }     
 
         [DataMember(Name = "Comments", Order = 8)]
         public ObservableCollection<IComment> Comments { get; set; }
+
+        protected void OnPropertyChanged(string Name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
+       
 
         /// <summary>
         /// Constructeur de Music

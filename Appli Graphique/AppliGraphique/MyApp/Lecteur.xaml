@@ -5,9 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyApp"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <local:ValueToContent x:Key="ValueToContent"/>
-    </UserControl.Resources>
     <ContentControl>
         <Grid x:Name="FullPlayer" Background="#222222">
 

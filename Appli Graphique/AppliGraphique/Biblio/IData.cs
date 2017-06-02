@@ -17,12 +17,12 @@ namespace Biblio
             Directory.SetCurrentDirectory(MyPath);
         }
 
-        public object Deserialize(string file, DataContractSerializer Serializer)
+        public ISerialize Deserialize(string file, DataContractSerializer Serializer)
         {
             if (!File.Exists(file))
                 return null;
             using (XmlReader reader = XmlReader.Create(file))
-                return Serializer.ReadObject(reader);
+                return (ISerialize)Serializer.ReadObject(reader);
         }
 
         public void Serialize(string file, ISerialize obj, DataContractSerializer Serializer)

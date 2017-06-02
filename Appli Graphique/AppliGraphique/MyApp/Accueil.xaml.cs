@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using BackEnd;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -60,7 +61,7 @@ namespace MyApp
         /// <param name="e"> Évènements du clic de souris </param>
         private void Home_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            MyScroller.SelectedIndex = MyPlayer.Allmusics.SelectHomeMusic(((StackPanel)sender).Tag.ToString());
+            MyScroller.SelectedIndex = PlaylistFront.AllMusics.SelectHomeMusic(((StackPanel)sender).Tag.ToString());
             MyTab.SelectedIndex = 1;
         }
     }

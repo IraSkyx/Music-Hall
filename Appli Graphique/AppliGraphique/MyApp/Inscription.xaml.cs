@@ -1,4 +1,5 @@
-﻿using Biblio;
+﻿using BackEnd;
+using Biblio;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -11,12 +12,10 @@ namespace MyApp
     public partial class Inscription : Window
     {
         public event Action<IUser> Check;
-        private UserDB DataBase;
 
         public Inscription(UserDB DataBase)
         {
             InitializeComponent();
-            this.DataBase = DataBase;
         }
 
         /// <summary>
@@ -45,7 +44,7 @@ namespace MyApp
         {
             try
             {
-                DataBase.IsAlreadyUsed(email.Text);
+                UserDBFront.MyUserDB.IsAlreadyUsed(email.Text);
                 UserDB.IsValid(email.Text);
                 Check?.Invoke(UserMaker.MakeUser(email.Text, pseudo.Text, mdp.Password, null));
                 Close();

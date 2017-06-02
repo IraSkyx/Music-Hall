@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
+using BackEnd;
 
 namespace MyApp
 {
@@ -50,7 +51,7 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void PlayASong(object sender, RoutedEventArgs e)
-            => MyPlayer.Player.Play((IMusic)DataContext);
+            => PlayerFront.MyPlayer.Play((IMusic)DataContext);
 
         /// <summary>
         /// Ajoute la Music à la Playlist si un User est connecté
@@ -59,10 +60,10 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void AddToPlaylist(object sender, RoutedEventArgs e)
         {
-            if (!ReferenceEquals(MyPlayer.Player.CurrentUser,null))
+            if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser,null))
             {
-                if (MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)MyScroller.SelectedItem)) == 0)
-                    MyPlayer.Player.CurrentUser.Favorite.PlaylistProperty.Add(ReferenceEquals(MyPlayer.Add1, sender) ? MyPlayer.Player.CurrentlyPlaying : (IMusic)DataContext);
+                if (PlayerFront.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)MyScroller.SelectedItem)) == 0)
+                    PlayerFront.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Add(ReferenceEquals(MyPlayer.Add1, sender) ? PlayerFront.MyPlayer.CurrentlyPlaying : (IMusic)DataContext);
             }
             MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
@@ -73,9 +74,13 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void AddComment(object sender, RoutedEventArgs e)
-        {           
-            AddComment adcom = new AddComment (MyPlayer.Player.CurrentUser, (IMusic)DataContext);           
-            adcom.ShowDialog();
+        {
+            if (PlayerFront.MyPlayer.CurrentUser!=null)
+            {
+                AddComment adcom = new AddComment (PlayerFront.MyPlayer.CurrentUser, (IMusic)DataContext);           
+                 adcom.ShowDialog();
+            }
+           
         }
     }
 }

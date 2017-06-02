@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using BackEnd;
 
 namespace MyApp
 {
@@ -22,6 +23,8 @@ namespace MyApp
         {
             switch ((string)parameter)
             {
+            //    case "average": return stringformat "Avis" ;
+                case "IsNullOrEmpty": return "Parcourir";
                 case "scale": return (double)value / 30.00;
                 case "booltocontent": return (bool)value ? "||" : "▶";
                 case "volume": return (double)value == 0 ? "🔇" : "🔊";
@@ -34,7 +37,7 @@ namespace MyApp
                 case "sinscrire": return value == null ? "S'inscrire" : "Voir mon profil";               
                 case "objecttovalue":
                     {
-                        try { return ((Lecteur)Application.Current.MainWindow.FindName("MyPlayer")).Player.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)value)) == 0 ? "✚" : "✓"; }
+                        try { return PlayerFront.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)value)) == 0 ? "✚" : "✓"; }
                         catch (NullReferenceException) { return ""; }
                     }
                 default : return null;

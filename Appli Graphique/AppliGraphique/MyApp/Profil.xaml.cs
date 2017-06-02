@@ -1,4 +1,5 @@
-﻿using Biblio;
+﻿using BackEnd;
+using Biblio;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -11,18 +12,13 @@ namespace MyApp
     public partial class Profil : Window
     {
         public event Action <IUser> Check;
-        private IUser User;
-        private UserDB DataBase;
 
         /// <summary>
         /// Instancie Profil
         /// </summary>
-        public Profil(IUser User, UserDB DataBase)
-        {           
-            this.User = User;
-            this.DataBase = DataBase;
-            InitializeComponent();           
-            DataContext = User;
+        public Profil()
+        {                    
+            InitializeComponent();                       
         }
 
         /// <summary>
@@ -51,10 +47,10 @@ namespace MyApp
         {
             try
             {
-                if(!User.Address.Equals(EmailBox.Text))
-                    DataBase.IsAlreadyUsed(EmailBox.Text);
+                if(!((IUser)DataContext).Address.Equals(EmailBox.Text))
+                    UserDBFront.MyUserDB.IsAlreadyUsed(EmailBox.Text);
                 UserDB.IsValid(EmailBox.Text);
-                Check?.Invoke(UserMaker.MakeUser(EmailBox.Text, PseudoBox.Text, MdpBox.Text, User.Favorite));
+                Check?.Invoke(UserMaker.MakeUser(EmailBox.Text, PseudoBox.Text, MdpBox.Text, ((IUser)DataContext).Favorite));
                 Close();
             }
             catch(Exception ex)

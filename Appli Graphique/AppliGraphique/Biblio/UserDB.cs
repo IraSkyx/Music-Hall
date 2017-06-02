@@ -17,7 +17,7 @@ namespace Biblio
         /// </summary>
         public UserDB()
         {
-             Database = new ObservableCollection<IUser>();
+            Database = new ObservableCollection<IUser>();
         }
 
         /// <summary>
@@ -53,6 +53,8 @@ namespace Biblio
         {
             MailAddress Add = new MailAddress(Address);
         }
+
+       
 
         /// <summary>
         /// Fixe l'affichage de l'objet 

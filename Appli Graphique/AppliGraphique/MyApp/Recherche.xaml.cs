@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BackEnd;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,18 +10,6 @@ namespace MyApp
     /// </summary>
     public partial class Recherche : UserControl
     {
-        public static readonly DependencyProperty Player = DependencyProperty.Register("MyPlayer", typeof(Lecteur), typeof(Recherche));
-        public Lecteur MyPlayer
-        {
-            get
-            {
-                return GetValue(Player) as Lecteur;
-            }
-            set
-            {
-                SetValue(Player, value);
-            }
-        }
 
         public static readonly DependencyProperty Scroller = DependencyProperty.Register("MyScroller", typeof(ListView), typeof(Recherche));
         public ListView MyScroller
@@ -59,7 +48,7 @@ namespace MyApp
         private void UserInputChanged(object sender, TextChangedEventArgs e)
         {
             if (Input.Text != String.Empty)
-                Search.DataContext = MyPlayer.Allmusics.Filter((string)((ComboBoxItem)Criterion.SelectedItem).Content, Input.Text);
+                Search.DataContext = PlaylistFront.AllMusics.Filter((string)((ComboBoxItem)Criterion.SelectedItem).Content, Input.Text);
         }
 
         /// <summary>

@@ -12,9 +12,6 @@
         DragDrop.Drop="DragAndDrop"
         Background="#ECF0F1" 
         Title="Music'Hall" Height="720" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Foreground="White" FontFamily="Microsoft YaHei Light">
-    <Window.Resources>
-        <local:ValueToContent x:Key="ValueToContent"/>
-    </Window.Resources>
     <DockPanel>
         
         <!--En-tête-->
@@ -65,7 +62,7 @@
                     <local:Selection x:Name="xSelection" MyScroller="{Binding ElementName=MyScroller}" MyPlayer="{Binding ElementName=MyPlayer}" DataContext="{Binding ElementName=MyScroller, Path=SelectedItem}"/>
                 </TabItem>
                 <TabItem Header="Recherche" FontFamily="Microsoft YaHei UI" Foreground="White" Margin="-5,0,5,0">
-                    <local:Recherche x:Name="xSearch" MyScroller="{Binding ElementName=MyScroller}" MyPlayer="{Binding ElementName=MyPlayer}"/>
+                    <local:Recherche x:Name="xSearch" MyScroller="{Binding ElementName=MyScroller}"/>
                 </TabItem>
             </TabControl>
             <!-- Onglets -->
