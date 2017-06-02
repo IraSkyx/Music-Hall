@@ -13,7 +13,7 @@ namespace MyApp
     {
         public event Action<IUser> Check;
 
-        public Inscription(UserDB DataBase)
+        public Inscription()
         {
             InitializeComponent();
         }

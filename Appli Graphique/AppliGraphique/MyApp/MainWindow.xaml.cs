@@ -153,7 +153,7 @@ namespace MyApp
             }
             else
             {
-                Inscription subWindow2 = new Inscription(UserDBFront.MyUserDB);
+                Inscription subWindow2 = new Inscription();
                 subWindow2.Check += value =>
                 {
                     UserDBFront.MyUserDB.Database.Add(value);

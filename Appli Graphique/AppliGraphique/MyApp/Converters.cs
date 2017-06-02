@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using BackEnd;
+using System.Collections.ObjectModel;
 
 namespace MyApp
 {
@@ -20,11 +21,11 @@ namespace MyApp
         /// <param name="culture"> Infos sur la culture </param>
         /// <returns> La nouvelle valeur convertit </returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
+        {            
             switch ((string)parameter)
             {
-            //    case "average": return stringformat "Avis" ;
-                case "IsNullOrEmpty": return "Parcourir";
+                case "average": return string.Format($"Avis : {((ObservableCollection<IComment>)value).Average(x => x.Rate)}");
+                case "IsNullOrEmpty": return string.IsNullOrEmpty(((string)value)) ? "Parcourir" : (string)value;
                 case "scale": return (double)value / 30.00;
                 case "booltocontent": return (bool)value ? "||" : "▶";
                 case "volume": return (double)value == 0 ? "🔇" : "🔊";
