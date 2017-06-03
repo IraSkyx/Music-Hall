@@ -6,14 +6,15 @@ namespace BackEnd
     public class UserDBFront
     {
         public static UserDB MyUserDB;
+
         public static void LoadUsers()
         {
-            MyUserDB = ReferenceEquals(new PersistanceUsers().LoadUsers(), null) ? new StubUsers().LoadUsers() : new PersistanceUsers().LoadUsers();
+            MyUserDB = ReferenceEquals(PersistanceUsers.LoadUsers(), null) ? StubUsers.LoadUsers() : PersistanceUsers.LoadUsers();
         }
 
         public static void SaveUsers()
         {
-            new PersistanceUsers().SaveUsers(MyUserDB);
+            PersistanceUsers.SaveUsers(MyUserDB);
         }
     }
 }

@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-using BackEnd;
 using System.Collections.ObjectModel;
 
 namespace MyApp
@@ -25,34 +24,25 @@ namespace MyApp
             switch ((string)parameter)
             {
                 case "average":
-                    try
                     {
-                        return string.Format($"Avis : {((ObservableCollection<IComment>)value).Average(x => x.Rate)}");
-                    }
-                    catch (Exception)
-                    {
-                        return "Aucun avis";
-                    }
+                        try { return String.Format("Avis : {0:0.00}/5", ((ObservableCollection<IComment>)value).Average(x => x.Rate)); }
+                        catch (Exception) { return "Aucun avis"; }
+                    }                    
                 case "IsNullOrEmpty": return string.IsNullOrEmpty(((string)value)) ? "Parcourir" : (string)value;
-                case "scale": return (double)value / 30.00;
                 case "booltocontent": return (bool)value ? "||" : "▶";
                 case "volume": return (double)value == 0 ? "🔇" : "🔊";
                 case "booltoforeground":  return (bool)value ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
                 case "booltovisibility": return (bool)value ? Visibility.Visible : Visibility.Hidden;
-                case "nulltovisibility": return value == null ? Visibility.Hidden : Visibility.Visible;
-                case "null2tovisibility": return ((Player)value).CurrentlyPlaying == null ? Visibility.Hidden : Visibility.Visible;
-                case "connexion": return value == null ? "Connexion" : "Déconnexion";
-                case "inscription": return value == null ? "Inscription" : ((IUser)value).Username;
-                case "seconnecter": return value == null ? "Se connecter" : "Fermer la session";
-                case "sinscrire": return value == null ? "S'inscrire" : "Voir mon profil";               
+                case "nulltovisibility": return ReferenceEquals(value, null) ? Visibility.Hidden : Visibility.Visible;
+                case "null2tovisibility": return (((Player)value)).IsPlaying ? Visibility.Visible : Visibility.Hidden;
+                case "connexion": return ReferenceEquals(value,null) ? "Connexion" : "Déconnexion";
+                case "inscription": return ReferenceEquals(value, null) ? "Inscription" : ((IUser)value).Username;
+                case "seconnecter": return ReferenceEquals(value, null) ? "Ses connecter" : "Fermer la session";
+                case "sinscrire": return ReferenceEquals(value, null) ? "S'inscrire" : "Voir mon profil";               
                 case "objecttovalue":
                     {
-                        try
-                        {
-                            Console.WriteLine("ok");
-                            return ((Player)value).CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals(((Player)value).CurrentlyPlaying)) == 0 ? "✚" : "✓";
-                        }
-                        catch (NullReferenceException) { return ""; }
+                        try { return (((Player)value)).CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((((Player)value)).CurrentlyPlaying)) == 0 ? "✚" : "✓"; }
+                        catch (NullReferenceException) { return String.Empty; }
                     }
                 default : return null;
             }

@@ -89,10 +89,13 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void AddComment(object sender, RoutedEventArgs e)
         {
-            if (Front.MyPlayer.CurrentUser!=null)
+            if (!ReferenceEquals(Front.MyPlayer.CurrentUser, null))
             {
-                AddComment adcom = new AddComment (Front.MyPlayer.CurrentUser, (IMusic)DataContext);           
-                 adcom.ShowDialog();
+                AddComment adcom = new AddComment(Front.MyPlayer.CurrentUser.Username)
+                {
+                    DataContext = (IMusic)DataContext
+                };        
+                adcom.ShowDialog();
             }
            
         }

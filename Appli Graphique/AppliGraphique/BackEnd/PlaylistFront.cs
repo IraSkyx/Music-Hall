@@ -9,7 +9,7 @@ namespace BackEnd
 
         public static void LoadMusics()
         {
-            AllMusics = ReferenceEquals(PersistanceMusics.LoadMusics(), null) ? new StubMusics().LoadMusics() : PersistanceMusics.LoadMusics();
+            AllMusics = ReferenceEquals(PersistanceMusics.LoadMusics(), null) ? StubMusics.LoadMusics() : PersistanceMusics.LoadMusics();
         }
 
         public static void SaveMusics()

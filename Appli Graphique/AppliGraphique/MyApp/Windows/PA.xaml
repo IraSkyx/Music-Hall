@@ -23,7 +23,7 @@
                 <Button x:Name="Edit" Grid.Column="2" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" ToolTip="Éditer" Click="EditMusic" Content="Éditer" Width="60" FontSize="10"/>
                 <Button x:Name="Delete" Grid.Column="2" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" ToolTip="Supprimer" Click="DeleteMusic" Content="Supprimer" Width="60" FontSize="10"/>
             </StackPanel>
-            <ListView x:Name="MyPlaylist" SelectedIndex="0" ItemsSource="{Binding PlaylistProperty}" Background="Transparent" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <ListView x:Name="MyPlaylist" SelectedIndex="0" BorderThickness="0" ItemsSource="{Binding PlaylistProperty}" Background="Transparent" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

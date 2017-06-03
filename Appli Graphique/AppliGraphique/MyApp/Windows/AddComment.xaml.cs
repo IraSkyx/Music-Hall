@@ -11,17 +11,15 @@ namespace MyApp
     public partial class AddComment : Window
     {
 
-        private IUser User;
-        private IMusic Music;
+        private string Username;
 
         /// <summary>
         /// Instancie un AddComment
         /// </summary>
-        public AddComment(IUser User, IMusic Music)
+        public AddComment(string Username)
         {
             InitializeComponent();
-            this.User = User;
-            this.Music = Music;
+            this.Username = Username;
         }
 
         /// <summary>
@@ -61,7 +59,7 @@ namespace MyApp
         {
             try
             {               
-                Music.AddComment(CommentMaker.MakeComment(User.Username, int.Parse(notation.Text), textcom.Text));
+                ((IMusic)DataContext).AddComment(CommentMaker.MakeComment(Username, int.Parse(notation.Text), textcom.Text));
                 Close();
             }
             catch (FormatException ex)

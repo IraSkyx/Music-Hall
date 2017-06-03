@@ -6,7 +6,7 @@ namespace Stub
 {
     public class StubUsers
     {
-        public UserDB LoadUsers()
+        public static UserDB LoadUsers()
         {           
             Playlist playlist = new Playlist()
             {

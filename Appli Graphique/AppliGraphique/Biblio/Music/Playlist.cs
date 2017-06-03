@@ -21,15 +21,6 @@ namespace Biblio
         }
 
         /// <summary>
-        /// Instancie une Playlist à d'un nombre indéterminé de IMusic sous forme de tableau
-        /// </summary>
-        /// <param name="Musics"> Paramètre d'instanciation </param>
-        public Playlist(params IMusic[] Musics)
-        {
-            PlaylistProperty = new ObservableCollection<IMusic>(Musics.AsEnumerable());
-        }
-
-        /// <summary>
         /// Instancie une Playlist à partir d'un IEnumerable (conversion implicite)
         /// </summary>
         /// <param name="mus"> Paramètre d'instanciation </param>

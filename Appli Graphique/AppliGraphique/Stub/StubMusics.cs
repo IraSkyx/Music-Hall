@@ -6,7 +6,7 @@ namespace Stub
 {
     public class StubMusics : Data
     {
-        public Playlist LoadMusics()
+        public static Playlist LoadMusics()
         {           
             ObservableCollection<IComment> Com = new ObservableCollection<IComment>
             {

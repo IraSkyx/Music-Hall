@@ -14,21 +14,8 @@ namespace MyApp
     /// </summary>
     public partial class Lecteur : UserControl
     {
-        //public PlayerFront Front { get; set; } = new PlayerFront();
+        public PlayerFront Front { get; set; } = new PlayerFront();
         private DispatcherTimer timer = new DispatcherTimer();
-
-        public static readonly DependencyProperty MyFront = DependencyProperty.Register("Front", typeof(PlayerFront), typeof(Lecteur), new PropertyMetadata(new PlayerFront()));
-        public PlayerFront Front
-        {
-            get
-            {
-                return GetValue(MyFront) as PlayerFront;
-            }
-            set
-            {
-                SetValue(MyFront, value);
-            }
-        }
 
         public static readonly DependencyProperty Playlist = DependencyProperty.Register("MyPlaylist", typeof(ListView), typeof(Lecteur));
         public ListView MyPlaylist
@@ -62,6 +49,8 @@ namespace MyApp
         public Lecteur()
         {
             InitializeComponent();
+
+            Add1.DataContext = Front;
 
             FullPlayer.DataContext = Front.MyPlayer;
 
@@ -108,6 +97,8 @@ namespace MyApp
                 Prog.Minimum = 0;
                 Prog.Maximum = Front.MyPlayer.NaturalDuration.TimeSpan.TotalSeconds;
                 ActualPlay.DataContext = Front.MyPlayer.CurrentlyPlaying;
+                Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+                Add1.GetBindingExpression(VisibilityProperty).UpdateTarget();
             }       
         }
 
@@ -220,12 +211,11 @@ namespace MyApp
         {
             if (!ReferenceEquals(Front.MyPlayer.CurrentUser,null))
             {
-                if (ReferenceEquals(Front.MyPlayer.CurrentUser.Favorite,null))
-                    Front.MyPlayer.CurrentUser.Favorite = new Playlist();
                 if (Front.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals(Front.MyPlayer.CurrentlyPlaying)) == 0)
                     Front.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Add(Front.MyPlayer.CurrentlyPlaying);
             }
             Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+            Add1.GetBindingExpression(VisibilityProperty).UpdateTarget();
         }
 
         /// <summary>

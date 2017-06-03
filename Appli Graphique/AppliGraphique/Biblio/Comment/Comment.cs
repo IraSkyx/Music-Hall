@@ -12,7 +12,7 @@ namespace Biblio
         [DataMember(Name = "Com", Order = 2)]
         public string Com { get; set; }
 
-        public Comment(string Username, int Rate, string Com)
+        internal Comment(string Username, int Rate, string Com)
         {
             this.Username = Username;
             this.Rate = Rate;

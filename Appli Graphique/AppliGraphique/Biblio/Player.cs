@@ -40,8 +40,7 @@ namespace Biblio
         private bool _Loop;
         public bool Loop
         {
-            get
-            { return _Loop; }
+            get { return _Loop; }
             set
             {
                 _Loop = value;
@@ -53,8 +52,7 @@ namespace Biblio
         private bool _RandomPlay;
         public bool RandomPlay
         {
-            get
-            { return _RandomPlay; }
+            get { return _RandomPlay; }
             set
             {
                 _RandomPlay = value;
@@ -68,7 +66,7 @@ namespace Biblio
         /// <summary>
         /// Instancie Player (+ appel Constructeur mère)
         /// </summary>
-        public Player():base()
+        public Player() : base()
         {
             LoadedBehavior = MediaState.Manual;            
             UnloadedBehavior = MediaState.Stop;
@@ -115,7 +113,7 @@ namespace Biblio
         /// </summary>
         private void SetPlay()
         {
-            if (CurrentlyPlaying != null)
+            if (!ReferenceEquals(CurrentlyPlaying, null))
             {
                 Source = CurrentlyPlaying.Audio;
                 Play();

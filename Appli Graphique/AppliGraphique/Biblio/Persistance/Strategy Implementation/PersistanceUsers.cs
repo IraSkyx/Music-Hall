@@ -5,14 +5,14 @@ namespace Biblio
 {
     public class PersistanceUsers : Data
     {
-        public UserDB LoadUsers()
+        public static UserDB LoadUsers()
         {
             SetCurrentDirectory();
 
             return (UserDB)Deserialize("PersistanceUsers.xml", new DataContractSerializer(typeof(UserDB), new Type[] { typeof(User), typeof(Playlist), typeof(Music), typeof(Comment) }));
         }
 
-        public void SaveUsers(UserDB DataBase)
+        public static void SaveUsers(UserDB DataBase)
         {
             SetCurrentDirectory();
 

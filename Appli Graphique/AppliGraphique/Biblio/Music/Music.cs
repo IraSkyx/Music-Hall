@@ -146,12 +146,11 @@ namespace Biblio
         }
 
         protected void OnPropertyChanged(string Name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
-       
 
         /// <summary>
         /// Constructeur de Music
         /// </summary>
-        public Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Video, string Image, ObservableCollection<IComment> Comments)
+        internal Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Video, string Image, ObservableCollection<IComment> Comments)
         {
             this.Title = Title;
             this.Artist = Artist;
@@ -173,6 +172,7 @@ namespace Biblio
             if (ReferenceEquals(Comments, null))
                 Comments = new ObservableCollection<IComment>();
             Comments.Add(Com);
+            OnPropertyChanged("Comments");
         }
 
         /// <summary>
