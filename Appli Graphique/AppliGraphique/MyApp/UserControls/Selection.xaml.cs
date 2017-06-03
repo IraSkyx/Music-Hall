@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
 using BackEnd;
+using System;
 
 namespace MyApp
 {
@@ -11,6 +12,19 @@ namespace MyApp
     /// </summary>
     public partial class Selection : UserControl
     {
+        public static readonly DependencyProperty FrontPlayer = DependencyProperty.Register("Front", typeof(PlayerFront), typeof(Selection));
+        public PlayerFront Front
+        {
+            get
+            {
+                return GetValue(FrontPlayer) as PlayerFront;
+            }
+            set
+            {
+                SetValue(FrontPlayer, value);
+            }
+        }
+
         public static readonly DependencyProperty Player = DependencyProperty.Register("MyPlayer", typeof(Lecteur), typeof(Selection));
         public Lecteur MyPlayer
         {
@@ -51,7 +65,7 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void PlayASong(object sender, RoutedEventArgs e)
-            => PlayerFront.MyPlayer.Play((IMusic)DataContext);
+            => Front.MyPlayer.Play((IMusic)DataContext);
 
         /// <summary>
         /// Ajoute la Music à la Playlist si un User est connecté
@@ -60,10 +74,10 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void AddToPlaylist(object sender, RoutedEventArgs e)
         {
-            if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser,null))
+            if (!ReferenceEquals(Front.MyPlayer.CurrentUser,null))
             {
-                if (PlayerFront.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)MyScroller.SelectedItem)) == 0)
-                    PlayerFront.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Add(ReferenceEquals(MyPlayer.Add1, sender) ? PlayerFront.MyPlayer.CurrentlyPlaying : (IMusic)DataContext);
+                if (Front.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)MyScroller.SelectedItem)) == 0)
+                    Front.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Add(ReferenceEquals(MyPlayer.Add1, sender) ? Front.MyPlayer.CurrentlyPlaying : (IMusic)DataContext);
             }
             MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
@@ -75,9 +89,9 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void AddComment(object sender, RoutedEventArgs e)
         {
-            if (PlayerFront.MyPlayer.CurrentUser!=null)
+            if (Front.MyPlayer.CurrentUser!=null)
             {
-                AddComment adcom = new AddComment (PlayerFront.MyPlayer.CurrentUser, (IMusic)DataContext);           
+                AddComment adcom = new AddComment (Front.MyPlayer.CurrentUser, (IMusic)DataContext);           
                  adcom.ShowDialog();
             }
            

@@ -9,12 +9,12 @@ namespace BackEnd
 
         public static void LoadMusics()
         {
-            AllMusics = ReferenceEquals(new PersistanceMusics().LoadMusics(), null) ? new StubMusics().LoadMusics() : new PersistanceMusics().LoadMusics();
+            AllMusics = ReferenceEquals(PersistanceMusics.LoadMusics(), null) ? new StubMusics().LoadMusics() : PersistanceMusics.LoadMusics();
         }
 
         public static void SaveMusics()
         {
-            new PersistanceMusics().SaveMusics(AllMusics);
+            PersistanceMusics.SaveMusics(AllMusics);
         }
     }
 }

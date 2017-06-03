@@ -3,6 +3,6 @@
 namespace Biblio
 {
     [DataContract]
-    public abstract class ISerialize
+    public abstract class Serialize
     { }
 }

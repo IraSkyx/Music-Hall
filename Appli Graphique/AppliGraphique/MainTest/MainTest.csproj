@@ -52,6 +52,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BackEnd\BackEnd.csproj">
+      <Project>{19EC50A4-46B2-4844-B86F-C63C41AF40CF}</Project>
+      <Name>BackEnd</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Biblio\Biblio.csproj">
       <Project>{087caf5b-e6cd-4ed8-9c1b-2bbf4a29a649}</Project>
       <Name>Biblio</Name>

@@ -49,6 +49,9 @@ namespace MyApp
             }
         }
 
+        /// <summary>
+        /// Instancie Accueil
+        /// </summary>
         public Accueil()
         {
             InitializeComponent();

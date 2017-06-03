@@ -24,7 +24,15 @@ namespace MyApp
         {            
             switch ((string)parameter)
             {
-                case "average": return string.Format($"Avis : {((ObservableCollection<IComment>)value).Average(x => x.Rate)}");
+                case "average":
+                    try
+                    {
+                        return string.Format($"Avis : {((ObservableCollection<IComment>)value).Average(x => x.Rate)}");
+                    }
+                    catch (Exception)
+                    {
+                        return "Aucun avis";
+                    }
                 case "IsNullOrEmpty": return string.IsNullOrEmpty(((string)value)) ? "Parcourir" : (string)value;
                 case "scale": return (double)value / 30.00;
                 case "booltocontent": return (bool)value ? "||" : "▶";
@@ -32,13 +40,18 @@ namespace MyApp
                 case "booltoforeground":  return (bool)value ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
                 case "booltovisibility": return (bool)value ? Visibility.Visible : Visibility.Hidden;
                 case "nulltovisibility": return value == null ? Visibility.Hidden : Visibility.Visible;
+                case "null2tovisibility": return ((Player)value).CurrentlyPlaying == null ? Visibility.Hidden : Visibility.Visible;
                 case "connexion": return value == null ? "Connexion" : "Déconnexion";
                 case "inscription": return value == null ? "Inscription" : ((IUser)value).Username;
                 case "seconnecter": return value == null ? "Se connecter" : "Fermer la session";
                 case "sinscrire": return value == null ? "S'inscrire" : "Voir mon profil";               
                 case "objecttovalue":
                     {
-                        try { return PlayerFront.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((IMusic)value)) == 0 ? "✚" : "✓"; }
+                        try
+                        {
+                            Console.WriteLine("ok");
+                            return ((Player)value).CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals(((Player)value).CurrentlyPlaying)) == 0 ? "✚" : "✓";
+                        }
                         catch (NullReferenceException) { return ""; }
                     }
                 default : return null;

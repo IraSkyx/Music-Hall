@@ -2,6 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MyApp
 {
@@ -21,6 +22,19 @@ namespace MyApp
             set
             {
                 SetValue(Scroller, value);
+            }
+        }
+
+        public static readonly DependencyProperty Tab = DependencyProperty.Register("MyTab", typeof(TabControl), typeof(Recherche));
+        public TabControl MyTab
+        {
+            get
+            {
+                return GetValue(Tab) as TabControl;
+            }
+            set
+            {
+                SetValue(Tab, value);
             }
         }
 
@@ -58,5 +72,13 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void CriterionChanged(object sender, SelectionChangedEventArgs e)
             => UserInputChanged(this, new TextChangedEventArgs(e.RoutedEvent, UndoAction.None));
+
+        /// <summary>
+        /// Réinitialise la sélection des résultats
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
+        private void Search_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+            => MyTab.SelectedIndex = 1;
     }
 }

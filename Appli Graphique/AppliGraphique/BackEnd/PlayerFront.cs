@@ -1,11 +1,13 @@
 ﻿using Biblio;
+using System.Windows;
 
 namespace BackEnd
 {
     public class PlayerFront
     {
-        public static Player MyPlayer;
-        public static void LoadPlayer()
+        public Player MyPlayer;
+
+        public PlayerFront()
         {
             MyPlayer = new Player();
         }

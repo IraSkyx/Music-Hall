@@ -27,7 +27,8 @@ namespace Biblio
 
         private string _Artist;
         [DataMember(Name = "Artist", Order = 1)]
-        public string Artist {
+        public string Artist
+        {
             get
             {
                 return _Artist;
@@ -127,10 +128,22 @@ namespace Biblio
                 _Image = value;
                 OnPropertyChanged("Image");
             }
-        }     
+        }
 
+        private ObservableCollection<IComment> _Comments;
         [DataMember(Name = "Comments", Order = 8)]
-        public ObservableCollection<IComment> Comments { get; set; }
+        public ObservableCollection<IComment> Comments
+        {
+            get
+            {
+                return _Comments;
+            }
+            set
+            {
+                _Comments = value;
+                OnPropertyChanged("Comments");
+            }
+        }
 
         protected void OnPropertyChanged(string Name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
        

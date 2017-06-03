@@ -1,9 +1,8 @@
-﻿using Biblio;
-using System;
+﻿using System;
 using static System.Console;
 using System.Linq;
-using System.Collections.ObjectModel;
 using System.Threading;
+using BackEnd;
 
 namespace MainTest
 {
@@ -15,49 +14,40 @@ namespace MainTest
             /* ----- MAKER ----- */
 
             //Create a player
-            Player myPlayer = new Player();
+            PlayerFront Front = new PlayerFront();
 
-            //Create comments
-            ObservableCollection<IComment> Com = new ObservableCollection<IComment>();
-            Com.Add(CommentMaker.MakeComment("Toto", 4, "lolol"));
-            Com.Add(CommentMaker.MakeComment("Toto2", 2, "lolol2"));
+            //Load Music DB
+            PlaylistFront.LoadMusics();
 
-            //Create Musics
-            IMusic music1 = MusicMaker.MakeMusic("Back For More", "Feder feat Daecolm", "2017", "Dance", "Directed by Julien", new Uri("audio/Feder.mp3", UriKind.RelativeOrAbsolute), "https://www.youtube.com/embed/FvDk9paBf9I", "images/eFeder.jpg", Com);
-            IMusic music2 = MusicMaker.MakeMusic("Holding On To You", "Twenty One Pilots", "2012", "Musique alternative/indé", "Directed by Jordan Bahat", new Uri("audio/Holding.mp3", UriKind.RelativeOrAbsolute), "https://www.youtube.com/embed/ktBMxkLUIwY", "images/eHolding.jpg", Com);
-
-            //Create a playlist
-            Playlist list = new Playlist(music1, music2);
-
-            //Create a User
-            IUser toto = UserMaker.MakeUser("toto@gmail.com", "toto", "toto", list);
+            //Load User DB
+            UserDBFront.LoadUsers();
 
             /* ----- MAKER ----- */
 
             /* ----- DISPLAY ----- */
 
             //Display a User
-            WriteLine(toto);
+            WriteLine(UserDBFront.MyUserDB.Database.ElementAt(0));
 
             //Display a Music
-            WriteLine(music1);
+            WriteLine(PlaylistFront.AllMusics.PlaylistProperty.ElementAt(0));
 
             //Display a playlist
-            WriteLine(list);
+            WriteLine(PlaylistFront.AllMusics);
 
             //Display a comment
-            WriteLine(Com.ElementAt(0));
+            WriteLine(PlaylistFront.AllMusics.PlaylistProperty.ElementAt(0));
 
             /* ----- DISPLAY ----- */
 
             /* ----- USING ----- */
 
-            myPlayer.CurrentUser = toto;
-            myPlayer.Play(music1);
+            Front.MyPlayer.CurrentUser = UserDBFront.MyUserDB.Database.ElementAt(0);
+            Front.MyPlayer.Play(PlaylistFront.AllMusics.PlaylistProperty.ElementAt(0));
             Thread.Sleep(10000);
-            myPlayer.GoToNextOrPrevious(1);
+            Front.MyPlayer.GoToNextOrPrevious(1);
             Thread.Sleep(10000);
-            myPlayer.GoToNextOrPrevious(-1);
+            Front.MyPlayer.GoToNextOrPrevious(-1);
             Thread.Sleep(10000);
 
             /* ----- USING ----- */

@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace Biblio
 {
     [DataContract]
-    public class UserDB : ISerialize
+    public class UserDB : Serialize
     {
         [DataMember]
         public ObservableCollection<IUser> Database;

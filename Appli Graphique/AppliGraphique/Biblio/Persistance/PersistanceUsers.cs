@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Biblio
 {
-    public class PersistanceUsers : IData
+    public class PersistanceUsers : Data
     {
         public UserDB LoadUsers()
         {

@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 namespace Biblio
 {
     [DataContract]
-    public class Playlist : ISerialize
+    public class Playlist : Serialize
     {
         [DataMember]
         public ObservableCollection<IMusic> PlaylistProperty { get; set; }

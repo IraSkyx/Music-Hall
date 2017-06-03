@@ -5,11 +5,11 @@ using System.Xml;
 
 namespace Biblio
 {
-    public abstract class IData
+    public abstract class Data
     {
-        string MyPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MusicHall");
+        static string MyPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MusicHall");
 
-        public void SetCurrentDirectory()
+        public static void SetCurrentDirectory()
         {
             if (!Directory.Exists(MyPath))
                 Directory.CreateDirectory(MyPath);
@@ -17,15 +17,15 @@ namespace Biblio
             Directory.SetCurrentDirectory(MyPath);
         }
 
-        public ISerialize Deserialize(string file, DataContractSerializer Serializer)
+        public static Serialize Deserialize(string file, DataContractSerializer Serializer)
         {
             if (!File.Exists(file))
                 return null;
             using (XmlReader reader = XmlReader.Create(file))
-                return (ISerialize)Serializer.ReadObject(reader);
+                return (Serialize)Serializer.ReadObject(reader);
         }
 
-        public void Serialize(string file, ISerialize obj, DataContractSerializer Serializer)
+        public static void Serialize(string file, Serialize obj, DataContractSerializer Serializer)
         {
             using (XmlWriter writer = XmlWriter.Create(file, new XmlWriterSettings() { Indent = true }))
                 Serializer.WriteObject(writer, obj);

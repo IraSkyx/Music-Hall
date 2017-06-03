@@ -14,24 +14,22 @@ namespace MyApp
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    {        
         /// <summary>
         /// Instancie MainWindow
         /// </summary>
         public MainWindow()
         {
             UserDBFront.LoadUsers();
-            PlaylistFront.LoadMusics();
-            PlayerFront.LoadPlayer();
+            PlaylistFront.LoadMusics();           
 
-            InitializeComponent();           
+            InitializeComponent();
 
             Settings.Default.Upgrade();
             if (Settings.Default.StayLogged)
                 LogIn(UserDBFront.MyUserDB.Database.First(x => x.Address.Equals(Settings.Default.LastMail)));
 
-            root.DataContext = this;
-            Panel.DataContext = PlayerFront.MyPlayer;
+            Panel.DataContext = MyPlayer.Front.MyPlayer;
             MyScroller.DataContext = PlaylistFront.AllMusics;                                            
         }
 
@@ -104,7 +102,7 @@ namespace MyApp
         /// <remarks>Le else correspond à la gestion de la déconnexion</remarks>
         private void Connexion(object sender, RoutedEventArgs e)
         {
-            if (ReferenceEquals(PlayerFront.MyPlayer.CurrentUser,null))
+            if (ReferenceEquals(MyPlayer.Front.MyPlayer.CurrentUser,null))
             {
                 Connexion subWindow = new Connexion();
                 subWindow.Check += value => LogIn(value);
@@ -113,7 +111,7 @@ namespace MyApp
             else
             {
                 Settings.Default.StayLogged = false;
-                PlayerFront.MyPlayer.CurrentUser = null;
+                MyPlayer.Front.MyPlayer.CurrentUser = null;
                 MyPlaylist.DataContext = null;
             }
         }
@@ -124,8 +122,8 @@ namespace MyApp
         /// <param name="value"> L'User à connecter </param>
         private void LogIn(IUser value)
         {
-            PlayerFront.MyPlayer.CurrentUser = value;
-            MyPlaylist.DataContext = PlayerFront.MyPlayer.CurrentUser.Favorite;
+            MyPlayer.Front.MyPlayer.CurrentUser = value;
+            MyPlaylist.DataContext = MyPlayer.Front.MyPlayer.CurrentUser.Favorite;
             Settings.Default.LastMail = value.Address;           
             MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
@@ -139,14 +137,16 @@ namespace MyApp
         /// <remarks>Le else correspond à l'ouverture de la fenêtre du profil</remarks>
         private void Inscription(object sender, RoutedEventArgs e)
         {
-            if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser, null))
+            if (!ReferenceEquals(MyPlayer.Front.MyPlayer.CurrentUser, null))
             {
-                Profil subWindow3 = new Profil();
-                subWindow3.DataContext = PlayerFront.MyPlayer.CurrentUser;
+                Profil subWindow3 = new Profil()
+                {
+                    DataContext = MyPlayer.Front.MyPlayer.CurrentUser
+                };
                 subWindow3.Check += value =>
                 {
                     UserDBFront.MyUserDB.Database.Add(value);
-                    UserDBFront.MyUserDB.Database.Remove(UserDBFront.MyUserDB.Database.First(x => x.Equals(PlayerFront.MyPlayer.CurrentUser)));
+                    UserDBFront.MyUserDB.Database.Remove(UserDBFront.MyUserDB.Database.First(x => x.Equals(MyPlayer.Front.MyPlayer.CurrentUser)));
                     LogIn(value);
                 };
                 subWindow3.ShowDialog();
@@ -169,23 +169,12 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void MyScrollerSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Tab.SelectedIndex = 1; 
-            xSelection.Browser.Navigate("https://www.youtube.com/v/" + new Uri(((IMusic)MyScroller.SelectedItem).Video, UriKind.RelativeOrAbsolute).Segments.Last().ToString());
-        }
-
-        /// <summary>
-        /// Réinitialise l'indice de sélection de la ListView de recherche lorsqu'on clique sur un de ces éléments
-        /// </summary>
-        /// <param name="sender"> Object envoyeur </param>
-        /// <param name="e"> Évènement déclenché par la vue </param>
-        private void MyTabSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (Tab.SelectedIndex == 2)
+        {            
+            if(!ReferenceEquals((IMusic)MyScroller.SelectedItem, null))
             {
-                xSearch.Search.SelectedIndex = -1;
-                Tab.SelectedIndex = 2;
-            }              
+                Tab.SelectedIndex = 1;
+                xSelection.Browser.Navigate("https://www.youtube.com/v/" + new Uri(((IMusic)MyScroller.SelectedItem).Video, UriKind.RelativeOrAbsolute).Segments.Last().ToString());
+            }               
         }
 
         /// <summary>
@@ -211,7 +200,7 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void ViewFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser,null) && !ReferenceEquals(MyPlaylist.SelectedItem,null))
+            if (!ReferenceEquals(MyPlayer.Front.MyPlayer.CurrentUser,null) && !ReferenceEquals(MyPlaylist.SelectedItem,null))
                 MyScroller.SelectedItem=((IMusic)MyPlaylist.SelectedItem);
         }
 
@@ -222,10 +211,10 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void ReadFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser, null) && !ReferenceEquals(MyPlaylist.SelectedItem, null) && ReferenceEquals(sender, MyPlaylist))
-                PlayerFront.MyPlayer.Play((IMusic)MyPlaylist.SelectedItem);    
+            if (!ReferenceEquals(MyPlayer.Front.MyPlayer.CurrentUser, null) && !ReferenceEquals(MyPlaylist.SelectedItem, null) && ReferenceEquals(sender, MyPlaylist))
+                MyPlayer.Front.MyPlayer.Play((IMusic)MyPlaylist.SelectedItem);    
             else
-                PlayerFront.MyPlayer.Play((IMusic)MyScroller.SelectedItem);
+                MyPlayer.Front.MyPlayer.Play((IMusic)MyScroller.SelectedItem);
         }
 
         /// <summary>
@@ -235,8 +224,8 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void DeleteFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser, null) && !ReferenceEquals(MyPlaylist.SelectedItem, null))
-                PlayerFront.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Remove((IMusic)MyPlaylist.SelectedItem);
+            if (!ReferenceEquals(MyPlayer.Front.MyPlayer.CurrentUser, null) && !ReferenceEquals(MyPlaylist.SelectedItem, null))
+                MyPlayer.Front.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Remove((IMusic)MyPlaylist.SelectedItem);
             MyPlayer.Add1.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
 
