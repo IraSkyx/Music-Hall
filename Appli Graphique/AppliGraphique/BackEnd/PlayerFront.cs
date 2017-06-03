@@ -4,9 +4,9 @@ namespace BackEnd
 {
     public class PlayerFront
     {
-        public Player MyPlayer { get; set; }
+        public static Player MyPlayer { get; set; }
 
-        public PlayerFront()
+        public static void LoadPlayer()
         {
             MyPlayer = new Player();
         }

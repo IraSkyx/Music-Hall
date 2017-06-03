@@ -71,7 +71,7 @@
                     <local:Accueil x:Name="xHome" MyTab="{Binding ElementName=Tab}" MyScroller="{Binding ElementName=MyScroller}" MyPlayer="{Binding ElementName=MyPlayer}"/>
                 </TabItem>
                 <TabItem Header="Sélection" FontFamily="Microsoft YaHei UI" Foreground="White" Margin="-4,0,4,0">
-                    <local:Selection x:Name="xSelection" Front="{Binding ElementName=MyPlayer, Path=Front}" MyScroller="{Binding ElementName=MyScroller}" MyPlayer="{Binding ElementName=MyPlayer}" DataContext="{Binding ElementName=MyScroller, Path=SelectedItem}"/>
+                    <local:Selection x:Name="xSelection" MyScroller="{Binding ElementName=MyScroller}" MyPlayer="{Binding ElementName=MyPlayer}" DataContext="{Binding ElementName=MyScroller, Path=SelectedItem}"/>
                 </TabItem>
                 <TabItem Header="Recherche" FontFamily="Microsoft YaHei UI" Foreground="White" Margin="-5,0,5,0">
                     <local:Recherche x:Name="xSearch" MyTab="{Binding ElementName=Tab}" MyScroller="{Binding ElementName=MyScroller}"/>

@@ -11117,8 +11117,8 @@
 											"width": 343,
 											"height": 13,
 											"autoResize": false,
-											"underline": false,
-											"text": "+PlayerFront()",
+											"underline": true,
+											"text": "+LoadPlayer(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24745,10 +24745,27 @@
 							"_parent": {
 								"$ref": "AAAAAAFcaAYxngB+n1M="
 							},
-							"name": "PlayerFront",
+							"name": "LoadPlayer",
 							"visibility": "public",
-							"isStatic": false,
+							"isStatic": true,
 							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFcbxYCl8bPeK4=",
+									"_parent": {
+										"$ref": "AAAAAAFcaC1snUT5Uf8="
+									},
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "void",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "return"
+								}
+							],
 							"concurrency": "sequential",
 							"isQuery": false,
 							"isAbstract": false

@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Collections.ObjectModel;
+using BackEnd;
 
 namespace MyApp
 {
@@ -34,14 +35,13 @@ namespace MyApp
                 case "booltoforeground":  return (bool)value ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
                 case "booltovisibility": return (bool)value ? Visibility.Visible : Visibility.Hidden;
                 case "nulltovisibility": return ReferenceEquals(value, null) ? Visibility.Hidden : Visibility.Visible;
-                case "null2tovisibility": return (((Player)value)).IsPlaying ? Visibility.Visible : Visibility.Hidden;
                 case "connexion": return ReferenceEquals(value,null) ? "Connexion" : "Déconnexion";
                 case "inscription": return ReferenceEquals(value, null) ? "Inscription" : ((IUser)value).Username;
                 case "seconnecter": return ReferenceEquals(value, null) ? "Ses connecter" : "Fermer la session";
                 case "sinscrire": return ReferenceEquals(value, null) ? "S'inscrire" : "Voir mon profil";               
                 case "objecttovalue":
                     {
-                        try { return (((Player)value)).CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals((((Player)value)).CurrentlyPlaying)) == 0 ? "✚" : "✓"; }
+                        try { return PlayerFront.MyPlayer.CurrentUser.Favorite.PlaylistProperty.Count(x => x.Equals(PlayerFront.MyPlayer.CurrentlyPlaying)) == 0 ? "✚" : "✓"; }
                         catch (NullReferenceException) { return String.Empty; }
                     }
                 default : return null;
