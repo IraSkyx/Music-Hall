@@ -87,8 +87,8 @@
     <Compile Include="Windows\AddComment.xaml.cs">
       <DependentUpon>AddComment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\AddMusicWin.xaml.cs">
-      <DependentUpon>AddMusicWin.xaml</DependentUpon>
+    <Compile Include="Windows\AddMusic.xaml.cs">
+      <DependentUpon>AddMusic.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters.cs" />
     <Compile Include="UserControls\Lecteur.xaml.cs">
@@ -128,7 +128,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\AddMusicWin.xaml">
+    <Page Include="Windows\AddMusic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -231,7 +231,9 @@
     <Resource Include="images\eShelter.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\logo.ico" />
+    <Resource Include="images\logo.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <None Include="audio\AintMe.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -262,6 +264,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\NotifyIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

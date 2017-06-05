@@ -7,6 +7,8 @@ using System.Windows.Input;
 using MyApp.Properties;
 using System.IO;
 using BackEnd;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace MyApp
 {
@@ -14,7 +16,13 @@ namespace MyApp
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {        
+    {
+        private NotifyIcon ToTaskBar = new NotifyIcon()
+        {
+            Icon = new Icon("images/NotifyIcon.ico"),
+            Visible = true       
+        };
+
         /// <summary>
         /// Instancie MainWindow
         /// </summary>
@@ -26,12 +34,26 @@ namespace MyApp
 
             InitializeComponent();
 
+            ToTaskBar.DoubleClick +=
+                delegate (object sender, EventArgs args)
+                {
+                    Show();
+                    WindowState = WindowState.Normal;
+                };
+
             Settings.Default.Upgrade();
             if (Settings.Default.StayLogged)
                 LogIn(UserDBFront.MyUserDB.Database.First(x => x.Address.Equals(Settings.Default.LastMail)));
 
             Panel.DataContext = PlayerFront.MyPlayer;
             MyScroller.DataContext = PlaylistFront.AllMusics;                                            
+        }
+
+        protected override void OnStateChanged(EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+                Hide();
+            base.OnStateChanged(e);
         }
 
         /// <summary>
@@ -53,6 +75,7 @@ namespace MyApp
             PlaylistFront.SaveMusics();
             Settings.Default.Save();
             Settings.Default.Reload();
+            ToTaskBar.Dispose();
         }
 
         /// <summary>
@@ -103,7 +126,7 @@ namespace MyApp
         /// <remarks>Le else correspond à la gestion de la déconnexion</remarks>
         private void Connexion(object sender, RoutedEventArgs e)
         {
-            if (ReferenceEquals(PlayerFront.MyPlayer.CurrentUser,null))
+            if (ReferenceEquals(PlayerFront.MyPlayer.CurrentUser, null))
             {
                 Connexion subWindow = new Connexion();
                 subWindow.Check += value => LogIn(value);
@@ -236,12 +259,12 @@ namespace MyApp
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
-        public void DragAndDrop(object sender, DragEventArgs e)
+        public void DragAndDrop(object sender, System.Windows.DragEventArgs e)
         {
-            FileInfo infos = new FileInfo(((string[])e.Data.GetData(DataFormats.FileDrop))[0]);
+            FileInfo infos = new FileInfo(((string[])e.Data.GetData(System.Windows.DataFormats.FileDrop))[0]);
             if (infos.Extension == ".mp3")
             {
-                AddMusicWin sub = new AddMusicWin(infos);                
+                AddMusic sub = new AddMusic(infos);                
                 sub.ShowDialog();
             }
         }

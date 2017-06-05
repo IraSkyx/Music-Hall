@@ -53,11 +53,13 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void AddMusic(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog Explo = new OpenFileDialog();
-            Explo.Filter = "(.mp3)|*.mp3";
+            OpenFileDialog Explo = new OpenFileDialog()
+            {
+                Filter = "(.mp3)|*.mp3"
+            };            
             if (Explo.ShowDialog() == true)
             {
-                AddMusicWin sub = new AddMusicWin(new FileInfo(Explo.FileName));
+                AddMusic sub = new AddMusic(new FileInfo(Explo.FileName));
                 sub.ShowDialog();
             }  
         }
@@ -69,8 +71,10 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void EditMusic(object sender, RoutedEventArgs e)
         {
-            AddMusicWin sub = new AddMusicWin();
-            sub.DataContext = (IMusic)MyPlaylist.SelectedItem;
+            AddMusic sub = new AddMusic()
+            {
+                DataContext = (IMusic)MyPlaylist.SelectedItem
+            };
             sub.ShowDialog();
         }
     }

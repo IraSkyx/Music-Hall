@@ -10,28 +10,29 @@ using System.Windows.Input;
 namespace MyApp
 {
     /// <summary>
-    /// Logique d'interaction pour AddMusicWin.xaml
+    /// Logique d'interaction pour AddMusic.xaml
     /// </summary>
-    public partial class AddMusicWin : Window
+    public partial class AddMusic : Window
     {
         private FileInfo infos;
-        private OpenFileDialog Explo;          
+        private OpenFileDialog Explo;
 
         /// <summary>
-        /// Instancie un AddMusicWin pour un ajout
+        /// Instancie AddMusic pour un ajout
         /// </summary>
-        public AddMusicWin(FileInfo infos)
+        public AddMusic(FileInfo infos)
         {
             InitializeComponent();
             this.infos = infos;
             Titre.Text = infos.Name;
             Date.Text = infos.CreationTime.ToShortDateString();
+            MyExplorer.Content = "Parcourir";
         }
 
         /// <summary>
         /// Instancie un AddMusicWin pour une modification
         /// </summary>
-        public AddMusicWin()
+        public AddMusic()
         {
             InitializeComponent();
             bigtitle.Text = "Modifier une musique";
@@ -58,12 +59,14 @@ namespace MyApp
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
-        private void explorer(object sender, RoutedEventArgs e)
+        private void Explorer(object sender, RoutedEventArgs e)
         {
-            Explo = new OpenFileDialog();
-            Explo.Filter = "Image Files(*.png, *.jpg, *.jpeg)| *.png; *.jpg; *.jpeg";
+            Explo = new OpenFileDialog()
+            {
+                Filter = "Image Files(*.png, *.jpg, *.jpeg)| *.png; *.jpg; *.jpeg"
+            };            
             if (Explo.ShowDialog() == true)
-                Explorer.Content = Explo.SafeFileName;
+                MyExplorer.Content = Explo.SafeFileName;
         }
 
         /// <summary>
