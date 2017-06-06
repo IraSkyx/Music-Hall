@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -67,8 +68,17 @@ namespace Biblio
         /// </summary>
         /// <param name="currentlyPlaying"> Music à rechercher </param>
         /// <returns> L'indice de la première occurence matchant celle passée en paramètre </returns>
-        public int Index(IMusic currentlyPlaying) 
-            => PlaylistProperty.IndexOf(PlaylistProperty.First(x => x.Equals(currentlyPlaying)));
+        public int Index(IMusic currentlyPlaying)
+        {
+            try
+            {
+                return PlaylistProperty.IndexOf(PlaylistProperty.First(x => x.Equals(currentlyPlaying)));
+            }
+            catch
+            {
+                throw new NullReferenceException();
+            }            
+        }
 
         /// <summary>
         /// Fixe l'affichage de l'objet 

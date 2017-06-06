@@ -161,8 +161,10 @@ namespace MyApp
             {
                 if (ReferenceEquals(sender, next))
                     PlayerFront.MyPlayer.GoToNextOrPrevious(1);
-                else
+                else if (ReferenceEquals(sender, previous))
                     PlayerFront.MyPlayer.GoToNextOrPrevious(-1);
+                else
+                    PlayerFront.MyPlayer.GoToNextOrPrevious(1);
             }
             catch (NullReferenceException)
             {

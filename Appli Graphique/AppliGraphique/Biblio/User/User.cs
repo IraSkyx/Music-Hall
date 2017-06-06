@@ -35,6 +35,7 @@ namespace Biblio
         /// Fixe l'affichage de l'objet 
         /// </summary>
         /// <returns> Retourne la mise en forme de l'affichage </returns>
-        public override string ToString() => $"{Address}\n{Username}\n{Psswd}\n{Favorite}\n";
+        public override string ToString() 
+            => $"{Address}\n{Username}\n{Psswd}\n{Favorite}\n";
     }
 }

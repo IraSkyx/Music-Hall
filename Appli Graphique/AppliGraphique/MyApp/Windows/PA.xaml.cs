@@ -12,7 +12,6 @@ namespace MyApp
     /// </summary>
     public partial class PA : Window
     {
-
         /// <summary>
         /// Instancie un PA
         /// </summary>

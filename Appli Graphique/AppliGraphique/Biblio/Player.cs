@@ -136,6 +136,7 @@ namespace Biblio
         /// Avertit la vue du changement de valeur de la propriété
         /// </summary>
         /// <param name="Name"> Nom de la propriété modifiée </param>
-        protected void OnPropertyChanged(string Name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
+        protected void OnPropertyChanged(string Name) 
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
     }
 }

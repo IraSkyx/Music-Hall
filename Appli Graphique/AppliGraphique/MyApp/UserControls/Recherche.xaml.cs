@@ -2,7 +2,6 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace MyApp
 {
@@ -66,19 +65,11 @@ namespace MyApp
         }
 
         /// <summary>
-        /// Change le DataContext par le résultat de la fonction <code>Filter()</code> de Playlist 
+        /// Lève manuellement <code>UserInputChanged()</code>
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void CriterionChanged(object sender, SelectionChangedEventArgs e)
             => UserInputChanged(this, new TextChangedEventArgs(e.RoutedEvent, UndoAction.None));
-
-        /// <summary>
-        /// Réinitialise la sélection des résultats
-        /// </summary>
-        /// <param name="sender"> Object envoyeur </param>
-        /// <param name="e"> Évènement déclenché par la vue </param>
-        private void Search_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-            => MyTab.SelectedIndex = 1;
     }
 }

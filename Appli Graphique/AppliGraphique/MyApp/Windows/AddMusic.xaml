@@ -55,7 +55,7 @@
                 <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="Image" Grid.Row="6"/>
                 <Button x:Name="MyExplorer" Content="{Binding Image, Converter={StaticResource ValueToContent}, ConverterParameter=IsNullOrEmpty, Mode=OneTime}" Grid.Row="6" Grid.Column="1" Click="Explorer" Margin="10"/>
             </Grid>
-            <TextBlock x:Name="wrong" TextAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Foreground="#D91E18" Text="Un ou plusieurs champs manquants"/>
+            <TextBlock x:Name="wrong" TextAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Foreground="#D91E18"/>
             <Button x:Name="valider" Content="Valider" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Commit" Margin="30"/>
         </StackPanel>
         <!--Corps-->

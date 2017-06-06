@@ -158,9 +158,25 @@ namespace Biblio
             this.Genre = Genre;
             this.Infos = Infos;
             this.Audio = Audio;
-            this.Video = Video;
+            this.Video = GetVideoValid(Video);
             this.Image = Image;
             this.Comments = Comments;
+        }
+
+        /// <summary>
+        /// Transforme une URL youtube en ID Youtube
+        /// </summary>
+        /// <param name="Video"> string à modifier </param>
+        /// <exception cref="FormatException"> En cas de mauvais lien </exception>
+        /// <returns> la string modifiée </returns>
+        private string GetVideoValid(string Video)
+        {
+            Video = Video.Replace(@"https://www.youtube.com/watch?v=", @"https://www.youtube.com/embed/");
+            Video = Video.Replace(@"https://youtu.be/", @"https://www.youtube.com/embed/");
+            if (Video.Contains("www"))
+                throw new FormatException("URL vidéo non valide");
+            else
+                return Video;
         }
 
         /// <summary>

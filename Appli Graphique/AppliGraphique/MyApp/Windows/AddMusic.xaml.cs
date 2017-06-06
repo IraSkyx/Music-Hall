@@ -77,9 +77,7 @@ namespace MyApp
         /// <exception cref="NullReferenceException"> Si un champ est manquant (= null) </exception>
         private void Commit(object sender, RoutedEventArgs e)
         {
-            IMusic music;
-            Video.Text = (Video.Text).Replace(@"https://www.youtube.com/watch?v=", @"https://www.youtube.com/embed/");
-            Video.Text = (Video.Text).Replace(@"https://youtu.be/", @"https://www.youtube.com/embed/");
+            IMusic music;            
             try
             {                
                 if (ReferenceEquals((IMusic)DataContext, null)) //Ajout
@@ -104,6 +102,12 @@ namespace MyApp
             }
             catch (NullReferenceException)
             {
+                wrong.Text = "Un ou plusieurs champs manquants";
+                wrong.Visibility = Visibility.Visible;
+            }
+            catch(FormatException ex)
+            {
+                wrong.Text = ex.Message;
                 wrong.Visibility = Visibility.Visible;
             }
         }

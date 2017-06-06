@@ -279,5 +279,11 @@ namespace MyApp
             PA sub = new PA();
             sub.ShowDialog();
         }
+
+        private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(Tab.SelectedIndex == 2)
+                xSearch.Search.SelectedItem = null;
+        }
     }  
 }

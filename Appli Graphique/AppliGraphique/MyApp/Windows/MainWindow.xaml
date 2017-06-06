@@ -66,7 +66,7 @@
             <!-- MaPlaylist -->
             
             <!-- Onglets -->
-            <TabControl x:Name="Tab" Margin="10" Background="#222222">
+            <TabControl x:Name="Tab" Margin="10" Background="#222222" SelectionChanged="Tab_SelectionChanged">
                 <TabItem Header="Accueil" FontFamily="Microsoft YaHei UI" Foreground="White" Margin="-3,0,3,0">
                     <local:Accueil x:Name="xHome" MyTab="{Binding ElementName=Tab}" MyScroller="{Binding ElementName=MyScroller}" MyPlayer="{Binding ElementName=MyPlayer}"/>
                 </TabItem>

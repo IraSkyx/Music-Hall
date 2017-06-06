@@ -19,7 +19,7 @@
         </StackPanel>
         <DockPanel>
             <TextBlock DockPanel.Dock="Top" Margin="10" Text="Résultats de la recherche :" FontSize="20"/>
-            <ListView x:Name="Search" Background="Transparent" SelectedIndex="-1" SelectionChanged="ResultSelectionChanged" ItemsSource="{Binding PlaylistProperty}">
+            <ListView x:Name="Search" Background="Transparent" SelectionChanged="ResultSelectionChanged"  ItemsSource="{Binding PlaylistProperty}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -28,11 +28,6 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="Search_PreviewMouseLeftButtonDown" />
-                    </Style>
-                </ListView.ItemContainerStyle>
             </ListView>
         </DockPanel>
     </DockPanel>
