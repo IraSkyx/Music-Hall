@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyApp"
         mc:Ignorable="d"
-        Name="root"
+        Name="Root"
         Icon="../images/logo.ico"
         Closed="OnClose"
         AllowDrop="True"

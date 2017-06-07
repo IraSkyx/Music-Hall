@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stub", "Stub\Stub.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEnd", "BackEnd\BackEnd.csproj", "{19EC50A4-46B2-4844-B86F-C63C41AF40CF}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{B2CCD0B5-9840-4E17-8B01-816BF0D83601}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Music'Hall", "Music'Hall\Music'Hall.vdproj", "{6D2A2624-7410-4CF8-87AF-1848996EFAE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,14 +107,14 @@ Global
 		{19EC50A4-46B2-4844-B86F-C63C41AF40CF}.Release|x64.Build.0 = Release|Any CPU
 		{19EC50A4-46B2-4844-B86F-C63C41AF40CF}.Release|x86.ActiveCfg = Release|Any CPU
 		{19EC50A4-46B2-4844-B86F-C63C41AF40CF}.Release|x86.Build.0 = Release|Any CPU
-		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Debug|Any CPU.ActiveCfg = Debug
-		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Debug|ARM.ActiveCfg = Debug
-		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Debug|x64.ActiveCfg = Debug
-		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Debug|x86.ActiveCfg = Debug
-		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Release|Any CPU.ActiveCfg = Release
-		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Release|ARM.ActiveCfg = Release
-		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Release|x64.ActiveCfg = Release
-		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Release|x86.ActiveCfg = Release
+		{6D2A2624-7410-4CF8-87AF-1848996EFAE6}.Debug|Any CPU.ActiveCfg = Debug
+		{6D2A2624-7410-4CF8-87AF-1848996EFAE6}.Debug|ARM.ActiveCfg = Debug
+		{6D2A2624-7410-4CF8-87AF-1848996EFAE6}.Debug|x64.ActiveCfg = Debug
+		{6D2A2624-7410-4CF8-87AF-1848996EFAE6}.Debug|x86.ActiveCfg = Debug
+		{6D2A2624-7410-4CF8-87AF-1848996EFAE6}.Release|Any CPU.ActiveCfg = Release
+		{6D2A2624-7410-4CF8-87AF-1848996EFAE6}.Release|ARM.ActiveCfg = Release
+		{6D2A2624-7410-4CF8-87AF-1848996EFAE6}.Release|x64.ActiveCfg = Release
+		{6D2A2624-7410-4CF8-87AF-1848996EFAE6}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

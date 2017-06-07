@@ -47,7 +47,7 @@
                     </StackPanel>
                 </Grid>
             </StackPanel>
-            <local:SongDetail Panel.ZIndex="0"  Visibility="{Binding DataContext.IsPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=booltovisibility}" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}"/>
+            <local:SongDetail Panel.ZIndex="0" Visibility="{Binding DataContext.IsPlaying, Converter={StaticResource ValueToContent}, ConverterParameter=booltovisibility}" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}"/>
         </Grid>
     </ContentControl>
 </UserControl>

@@ -1,10 +1,9 @@
 ﻿using Biblio;
 using NAudio.CoreAudioApi;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace MyApp
@@ -14,9 +13,12 @@ namespace MyApp
     /// </summary>
     public partial class SongDetail : UserControl
     {
-        private Thread myThread;
         private Equalizer MyEqualizer = new Equalizer(30);
         private int[] Previous = new int[30];
+        private Random r = new Random();
+        private BackgroundWorker MyWorker = new BackgroundWorker();
+        private float BaseValue;
+        private double RoundedValue;
 
         /// <summary>
         /// Instancie SongDetail
@@ -27,68 +29,60 @@ namespace MyApp
 
             InitializeEqualizer();
 
-            Task t = Task.Run(() => SetValues());
+            MyWorker.DoWork += new DoWorkEventHandler(SetValues);
+            MyWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkCompleted);
+            MyWorker.RunWorkerAsync();
         }
 
         /// <summary>
-        /// Initialise les Progress Bar
+        /// Ajoute les Progress Bar à la vue
         /// </summary>
         private void InitializeEqualizer()
         {
-            for (int i = 0; i < 30; ++i)
-            {                
+            for (int i = 0; i < 30; ++i)          
                 ProgGrid.Children.Add(MyEqualizer.MyProgs.ElementAt(i).Value);
-            }
         }
 
         /// <summary>
-        /// Modifie les valeurs des Progress Bar en fonction du MasterPeakValue de Naudio.dll en Multi-Threadé
+        /// Relance le Worker
         /// </summary>
-        [MTAThread]
-        private void SetValues()
-        {
-            MMDevice DefaultDevice = new MMDeviceEnumerator().GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-            float BaseValue;
-            double RoundedValue;
-            Random r = new Random();
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par le worker </param>
+        private void WorkCompleted(object sender, RunWorkerCompletedEventArgs e)         
+            => MyWorker.RunWorkerAsync();
 
-            myThread = new Thread(() =>
+        /// <summary>
+        /// Modifie les valeurs des Progress Bar en fonction du MasterPeakValue de Naudio.dll
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par le worker </param>
+        private void SetValues(object sender, DoWorkEventArgs e)
+        {
+            MMDevice DefaultDevice = new MMDeviceEnumerator().GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);    
+            for (int i = 0; i < 30; ++i)
             {
-                while (Thread.CurrentThread.IsAlive)
+                BaseValue = DefaultDevice.AudioMeterInformation.MasterPeakValue;
+                RoundedValue = Math.Round(BaseValue * 100);
+
+                if (BaseValue > 5)
                 {
-                    for (int i = 0; i < 30; ++i)
+                    Dispatcher.Invoke(() =>
                     {
-                        BaseValue = DefaultDevice.AudioMeterInformation.MasterPeakValue;
-                        RoundedValue = Math.Round(BaseValue * 100);
-                        if (BaseValue > 0)
-                        {
-                            try
-                            {
-                                Application.Current.Dispatcher.Invoke(() =>
-                                {
-                                    MyEqualizer.MyProgs.ElementAt(i).Value.Value = RoundedValue * 0.50 + Previous[i] / 3 + r.Next(0, 10);
-                                    Previous[i] = Convert.ToInt32(RoundedValue);
-                                });
-                            }
-                            catch (NullReferenceException) { myThread = null; return; }
-                        }
-                        else
-                        {
-                            try
-                            {
-                                Application.Current.Dispatcher.Invoke(() =>
-                                {
-                                    MyEqualizer.MyProgs.ElementAt(i).Value.Value = 0;
-                                    Previous[i] = Convert.ToInt32(RoundedValue);
-                                });
-                            }
-                            catch (NullReferenceException) { myThread = null; return; }
-                        }
-                        Thread.Sleep(1);
-                    }
+                        MyEqualizer.MyProgs.ElementAt(i).Value.Value = RoundedValue * 0.50 + Previous[i] / 3 + r.Next(0, 10);
+                        Previous[i] = Convert.ToInt32(RoundedValue);
+                    });
                 }
-            });
-            myThread.Start();
+                else
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        MyEqualizer.MyProgs.ElementAt(i).Value.Value = 0;
+                        Previous[i] = Convert.ToInt32(RoundedValue);
+                    });
+                }
+
+                Thread.Sleep(1);
+            }
         }
     }
 }
