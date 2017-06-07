@@ -49,6 +49,10 @@ namespace MyApp
             MyScroller.DataContext = PlaylistFront.AllMusics;                                            
         }
 
+        /// <summary>
+        /// Cache la fenêtre à la minimisation, sinon la rend visible
+        /// </summary>
+        /// <param name="e"> Évènement déclenché par la vue </param>
         protected override void OnStateChanged(EventArgs e)
         {
             if (WindowState == WindowState.Minimized)
@@ -280,6 +284,11 @@ namespace MyApp
             sub.ShowDialog();
         }
 
+        /// <summary>
+        /// Réinitialise la sélection de la ListView Search lors du passage à son onglet
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
         private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(Tab.SelectedIndex == 2)

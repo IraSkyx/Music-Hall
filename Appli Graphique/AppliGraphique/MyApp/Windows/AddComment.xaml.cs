@@ -50,7 +50,7 @@ namespace MyApp
         }
 
         /// <summary>
-        /// Renvoit un Comment à ajouter à la Music
+        /// Ajoute un Comment à la Music
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
