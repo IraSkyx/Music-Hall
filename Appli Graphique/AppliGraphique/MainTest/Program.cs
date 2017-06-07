@@ -13,11 +13,11 @@ namespace MainTest
         {
             /* ----- MAKER ----- */
 
-            //Create a player
-            PlayerFront Front = new PlayerFront();
-
             //Load Music DB
             PlaylistFront.LoadMusics();
+
+            //Load Music DB
+            PlayerFront.LoadPlayer();
 
             //Load User DB
             UserDBFront.LoadUsers();
@@ -42,12 +42,12 @@ namespace MainTest
 
             /* ----- USING ----- */
 
-            Front.MyPlayer.CurrentUser = UserDBFront.MyUserDB.Database.ElementAt(0);
-            Front.MyPlayer.Play(PlaylistFront.AllMusics.PlaylistProperty.ElementAt(0));
+            PlayerFront.MyPlayer.CurrentUser = UserDBFront.MyUserDB.Database.ElementAt(0);
+            PlayerFront.MyPlayer.Play(PlaylistFront.AllMusics.PlaylistProperty.ElementAt(0));
             Thread.Sleep(10000);
-            Front.MyPlayer.GoToNextOrPrevious(1);
+            PlayerFront.MyPlayer.GoToNextOrPrevious(1);
             Thread.Sleep(10000);
-            Front.MyPlayer.GoToNextOrPrevious(-1);
+            PlayerFront.MyPlayer.GoToNextOrPrevious(-1);
             Thread.Sleep(10000);
 
             /* ----- USING ----- */

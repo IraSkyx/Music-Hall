@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApp", "MyApp\MyApp.csproj", "{E78620CD-2866-4327-875B-79FCE8AE4136}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stub", "Stub\Stub.csproj", "{27F289E9-B424-44B2-9B50-E13DB6C0F0A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEnd", "BackEnd\BackEnd.csproj", "{19EC50A4-46B2-4844-B86F-C63C41AF40CF}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{B2CCD0B5-9840-4E17-8B01-816BF0D83601}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,14 @@ Global
 		{19EC50A4-46B2-4844-B86F-C63C41AF40CF}.Release|x64.Build.0 = Release|Any CPU
 		{19EC50A4-46B2-4844-B86F-C63C41AF40CF}.Release|x86.ActiveCfg = Release|Any CPU
 		{19EC50A4-46B2-4844-B86F-C63C41AF40CF}.Release|x86.Build.0 = Release|Any CPU
+		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Debug|Any CPU.ActiveCfg = Debug
+		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Debug|ARM.ActiveCfg = Debug
+		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Debug|x64.ActiveCfg = Debug
+		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Debug|x86.ActiveCfg = Debug
+		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Release|Any CPU.ActiveCfg = Release
+		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Release|ARM.ActiveCfg = Release
+		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Release|x64.ActiveCfg = Release
+		{B2CCD0B5-9840-4E17-8B01-816BF0D83601}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
