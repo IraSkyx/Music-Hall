@@ -197,7 +197,7 @@ namespace MyApp
             if(!ReferenceEquals((IMusic)MyScroller.SelectedItem, null))
             {
                 Tab.SelectedIndex = 1;
-                xSelection.Browser.Navigate("https://www.youtube.com/v/" + new Uri(((IMusic)MyScroller.SelectedItem).Video, UriKind.RelativeOrAbsolute).Segments.Last().ToString());
+                xSelection.Browser.Navigate(new Uri("https://www.youtube.com/v/"+ ((IMusic)MyScroller.SelectedItem).Video, UriKind.RelativeOrAbsolute));
             }               
         }
 
