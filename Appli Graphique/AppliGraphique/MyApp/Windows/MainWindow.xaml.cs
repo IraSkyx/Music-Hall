@@ -28,6 +28,10 @@ namespace MyApp
         /// </summary>
         public MainWindow()
         {
+
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.UnhandledException += new UnhandledExceptionEventHandler(MyHandler);
+
             UserDBFront.LoadUsers();
             PlaylistFront.LoadMusics();
             PlayerFront.LoadPlayer();
@@ -58,6 +62,15 @@ namespace MyApp
             if (WindowState == WindowState.Minimized)
                 Hide();
             base.OnStateChanged(e);
+        }
+
+        static void MyHandler(object sender, UnhandledExceptionEventArgs args)
+        {
+            
+            Exception e = (Exception)args.ExceptionObject;
+            System.Windows.MessageBox.Show(e.Message);
+            Console.WriteLine("MyHandler caught : " + e.Message);
+            Console.WriteLine("Runtime terminating: {0}", args.IsTerminating);
         }
 
         /// <summary>
@@ -192,7 +205,7 @@ namespace MyApp
         }
 
         /// <summary>
-        /// Met l'élement sélectionné de la Listview du haut à l'indice 1 et met à jour la vidéo de la sélection
+        /// Mets l'élement sélectionné de la Listview du haut à l'indice 1 et met à jour la vidéo de la sélection
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
