@@ -16,7 +16,7 @@
             <Border Style="{StaticResource BorderShadow}"/>
         </Canvas>
         <!--En-tête-->
-        <Button x:Name="quit" DockPanel.Dock="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20"/>
+        <Button AutomationProperties.Name="{Binding Tooltip, RelativeSource={RelativeSource Self}}" DockPanel.Dock="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20"/>
         <!--En-tête-->
 
         <!--Corps-->

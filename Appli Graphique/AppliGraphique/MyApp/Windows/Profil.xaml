@@ -13,13 +13,13 @@
     <DockPanel>
 
         <!--En-tête-->
-        <Button x:Name="quit" DockPanel.Dock="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20"/>
+        <Button AutomationProperties.Name="{Binding Tooltip, RelativeSource={RelativeSource Self}}" DockPanel.Dock="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20"/>
         <!--En-tête-->
 
         <!--Corps-->
         <StackPanel>
-            <TextBlock x:Name="label" TextAlignment="Center" Text="Profil" FontSize="35" Margin="30"/>
-            <Grid x:Name="gridresources">
+            <TextBlock TextAlignment="Center" Text="Profil" FontSize="35" Margin="30"/>
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
@@ -30,9 +30,9 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Name="pseudo" Grid.Row="0" VerticalAlignment="Center" TextAlignment="Center" Text="Pseudo" FontSize="15"/>
-                <TextBlock x:Name="email" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Text="Adresse email" FontSize="15"/>
-                <TextBlock x:Name="mdp" Grid.Row="2" VerticalAlignment="Center" TextAlignment="Center" Text="Mot de passe" FontSize="15"/>
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" TextAlignment="Center" Text="Pseudo" FontSize="15"/>
+                <TextBlock Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Text="Adresse email" FontSize="15"/>
+                <TextBlock Grid.Row="2" VerticalAlignment="Center" TextAlignment="Center" Text="Mot de passe" FontSize="15"/>
 
                 <TextBox x:Name="PseudoBox" Grid.Column="1" Height="30" Margin="10" Text="{Binding Username, Mode=OneWay}"/>
                 <TextBox x:Name="EmailBox" Grid.Column="1" Grid.Row="1"  Height="30" Margin="10" Text="{Binding Address, Mode=OneWay}"/>
@@ -40,7 +40,7 @@
 
             </Grid>
             <TextBlock x:Name="wrong" Foreground="#D91E18" TextAlignment="Center" TextWrapping="Wrap"/>
-            <Button x:Name="valider" Click="Commit" Content="Sauvegarder mon profil" Width="200" Height="35" Margin="30" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}"/>
+            <Button Click="Commit" Content="Sauvegarder mon profil" Width="200" Height="35" Margin="30" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}"/>
         </StackPanel>
         <!--Corps-->
         

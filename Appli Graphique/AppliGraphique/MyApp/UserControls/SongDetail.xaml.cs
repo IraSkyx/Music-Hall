@@ -16,7 +16,10 @@ namespace MyApp
         private Equalizer MyEqualizer = new Equalizer(30);
         private int[] Previous = new int[30];
         private Random r = new Random();
-        private BackgroundWorker MyWorker = new BackgroundWorker();
+        public BackgroundWorker MyWorker = new BackgroundWorker()
+        {
+            WorkerSupportsCancellation = true
+        };
         private float BaseValue;
         private double RoundedValue;
 
@@ -61,10 +64,16 @@ namespace MyApp
             MMDevice DefaultDevice = new MMDeviceEnumerator().GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);    
             for (int i = 0; i < 30; ++i)
             {
-                BaseValue = DefaultDevice.AudioMeterInformation.MasterPeakValue;
-                RoundedValue = Math.Round(BaseValue * 100);
+                if (MyWorker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
 
-                if (BaseValue > 5)
+                BaseValue = DefaultDevice.AudioMeterInformation.MasterPeakValue;
+                RoundedValue = Math.Round(BaseValue * 100);                
+
+                if (RoundedValue > 0)
                 {
                     Dispatcher.Invoke(() =>
                     {
@@ -80,7 +89,6 @@ namespace MyApp
                         Previous[i] = Convert.ToInt32(RoundedValue);
                     });
                 }
-
                 Thread.Sleep(1);
             }
         }

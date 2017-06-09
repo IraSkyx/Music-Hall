@@ -15,7 +15,7 @@
             <Border Style="{StaticResource BorderShadow}"/>
         </Canvas>
         <!--En-tête-->
-        <Button x:Name="quit" DockPanel.Dock="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20"/>
+        <Button AutomationProperties.Name="{Binding ToolTip, RelativeSource={RelativeSource Self}}" DockPanel.Dock="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20"/>
         <!--En-tête-->
 
         <!--Corps-->
@@ -24,15 +24,15 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Note:" FontSize="20" VerticalAlignment="Center" Margin="10"/>
                 <ComboBox x:Name="notation" FontSize="20" Margin="10">
-                    <ComboBoxItem IsSelected="True">0</ComboBoxItem>
-                    <ComboBoxItem>1</ComboBoxItem>
-                    <ComboBoxItem>2</ComboBoxItem>
-                    <ComboBoxItem>3</ComboBoxItem>
-                    <ComboBoxItem>4</ComboBoxItem>
-                    <ComboBoxItem>5</ComboBoxItem>
+                    <ComboBoxItem IsSelected="True" AutomationProperties.Name="{Binding Content, RelativeSource={RelativeSource Self}, StringFormat=' Note {0} sur 5'}">0</ComboBoxItem>
+                    <ComboBoxItem AutomationProperties.Name="{Binding Content, RelativeSource={RelativeSource Self}, StringFormat=' Note {0} sur 5'}">1</ComboBoxItem>
+                    <ComboBoxItem AutomationProperties.Name="{Binding Content, RelativeSource={RelativeSource Self}, StringFormat=' Note {0} sur 5'}">2</ComboBoxItem>
+                    <ComboBoxItem AutomationProperties.Name="{Binding Content, RelativeSource={RelativeSource Self}, StringFormat=' Note {0} sur 5'}">3</ComboBoxItem>
+                    <ComboBoxItem AutomationProperties.Name="{Binding Content, RelativeSource={RelativeSource Self}, StringFormat=' Note {0} sur 5'}">4</ComboBoxItem>
+                    <ComboBoxItem AutomationProperties.Name="{Binding Content, RelativeSource={RelativeSource Self}, StringFormat=' Note {0} sur 5'}">5</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
-            <TextBox x:Name="textcom" DockPanel.Dock="Top" FontSize="15" Height="100" Text="Cool!!!" Margin="10,0,10,0" TextWrapping="Wrap" Padding="3"/>
+            <TextBox x:Name="textcom" AutomationProperties.Name="Zone de texte pour poster un commentaire" DockPanel.Dock="Top" FontSize="15" Height="100" Margin="10,0,10,0" TextWrapping="Wrap" Padding="3"/>
 
             <TextBlock x:Name="wrong" Foreground="#D91E18" TextAlignment="Center" TextWrapping="Wrap" Margin="10"/>
 

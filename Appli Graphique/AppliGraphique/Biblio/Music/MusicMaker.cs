@@ -29,9 +29,10 @@ namespace Biblio
         /// <returns> la string modifiée </returns>
         private static string GetVideoValid(string Video)
         {
-            Video = Video.Replace(@"https://www.youtube.com/watch?v=", @"https://www.youtube.com/embed/");
-            Video = Video.Replace(@"https://youtu.be/", @"https://www.youtube.com/embed/");
-            if (Video.Contains("www"))
+            Video = Video.Replace(@"https://www.youtube.com/watch?v=", String.Empty);
+            Video = Video.Replace(@"https://www.youtube.com/embed/=", String.Empty);    
+            Video = Video.Replace(@"https://youtu.be/", String.Empty);
+            if (Video.Contains("www") || Video.Length != 11)
                 throw new FormatException("URL vidéo non valide");
             else
                 return Video;

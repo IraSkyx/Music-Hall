@@ -9,8 +9,6 @@ using System.IO;
 using BackEnd;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Reflection;
-using System.Windows.Media.Imaging;
 
 namespace MyApp
 {
@@ -64,6 +62,11 @@ namespace MyApp
             base.OnStateChanged(e);
         }
 
+        /// <summary>
+        /// Gère les exceptions non gérées
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Exception déclencheé </param>
         static void MyHandler(object sender, UnhandledExceptionEventArgs args)
         {            
             Exception e = (Exception)args.ExceptionObject;
@@ -85,6 +88,7 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void OnClose(object sender, EventArgs e)
         {
+            MyPlayer.Detail.MyWorker.CancelAsync();
             UserDBFront.SaveUsers();
             PlaylistFront.SaveMusics();
             Settings.Default.Save();
@@ -238,7 +242,7 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void ViewFromPlaylist(object sender, MouseButtonEventArgs e)
         {
-            if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser,null) && !ReferenceEquals(MyPlaylist.SelectedItem,null))
+            if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser, null) && !ReferenceEquals(MyPlaylist.SelectedItem, null))
                 MyScroller.SelectedItem=((IMusic)MyPlaylist.SelectedItem);
         }
 

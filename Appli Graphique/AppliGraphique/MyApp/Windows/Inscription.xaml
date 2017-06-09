@@ -10,8 +10,6 @@
         FontFamily="Microsoft YaHei Light"
         KeyDown="Window_KeyDown"
         Title="Inscription" Height="500" Width="300" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Drag">
-
-
     <DockPanel>
 
         <Canvas>
@@ -20,13 +18,13 @@
 
 
         <!--En-tête-->
-        <Button x:Name="quit" DockPanel.Dock="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20"/>
+        <Button AutomationProperties.Name="{Binding Tooltip, RelativeSource={RelativeSource Self}}" DockPanel.Dock="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20"/>
         <!--En-tête-->
 
         <!--Corps-->
         <StackPanel>
 
-            <TextBlock x:Name="inscrire" TextAlignment="Center" Text="S'inscrire" FontSize="35" Margin="30"/>
+            <TextBlock TextAlignment="Center" Text="S'inscrire" FontSize="35" Margin="30"/>
 
             <Grid>
 
@@ -40,18 +38,18 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Name="labelpseudo" TextAlignment="Center" VerticalAlignment="Center" Text="Pseudo"/>
+                <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="Pseudo"/>
                 <TextBox x:Name="pseudo" Grid.Column="1" Height="23" Margin="10" Text="totoo"/>
 
-                <TextBlock x:Name="labelemail" TextAlignment="Center" VerticalAlignment="Center" Text="Adresse mail" Grid.Row="1"/>
+                <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="Adresse mail" Grid.Row="1"/>
                 <TextBox x:Name="email" Grid.Row="1" Grid.Column="1" Height="23" Margin="10" Text="totoo@gmail.com"/>
 
-                <TextBlock x:Name="labelmdp" TextAlignment="Center" VerticalAlignment="Center" Text="Mot de passe" Grid.Row="2"/>
+                <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="Mot de passe" Grid.Row="2"/>
                 <PasswordBox x:Name="mdp" Grid.Row="2" Grid.Column="1" Height="23" Margin="10" Password="totoo"/>
 
             </Grid>
             <TextBlock x:Name="wrong" Foreground="#D91E18" TextAlignment="Center" TextWrapping="Wrap"/>
-            <Button x:Name="valider" Content="Valider" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Commit" Width="100" Height="35" Margin="50"/>
+            <Button Content="Valider" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Commit" Width="100" Height="35" Margin="50"/>
 
         </StackPanel>
         <!--Corps-->
