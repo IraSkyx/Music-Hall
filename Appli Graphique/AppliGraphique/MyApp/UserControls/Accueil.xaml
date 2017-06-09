@@ -15,14 +15,14 @@
         </Grid.ColumnDefinitions>
         <StackPanel Tag="It Ain't Me" Margin="20"  VerticalAlignment="Bottom" MouseUp="Home_MouseUp">
             <TextBlock Text="Top 1 Music'Hall" FontSize="20" Margin="10" TextAlignment="Center"/>
-            <Image Source="../images/eAintMe.jpg" ToolTip="Cliquer pour + d'infos">
+            <Image Source="pack://application:,,,/Resources;Component/eAintMe.jpg" ToolTip="Cliquer pour + d'infos">
                 <Image.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
                 </Image.BitmapEffect>
             </Image>
         </StackPanel>
         <StackPanel Tag="Back For More" Margin="20" Grid.Column="1" VerticalAlignment="Top" MouseUp="Home_MouseUp">
-            <Image Source="../images/eFeder.jpg" ToolTip="Cliquer pour + d'infos">
+            <Image Source="pack://application:,,,/Resources;Component/eFeder.jpg" ToolTip="Cliquer pour + d'infos">
                 <Image.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
                 </Image.BitmapEffect>
@@ -31,7 +31,7 @@
         </StackPanel>
         <StackPanel Tag="Paris" Margin="20" Grid.Column="2" VerticalAlignment="Center" MouseUp="Home_MouseUp">
             <TextBlock Text="Top 1 France" FontSize="20" Margin="10" TextAlignment="Center"/>
-            <Image Source="../images/eParis.jpg" ToolTip="Cliquer pour + d'infos">
+            <Image Source="pack://application:,,,/Resources;Component/eParis.jpg" ToolTip="Cliquer pour + d'infos">
                 <Image.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
                 </Image.BitmapEffect>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MyApp"
         mc:Ignorable="d"
         Name="Root"
-        Icon="../images/logo.ico"
+        Icon="pack://application:,,,/Resources;Component/logo.ico"
         Closed="OnClose"
         AllowDrop="True"
         DragDrop.Drop="DragAndDrop"

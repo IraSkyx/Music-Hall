@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.Serialization;
+using System.Windows.Media.Imaging;
 
 namespace Biblio
 {
@@ -115,9 +116,9 @@ namespace Biblio
             }
         }
 
-        private string _Image;
+        private Uri _Image;
         [DataMember(Name = "Image", Order = 7)]
-        public string Image
+        public Uri Image
         {
             get
             {
@@ -150,7 +151,7 @@ namespace Biblio
         /// <summary>
         /// Constructeur de Music
         /// </summary>
-        internal Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Video, string Image, ObservableCollection<IComment> Comments)
+        internal Music(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Video, Uri Image, ObservableCollection<IComment> Comments)
         {
             this.Title = Title;
             this.Artist = Artist;
@@ -158,25 +159,9 @@ namespace Biblio
             this.Genre = Genre;
             this.Infos = Infos;
             this.Audio = Audio;
-            this.Video = GetVideoValid(Video);
+            this.Video = Video;
             this.Image = Image;
             this.Comments = Comments;
-        }
-
-        /// <summary>
-        /// Transforme une URL youtube en ID Youtube
-        /// </summary>
-        /// <param name="Video"> string à modifier </param>
-        /// <exception cref="FormatException"> En cas de mauvais lien </exception>
-        /// <returns> la string modifiée </returns>
-        private string GetVideoValid(string Video)
-        {
-            Video = Video.Replace(@"https://www.youtube.com/watch?v=", @"https://www.youtube.com/embed/");
-            Video = Video.Replace(@"https://youtu.be/", @"https://www.youtube.com/embed/");
-            if (Video.Contains("www"))
-                throw new FormatException("URL vidéo non valide");
-            else
-                return Video;
         }
 
         /// <summary>
@@ -216,7 +201,7 @@ namespace Biblio
         /// <param name="other"> L'autre musique qui sera comparé à cette Music </param>
         /// <returns>true si égaux, false sinon </returns>
         public bool Equals(IMusic other) 
-            => (Title.Equals(other.Title) && Artist.Equals(other.Artist) && Date.Equals(other.Date) && Genre.Equals(other.Genre) && Infos.Equals(other.Infos) && Audio.ToString().Equals(other.Audio.ToString()) && Video.Equals(other.Video) && Image.Equals(other.Image));
+            => (Title.Equals(other.Title) && Artist.Equals(other.Artist) && Date.Equals(other.Date) && Genre.Equals(other.Genre) && Infos.Equals(other.Infos) && Audio.ToString().Equals(other.Audio.ToString()) && Video.Equals(other.Video));
 
         /// <summary>
         /// Fixe le HashCode de l'objet

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Windows.Media.Imaging;
 
 namespace Biblio
 {
@@ -19,7 +20,7 @@ namespace Biblio
 
         string Video { get; set; }
 
-        string Image { get; set; }
+        Uri Image { get; set; }
 
         ObservableCollection<IComment> Comments { get; set; }
 

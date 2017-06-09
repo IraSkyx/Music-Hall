@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace MyApp
 {
@@ -81,11 +82,11 @@ namespace MyApp
             try
             {                
                 if (ReferenceEquals((IMusic)DataContext, null)) //Ajout
-                    music = MusicMaker.MakeMusic(Titre.Text, Artist.Text, Date.Text, Genre.Text, Infos.Text, new Uri(infos.FullName, UriKind.RelativeOrAbsolute), Video.Text, Explo.FileName, null);    
+                    music = MusicMaker.MakeMusic(Titre.Text, Artist.Text, Date.Text, Genre.Text, Infos.Text, new Uri(infos.FullName, UriKind.RelativeOrAbsolute), Video.Text, new Uri(Explo.FileName), null);    
                 else if(ReferenceEquals(Explo, null)) //Modif sans choix d'image
                     music = MusicMaker.MakeMusic(Titre.Text, Artist.Text, Date.Text, Genre.Text, Infos.Text, ((IMusic)DataContext).Audio, Video.Text, ((IMusic)DataContext).Image, ((IMusic)DataContext).Comments);        
                 else //Modif avec choix d'image
-                    music = MusicMaker.MakeMusic(Titre.Text, Artist.Text, Date.Text, Genre.Text, Infos.Text, ((IMusic)DataContext).Audio, Video.Text, Explo.FileName, ((IMusic)DataContext).Comments);
+                    music = MusicMaker.MakeMusic(Titre.Text, Artist.Text, Date.Text, Genre.Text, Infos.Text, ((IMusic)DataContext).Audio, Video.Text, new Uri(Explo.FileName), ((IMusic)DataContext).Comments);
 
                 if (PlaylistFront.AllMusics.PlaylistProperty.Count(x => x.Equals(music)) == 0)
                 {

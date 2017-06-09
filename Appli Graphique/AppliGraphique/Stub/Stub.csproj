@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,6 +50,10 @@
     <ProjectReference Include="..\Biblio\Biblio.csproj">
       <Project>{087CAF5B-E6CD-4ED8-9C1B-2BBF4A29A649}</Project>
       <Name>Biblio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{39a3371a-a3b3-4a16-b3ea-aa309f6290eb}</Project>
+      <Name>Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

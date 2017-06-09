@@ -9,6 +9,8 @@ using System.IO;
 using BackEnd;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Reflection;
+using System.Windows.Media.Imaging;
 
 namespace MyApp
 {
@@ -19,7 +21,7 @@ namespace MyApp
     {
         private NotifyIcon ToTaskBar = new NotifyIcon()
         {
-            Icon = new Icon("images/NotifyIcon.ico"),
+            Icon = new Icon("audio/logo.ico"),
             Visible = true       
         };
 
@@ -28,9 +30,7 @@ namespace MyApp
         /// </summary>
         public MainWindow()
         {
-
-            AppDomain currentDomain = AppDomain.CurrentDomain;
-            currentDomain.UnhandledException += new UnhandledExceptionEventHandler(MyHandler);
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(MyHandler);
 
             UserDBFront.LoadUsers();
             PlaylistFront.LoadMusics();
@@ -65,12 +65,9 @@ namespace MyApp
         }
 
         static void MyHandler(object sender, UnhandledExceptionEventArgs args)
-        {
-            
+        {            
             Exception e = (Exception)args.ExceptionObject;
-            System.Windows.MessageBox.Show(e.Message);
-            Console.WriteLine("MyHandler caught : " + e.Message);
-            Console.WriteLine("Runtime terminating: {0}", args.IsTerminating);
+            System.Windows.MessageBox.Show($"{e.Message}\n{e.Source}\n{e.StackTrace}");
         }
 
         /// <summary>

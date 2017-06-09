@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Windows.Media.Imaging;
 
 namespace Biblio
 {
