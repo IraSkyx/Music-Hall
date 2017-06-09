@@ -46,7 +46,7 @@ namespace MyApp
             {
                 UserDBFront.MyUserDB.IsAlreadyUsed(email.Text);
                 UserDB.IsValid(email.Text);
-                Check?.Invoke(UserMaker.MakeUser(email.Text, pseudo.Text, mdp.Password, null));
+                Check?.Invoke(UserMaker.MakeUser(email.Text, pseudo.Text, mdp.Password, new Playlist()));
                 Close();
             }
             catch (Exception ex)

@@ -10,16 +10,26 @@
         FontFamily="Microsoft YaHei Light"
         KeyDown="Window_KeyDown"
         Title="Inscription" Height="500" Width="300" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Drag">
+
+
     <DockPanel>
 
+        <Canvas>
+            <Border Style="{StaticResource BorderShadow}"/>
+        </Canvas>
+
+
         <!--En-tête-->
-            <Button x:Name="quit" DockPanel.Dock="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20"/>
+        <Button x:Name="quit" DockPanel.Dock="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20"/>
         <!--En-tête-->
 
         <!--Corps-->
         <StackPanel>
+
             <TextBlock x:Name="inscrire" TextAlignment="Center" Text="S'inscrire" FontSize="35" Margin="30"/>
+
             <Grid>
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -42,8 +52,12 @@
             </Grid>
             <TextBlock x:Name="wrong" Foreground="#D91E18" TextAlignment="Center" TextWrapping="Wrap"/>
             <Button x:Name="valider" Content="Valider" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="Commit" Width="100" Height="35" Margin="50"/>
+
         </StackPanel>
         <!--Corps-->
-        
+
+
     </DockPanel>
+
+
 </Window>

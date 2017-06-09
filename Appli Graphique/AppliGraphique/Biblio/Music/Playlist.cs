@@ -30,13 +30,6 @@ namespace Biblio
             PlaylistProperty = new ObservableCollection<IMusic>(Musics); 
         }
 
-        public void Add(IMusic Mus)
-        {
-            if (ReferenceEquals(PlaylistProperty, null))
-                PlaylistProperty = new ObservableCollection<IMusic>();
-            PlaylistProperty.Add(Mus);
-        }
-
         /// <summary>
         /// Filtre les éléments de la ListView de recherche
         /// </summary>

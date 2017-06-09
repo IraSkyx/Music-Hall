@@ -11,7 +11,9 @@
         KeyDown="Window_KeyDown"
         Title="Connexion" Height="500" Width="300" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Drag">
     <DockPanel>
-        
+        <Canvas>
+            <Border Style="{StaticResource BorderShadow}"/>
+        </Canvas>
         <!--En-tête-->
         <Button x:Name="quit" DockPanel.Dock="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle}" Template="{StaticResource OverQuit}" ToolTip="Fermer" Click="Exit" Content="✗" Width="60" FontSize="20"/>
         <!--En-tête-->
