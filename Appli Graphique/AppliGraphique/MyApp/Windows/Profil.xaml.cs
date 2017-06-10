@@ -11,6 +11,9 @@ namespace MyApp
     /// </summary>
     public partial class Profil : Window
     {
+        /// <summary>
+        /// Permet de renvoyer un IUser à la MainWindow
+        /// </summary>
         public event Action <IUser> Check;
 
         /// <summary>

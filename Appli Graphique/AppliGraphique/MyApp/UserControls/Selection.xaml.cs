@@ -12,7 +12,13 @@ namespace MyApp
     /// </summary>
     public partial class Selection : UserControl
     {
+        /// <summary>
+        /// DependencyProperty vers MyPlayer de MainWindow.xaml
+        /// </summary>
         public static readonly DependencyProperty Player = DependencyProperty.Register("MyPlayer", typeof(Lecteur), typeof(Selection));
+        /// <summary>
+        /// Propriété contenant les valeurs de la DependencyProperty "Player"
+        /// </summary>
         public Lecteur MyPlayer
         {
             get
@@ -25,7 +31,13 @@ namespace MyApp
             }
         }
 
+        /// <summary>
+        /// DependencyProperty vers MyScroller de MainWindow.xaml
+        /// </summary>
         public static readonly DependencyProperty Scroller = DependencyProperty.Register("MyScroller", typeof(ListView), typeof(Selection));
+        /// <summary>
+        /// Propriété contenant les valeurs de la DependencyProperty "Scroller"
+        /// </summary>
         public ListView MyScroller
         {
             get

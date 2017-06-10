@@ -1,0 +1,881 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MyApp</name>
+    </assembly>
+    <members>
+        <member name="T:MyApp.Accueil">
+            <summary>
+            Logique d'interaction pour Accueil.xaml
+            </summary>
+            <summary>
+            Accueil
+            </summary>
+        </member>
+        <member name="F:MyApp.Accueil.Player">
+            <summary>
+            DependencyProperty vers MyPlayer de MainWindow.xaml
+            </summary>
+        </member>
+        <member name="P:MyApp.Accueil.MyPlayer">
+            <summary>
+            Propriété contenant les valeurs de la DependencyProperty "Player"
+            </summary>
+        </member>
+        <member name="F:MyApp.Accueil.Scroller">
+            <summary>
+            DependencyProperty vers MyScroller de MainWindow.xaml
+            </summary>
+        </member>
+        <member name="P:MyApp.Accueil.MyScroller">
+            <summary>
+            Propriété contenant les valeurs de la DependencyProperty "Scroller"
+            </summary>
+        </member>
+        <member name="F:MyApp.Accueil.Tab">
+            <summary>
+            DependencyProperty vers MyTab de MainWindow.xaml
+            </summary>
+        </member>
+        <member name="P:MyApp.Accueil.MyTab">
+            <summary>
+            Propriété contenant les valeurs de la DependencyProperty "Tab"
+            </summary>
+        </member>
+        <member name="M:MyApp.Accueil.#ctor">
+            <summary>
+            Instancie Accueil
+            </summary>
+        </member>
+        <member name="M:MyApp.Accueil.Home_MouseUp(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Sélectionne dans la ListView supérieure la musique sélectionné depuis la page d'Accueil
+            </summary>
+            <param name="sender"> Objet envoyeur </param>
+            <param name="e"> Évènements du clic de souris </param>
+        </member>
+        <member name="M:MyApp.Accueil.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:MyApp.AddComment">
+            <summary>
+            Logique d'interaction pour AddComment.xaml
+            </summary>
+            <summary>
+            AddComment
+            </summary>
+        </member>
+        <member name="M:MyApp.AddComment.#ctor(System.String)">
+            <summary>
+            Instancie un AddComment
+            </summary>
+        </member>
+        <member name="M:MyApp.AddComment.Exit(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Quitte le programme 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.AddComment.Drag(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Déplace la fenêtre
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.AddComment.Window_KeyDown(System.Object,System.Windows.Input.KeyEventArgs)">
+            <summary>
+            Permet à l'utilisateur de valider en pressant la touche Entrée
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.AddComment.Commit(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Ajoute un Comment à la Music
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+            <exception cref="T:System.FormatException"> En cas de commentaire vide </exception>
+        </member>
+        <member name="M:MyApp.AddComment.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:MyApp.AddMusic">
+            <summary>
+            Logique d'interaction pour AddMusic.xaml
+            </summary>
+            <summary>
+            AddMusic
+            </summary>
+        </member>
+        <member name="M:MyApp.AddMusic.#ctor(System.IO.FileInfo)">
+            <summary>
+            Instancie AddMusic pour un ajout
+            </summary>
+        </member>
+        <member name="M:MyApp.AddMusic.#ctor">
+            <summary>
+            Instancie un AddMusicWin pour une modification
+            </summary>
+        </member>
+        <member name="M:MyApp.AddMusic.Exit(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Quitte le programme 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.AddMusic.Drag(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Déplace la fenêtre
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.AddMusic.Explorer(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Permet au User d'ouvrir de rechercher une image
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.AddMusic.Commit(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Valide les modifications/l'ajout dans la base de données 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+            <exception cref="T:System.NullReferenceException"> Si un champ est manquant (= null) </exception>
+        </member>
+        <member name="M:MyApp.AddMusic.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:MyApp.ValueToContent">
+            <summary>
+            Classe de convertion de valeurs
+            </summary>
+        </member>
+        <member name="M:MyApp.ValueToContent.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convertit des valeurs
+            </summary>
+            <param name="value"> Object envoyeur </param>
+            <param name="targetType"> Type de l'objet envoyeur </param>
+            <param name="parameter"> Converter Parameter </param>
+            <param name="culture"> Infos sur la culture </param>
+            <returns> La nouvelle valeur convertit </returns>
+        </member>
+        <member name="M:MyApp.ValueToContent.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Pas nécessaire
+            </summary>
+        </member>
+        <member name="T:MyApp.Lecteur">
+            <summary>
+            Logique d'interaction pour Lecteur.xaml
+            </summary>
+            <summary>
+            Lecteur
+            </summary>
+        </member>
+        <member name="F:MyApp.Lecteur.Playlist">
+            <summary>
+            DependencyProperty vers MyPlayer de MainWindow.xaml
+            </summary>
+        </member>
+        <member name="P:MyApp.Lecteur.MyPlaylist">
+            <summary>
+            Propriété contenant les valeurs de la DependencyProperty "Player"
+            </summary>
+        </member>
+        <member name="F:MyApp.Lecteur.Scroller">
+            <summary>
+            DependencyProperty vers MyScroller de MainWindow.xaml
+            </summary>
+        </member>
+        <member name="P:MyApp.Lecteur.MyScroller">
+            <summary>
+            Propriété contenant les valeurs de la DependencyProperty "Scroller"
+            </summary>
+        </member>
+        <member name="M:MyApp.Lecteur.#ctor">
+            <summary>
+            Instancie Lecteur, ajoute dynamiquement un Player, fixe les évènements du Player, définit les paramètres du Timer et les DataContext de la vue
+            </summary>
+        </member>
+        <member name="M:MyApp.Lecteur.Update(System.Object,System.EventArgs)">
+            <summary>
+            Met à jour les durées actuelles et maximales d'une Music en cours de lecture 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Lecteur.MediaOpened(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Définit les valeurs de la ProgressBar et le DataContext de la miniature
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Lecteur.PausePlayClick(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Lis ou mets en pause le Player
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Lecteur.Replay(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Active l'option lecture en boucle
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Lecteur.Random(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Active l'option lecture aléatoire
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Lecteur.Mute(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Désactive/active le son
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Lecteur.NextAndPrevious(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Passe à la Music suivante/précédente
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Lecteur.MediaEnded(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Définit le comportement du Player pour la prochaine lecture 
+            => Relecture
+            => Lecture de la prochaine Music
+            => Pause
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Lecteur.ProgMouseClick(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Change la position de la Music actuellement lue d'après la position X du clic dans la ProgressBar (Produit en croix)
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Lecteur.AddToPlaylist(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Ajoute une Music à la playlist User (si connecté) tout en instanciant si nécessaire
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Lecteur.SeeMusic(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Permet de consulter la Music actuellement lue ou celle sélectionnée dans sa playlist
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Lecteur.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:MyApp.PA">
+            <summary>
+            Logique d'interaction pour PA.xaml
+            </summary>
+            <summary>
+            PA
+            </summary>
+        </member>
+        <member name="M:MyApp.PA.#ctor">
+            <summary>
+            Instancie un PA
+            </summary>
+        </member>
+        <member name="M:MyApp.PA.Exit(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Quitte le programme 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.PA.Drag(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Déplace la fenêtre
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.PA.DeleteMusic(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Supprime une music de la base de données
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.PA.AddMusic(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Ajoute une music à la base de données
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.PA.EditMusic(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Edite une music de la base de données
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.PA.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:MyApp.Properties.Resources">
+            <summary>
+              Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
+            </summary>
+        </member>
+        <member name="P:MyApp.Properties.Resources.ResourceManager">
+            <summary>
+              Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
+            </summary>
+        </member>
+        <member name="P:MyApp.Properties.Resources.Culture">
+            <summary>
+              Remplace la propriété CurrentUICulture du thread actuel pour toutes
+              les recherches de ressources à l'aide de cette classe de ressource fortement typée.
+            </summary>
+        </member>
+        <member name="T:MyApp.Properties.Settings">
+            <summary>
+            Paramètres de l'application
+            </summary>
+        </member>
+        <member name="P:MyApp.Properties.Settings.Default">
+            <summary>
+            Instancie le Settings par défaut (Default)
+            </summary>
+        </member>
+        <member name="P:MyApp.Properties.Settings.LastMail">
+            <summary>
+            Indique l'email du dernier utilisateur connecté
+            </summary>
+        </member>
+        <member name="P:MyApp.Properties.Settings.StayLogged">
+            <summary>
+            Indique si l'utilisateur souhaite/souhaitait rester connecté
+            </summary>
+        </member>
+        <member name="T:MyApp.Recherche">
+            <summary>
+            Logique d'interaction pour Recherche.xaml
+            </summary>
+            <summary>
+            Recherche
+            </summary>
+        </member>
+        <member name="F:MyApp.Recherche.Scroller">
+            <summary>
+            DependencyProperty vers MyScroller de MainWindow.xaml
+            </summary>
+        </member>
+        <member name="P:MyApp.Recherche.MyScroller">
+            <summary>
+            Propriété contenant les valeurs de la DependencyProperty "Scroller"
+            </summary>
+        </member>
+        <member name="F:MyApp.Recherche.Tab">
+            <summary>
+            DependencyProperty vers MyTab de MainWindow.xaml
+            </summary>
+        </member>
+        <member name="P:MyApp.Recherche.MyTab">
+            <summary>
+            Propriété contenant les valeurs de la DependencyProperty "Tab"
+            </summary>
+        </member>
+        <member name="M:MyApp.Recherche.#ctor">
+            <summary>
+            Instancie Recherche
+            </summary>
+        </member>
+        <member name="M:MyApp.Recherche.ResultSelectionChanged(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
+            <summary>
+            Change la sélection de MyScroller en fonction de la sélection par l'User dans la liste de résultats 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Recherche.UserInputChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)">
+            <summary>
+            Change le DataContext par le résultat de la fonction <code>Filter()</code> de Playlist 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Recherche.CriterionChanged(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
+            <summary>
+            Lève manuellement <code>UserInputChanged()</code>
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Recherche.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:MyApp.Selection">
+            <summary>
+            Logique d'interaction pour Selection.xaml
+            </summary>
+            <summary>
+            Selection
+            </summary>
+        </member>
+        <member name="F:MyApp.Selection.Player">
+            <summary>
+            DependencyProperty vers MyPlayer de MainWindow.xaml
+            </summary>
+        </member>
+        <member name="P:MyApp.Selection.MyPlayer">
+            <summary>
+            Propriété contenant les valeurs de la DependencyProperty "Player"
+            </summary>
+        </member>
+        <member name="F:MyApp.Selection.Scroller">
+            <summary>
+            DependencyProperty vers MyScroller de MainWindow.xaml
+            </summary>
+        </member>
+        <member name="P:MyApp.Selection.MyScroller">
+            <summary>
+            Propriété contenant les valeurs de la DependencyProperty "Scroller"
+            </summary>
+        </member>
+        <member name="M:MyApp.Selection.#ctor">
+            <summary>
+            Instancie Selection
+            </summary>
+        </member>
+        <member name="M:MyApp.Selection.PlayASong(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Joue le son actuellement selectionné par le Scroller
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Selection.AddToPlaylist(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Ajoute la Music à la Playlist si un User est connecté
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Selection.AddComment(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Ajoute un Comment à la Music si un User est connecté 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Selection.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:MyApp.SongDetail">
+            <summary>
+            Logique d'interaction pour SongDetail.xaml
+            </summary>
+            <summary>
+            SongDetail
+            </summary>
+        </member>
+        <member name="F:MyApp.SongDetail.MyEqualizer">
+            <summary>
+            ProgressBar pour former un Égaliseur
+            </summary>
+        </member>
+        <member name="F:MyApp.SongDetail.Previous">
+            <summary>
+            Valeurs des ProgressBar lors de la mise à jour précédente
+            </summary>
+        </member>
+        <member name="F:MyApp.SongDetail.MyWorker">
+            <summary>
+            Permet d'effectuer l'update des Progressbar de manière asynchrone
+            </summary>
+        </member>
+        <member name="M:MyApp.SongDetail.#ctor">
+            <summary>
+            Instancie SongDetail
+            </summary>
+        </member>
+        <member name="M:MyApp.SongDetail.InitializeEqualizer">
+            <summary>
+            Ajoute les Progress Bar à la vue
+            </summary>
+        </member>
+        <member name="M:MyApp.SongDetail.WorkCompleted(System.Object,System.ComponentModel.RunWorkerCompletedEventArgs)">
+            <summary>
+            Relance le Worker
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par le worker </param>
+        </member>
+        <member name="M:MyApp.SongDetail.SetValues(System.Object,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Modifie les valeurs des Progress Bar en fonction du MasterPeakValue de Naudio.dll
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par le worker </param>
+        </member>
+        <member name="M:MyApp.SongDetail.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:MyApp.Connexion">
+            <summary>
+            Logique d'interaction pour Connexion.xaml
+            </summary>
+            <summary>
+            Connexion
+            </summary>
+        </member>
+        <member name="E:MyApp.Connexion.Check">
+            <summary>
+            Permet de renvoyer un IUser à la MainWindow
+            </summary>
+        </member>
+        <member name="M:MyApp.Connexion.#ctor">
+            <summary>
+            Instancie Connexion
+            </summary>
+        </member>
+        <member name="M:MyApp.Connexion.Exit(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Quitte le programme 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Connexion.Drag(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Déplace la fenêtre
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Connexion.Commit(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Renvoit un User via un event à la MainWindow si les informations sont correctes
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+            <exception cref="T:System.Exception"> En cas d'erreur de connexion (Par exemple : ID/PW inexistants) levé par <code>LogIn()</code> </exception>
+        </member>
+        <member name="M:MyApp.Connexion.Window_KeyDown(System.Object,System.Windows.Input.KeyEventArgs)">
+            <summary>
+            Permet à l'utilisateur de valider en pressant la touche Entrée
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Connexion.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:MyApp.Inscription">
+            <summary>
+            Logique d'interaction pour Inscription.xaml
+            </summary>
+            <summary>
+            Inscription
+            </summary>
+        </member>
+        <member name="E:MyApp.Inscription.Check">
+            <summary>
+            Permet de renvoyer un IUser à la MainWindow
+            </summary>
+        </member>
+        <member name="M:MyApp.Inscription.#ctor">
+            <summary>
+            Instancie Inscription
+            </summary>
+        </member>
+        <member name="M:MyApp.Inscription.Exit(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Quitte le programme 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Inscription.Drag(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Déplace la fenêtre
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Inscription.Commit(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Renvoit un User via un event à la MainWindow si les informations sont correctes
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+            <exception cref="T:System.Exception"> En cas d'erreur d'inscription (Par exemple : ID/PW incorrectes ou déjà existants) levé par <code>IsAlreadyUsed()</code>, <code>MakeUser()</code> et <code>MailAddress()</code> </exception>
+        </member>
+        <member name="M:MyApp.Inscription.Window_KeyDown(System.Object,System.Windows.Input.KeyEventArgs)">
+            <summary>
+            Permet à l'utilisateur de valider en pressant la touche Entrée
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Inscription.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:MyApp.Profil">
+            <summary>
+            Logique d'interaction pour Profil.xaml
+            </summary>
+            <summary>
+            Profil
+            </summary>
+        </member>
+        <member name="E:MyApp.Profil.Check">
+            <summary>
+            Permet de renvoyer un IUser à la MainWindow
+            </summary>
+        </member>
+        <member name="M:MyApp.Profil.#ctor">
+            <summary>
+            Instancie Profil
+            </summary>
+        </member>
+        <member name="M:MyApp.Profil.Exit(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Quitte le programme 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Profil.Drag(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Déplace la fenêtre
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Profil.Commit(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Renvoit un User via un event à la MainWindow si les informations sont correctes
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+            <exception cref="T:System.Exception"> En cas d'erreur de connexion (Par exemple : ID/PW incorrectes ou déjà existants) levé par <code>IsAlreadyUsed()</code>, <code>MakeUser()</code> et <code>MailAddress()</code> </exception>
+        </member>
+        <member name="M:MyApp.Profil.Window_KeyDown(System.Object,System.Windows.Input.KeyEventArgs)">
+            <summary>
+            Permet à l'utilisateur de valider en pressant la touche Entrée
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.Profil.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:MyApp.App">
+            <summary>
+            Logique d'interaction pour App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:MyApp.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:MyApp.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:MyApp.MainWindow">
+            <summary>
+            Logique d'interaction pour MainWindow.xaml
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:MyApp.MainWindow.#ctor">
+            <summary>
+            Instancie MainWindow
+            </summary>
+        </member>
+        <member name="M:MyApp.MainWindow.OnStateChanged(System.EventArgs)">
+            <summary>
+            Cache la fenêtre à la minimisation, sinon la rend visible
+            </summary>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.MainWindow.MyHandler(System.Object,System.UnhandledExceptionEventArgs)">
+            <summary>
+            Gère les exceptions non gérées
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="args"> Exception déclencheé </param>
+        </member>
+        <member name="M:MyApp.MainWindow.Exit(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Quitte le programme 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.MainWindow.OnClose(System.Object,System.EventArgs)">
+            <summary>
+            Lance les méthodes suivantes lorsque l'appli est fermée 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.MainWindow.Reduce(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Réduit la fenêtre
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.MainWindow.Drag(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Déplace la fenêtre ou l'agrandit lors d'un double-clic
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.MainWindow.Increase(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Agrandit la fenêtre
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.MainWindow.Connexion(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Ouvre la fenêtre de connexion ou déconnecte un User
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+            <remarks>Le if correspond à l'ouverture  de la fenêtre de connexion</remarks>
+            <remarks>Le else correspond à la gestion de la déconnexion</remarks>
+        </member>
+        <member name="M:MyApp.MainWindow.LogIn(Biblio.IUser)">
+            <summary>
+            Connecte un User
+            </summary>
+            <param name="value"> L'User à connecter </param>
+        </member>
+        <member name="M:MyApp.MainWindow.Inscription(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Ouvre la fenêtre d'inscription ou de profil
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+            <remarks>Le if correspond à l'ouverture de la fenêtre d'inscription</remarks>
+            <remarks>Le else correspond à l'ouverture de la fenêtre du profil</remarks>
+        </member>
+        <member name="M:MyApp.MainWindow.MyScrollerSelectionChanged(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
+            <summary>
+            Mets l'élement sélectionné de la Listview du haut à l'indice 1 et met à jour la vidéo de la sélection
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.MainWindow.MyScrollerWheeling(System.Object,System.Windows.Input.MouseWheelEventArgs)">
+            <summary>
+            Permet de Scroller de gauche à droite et inversement 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+            <remarks> Le if permet un scroll vers la gauche </remarks>
+            <remarks> Le else permet un scroll vers la droite </remarks>
+        </member>
+        <member name="M:MyApp.MainWindow.ViewFromPlaylist(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Permet de consulter une Music en cliquant sur un élément de sa playlist
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.MainWindow.ReadFromPlaylist(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Permet de lire une Music en double-cliquant sur un élément de sa playlist
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.MainWindow.DeleteFromPlaylist(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Permet de supprimer une Music en faisant un clic gauche sur un élément de sa playlist
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.MainWindow.DragAndDrop(System.Object,System.Windows.DragEventArgs)">
+            <summary>
+            Permet d'ajouter une music via un DragAndDrop
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.MainWindow.OpenPA(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Permet d'ouvrir le panneau d'administration
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.MainWindow.Tab_SelectionChanged(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
+            <summary>
+            Réinitialise la sélection de la ListView Search lors du passage à son onglet
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
+        <member name="M:MyApp.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

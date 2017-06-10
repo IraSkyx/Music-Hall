@@ -12,6 +12,9 @@ namespace MyApp
     /// </summary>
     public partial class Connexion : Window
     {
+        /// <summary>
+        /// Permet de renvoyer un IUser à la MainWindow
+        /// </summary>
         public event Action<IUser> Check;
 
         /// <summary>

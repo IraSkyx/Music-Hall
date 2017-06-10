@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Stub</name>
+    </assembly>
+    <members>
+        <member name="T:Stub.StubMusics">
+            <summary>
+            Classe de chargement en dur dans le code
+            </summary>
+        </member>
+        <member name="M:Stub.StubMusics.LoadMusics">
+            <summary>
+            Charge en dur une Database de Music
+            </summary>
+            <returns> La Database de Music fabriquée </returns>
+        </member>
+        <member name="T:Stub.StubUsers">
+            <summary>
+            Classe de chargement en dur dans le code
+            </summary>
+        </member>
+        <member name="M:Stub.StubUsers.LoadUsers">
+            <summary>
+            Charge en dur une Database de Users
+            </summary>
+            <returns> La Database fabriquée </returns>
+        </member>
+    </members>
+</doc>

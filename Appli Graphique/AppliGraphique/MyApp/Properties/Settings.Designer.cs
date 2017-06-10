@@ -9,20 +9,28 @@
 //------------------------------------------------------------------------------
 
 namespace MyApp.Properties {
-    
-    
+
+    /// <summary>
+    /// Paramètres de l'application
+    /// </summary>
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-        
+
+        /// <summary>
+        /// Instancie le Settings par défaut (Default)
+        /// </summary>
         public static Settings Default {
             get {
                 return defaultInstance;
             }
         }
-        
+
+        /// <summary>
+        /// Indique l'email du dernier utilisateur connecté
+        /// </summary>
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("null")]
@@ -34,10 +42,13 @@ namespace MyApp.Properties {
                 this["LastMail"] = value;
             }
         }
-        
+
+        /// <summary>
+        /// Indique si l'utilisateur souhaite/souhaitait rester connecté
+        /// </summary>
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]       
         public bool StayLogged {
             get {
                 return ((bool)(this["StayLogged"]));

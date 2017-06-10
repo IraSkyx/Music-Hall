@@ -5,9 +5,18 @@ using System.Windows.Controls;
 
 namespace Biblio
 {
+    /// <summary>
+    /// Lecteur permettant de lire et gérer des Musics
+    /// </summary>
     public class Player : MediaElement, INotifyPropertyChanged
-    {        
+    {
+        /// <summary>
+        /// (Attribut) Music actuellement lue
+        /// </summary>
         private IMusic _CurrentlyPlaying;
+        /// <summary>
+        /// (Propriété) Music actuellement lue
+        /// </summary>
         public IMusic CurrentlyPlaying
         {
             get { return _CurrentlyPlaying; }
@@ -17,7 +26,13 @@ namespace Biblio
                 OnPropertyChanged("CurrentlyPlaying");
             }
         }
+        /// <summary>
+        /// (Attribut) User actuellement connecté
+        /// </summary>
         private IUser _CurrentUser;
+        /// <summary>
+        /// (Propriété) User actuellement connecté
+        /// </summary>
         public IUser CurrentUser
         {
             get { return _CurrentUser; }
@@ -27,7 +42,13 @@ namespace Biblio
                 OnPropertyChanged("CurrentUser");
             }
         }
+        /// <summary>
+        /// (Attribut) Indique si une Music est en cours de lecture
+        /// </summary>
         private bool _IsPlaying;
+        /// <summary>
+        /// (Propriété) Indique si une Music est en cours de lecture
+        /// </summary>
         public bool IsPlaying
         {
             get { return _IsPlaying; }
@@ -37,7 +58,13 @@ namespace Biblio
                 OnPropertyChanged("IsPlaying");
             }
         }
+        /// <summary>
+        /// (Attribut) Indique si la Music doit être lue en boucle
+        /// </summary>
         private bool _Loop;
+        /// <summary>
+        /// (Propriété) Indique si la Music doit être lue en boucle
+        /// </summary>
         public bool Loop
         {
             get { return _Loop; }
@@ -49,7 +76,13 @@ namespace Biblio
                 OnPropertyChanged("RandomPlay");
             }
         }
+        /// <summary>
+        /// (Attribut) Indique si la Playlist doit être lue en lecture aléatoire
+        /// </summary>
         private bool _RandomPlay;
+        /// <summary>
+        /// (Propriété) Indique si la Playlist doit être lue en lecture aléatoire
+        /// </summary>
         public bool RandomPlay
         {
             get { return _RandomPlay; }
@@ -61,6 +94,9 @@ namespace Biblio
                 OnPropertyChanged("Loop");
             }
         }
+        /// <summary>
+        /// Notifie la vue d'un changement de variable
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -133,7 +169,7 @@ namespace Biblio
         }
 
         /// <summary>
-        /// Avertit la vue du changement de valeur de la propriété
+        /// Notifie la vue du changement de valeur de la propriété
         /// </summary>
         /// <param name="Name"> Nom de la propriété modifiée </param>
         protected void OnPropertyChanged(string Name) 

@@ -11,8 +11,14 @@ namespace MyApp
     /// </summary>
     public partial class Inscription : Window
     {
+        /// <summary>
+        /// Permet de renvoyer un IUser à la MainWindow
+        /// </summary>
         public event Action<IUser> Check;
 
+        /// <summary>
+        /// Instancie Inscription
+        /// </summary>
         public Inscription()
         {
             InitializeComponent();

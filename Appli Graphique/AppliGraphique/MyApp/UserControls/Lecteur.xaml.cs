@@ -16,7 +16,13 @@ namespace MyApp
     {
         private DispatcherTimer timer = new DispatcherTimer();
 
+        /// <summary>
+        /// DependencyProperty vers MyPlayer de MainWindow.xaml
+        /// </summary>
         public static readonly DependencyProperty Playlist = DependencyProperty.Register("MyPlaylist", typeof(ListView), typeof(Lecteur));
+        /// <summary>
+        /// Propriété contenant les valeurs de la DependencyProperty "Player"
+        /// </summary>
         public ListView MyPlaylist
         {
             get
@@ -29,7 +35,13 @@ namespace MyApp
             }
         }
 
+        /// <summary>
+        /// DependencyProperty vers MyScroller de MainWindow.xaml
+        /// </summary>
         public static readonly DependencyProperty Scroller = DependencyProperty.Register("MyScroller", typeof(ListView), typeof(Lecteur));
+        /// <summary>
+        /// Propriété contenant les valeurs de la DependencyProperty "Scroller"
+        /// </summary>
         public ListView MyScroller
         {
             get

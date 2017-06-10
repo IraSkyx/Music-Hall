@@ -6,10 +6,20 @@ using System.Windows.Media;
 
 namespace Biblio
 {
+    /// <summary>
+    /// Classe permettant de gérer l'instanciation des Progressbar servant au SongDetail
+    /// </summary>
     public class Equalizer
     {
+        /// <summary>
+        /// Dictionnaire contenant les ProgressBar du SongDetail
+        /// </summary>
         public Dictionary<int, ProgressBar> MyProgs = new Dictionary<int, ProgressBar>();
 
+        /// <summary>
+        /// Constructeur de Equalizer
+        /// </summary>
+        /// <param name="NumberOfInstances"> Donne le nombre d'entités à instancier dans le dictionnaire </param>
         public Equalizer(int NumberOfInstances)
         {
             for(int i=0; i< NumberOfInstances; ++i)

@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BackEnd</name>
+    </assembly>
+    <members>
+        <member name="T:BackEnd.PlayerFront">
+            <summary>
+            Classe instanciant un Player pour que la vue y ait accès statiquement
+            </summary>
+        </member>
+        <member name="P:BackEnd.PlayerFront.MyPlayer">
+            <summary>
+            Lecteur permettant de lire et gérer des Musics
+            </summary>
+        </member>
+        <member name="M:BackEnd.PlayerFront.LoadPlayer">
+            <summary>
+            Instancie un Player
+            </summary>
+        </member>
+        <member name="T:BackEnd.PlaylistFront">
+            <summary>
+            Classe instanciant un Player pour que la vue y ait accès statiquement
+            </summary>
+        </member>
+        <member name="F:BackEnd.PlaylistFront.AllMusics">
+            <summary>
+            Contient toutes les Musics disponibles et les gèrent
+            </summary>
+        </member>
+        <member name="M:BackEnd.PlaylistFront.LoadMusics">
+            <summary>
+            Désérialise/Charge un Player
+            </summary>
+        </member>
+        <member name="M:BackEnd.PlaylistFront.SaveMusics">
+            <summary>
+            Sérialise un Player
+            </summary>
+        </member>
+        <member name="T:BackEnd.UserDBFront">
+            <summary>
+            Classe instanciant une UserDB pour que la vue y ait accès statiquement
+            </summary>
+        </member>
+        <member name="F:BackEnd.UserDBFront.MyUserDB">
+            <summary>
+            DataBase contenant tous les utilisateurs enregistrés
+            </summary>
+        </member>
+        <member name="M:BackEnd.UserDBFront.LoadUsers">
+            <summary>
+            Désérialise/Charge une UserDB
+            </summary>
+        </member>
+        <member name="M:BackEnd.UserDBFront.SaveUsers">
+            <summary>
+            Sérialise une UserDB
+            </summary>
+        </member>
+    </members>
+</doc>

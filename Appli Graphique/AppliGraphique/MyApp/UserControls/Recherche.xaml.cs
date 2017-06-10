@@ -10,8 +10,13 @@ namespace MyApp
     /// </summary>
     public partial class Recherche : UserControl
     {
-
+        /// <summary>
+        /// DependencyProperty vers MyScroller de MainWindow.xaml
+        /// </summary>
         public static readonly DependencyProperty Scroller = DependencyProperty.Register("MyScroller", typeof(ListView), typeof(Recherche));
+        /// <summary>
+        /// Propriété contenant les valeurs de la DependencyProperty "Scroller"
+        /// </summary>
         public ListView MyScroller
         {
             get
@@ -24,7 +29,13 @@ namespace MyApp
             }
         }
 
+        /// <summary>
+        /// DependencyProperty vers MyTab de MainWindow.xaml
+        /// </summary>
         public static readonly DependencyProperty Tab = DependencyProperty.Register("MyTab", typeof(TabControl), typeof(Recherche));
+        /// <summary>
+        /// Propriété contenant les valeurs de la DependencyProperty "Tab"
+        /// </summary>
         public TabControl MyTab
         {
             get

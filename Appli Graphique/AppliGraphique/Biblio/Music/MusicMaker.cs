@@ -3,6 +3,9 @@ using System.Collections.ObjectModel;
 
 namespace Biblio
 {
+    /// <summary>
+    /// Créateur de Music. Sert à instancier des Musics.
+    /// </summary>
     public class MusicMaker
     {
         /// <summary>
@@ -16,8 +19,8 @@ namespace Biblio
         /// <param name="Audio"> L'Audio de la Music </param>
         /// <param name="Video"> La Vidéo youtube de la Music </param>
         /// <param name="Image"> L'Image de la Music </param>
+        /// <param name="Comments"> Les Commentaires de la Music </param>
         /// <returns> La Music fabriquée </returns>
-
         public static IMusic MakeMusic(string Title, string Artist, string Date, string Genre, string Infos, Uri Audio, string Video, Uri Image, ObservableCollection<IComment> Comments)
            => new Music(Title, Artist, Date, Genre, Infos, Audio, GetVideoValid(Video) , Image, Comments);
 

@@ -66,7 +66,7 @@ namespace MyApp
         /// Gère les exceptions non gérées
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
-        /// <param name="e"> Exception déclencheé </param>
+        /// <param name="args"> Exception déclencheé </param>
         static void MyHandler(object sender, UnhandledExceptionEventArgs args)
         {            
             Exception e = (Exception)args.ExceptionObject;
@@ -273,7 +273,7 @@ namespace MyApp
         }
 
         /// <summary>
-        /// Permet d'ajouter une music via un Drag&Drop
+        /// Permet d'ajouter une music via un DragAndDrop
         /// </summary>
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>

@@ -13,13 +13,26 @@ namespace MyApp
     /// </summary>
     public partial class SongDetail : UserControl
     {
+        /// <summary>
+        /// ProgressBar pour former un Égaliseur
+        /// </summary>
         private Equalizer MyEqualizer = new Equalizer(30);
+
+        /// <summary>
+        /// Valeurs des ProgressBar lors de la mise à jour précédente
+        /// </summary>
         private int[] Previous = new int[30];
+
         private Random r = new Random();
+
+        /// <summary>
+        /// Permet d'effectuer l'update des Progressbar de manière asynchrone
+        /// </summary>
         public BackgroundWorker MyWorker = new BackgroundWorker()
         {
             WorkerSupportsCancellation = true
         };
+
         private float BaseValue;
         private double RoundedValue;
 

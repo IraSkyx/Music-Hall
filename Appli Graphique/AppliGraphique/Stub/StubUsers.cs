@@ -1,12 +1,18 @@
 ﻿using System;
 using Biblio;
 using System.Collections.ObjectModel;
-using System.Windows.Media.Imaging;
 
 namespace Stub
 {
+    /// <summary>
+    /// Classe de chargement en dur dans le code
+    /// </summary>
     public class StubUsers
     {
+        /// <summary>
+        /// Charge en dur une Database de Users
+        /// </summary>
+        /// <returns> La Database fabriquée </returns>
         public static UserDB LoadUsers()
         {           
             Playlist playlist = new Playlist()

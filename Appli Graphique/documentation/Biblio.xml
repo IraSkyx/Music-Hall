@@ -1,0 +1,549 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Biblio</name>
+    </assembly>
+    <members>
+        <member name="T:Biblio.Comment">
+            <summary>
+            Classe définissant des structures de type "Commentaire"
+            </summary>
+        </member>
+        <member name="M:Biblio.Comment.#ctor(System.String,System.Int32,System.String)">
+            <summary>
+            Constructeur de Comment
+            </summary>
+        </member>
+        <member name="M:Biblio.Comment.ToString">
+            <summary>
+            Fixe l'affichage de l'objet 
+            </summary>
+            <returns> Retourne la mise en forme de l'affichage </returns>
+        </member>
+        <member name="T:Biblio.CommentMaker">
+            <summary>
+            Créateur de Comment. Sert à instancier des Comments.
+            </summary>
+        </member>
+        <member name="M:Biblio.CommentMaker.MakeComment(System.String,System.Int32,System.String)">
+            <summary>
+            Fabrique un Comment 
+            </summary>
+            <param name="Username"> Le nom du User </param>
+            <param name="Rate"> La Note attribué à la Music </param>
+            <param name="Com"> Le Commentaire donné à la Music </param>
+            <returns> Le Comment fabriqué </returns>
+        </member>
+        <member name="T:Biblio.IComment">
+            <summary>
+            Interface définissant les attributs essentiels d'un Commentaire
+            </summary>
+        </member>
+        <member name="P:Biblio.IComment.Username">
+            <summary>
+            Nom de l'utilisateur ayant posté ce commentaire
+            </summary>
+        </member>
+        <member name="P:Biblio.IComment.Rate">
+            <summary>
+            Note attribuée
+            </summary>
+        </member>
+        <member name="P:Biblio.IComment.Com">
+            <summary>
+            Commentaire donné
+            </summary>
+        </member>
+        <member name="T:Biblio.Equalizer">
+            <summary>
+            Classe permettant de gérer l'instanciation des Progressbar servant au SongDetail
+            </summary>
+        </member>
+        <member name="F:Biblio.Equalizer.MyProgs">
+            <summary>
+            Dictionnaire contenant les ProgressBar du SongDetail
+            </summary>
+        </member>
+        <member name="M:Biblio.Equalizer.#ctor(System.Int32)">
+            <summary>
+            Constructeur de Equalizer
+            </summary>
+            <param name="NumberOfInstances"> Donne le nombre d'entités à instancier dans le dictionnaire </param>
+        </member>
+        <member name="T:Biblio.ValueToContent">
+            <summary>
+            Classe de convertion de valeurs
+            </summary>
+        </member>
+        <member name="M:Biblio.ValueToContent.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convertit des valeurs
+            </summary>
+            <param name="value"> Object envoyeur </param>
+            <param name="targetType"> Type de l'objet envoyeur </param>
+            <param name="parameter"> Converter Parameter </param>
+            <param name="culture"> Infos sur la culture </param>
+            <returns> La nouvelle valeur convertit </returns>
+        </member>
+        <member name="M:Biblio.ValueToContent.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Pas nécessaire
+            </summary>
+        </member>
+        <member name="T:Biblio.Data">
+            <summary>
+            Stratégie de persistance
+            </summary> 
+        </member>
+        <member name="F:Biblio.Data.MyPath">
+            <summary>
+            Chemin d'accès à AppData/MusicHall
+            </summary> 
+        </member>
+        <member name="M:Biblio.Data.SetCurrentDirectory">
+            <summary>
+            Définit le répertoire courant dans l'environnement %appdata%/MusicHall
+            </summary>        
+            <returns> La Playlist chargée contenant toutes les Musics </returns>
+        </member>
+        <member name="M:Biblio.Data.Deserialize(System.String,System.Runtime.Serialization.DataContractSerializer)">
+            <summary>
+            Lis le fichier de sauvegarde si il existe et de ce cas renvoit ce qui est lu
+            </summary>    
+            <param name="file"> Nom du fichier de désérialisation </param>
+            <param name="Serializer"> Indique le contrat de données à respecter lors de la désérialisation </param>
+            <returns> La Playlist chargée contenant toutes les Musics </returns>
+        </member>
+        <member name="M:Biblio.Data.Serialize(System.String,Biblio.Serialize,System.Runtime.Serialization.DataContractSerializer)">
+            <summary>
+            Créer un fichier de sauvegarde et sérialise l'objet 
+            </summary>    
+            <param name="file"> Nom du fichier de sérialisation </param>
+            <param name="obj"> Objet à sérialiser </param>
+            <param name="Serializer"> Indique le contrat de données à respecter lors de la sérialisation </param>
+        </member>
+        <member name="T:Biblio.IMusic">
+            <summary>
+            Interface définissant les attributs essentiels d'une Musique
+            </summary>
+        </member>
+        <member name="P:Biblio.IMusic.Title">
+            <summary>
+            Titre de la musique
+            </summary>
+        </member>
+        <member name="P:Biblio.IMusic.Artist">
+            <summary>
+            Artiste de la musique
+            </summary>
+        </member>
+        <member name="P:Biblio.IMusic.Date">
+            <summary>
+            Date de la musique
+            </summary>
+        </member>
+        <member name="P:Biblio.IMusic.Genre">
+            <summary>
+            Genre de la musique
+            </summary>
+        </member>
+        <member name="P:Biblio.IMusic.Infos">
+            <summary>
+            Infos complémentaires sur la musique
+            </summary>
+        </member>
+        <member name="P:Biblio.IMusic.Audio">
+            <summary>
+            Audio de la musique
+            </summary>
+        </member>
+        <member name="P:Biblio.IMusic.Video">
+            <summary>
+            Video de la musique
+            </summary>
+        </member>
+        <member name="P:Biblio.IMusic.Image">
+            <summary>
+            Image de la musique
+            </summary>
+        </member>
+        <member name="P:Biblio.IMusic.Comments">
+            <summary>
+            Comments de la musique
+            </summary>
+        </member>
+        <member name="M:Biblio.IMusic.AddComment(Biblio.IComment)">
+            <summary>
+            Permet d'ajouter un Comment à la Music
+            </summary>
+            <param name="Com"> Comment à ajouter </param>
+        </member>
+        <member name="T:Biblio.Serialize">
+            <summary>
+            Classe commune pour sérialiser les objets
+            </summary>
+        </member>
+        <member name="T:Biblio.IUser">
+            <summary>
+            Interface définissant les attributs essentiels d'un Utilisateur
+            </summary>
+        </member>
+        <member name="P:Biblio.IUser.Address">
+            <summary>
+            Adresse email de l'utilisateur
+            </summary>
+        </member>
+        <member name="P:Biblio.IUser.Username">
+            <summary>
+            Nom de l'utilisateur
+            </summary>
+        </member>
+        <member name="P:Biblio.IUser.Psswd">
+            <summary>
+            Mot de passe de l'utilisateur
+            </summary>
+        </member>
+        <member name="P:Biblio.IUser.Favorite">
+            <summary>
+            Musiques favorites de l'utilisateur
+            </summary>
+        </member>
+        <member name="T:Biblio.Music">
+            <summary>
+            Classe définissant des structures de type "Musique"
+            </summary>
+        </member>
+        <member name="E:Biblio.Music.PropertyChanged">
+            <summary>
+            Évènement permettant de notifier la vue d'un changement
+            </summary>
+        </member>
+        <member name="M:Biblio.Music.OnPropertyChanged(System.String)">
+            <summary>
+            Notifie la vue d'un changement de variable
+            </summary>
+            <param name="Name"> Nom de la propriété ayant changé </param>
+        </member>
+        <member name="M:Biblio.Music.#ctor(System.String,System.String,System.String,System.String,System.String,System.Uri,System.String,System.Uri,System.Collections.ObjectModel.ObservableCollection{Biblio.IComment})">
+            <summary>
+            Constructeur de Music
+            </summary>
+        </member>
+        <member name="M:Biblio.Music.AddComment(Biblio.IComment)">
+            <summary>
+            Ajoute un Comment
+            </summary>
+            <param name="Com"> Comment à ajouter </param>
+        </member>
+        <member name="M:Biblio.Music.Equals(System.Object)">
+            <summary>
+            Vérifie que l'object "o" est égal à cette musique ou pas 
+            </summary>
+            <param name="o"> Le second object qui sera comparé à cette Music </param>
+            <returns>true si égaux, false sinon </returns>
+        </member>
+        <member name="M:Biblio.Music.Equals(Biblio.IMusic)">
+            <summary>
+            Vérifie si cette Music est égale à l'autre Music
+            </summary>
+            <param name="other"> L'autre musique qui sera comparé à cette Music </param>
+            <returns>true si égaux, false sinon </returns>
+        </member>
+        <member name="M:Biblio.Music.GetHashCode">
+            <summary>
+            Fixe le HashCode de l'objet
+            </summary>
+            <returns>Un entier HashCode aléatoire </returns>
+        </member>
+        <member name="M:Biblio.Music.ToString">
+            <summary>
+            Fixe l'affichage de l'objet 
+            </summary>
+            <returns> Retourne la mise en forme de l'affichage </returns>
+        </member>
+        <member name="T:Biblio.MusicMaker">
+            <summary>
+            Créateur de Music. Sert à instancier des Musics.
+            </summary>
+        </member>
+        <member name="M:Biblio.MusicMaker.MakeMusic(System.String,System.String,System.String,System.String,System.String,System.Uri,System.String,System.Uri,System.Collections.ObjectModel.ObservableCollection{Biblio.IComment})">
+            <summary>
+            Fabrique une Music 
+            </summary>
+            <param name="Title"> Le Titre de la Music </param>
+            <param name="Artist"> L'Artiste de la Music </param>
+            <param name="Date"> La Date de la Music </param>
+            <param name="Genre"> Le Genre de la Music </param>
+            <param name="Infos"> Les Infos de la Music </param>
+            <param name="Audio"> L'Audio de la Music </param>
+            <param name="Video"> La Vidéo youtube de la Music </param>
+            <param name="Image"> L'Image de la Music </param>
+            <param name="Comments"> Les Commentaires de la Music </param>
+            <returns> La Music fabriquée </returns>
+        </member>
+        <member name="M:Biblio.MusicMaker.GetVideoValid(System.String)">
+            <summary>
+            Transforme une URL youtube en ID Youtube
+            </summary>
+            <param name="Video"> string à modifier </param>
+            <exception cref="T:System.FormatException"> En cas de mauvais lien </exception>
+            <returns> la string modifiée </returns>
+        </member>
+        <member name="T:Biblio.PersistanceMusics">
+            <summary>
+            Implémentation de la stratégie de persistance pour les Musics
+            </summary> 
+        </member>
+        <member name="M:Biblio.PersistanceMusics.LoadMusics">
+            <summary>
+            Mise en oeuvre de la persistance pour charger les Musics
+            </summary>        
+            <returns> La Playlist chargée contenant toutes les Musics </returns>
+        </member>
+        <member name="M:Biblio.PersistanceMusics.SaveMusics(Biblio.Playlist)">
+            <summary>
+            Mise en oeuvre de la persistance pour sérialiser les Musics
+            </summary>        
+            <param name="AllMusics"> Les Musics à sérialiser </param>
+        </member>
+        <member name="T:Biblio.PersistanceUsers">
+            <summary>
+            Implémentation de la stratégie de persistance pour les Users
+            </summary> 
+        </member>
+        <member name="M:Biblio.PersistanceUsers.LoadUsers">
+            <summary>
+            Mise en oeuvre de la persistance pour charger les Users
+            </summary>        
+            <returns> La DataBase de User chargée </returns>
+        </member>
+        <member name="M:Biblio.PersistanceUsers.SaveUsers(Biblio.UserDB)">
+            <summary>
+            Mise en oeuvre de la persistance pour sérialiser les Users
+            </summary>        
+            <param name="DataBase"> La DataBase à sérialiser </param>
+        </member>
+        <member name="T:Biblio.Player">
+            <summary>
+            Lecteur permettant de lire et gérer des Musics
+            </summary>
+        </member>
+        <member name="F:Biblio.Player._CurrentlyPlaying">
+            <summary>
+            (Attribut) Music actuellement lue
+            </summary>
+        </member>
+        <member name="P:Biblio.Player.CurrentlyPlaying">
+            <summary>
+            (Propriété) Music actuellement lue
+            </summary>
+        </member>
+        <member name="F:Biblio.Player._CurrentUser">
+            <summary>
+            (Attribut) User actuellement connecté
+            </summary>
+        </member>
+        <member name="P:Biblio.Player.CurrentUser">
+            <summary>
+            (Propriété) User actuellement connecté
+            </summary>
+        </member>
+        <member name="F:Biblio.Player._IsPlaying">
+            <summary>
+            (Attribut) Indique si une Music est en cours de lecture
+            </summary>
+        </member>
+        <member name="P:Biblio.Player.IsPlaying">
+            <summary>
+            (Propriété) Indique si une Music est en cours de lecture
+            </summary>
+        </member>
+        <member name="F:Biblio.Player._Loop">
+            <summary>
+            (Attribut) Indique si la Music doit être lue en boucle
+            </summary>
+        </member>
+        <member name="P:Biblio.Player.Loop">
+            <summary>
+            (Propriété) Indique si la Music doit être lue en boucle
+            </summary>
+        </member>
+        <member name="F:Biblio.Player._RandomPlay">
+            <summary>
+            (Attribut) Indique si la Playlist doit être lue en lecture aléatoire
+            </summary>
+        </member>
+        <member name="P:Biblio.Player.RandomPlay">
+            <summary>
+            (Propriété) Indique si la Playlist doit être lue en lecture aléatoire
+            </summary>
+        </member>
+        <member name="E:Biblio.Player.PropertyChanged">
+            <summary>
+            Notifie la vue d'un changement de variable
+            </summary>
+        </member>
+        <member name="M:Biblio.Player.#ctor">
+            <summary>
+            Instancie Player (+ appel Constructeur mère)
+            </summary>
+        </member>
+        <member name="M:Biblio.Player.GoToNextOrPrevious(System.Int32)">
+            <summary>
+            Avance ou recule dans la lecture de la playlist
+            </summary>
+            <param name="Sens"> 1 pour Suivant, -1 pour Précédent </param>
+        </member>
+        <member name="M:Biblio.Player.Play(Biblio.IMusic)">
+            <summary>
+            Lis la Music passée en paramètre
+            </summary>
+            <param name="currentlyPlaying"> Music souhaitant être lue </param>
+        </member>
+        <member name="M:Biblio.Player.SetPlay">
+            <summary>
+            Lis la Music venant d'être affectée à CurrentlyPlaying
+            </summary>
+        </member>
+        <member name="M:Biblio.Player.ChangePosition(System.TimeSpan)">
+            <summary>
+            Change la position de la lecture par celle passée en paramètre
+            </summary>
+            <param name="NewPosition"> Nouvelle position dans la musique </param>
+        </member>
+        <member name="M:Biblio.Player.OnPropertyChanged(System.String)">
+            <summary>
+            Notifie la vue du changement de valeur de la propriété
+            </summary>
+            <param name="Name"> Nom de la propriété modifiée </param>
+        </member>
+        <member name="T:Biblio.Playlist">
+            <summary>
+            Contient toutes les Musics disponibles et les gèrent
+            </summary>
+        </member>
+        <member name="P:Biblio.Playlist.PlaylistProperty">
+            <summary>
+            Collection contenant toutes les Musics disponibles
+            </summary>
+        </member>
+        <member name="M:Biblio.Playlist.#ctor">
+            <summary>
+            Instancie une Playlist
+            </summary>
+        </member>
+        <member name="M:Biblio.Playlist.#ctor(System.Collections.Generic.IEnumerable{Biblio.IMusic})">
+            <summary>
+            Instancie une Playlist à partir d'un IEnumerable (conversion implicite)
+            </summary>
+            <param name="Musics"> Paramètre d'instanciation </param>
+        </member>
+        <member name="M:Biblio.Playlist.Filter(System.String,System.String)">
+            <summary>
+            Filtre les éléments de la ListView de recherche
+            </summary>
+            <param name="critere"> Critère de recherche </param>
+            <param name="input"> Ce qu'a tapé l'utilisateur </param>
+            <returns> Playlist matchant ce qu'à rentré l'utilisateur et son critère de recherche </returns>
+        </member>
+        <member name="M:Biblio.Playlist.SelectHomeMusic(System.String)">
+            <summary>
+            Retourne l'indice de la première Music ayant ce titre
+            </summary>
+            <param name="title"> Titre à rechercher </param>
+            <returns> L'indice de la première occurence matchant le Title </returns>
+        </member>
+        <member name="M:Biblio.Playlist.Index(Biblio.IMusic)">
+            <summary>
+            Retourne l'indice de la première Music matchant celle passée en paramètre
+            </summary>
+            <param name="currentlyPlaying"> Music à rechercher </param>
+            <returns> L'indice de la première occurence matchant celle passée en paramètre </returns>
+        </member>
+        <member name="M:Biblio.Playlist.ToString">
+            <summary>
+            Fixe l'affichage de l'objet 
+            </summary>
+            <returns> Retourne la mise en forme de l'affichage </returns>
+        </member>
+        <member name="T:Biblio.User">
+            <summary>
+            Classe définissant des structures de type "Utilisateur"
+            </summary>
+        </member>
+        <member name="M:Biblio.User.#ctor(System.String,System.String,System.String,Biblio.Playlist)">
+            <summary>
+            Instancie une Music 
+            </summary>
+            <param name="Address"> Email du User </param>
+            <param name="Username"> Nom du User </param>
+            <param name="Psswd"> Mot de passe du User </param>
+            <param name="Favorite"> Playlist du User </param>
+        </member>
+        <member name="M:Biblio.User.ToString">
+            <summary>
+            Fixe l'affichage de l'objet 
+            </summary>
+            <returns> Retourne la mise en forme de l'affichage </returns>
+        </member>
+        <member name="T:Biblio.UserDB">
+            <summary>
+            Contient toutes les Users enregistrés et les gèrent
+            </summary>
+        </member>
+        <member name="F:Biblio.UserDB.Database">
+            <summary>
+            Collection contenant toutes les Users enregistrés
+            </summary>
+        </member>
+        <member name="M:Biblio.UserDB.#ctor">
+            <summary>
+            Instancie une UserDB 
+            </summary>
+        </member>
+        <member name="M:Biblio.UserDB.IsAlreadyUsed(System.String)">
+            <summary>
+            Détermine si l'adresse est déjà utilisée
+            </summary>
+            <param name="address"> L'adresse entrée par l'User </param>
+            <exception cref="T:System.Exception"> Lance une Exception si l'email est déjà utilisé </exception>
+        </member>
+        <member name="M:Biblio.UserDB.LogIn(System.String,System.String)">
+            <summary>
+            Détermine si l'User passé en paramètre remplit les critères pour se connecter
+            </summary>
+            <param name="address"> L'adresse entrée par l'User </param>
+            <param name="password"> Mot de passe entrée par l'User </param>
+            <returns> Retourne la première occurence matchant l'User passé en paramètre </returns>
+            <exception cref="T:System.Exception"> Lance une Exception si l'email ou le mot de passe sont invalides </exception>
+        </member>
+        <member name="M:Biblio.UserDB.IsValid(System.String)">
+            <summary>
+            Détermine si une adresse est valide grâve à la FormatException de MailAddress
+            </summary>
+            <param name="Address"> L'adresse entrée par l'User </param>
+            <exception cref="T:System.Exception"> Lance une Exception si l'email est invalide </exception>
+        </member>
+        <member name="M:Biblio.UserDB.ToString">
+            <summary>
+            Fixe l'affichage de l'objet 
+            </summary>
+            <returns> Retourne la mise en forme de l'affichage </returns>
+        </member>
+        <member name="T:Biblio.UserMaker">
+            <summary>
+            Créateur de User. Sert à instancier des Users.
+            </summary>
+        </member>
+        <member name="M:Biblio.UserMaker.MakeUser(System.String,System.String,System.String,Biblio.Playlist)">
+            <summary>
+            Fabrique un User
+            </summary>
+            <param name="Address"> Email nécessaire à l'instanciation </param>
+            <param name="Username"> Nom nécessaire à l'instanciation </param>
+            <param name="Psswd"> Mot de passe nécessaire à l'instanciation </param>
+            <param name="Favorite"> Playlist nécessaire à l'instanciation </param>
+            <exception cref="T:System.FormatException"> Lance une FormatException si le Pseudo ou le mot de passe sont trop courts </exception>
+        </member>
+    </members>
+</doc>

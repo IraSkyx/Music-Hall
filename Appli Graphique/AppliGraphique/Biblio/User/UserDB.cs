@@ -6,9 +6,15 @@ using System.Runtime.Serialization;
 
 namespace Biblio
 {
+    /// <summary>
+    /// Contient toutes les Users enregistrés et les gèrent
+    /// </summary>
     [DataContract]
     public class UserDB : Serialize
     {
+        /// <summary>
+        /// Collection contenant toutes les Users enregistrés
+        /// </summary>
         [DataMember]
         public ObservableCollection<IUser> Database;
 
@@ -34,7 +40,8 @@ namespace Biblio
         /// <summary>
         /// Détermine si l'User passé en paramètre remplit les critères pour se connecter
         /// </summary>
-        /// <param name="address"> L'adresse et le mot de passe entrée par l'User </param>
+        /// <param name="address"> L'adresse entrée par l'User </param>
+        /// <param name="password"> Mot de passe entrée par l'User </param>
         /// <returns> Retourne la première occurence matchant l'User passé en paramètre </returns>
         /// <exception cref="Exception"> Lance une Exception si l'email ou le mot de passe sont invalides </exception>
         public IUser LogIn(string address, string password)
@@ -50,11 +57,7 @@ namespace Biblio
         /// <param name="Address"> L'adresse entrée par l'User </param>
         /// <exception cref="Exception"> Lance une Exception si l'email est invalide </exception>
         public static void IsValid(string Address)
-        {
-            MailAddress Add = new MailAddress(Address);
-        }
-
-       
+            => new MailAddress(Address); 
 
         /// <summary>
         /// Fixe l'affichage de l'objet 

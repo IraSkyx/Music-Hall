@@ -1,16 +1,19 @@
 ﻿using System;
-using System.Net.Mail;
 
 namespace Biblio
 {
+    /// <summary>
+    /// Créateur de User. Sert à instancier des Users.
+    /// </summary>
     public class UserMaker
     {
         /// <summary>
         /// Fabrique un User
         /// </summary>
-        /// <param name="Infos"> Infos nécessaires à l'instanciation </param>
+        /// <param name="Address"> Email nécessaire à l'instanciation </param>
+        /// <param name="Username"> Nom nécessaire à l'instanciation </param>
         /// <param name="Psswd"> Mot de passe nécessaire à l'instanciation </param>
-        /// <param name="Favorite"> Playlist nécessaires à l'instanciation </param>
+        /// <param name="Favorite"> Playlist nécessaire à l'instanciation </param>
         /// <exception cref="FormatException"> Lance une FormatException si le Pseudo ou le mot de passe sont trop courts </exception>
         public static IUser MakeUser(string Address, string Username, string Psswd, Playlist Favorite)
         {

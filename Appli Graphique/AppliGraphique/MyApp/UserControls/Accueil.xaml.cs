@@ -9,8 +9,14 @@ namespace MyApp
     /// Logique d'interaction pour Accueil.xaml
     /// </summary>
     public partial class Accueil : UserControl
-    {        
+    {
+        /// <summary>
+        /// DependencyProperty vers MyPlayer de MainWindow.xaml
+        /// </summary>
         public static readonly DependencyProperty Player = DependencyProperty.Register("MyPlayer", typeof(Lecteur), typeof(Accueil));
+        /// <summary>
+        /// Propriété contenant les valeurs de la DependencyProperty "Player"
+        /// </summary>
         public Lecteur MyPlayer
         {
             get
@@ -23,7 +29,13 @@ namespace MyApp
             }
         }
 
+        /// <summary>
+        /// DependencyProperty vers MyScroller de MainWindow.xaml
+        /// </summary>
         public static readonly DependencyProperty Scroller = DependencyProperty.Register("MyScroller", typeof(ListView), typeof(Accueil));
+        /// <summary>
+        /// Propriété contenant les valeurs de la DependencyProperty "Scroller"
+        /// </summary>
         public ListView MyScroller
         {
             get
@@ -36,7 +48,13 @@ namespace MyApp
             }
         }
 
+        /// <summary>
+        /// DependencyProperty vers MyTab de MainWindow.xaml
+        /// </summary>
         public static readonly DependencyProperty Tab = DependencyProperty.Register("MyTab", typeof(TabControl), typeof(Accueil));
+        /// <summary>
+        /// Propriété contenant les valeurs de la DependencyProperty "Tab"
+        /// </summary>
         public TabControl MyTab
         {
             get

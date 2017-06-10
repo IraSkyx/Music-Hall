@@ -1,12 +1,18 @@
 ﻿using Biblio;
 using System;
 using System.Collections.ObjectModel;
-using System.Windows.Media.Imaging;
 
 namespace Stub
 {
+    /// <summary>
+    /// Classe de chargement en dur dans le code
+    /// </summary>
     public class StubMusics : Data
     {
+        /// <summary>
+        /// Charge en dur une Database de Music
+        /// </summary>
+        /// <returns> La Database de Music fabriquée </returns>
         public static Playlist LoadMusics()
         {           
             ObservableCollection<IComment> Com = new ObservableCollection<IComment>

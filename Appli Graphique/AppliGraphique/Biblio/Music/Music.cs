@@ -2,13 +2,18 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.Serialization;
-using System.Windows.Media.Imaging;
 
 namespace Biblio
 {
+    /// <summary>
+    /// Classe définissant des structures de type "Musique"
+    /// </summary>
     [DataContract]
     internal class Music : IMusic, INotifyPropertyChanged
     {
+        /// <summary>
+        /// Évènement permettant de notifier la vue d'un changement
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string _Title;
@@ -146,7 +151,12 @@ namespace Biblio
             }
         }
 
-        protected void OnPropertyChanged(string Name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
+        /// <summary>
+        /// Notifie la vue d'un changement de variable
+        /// </summary>
+        /// <param name="Name"> Nom de la propriété ayant changé </param>
+        protected void OnPropertyChanged(string Name) 
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
 
         /// <summary>
         /// Constructeur de Music

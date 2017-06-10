@@ -2,6 +2,9 @@
 
 namespace Biblio
 {
+    /// <summary>
+    /// Classe définissant des structures de type "Utilisateur"
+    /// </summary>
     [DataContract]
     internal class User : IUser
     {
@@ -20,9 +23,10 @@ namespace Biblio
         /// <summary>
         /// Instancie une Music 
         /// </summary>
-        /// <param name="Infos"> Les infos du User </param>
-        /// <param name="Psswd"> Le Mot de passe du User </param>
-        /// <param name="Favorite"> La Playlist du User </param>
+        /// <param name="Address"> Email du User </param>
+        /// <param name="Username"> Nom du User </param>
+        /// <param name="Psswd"> Mot de passe du User </param>
+        /// <param name="Favorite"> Playlist du User </param>
         public User(string Address, string Username, string Psswd, Playlist Favorite)
         {
             this.Address = Address;

@@ -7,9 +7,15 @@ using System.Text.RegularExpressions;
 
 namespace Biblio
 {
+    /// <summary>
+    /// Contient toutes les Musics disponibles et les gèrent
+    /// </summary>
     [DataContract]
     public class Playlist : Serialize
     {
+        /// <summary>
+        /// Collection contenant toutes les Musics disponibles
+        /// </summary>
         [DataMember]
         public ObservableCollection<IMusic> PlaylistProperty { get; set; }
 
@@ -24,7 +30,7 @@ namespace Biblio
         /// <summary>
         /// Instancie une Playlist à partir d'un IEnumerable (conversion implicite)
         /// </summary>
-        /// <param name="mus"> Paramètre d'instanciation </param>
+        /// <param name="Musics"> Paramètre d'instanciation </param>
         public Playlist(IEnumerable<IMusic> Musics)
         {
             PlaylistProperty = new ObservableCollection<IMusic>(Musics); 

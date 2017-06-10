@@ -10,6 +10,9 @@ using BackEnd;
 
 namespace MyApp
 {
+    /// <summary>
+    /// Classe de convertion de valeurs
+    /// </summary>
     public class ValueToContent : IValueConverter
     {
         /// <summary>
