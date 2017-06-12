@@ -32,7 +32,7 @@ namespace MyApp
                         try { return String.Format("Avis : {0:0.00}/5", ((ObservableCollection<IComment>)value).Average(x => x.Rate)); }
                         catch (Exception) { return "Aucun avis"; }
                     }                    
-                case "IsNullOrEmpty": return string.IsNullOrEmpty(((string)value)) ? "Parcourir" : (string)value;
+                case "IsNullOrEmpty": return string.IsNullOrEmpty(((Uri)value).ToString()) ? "Parcourir" : ((Uri)value).ToString();
                 case "booltocontent": return (bool)value ? "||" : "▶";
                 case "volume": return (double)value == 0 ? "🔇" : "🔊";
                 case "booltoforeground":  return (bool)value ? new SolidColorBrush(Color.FromRgb(3, 166, 120)) : new SolidColorBrush(Color.FromRgb(255, 255, 255));
@@ -40,7 +40,7 @@ namespace MyApp
                 case "nulltovisibility": return ReferenceEquals(value, null) ? Visibility.Hidden : Visibility.Visible;
                 case "connexion": return ReferenceEquals(value,null) ? "Connexion" : "Déconnexion";
                 case "inscription": return ReferenceEquals(value, null) ? "Inscription" : ((IUser)value).Username;
-                case "seconnecter": return ReferenceEquals(value, null) ? "Ses connecter" : "Fermer la session";
+                case "seconnecter": return ReferenceEquals(value, null) ? "Se connecter" : "Fermer la session";
                 case "sinscrire": return ReferenceEquals(value, null) ? "S'inscrire" : "Voir mon profil";               
                 case "objecttovalue":
                     {

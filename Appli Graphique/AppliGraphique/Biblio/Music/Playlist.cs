@@ -46,10 +46,10 @@ namespace Biblio
         {
             switch (critere)
             {
-                case "Par titre": return new Playlist(PlaylistProperty.Where(x => Regex.IsMatch(x.Title, input)));
-                case "Par artiste": return new Playlist(PlaylistProperty.Where(x => Regex.IsMatch(x.Artist, input)));
-                case "Par genre": return new Playlist(PlaylistProperty.Where(x => Regex.IsMatch(x.Genre, input)));
-                case "Par date": return new Playlist(PlaylistProperty.Where(x => Regex.IsMatch(x.Date, input)));
+                case "Par titre": return new Playlist(PlaylistProperty.Where(x => Regex.IsMatch(x.Title.ToLower(), input.ToLower())));
+                case "Par artiste": return new Playlist(PlaylistProperty.Where(x => Regex.IsMatch(x.Artist.ToLower(), input.ToLower())));
+                case "Par genre": return new Playlist(PlaylistProperty.Where(x => Regex.IsMatch(x.Genre.ToLower(), input.ToLower())));
+                case "Par date": return new Playlist(PlaylistProperty.Where(x => Regex.IsMatch(x.Date.ToLower(), input.ToLower())));
                 default: return null;
             }
         }

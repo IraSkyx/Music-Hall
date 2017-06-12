@@ -45,7 +45,16 @@ namespace MyApp
 
             Settings.Default.Upgrade();
             if (Settings.Default.StayLogged)
-                LogIn(UserDBFront.MyUserDB.Database.First(x => x.Address.Equals(Settings.Default.LastMail)));
+            {
+                try
+                {
+                    LogIn(UserDBFront.MyUserDB.Database.First(x => x.Address.Equals(Settings.Default.LastMail)));
+                }
+                catch
+                {
+                    Settings.Default.StayLogged = false;
+                }
+            }               
 
             Panel.DataContext = PlayerFront.MyPlayer;
             MyScroller.DataContext = PlaylistFront.AllMusics;                                            
@@ -70,7 +79,7 @@ namespace MyApp
         static void MyHandler(object sender, UnhandledExceptionEventArgs args)
         {            
             Exception e = (Exception)args.ExceptionObject;
-            System.Windows.MessageBox.Show($"{e.Message}\n{e.Source}\n{e.StackTrace}");
+            System.Windows.MessageBox.Show($"{e.InnerException}\n{e.Source}\n{e.StackTrace}");
         }
 
         /// <summary>

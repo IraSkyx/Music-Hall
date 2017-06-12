@@ -49,6 +49,8 @@
     <Resource Include="eJustLike.jpg" />
     <Resource Include="eParis.jpg" />
     <Resource Include="eShelter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

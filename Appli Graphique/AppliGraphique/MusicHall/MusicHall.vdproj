@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2A2BB2C73E064A2B822CD23C04A0FBBA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6944B92A56A6488CB7596B720BE8490B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -34,7 +40,7 @@
         "Entry"
         {
         "MsmKey" = "8:_73639459C7C1ECDF4815A31BCAE371B8"
-        "OwnerKey" = "8:_AE65CD56C2B34DD8883F60447166D07F"
+        "OwnerKey" = "8:_2A2BB2C73E064A2B822CD23C04A0FBBA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -46,13 +52,13 @@
         "Entry"
         {
         "MsmKey" = "8:_864E5946F71AC40D8AEAB95FE284712B"
-        "OwnerKey" = "8:_AE65CD56C2B34DD8883F60447166D07F"
+        "OwnerKey" = "8:_F0C74CE4DB91691E077919B5AD50572A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_864E5946F71AC40D8AEAB95FE284712B"
-        "OwnerKey" = "8:_F0C74CE4DB91691E077919B5AD50572A"
+        "OwnerKey" = "8:_2A2BB2C73E064A2B822CD23C04A0FBBA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -64,24 +70,18 @@
         "Entry"
         {
         "MsmKey" = "8:_8868D6E78E0951B93A1C60824D22C1DE"
-        "OwnerKey" = "8:_AE65CD56C2B34DD8883F60447166D07F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8868D6E78E0951B93A1C60824D22C1DE"
         "OwnerKey" = "8:_F0C74CE4DB91691E077919B5AD50572A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_AAB885CCE8B543BE9FC8FEC5759A096C"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_8868D6E78E0951B93A1C60824D22C1DE"
+        "OwnerKey" = "8:_2A2BB2C73E064A2B822CD23C04A0FBBA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_AE65CD56C2B34DD8883F60447166D07F"
+        "MsmKey" = "8:_AAB885CCE8B543BE9FC8FEC5759A096C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -94,7 +94,7 @@
         "Entry"
         {
         "MsmKey" = "8:_E96F323676B83ADEDDCBCDCAFC4E613F"
-        "OwnerKey" = "8:_AE65CD56C2B34DD8883F60447166D07F"
+        "OwnerKey" = "8:_2A2BB2C73E064A2B822CD23C04A0FBBA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,25 +106,7 @@
         "Entry"
         {
         "MsmKey" = "8:_F0C74CE4DB91691E077919B5AD50572A"
-        "OwnerKey" = "8:_AE65CD56C2B34DD8883F60447166D07F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F0C74CE4DB91691E077919B5AD50572A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AE65CD56C2B34DD8883F60447166D07F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8868D6E78E0951B93A1C60824D22C1DE"
+        "OwnerKey" = "8:_2A2BB2C73E064A2B822CD23C04A0FBBA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -136,13 +118,31 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E96F323676B83ADEDDCBCDCAFC4E613F"
+        "OwnerKey" = "8:_F0C74CE4DB91691E077919B5AD50572A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_8868D6E78E0951B93A1C60824D22C1DE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_864E5946F71AC40D8AEAB95FE284712B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2A2BB2C73E064A2B822CD23C04A0FBBA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E96F323676B83ADEDDCBCDCAFC4E613F"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -163,6 +163,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -179,6 +195,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -582,7 +614,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MusicHall"
         "ProductCode" = "8:{EDD0C9E6-40D4-4E6C-9571-162045BC6D95}"
-        "PackageCode" = "8:{64DA8C9B-D27A-4286-9334-1D07FA20B8C5}"
+        "PackageCode" = "8:{827D944F-8F71-43D9-B508-28ABF6DAE52E}"
         "UpgradeCode" = "8:{FC447E77-EB1E-4EAA-B58B-60DAABBE9BBA}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -702,7 +734,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2F681E2799094ED79A3CB080B43039DE"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3B489655AC684FE1ACF56985DBC1F962"
             {
             "Name" = "8:MusicHall"
             "Arguments" = "8:"
@@ -710,13 +742,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_AE65CD56C2B34DD8883F60447166D07F"
+            "Target" = "8:_2A2BB2C73E064A2B822CD23C04A0FBBA"
             "Folder" = "8:_D93058CF71094BA7AA155B245CB3B6ED"
             "WorkingFolder" = "8:_7D7F0B3EA92742B58E524225B805C03B"
             "Icon" = "8:_71B7FADC8DB54B70B3F7318966B43296"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7F63A6223CD54E4E81DC0C6D7B3ACE85"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F57423ACA9424AF681104A608C3E0159"
             {
             "Name" = "8:MusicHall"
             "Arguments" = "8:"
@@ -724,7 +756,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_AE65CD56C2B34DD8883F60447166D07F"
+            "Target" = "8:_2A2BB2C73E064A2B822CD23C04A0FBBA"
             "Folder" = "8:_FC40AAF911234C319B8B67025B6A826D"
             "WorkingFolder" = "8:_7D7F0B3EA92742B58E524225B805C03B"
             "Icon" = "8:"
@@ -1129,7 +1161,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_AE65CD56C2B34DD8883F60447166D07F"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2A2BB2C73E064A2B822CD23C04A0FBBA"
             {
             "SourcePath" = "8:..\\MyApp\\obj\\Debug\\MyApp.exe"
             "TargetName" = "8:"
