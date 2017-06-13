@@ -42,7 +42,7 @@
 
         <!-- Corps -->
         <DockPanel x:Name="Body">
-            <TextBlock Text="Toutes les musiques" Foreground="#222222" DockPanel.Dock="Top" FontSize="20" Margin="5,5,0,5"/>
+            <TextBlock Text="Ma bibliothèque" Foreground="#222222" DockPanel.Dock="Top" FontSize="20" Margin="5,5,0,5"/>
             <ListView x:Name="MyScroller" DockPanel.Dock="Top" Style="{StaticResource HorizontalListView}" MouseDoubleClick="ReadFromPlaylist" PreviewMouseWheel="MyScrollerWheeling" ItemsSource="{Binding PlaylistProperty}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectedItem="{Binding Path=Search.SelectedItem}" SelectionChanged="MyScrollerSelectionChanged" Height="100" Background="Transparent">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -55,13 +55,8 @@
             <DockPanel DockPanel.Dock="Right" Margin="10">
                 <TextBlock Text="Ma Playlist" Foreground="#222222" DockPanel.Dock="Top" FontSize="20"/>
                 <TextBlock Text="{Binding ItemsSource.Count, ElementName=MyPlaylist, StringFormat='\{0} titres'}" Foreground="#222222" DockPanel.Dock="Top" FontSize="10"/>
-                <ListView x:Name="MyPlaylist" ItemsSource="{Binding PlaylistProperty}" ScrollViewer.VerticalScrollBarVisibility="Hidden" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="ViewFromPlaylist" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Image Width="80" Source="{Binding Image}"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <ListView x:Name="MyPlaylist" ItemsSource="{Binding PlaylistProperty}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource MyDT}" MouseDoubleClick="ReadFromPlaylist" MouseLeftButtonUp="ViewFromPlaylist" MouseRightButtonUp="DeleteFromPlaylist" Background="Transparent"/>
+
             </DockPanel>
             <!-- MaPlaylist -->
             

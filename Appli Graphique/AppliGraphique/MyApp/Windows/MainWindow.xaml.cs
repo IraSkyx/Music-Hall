@@ -20,7 +20,7 @@ namespace MyApp
         private NotifyIcon ToTaskBar = new NotifyIcon()
         {
             Icon = new Icon("audio/logo.ico"),
-            Visible = true       
+            Visible = true
         };
 
         /// <summary>
@@ -186,6 +186,7 @@ namespace MyApp
         /// <param name="e"> Évènement déclenché par la vue </param>
         /// <remarks>Le if correspond à l'ouverture de la fenêtre d'inscription</remarks>
         /// <remarks>Le else correspond à l'ouverture de la fenêtre du profil</remarks>
+        /// <remarks> if si déconnecté / else si connecté </remarks>
         private void Inscription(object sender, RoutedEventArgs e)
         {
             if (!ReferenceEquals(PlayerFront.MyPlayer.CurrentUser, null))

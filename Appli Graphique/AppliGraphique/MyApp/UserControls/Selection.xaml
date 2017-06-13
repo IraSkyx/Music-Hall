@@ -31,7 +31,7 @@
                 <Button x:Name="Add2" Style="{StaticResource ButtonStyle}" Template="{StaticResource Over}" Click="AddToPlaylist" Margin="20" ToolTip="Cliquer pour ajouter" Content="+ Ajouter à ma playlist" Width="150" Height="40"/>
             </StackPanel>
 
-            <TabControl Background="#222222" Margin="10">
+            <TabControl Background="#262626" Margin="10">
                 <TabItem Header="Infos" Foreground="White">
                     <StackPanel>
                         <TextBlock Text="{Binding Infos}" Margin="30" FontSize="20" TextWrapping="Wrap"/>

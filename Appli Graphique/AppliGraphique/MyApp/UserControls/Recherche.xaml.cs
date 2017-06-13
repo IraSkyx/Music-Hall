@@ -1,7 +1,9 @@
 ﻿using BackEnd;
 using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MyApp
 {
@@ -72,7 +74,18 @@ namespace MyApp
         private void UserInputChanged(object sender, TextChangedEventArgs e)
         {
             if (Input.Text != String.Empty)
-                Search.DataContext = PlaylistFront.AllMusics.Filter((string)((ComboBoxItem)Criterion.SelectedItem).Content, Input.Text);
+                Search.DataContext = PlaylistFront.AllMusics.Filter((string)((ComboBoxItem)Criterion.SelectedItem).Content, Input.Text);             
+        }
+
+        /// <summary>
+        /// Si le critère de recherche est par année, vérifie que ce que l'User rentre ne sont que des chiffres 
+        /// </summary>
+        /// <param name="sender"> Object envoyeur </param>
+        /// <param name="e"> Évènement déclenché par la vue </param>
+        private void ValidDate(object sender, TextCompositionEventArgs e)
+        {
+            if ((string)((ComboBoxItem)Criterion.SelectedItem).Content == "Par année")
+                e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
         }
 
         /// <summary>
@@ -81,6 +94,10 @@ namespace MyApp
         /// <param name="sender"> Object envoyeur </param>
         /// <param name="e"> Évènement déclenché par la vue </param>
         private void CriterionChanged(object sender, SelectionChangedEventArgs e)
-            => UserInputChanged(this, new TextChangedEventArgs(e.RoutedEvent, UndoAction.None));
+        {
+            if ((string)((ComboBoxItem)Criterion.SelectedItem).Content == "Par année")
+                Input.Text = String.Empty;
+            UserInputChanged(this, new TextChangedEventArgs(e.RoutedEvent, UndoAction.None));
+        }        
     }
 }

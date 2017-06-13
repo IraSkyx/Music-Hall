@@ -432,6 +432,13 @@
             <param name="sender"> Object envoyeur </param>
             <param name="e"> Évènement déclenché par la vue </param>
         </member>
+        <member name="M:MyApp.Recherche.ValidDate(System.Object,System.Windows.Input.TextCompositionEventArgs)">
+            <summary>
+            Si le critère de recherche est par année, vérifie que ce que l'User rentre ne sont que des chiffres 
+            </summary>
+            <param name="sender"> Object envoyeur </param>
+            <param name="e"> Évènement déclenché par la vue </param>
+        </member>
         <member name="M:MyApp.Recherche.CriterionChanged(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
             <summary>
             Lève manuellement <code>UserInputChanged()</code>
@@ -813,6 +820,7 @@
             <param name="e"> Évènement déclenché par la vue </param>
             <remarks>Le if correspond à l'ouverture de la fenêtre d'inscription</remarks>
             <remarks>Le else correspond à l'ouverture de la fenêtre du profil</remarks>
+            <remarks> if si déconnecté / else si connecté </remarks>
         </member>
         <member name="M:MyApp.MainWindow.MyScrollerSelectionChanged(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
             <summary>

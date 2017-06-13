@@ -5,6 +5,10 @@
              StartupUri="Windows/MainWindow.xaml">
     <Application.Resources>
 
+        <DataTemplate x:Key="MyDT">
+            <Image Width="80" Source="{Binding Image}"/>
+        </DataTemplate>
+
         <local:ValueToContent x:Key="ValueToContent"/>
 
         <!-- Styles-->

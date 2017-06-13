@@ -49,7 +49,7 @@ namespace Biblio
                 case "Par titre": return new Playlist(PlaylistProperty.Where(x => Regex.IsMatch(x.Title.ToLower(), input.ToLower())));
                 case "Par artiste": return new Playlist(PlaylistProperty.Where(x => Regex.IsMatch(x.Artist.ToLower(), input.ToLower())));
                 case "Par genre": return new Playlist(PlaylistProperty.Where(x => Regex.IsMatch(x.Genre.ToLower(), input.ToLower())));
-                case "Par date": return new Playlist(PlaylistProperty.Where(x => Regex.IsMatch(x.Date.ToLower(), input.ToLower())));
+                case "Par année": return new Playlist(PlaylistProperty.Where(x => Regex.IsMatch(x.Date.ToLower(), input.ToLower())));
                 default: return null;
             }
         }
@@ -83,7 +83,7 @@ namespace Biblio
         /// Fixe l'affichage de l'objet 
         /// </summary>
         /// <returns> Retourne la mise en forme de l'affichage </returns>
-        public override string ToString() 
-            => string.Join<IMusic>("", PlaylistProperty.ToArray());
+        public override string ToString()
+            => String.Join<IMusic>(String.Empty, PlaylistProperty.ToArray());
     }
 }

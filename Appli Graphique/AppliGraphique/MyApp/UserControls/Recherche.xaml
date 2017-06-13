@@ -9,17 +9,17 @@
              d:DesignHeight="500" d:DesignWidth="720" Foreground="White" Background="#222222">
     <DockPanel Margin="10">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
-            <TextBox x:Name="Input" AutomationProperties.Name="{Binding ToolTip, RelativeSource={RelativeSource Self}}" ToolTip="Rechercher une musique" DockPanel.Dock="Top" Width="200" Margin="0,0,20,0" TextChanged="UserInputChanged"/>
+            <TextBox x:Name="Input" AutomationProperties.Name="{Binding ToolTip, RelativeSource={RelativeSource Self}}" ToolTip="Rechercher une musique" PreviewTextInput="ValidDate" DockPanel.Dock="Top" Width="200" Margin="0,0,20,0" TextChanged="UserInputChanged"/>
             <ComboBox x:Name="Criterion" SelectedIndex="0" SelectionChanged="CriterionChanged">
                 <ComboBoxItem x:Name="bytitle" AutomationProperties.Name="{Binding Content, RelativeSource={RelativeSource Self}, StringFormat=Trier {0}}" Content="Par titre" IsSelected="False"/>
                 <ComboBoxItem x:Name="byartist" AutomationProperties.Name="{Binding Content, RelativeSource={RelativeSource Self}, StringFormat=Trier {0}}" Content="Par artiste" IsSelected="False"/>
                 <ComboBoxItem x:Name="bygenre" AutomationProperties.Name="{Binding Content, RelativeSource={RelativeSource Self}, StringFormat=Trier {0}}" Content="Par genre" IsSelected="False"/>
-                <ComboBoxItem x:Name="bydate" AutomationProperties.Name="{Binding Content, RelativeSource={RelativeSource Self}, StringFormat=Trier {0}}" Content="Par date (jj/mm/aaaa)" IsSelected="False"/>
+                <ComboBoxItem x:Name="byyear" AutomationProperties.Name="{Binding Content, RelativeSource={RelativeSource Self}, StringFormat=Trier {0}}" Content="Par année" IsSelected="False"/>
             </ComboBox>
         </StackPanel>
         <DockPanel>
             <TextBlock DockPanel.Dock="Top" Margin="10" Text="Résultats de la recherche :" FontSize="20"/>
-            <ListView x:Name="Search" Background="Transparent" SelectionChanged="ResultSelectionChanged" ItemsSource="{Binding PlaylistProperty}">
+            <ListView x:Name="Search" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="ResultSelectionChanged" ItemsSource="{Binding PlaylistProperty}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

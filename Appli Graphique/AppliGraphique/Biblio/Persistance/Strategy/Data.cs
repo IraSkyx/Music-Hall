@@ -8,7 +8,7 @@ namespace Biblio
     /// <summary>
     /// Stratégie de persistance
     /// </summary> 
-    public abstract class Data
+    public class Data
     {
         /// <summary>
         /// Chemin d'accès à AppData/MusicHall

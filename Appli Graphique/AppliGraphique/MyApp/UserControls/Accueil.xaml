@@ -14,7 +14,7 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Tag="It Ain't Me" Margin="20"  VerticalAlignment="Bottom" MouseUp="Home_MouseUp">
-            <TextBlock Text="Top 1 Music'Hall" FontSize="20" Margin="10" TextAlignment="Center"/>
+            <TextBlock Text="↓ Consulter le Top 1 Music'Hall" TextWrapping="Wrap" FontSize="20" Margin="10" TextAlignment="Center"/>
             <Image Source="pack://application:,,,/Resources;Component/eAintMe.jpg" AutomationProperties.Name="{Binding ToolTip, RelativeSource={RelativeSource Self}}" ToolTip="Cliquer pour consulter le Top 1 Music'Hall">
                 <Image.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
@@ -27,10 +27,10 @@
                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
                 </Image.BitmapEffect>
             </Image>
-            <TextBlock Text="Top 1 Monde" FontSize="20" Margin="10" TextAlignment="Center"/>
+            <TextBlock Text="↑ Consulter le Top 1 Monde" TextWrapping="Wrap" FontSize="20" Margin="10" TextAlignment="Center"/>
         </StackPanel>
         <StackPanel Tag="Paris" Margin="20" Grid.Column="2" VerticalAlignment="Center" MouseUp="Home_MouseUp">
-            <TextBlock Text="Top 1 France" FontSize="20" Margin="10" TextAlignment="Center"/>
+            <TextBlock Text="↓ Consulter le Top 1 France" TextWrapping="Wrap" FontSize="20" Margin="10" TextAlignment="Center"/>
             <Image Source="pack://application:,,,/Resources;Component/eParis.jpg" AutomationProperties.Name="{Binding ToolTip, RelativeSource={RelativeSource Self}}" ToolTip="Cliquer pour consulter le Top 1 France">
                 <Image.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="3" Softness="1" Opacity="0.5"/>
